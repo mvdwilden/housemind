@@ -1,0 +1,184 @@
+# Gewone namen voor apparaten (E-248, B-93): hoe Vesta een apparaat noemt, zoals een mens.
+# Geen namen uit één huis: alleen gewone woorden. Een nieuwe taal is een nieuw bestand.
+grammar: nl
+and: "en"
+one_of: "een van {np}"
+# Telwoorden en woorden die nooit een onderscheid zijn.
+of: "van"  # a person in a room's name, only when two rooms would sound the same
+numbers: [een, één, twee, drie, vier, vijf, zes, zeven, acht, negen, tien, eerste, tweede, derde, vierde]
+fillers: [van, de, het, een, met, en, voor, bij, op, in, aan, groep, nieuw, oud, hoofd]
+# woord: [geslacht, meervoud] – m, f of n (het-woord). Ook samenstellingen: "bureaulamp" → lamp.
+nouns:
+  lamp: [m, lampen]
+  licht: [n, lichten]
+  verlichting: [f, verlichting]
+  spot: [m, spots]
+  ledstrip: [m, ledstrips]
+  lichtstrip: [m, lichtstrips]
+  raam: [n, ramen]
+  venster: [n, vensters]
+  deur: [f, deuren]
+  poort: [f, poorten]
+  hek: [n, hekken]
+  gordijn: [n, gordijnen]
+  rolluik: [n, rolluiken]
+  zonwering: [f, zonweringen]
+  screen: [n, screens]
+  jaloezie: [f, jaloezieën]
+  markies: [f, markiezen]
+  thermostaat: [m, thermostaten]
+  radiator: [m, radiatoren]
+  verwarming: [f, verwarmingen]
+  airco: [f, airco's]
+  ventilator: [m, ventilatoren]
+  afzuigkap: [f, afzuigkappen]
+  ventilatie: [f, ventilaties]
+  camera: [f, camera's]
+  deurbel: [f, deurbellen]
+  slot: [n, sloten]
+  alarm: [n, alarmen]
+  sirene: [f, sirenes]
+  rookmelder: [m, rookmelders]
+  melder: [m, melders]
+  sensor: [m, sensoren]
+  stopcontact: [n, stopcontacten]
+  schakelaar: [m, schakelaars]
+  stekker: [m, stekkers]
+  wasmachine: [f, wasmachines]
+  machine: [f, machines]
+  droger: [m, drogers]
+  vaatwasser: [m, vaatwassers]
+  koelkast: [m, koelkasten]
+  vriezer: [m, vriezers]
+  oven: [m, ovens]
+  kookplaat: [f, kookplaten]
+  magnetron: [m, magnetrons]
+  boiler: [m, boilers]
+  warmtepomp: [f, warmtepompen]
+  tv: [m, tv's]
+  televisie: [f, televisies]
+  speaker: [m, speakers]
+  luidspreker: [m, luidsprekers]
+  versterker: [m, versterkers]
+  stofzuiger: [m, stofzuigers]
+  stofzuigrobot: [m, stofzuigrobots]
+  robot: [m, robots]
+  grasmaaier: [m, grasmaaiers]
+  maaier: [m, maaiers]
+  kraan: [f, kranen]
+  klep: [f, kleppen]
+  laadpaal: [m, laadpalen]
+  lader: [m, laders]
+  batterij: [f, batterijen]
+  pomp: [f, pompen]
+  bevochtiger: [m, bevochtigers]
+  ontvochtiger: [m, ontvochtigers]
+  thermometer: [m, thermometers]
+  router: [m, routers]
+  printer: [m, printers]
+  computer: [m, computers]
+  waterkoker: [m, waterkokers]
+  scherm: [n, schermen]
+  meter: [m, meters]
+# Wat een apparaat is als de naam het niet zegt: HA-domein of domein.apparaatklasse.
+defaults:
+  light: lamp
+  switch: schakelaar
+  switch.outlet: stopcontact
+  cover: zonwering
+  cover.curtain: gordijn
+  cover.shutter: rolluik
+  cover.garage: garagedeur
+  cover.gate: poort
+  cover.door: deur
+  cover.window: raam
+  binary_sensor: sensor
+  binary_sensor.door: deur
+  binary_sensor.window: raam
+  binary_sensor.garage_door: garagedeur
+  binary_sensor.opening: deur
+  binary_sensor.smoke: rookmelder
+  binary_sensor.carbon_monoxide: melder
+  binary_sensor.gas: melder
+  sensor: sensor
+  sensor.temperature: thermometer
+  climate: thermostaat
+  fan: ventilator
+  camera: camera
+  lock: slot
+  alarm_control_panel: alarm
+  siren: sirene
+  media_player: speaker
+  media_player.tv: tv
+  media_player.receiver: versterker
+  vacuum: stofzuigrobot
+  lawn_mower: grasmaaier
+  valve: kraan
+  water_heater: boiler
+  humidifier: bevochtiger
+  binary_sensor.motion: bewegingsmelder
+  binary_sensor.occupancy: aanwezigheidssensor
+  binary_sensor.presence: aanwezigheidssensor
+  binary_sensor.moisture: lekmelder
+  sensor.humidity: vochtmeter
+  sensor.illuminance: lichtsensor
+# Plekken: woord: [geslacht, voorzetsel] – voor ruimtes ("in de keuken") en voor een plek in
+# de naam ("op het dak"). Ook samenstellingen: "badkamer" → kamer.
+places:
+  keuken: [f, in]
+  kamer: [f, in]
+  hal: [f, in]
+  gang: [m, in]
+  overloop: [m, op]
+  zolder: [m, op]
+  vliering: [f, op]
+  kelder: [m, in]
+  garage: [f, in]
+  tuin: [m, in]
+  terras: [n, op]
+  balkon: [n, op]
+  dak: [n, op]
+  dakterras: [n, op]
+  oprit: [f, op]
+  carport: [f, onder]
+  schuur: [f, in]
+  berging: [f, in]
+  kantoor: [n, in]
+  toilet: [n, op]
+  wc: [m, op]
+  washok: [n, in]
+  hok: [n, in]
+  huis: [n, in]
+  entree: [f, in]
+  portaal: [n, in]
+  trap: [f, op]
+  serre: [f, in]
+  veranda: [f, op]
+  werkplaats: [f, in]
+  atelier: [n, in]
+  bijkeuken: [f, in]
+  bed: [n, bij]
+  plafond: [n, aan]
+  muur: [m, aan]
+  voordeur: [f, bij]
+  achterdeur: [f, bij]
+  straat: [f, aan]
+  straatkant: [m, aan]
+  bank: [f, bij]
+  tafel: [f, boven]
+  bureau: [n, bij]
+  kast: [f, in]
+  aanrecht: [n, boven]
+  spiegel: [m, bij]
+# Ruimtes die zonder lidwoord staan: "de camera buiten".
+alone: [buiten, binnen, boven, beneden]
+# Woorden die zo achter het naamwoord mogen: "de lamp links".
+sides: [links, rechts, midden, voor, achter, boven, onder, groot, klein]
+# How a state is said (E-243). French agrees: masculine, feminine, and both plurals.
+states:
+  "on": ["aan"]
+  "off": ["uit"]
+  open: ["open"]
+  closed: ["dicht"]
+  locked: ["op slot"]
+  unlocked: ["niet op slot"]

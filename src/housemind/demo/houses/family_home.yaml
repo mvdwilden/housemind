@@ -1,0 +1,60 @@
+# A family home: two floors, children's room, a cat, many rooms (B-41).
+key: family_home
+name: family_home
+country: NL
+residents: 3
+pets: true
+pet_areas: [living, kitchen, hall]
+floors: [{id: ground, level: 0}, {id: first, level: 1}]
+areas:
+  - {id: living, floor: ground}
+  - {id: kitchen, floor: ground}
+  - {id: hall, floor: ground}
+  - {id: toilet, floor: ground}
+  - {id: garage, floor: ground}
+  - {id: garden, floor: ground}
+  - {id: bedroom, floor: first}
+  - {id: bedroom_child, floor: first}
+  - {id: guest_room, floor: first}
+  - {id: bathroom, floor: first}
+entities:
+  - {id: light.living_ceiling, area: living, label: ceiling_light, state: "off", modes: [color_temp]}
+  - {id: light.living_reading, area: living, label: reading_lamp, state: "off", modes: [brightness]}
+  - {id: light.kitchen, area: kitchen, label: light, state: "off", modes: [brightness]}
+  - {id: light.hall, area: hall, label: light, state: "off", modes: [onoff]}
+  - {id: light.toilet, area: toilet, label: light, state: "off", modes: [onoff]}
+  - {id: light.bedroom, area: bedroom, label: light, state: "off", modes: [brightness]}
+  - {id: light.bedroom_child, area: bedroom_child, label: night_light, state: "off", modes: [color_temp]}
+  - {id: light.bathroom, area: bathroom, label: light, state: "off", modes: [brightness]}
+  - {id: light.garden, area: garden, label: light, state: "off", modes: [onoff]}
+  - {id: cover.living_curtain, area: living, label: curtain, class: curtain, state: open}
+  - {id: cover.bedroom_curtain, area: bedroom, label: curtain, class: shutter, state: open}
+  - {id: cover.garden_awning, area: garden, label: awning, class: awning, state: closed}
+  - {id: cover.garage_door, area: garage, label: garage_door, class: garage, state: closed}
+  - {id: climate.living, area: living, label: thermostat, state: heat, attrs: {temperature: 20.5, current_temperature: 20.1}}
+  - {id: climate.bedroom, area: bedroom, label: radiator, state: heat, attrs: {temperature: 17, current_temperature: 17.4}}
+  - {id: climate.bedroom_child, area: bedroom_child, label: radiator, state: heat, attrs: {temperature: 18, current_temperature: 18.2}}
+  - {id: binary_sensor.living_presence, area: living, label: presence, class: presence, state: "off"}
+  - {id: binary_sensor.kitchen_motion, area: kitchen, label: motion, class: motion, state: "off"}
+  - {id: binary_sensor.hall_motion, area: hall, label: motion, class: motion, state: "off"}
+  - {id: binary_sensor.bathroom_motion, area: bathroom, label: motion, class: motion, state: "off"}
+  - {id: binary_sensor.front_door, area: hall, label: door, class: door, state: "off"}
+  - {id: binary_sensor.bedroom_window, area: bedroom, label: window, class: window, state: "off"}
+  - {id: binary_sensor.kitchen_smoke, area: kitchen, label: smoke, class: smoke, state: "off"}
+  - {id: binary_sensor.hall_smoke, area: hall, label: smoke, class: smoke, state: "off"}
+  - {id: binary_sensor.utility_leak, area: kitchen, label: leak, class: moisture, state: "off"}
+  - {id: valve.water_main, area: garage, label: water_valve, class: water, state: open}
+  - {id: sensor.water_meter, area: garage, label: water_meter, class: water, state: "123.456", unit: "m³", attrs: {state_class: total_increasing}}
+  - {id: fan.bathroom, area: bathroom, label: fan, state: "off"}
+  - {id: sensor.bathroom_humidity, area: bathroom, label: humidity, class: humidity, state: "55", unit: "%"}
+  - {id: lock.front_door, area: hall, label: lock, state: locked}
+  - {id: alarm_control_panel.home, area: hall, label: alarm, state: disarmed}
+  - {id: media_player.living_tv, area: living, label: tv, class: tv, state: "off"}
+  - {id: vacuum.robot, area: living, label: vacuum, state: docked}
+  - {id: binary_sensor.washer_running, area: kitchen, label: washer, class: running, state: "off"}
+  # The phone's next alarm (HA companion app): set on workdays (E-88)
+  - {id: sensor.phone_1_next_alarm, device: phone_1, label: next_alarm, class: timestamp, state: unavailable}
+persons:
+  - {id: person.resident_1, state: home}
+  - {id: person.resident_2, state: home}
+  - {id: person.resident_3, state: home}

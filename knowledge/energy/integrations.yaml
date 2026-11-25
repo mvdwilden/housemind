@@ -1,0 +1,16 @@
+# What is different per energy integration (E-341 as kept by K3, B-215): the technical name of
+# the Home Assistant integration (its platform), never shown in the app or the help. A later
+# layer (a knowledge update, E-154) may only make it stricter.
+#
+#   cloud: true   it goes through the maker's cloud: at most one write a minute for all cloud
+#                 integrations together
+#   flash: true   writing a setting wears the device's memory: at least five minutes between
+#                 two writes
+#
+# netcode: words of grid code settings, which HouseMind never touches (E-340).
+schema: 1
+integrations:
+  anker_solix: {cloud: true}
+  growatt_server: {cloud: true}
+  victron: {flash: true}
+netcode: [lvrt, hvrt, gridcode, powerfactor, cosphi, frequency, reactivepower]

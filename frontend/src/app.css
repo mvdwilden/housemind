@@ -1,0 +1,128 @@
+/* HouseMind look "deep and calm" (H9.1, B-22). Fonts are shipped with the app (no CDN). */
+@import "@fontsource/sora/600.css";
+@import "@fontsource/sora/700.css";
+@import "@fontsource/figtree/400.css";
+@import "@fontsource/figtree/500.css";
+@import "@fontsource/figtree/600.css";
+@import "@fontsource/jetbrains-mono/400.css";
+
+:root {
+  --ink: #0a0e19;
+  --surface: #10162a;
+  --raised: #172038;
+  --line: #24304f;
+  --edge: #63708f; /* the edge of fields and buttons: at least 3:1 (WCAG 1.4.11; design system 'rand') */
+  --text: #e7ebf6;
+  --muted: #9aa6c4;
+  --accent: #5ed4c4;
+  --on-accent: #06201d;
+  --emergency: #ff5468; /* the three status colours (design system: nood, belangrijk, leren) */
+  --important: #ff9150;
+  --learning: #f3b65b;
+  --vesta-glow: 1; /* how strong Vesta's glow is; a colour scheme may soften it */
+  --alert: #6e2a0c; /* a banner that something is wrong (no connection); same in every theme */
+  --rhythm-sleep: #8592e0; /* the rhythm bar: sleeping and away, as in the manual (E-507) */
+  --rhythm-away: #2d3a62;
+  --ai: #9c8cff; /* the AI's own violet, everywhere something comes from AI (E-524) */
+  --on-alert: #ffffff;
+  --font-display: "Sora", "Figtree", system-ui, sans-serif;
+  --font-body: "Figtree", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --ink: #f2f4f9;
+    --surface: #ffffff;
+    --raised: #eef1f7;
+    --line: #d6dcea;
+    --edge: #76829c;
+    --vesta-ring: var(--edge); /* her shape on a light background (M-23) */
+    --text: #121829;
+    --muted: #4e5a77;
+    --accent: #0b7a70;
+    --on-accent: #ffffff;
+    --emergency: #c4213a;
+    --important: #b04a0e;
+    --learning: #8a5a10;
+    --rhythm-sleep: #3f4fb0;
+    --rhythm-away: #c9d1e2;
+    --ai: #5b4ad0; /* on a light background the violet is too pale for its word */
+    color-scheme: light;
+  }
+}
+
+/* A personal choice beats the device setting (preferences). */
+:root[data-theme="light"] {
+  --ink: #f2f4f9;
+  --surface: #ffffff;
+  --raised: #eef1f7;
+  --line: #d6dcea;
+  --edge: #76829c;
+  --vesta-ring: var(--edge); /* her shape on a light background (M-23) */
+  --text: #121829;
+  --muted: #4e5a77;
+  --accent: #0b7a70;
+  --on-accent: #ffffff;
+  --emergency: #c4213a;
+  --important: #b04a0e;
+  --learning: #8a5a10;
+  --rhythm-sleep: #3f4fb0;
+  --rhythm-away: #c9d1e2;
+  --ai: #5b4ad0;
+  color-scheme: light;
+}
+
+/* The three steps, the same colour everywhere (StepPill, bars, choices). Built from the
+   scheme's own colours, so every scheme that passed the readability check keeps the text
+   readable: muted, learning and accent are checked against the surface, on-accent on accent. */
+:root {
+  --step-observe: var(--muted);
+  --on-step-observe: var(--surface);
+  --step-propose: var(--learning);
+  --on-step-propose: var(--surface);
+  --step-autonomous: var(--accent);
+  --on-step-autonomous: var(--on-accent);
+}
+
+/* Text size Large makes the letters bigger, not the page (M-22: zoom pushed the bars off the
+   screen). Every font size is a multiple of this. */
+:root { --text-scale: 1; }
+html.large-text { --text-scale: 1.125; }
+
+/* The Orb's colours as real colours, so a change can flow instead of jump (E-217). */
+@property --orb-color { syntax: "<color>"; inherits: true; initial-value: #5ed4c4; }
+@property --orb-deep { syntax: "<color>"; inherits: true; initial-value: #145e61; }
+@property --orb-glow { syntax: "<color>"; inherits: true; initial-value: rgba(94, 212, 196, 0.45); }
+
+/* Less motion: HouseMind follows the device's own setting, everywhere (E-46, E-319). */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--ink);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: calc(16px * var(--text-scale));
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Every button gets the theme's colours, never the browser's own grey (found by axe: in dark
+   mode that grey gave too little contrast). Components still style their own buttons. */
+button { font: inherit; color: inherit; background-color: var(--raised); border: 1px solid var(--line); border-radius: 10px; }
+button.link { align-self: flex-start; border: none; background: none; color: var(--accent); font-weight: 600; cursor: pointer; min-height: 40px; padding: 0; }
+button:focus-visible, select:focus-visible, input:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+input, select { font: inherit; }
+
+/* "van AI" (E-524): one small label in the AI's violet, wherever something comes from AI – in
+   Wat ik weet, a room, Klaar voor autonomie? – as in the network. */
+.from-ai { display: inline-block; padding: 0 7px; border: 1px solid currentColor; border-radius: 999px; color: var(--ai); font-size: calc(12px * var(--text-scale)); font-weight: 600; line-height: 1.5; white-space: nowrap; vertical-align: 1px; }

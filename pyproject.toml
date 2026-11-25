@@ -1,0 +1,69 @@
+[project]
+name = "housemind"
+version = "0.4.0"
+description = "HouseMind – a house that thinks for itself. A learning, explainable brain for Home Assistant."
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.13"
+dependencies = [
+    "aiohttp>=3.11",
+    "pyyaml>=6.0",
+    "jsonschema>=4.23",
+    "cryptography>=44.0",
+    "holidays>=0.106",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "pytest-asyncio>=0.25",
+    "hypothesis>=6.120",
+    "ruff>=0.9",
+    "mypy>=1.14",
+    "types-pyyaml>=6.0",
+    "types-jsonschema>=4.23",
+    "playwright>=1.64.0",
+    "pytest-xdist>=3.8.0",
+]
+
+[project.scripts]
+housemind = "housemind.__main__:main"
+
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/housemind"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+addopts = "-q -m 'not slow and not realha and not ui'"
+markers = [
+    "slow: long runs (a year in the time machine, speed); run with -m slow",
+    "realha: against a real Home Assistant in a container; run with tools/real_ha.py",
+    "ui: every screen in a real browser, with accessibility checks; run with -m ui",
+    "fresh_install: a new installation starts inactive (E-275), as in a real house",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "S", "SIM", "RUF", "ASYNC"]
+ignore = ["S101", "RUF001", "RUF002", "RUF003", "SIM102"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S"]
+"tools/real_ha.py" = ["S603", "S607"]  # runs docker and uv on this computer, for tests
+
+[tool.mypy]
+python_version = "3.13"
+strict = true
+mypy_path = "src"
+packages = ["housemind"]

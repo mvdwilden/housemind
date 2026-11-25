@@ -1,0 +1,297 @@
+# An extended home (the administrator's wish, 20-10-2026): every kind of device HouseMind
+# knows by itself, in one invented house. Lamps of every sort and a light group, every kind of
+# window covering, the awning, a roof window, a ventilation damper, the garage door and the
+# gate; heating, ventilation by humidity and air quality, a humidifier and hot water; the whole
+# energy setup (solar panels with an export limit, home battery, charge point and car, two
+# appliances that may start later); the lock, the alarm with its siren, cameras at the door,
+# on the driveway, in the garden and in the hall (16.9), water and gas valves with their meters, every emergency sensor (smoke, carbon
+# monoxide, gas, leak, frost); the fridge door, the oven, a TV and a speaker, a robot vacuum
+# and a robot mower; the weather, the phone's alarm and an automation made in HA earlier.
+# tests/test_demo_houses.py guards that nothing in the catalogue is missing here.
+key: extended
+name: extended
+country: NL
+residents: 4
+pets: true
+pet_areas: [living, kitchen, hall]
+floors: [{id: ground, level: 0}, {id: first, level: 1}, {id: second, level: 2}]
+areas:
+  - {id: living, floor: ground}
+  - {id: dining, floor: ground}
+  - {id: kitchen, floor: ground}
+  - {id: hall, floor: ground}
+  - {id: toilet, floor: ground}
+  - {id: utility, floor: ground}
+  - {id: garage, floor: ground}
+  - {id: garden, floor: ground}
+  - {id: driveway, floor: ground}
+  - {id: office, floor: first}
+  - {id: bedroom, floor: first}
+  - {id: bedroom_child, floor: first}
+  - {id: guest_room, floor: first}
+  - {id: bathroom, floor: first}
+  - {id: attic, floor: second}
+entities:
+  # Lamps: on/off, dimmable, white tones and colour, a Zigbee2MQTT group that steers two
+  # pendants in one radio message, and an HA group over two rooms that only gathers (E-312).
+  # Every other kind of group as Home Assistant shows it (E-458): a Hue room (its lamps in
+  # entity_id, with is_hue_group), a ZHA group (unique id light_zha_group_0x…, its lamps in
+  # group_entities), a deCONZ group (is_deconz_group; HA lists no lamps, so it only gathers)
+  # and an HA light group in one room.
+  - {id: light.living_ceiling, area: living, label: ceiling_light, state: "off", modes: [color_temp]}
+  - {id: light.living_reading, area: living, label: reading_lamp, state: "off", modes: [brightness]}
+  - {id: light.living_mood, area: living, label: mood_light, state: "off", modes: [color_temp, hs]}
+  - {id: light.dining_left, area: dining, label: pendant_left, state: "off", modes: [brightness]}
+  - {id: light.dining_right, area: dining, label: pendant_right, state: "off", modes: [brightness]}
+  - {id: light.dining_table, area: dining, label: table_lights, state: "off", modes: [brightness], platform: mqtt, unique_id: 3_light_zigbee2mqtt, attrs: {group_entities: [light.dining_left, light.dining_right]}}
+  - {id: light.downstairs, label: downstairs_lights, state: "off", modes: [brightness], platform: group, attrs: {entity_id: [light.living_reading, light.kitchen]}}
+  - {id: light.living_room, area: living, label: room_lights, state: "off", modes: [color_temp], platform: hue, unique_id: hue_room_1, attrs: {is_hue_group: true, hue_type: room, entity_id: [light.living_ceiling, light.living_mood]}}
+  - {id: light.bedroom_bedside, area: bedroom, label: bedside_lamp, state: "off", modes: [brightness]}
+  - {id: light.bedroom_lights, area: bedroom, label: room_lights, state: "off", modes: [brightness], platform: zha, unique_id: light_zha_group_0x0002, attrs: {group_entities: [light.bedroom, light.bedroom_bedside]}}
+  - {id: light.garden_lights, area: garden, label: room_lights, state: "off", modes: [onoff], platform: deconz, unique_id: "00212effff00aabb-group-3", attrs: {is_deconz_group: true, all_on: false}}
+  - {id: light.bathroom_mirror, area: bathroom, label: mirror_light, state: "off", modes: [brightness]}
+  - {id: light.bathroom_lights, area: bathroom, label: room_lights, state: "off", modes: [brightness], platform: group, attrs: {entity_id: [light.bathroom, light.bathroom_mirror]}}
+  - {id: light.kitchen, area: kitchen, label: light, state: "off", modes: [brightness]}
+  - {id: light.hall, area: hall, label: light, state: "off", modes: [onoff]}
+  - {id: light.toilet, area: toilet, label: light, state: "off", modes: [onoff]}
+  - {id: light.office, area: office, label: desk_lamp, state: "off", modes: [brightness]}
+  - {id: light.bedroom, area: bedroom, label: light, state: "off", modes: [brightness]}
+  - {id: light.bedroom_child, area: bedroom_child, label: night_light, state: "off", modes: [color_temp]}
+  - {id: light.guest_room, area: guest_room, label: light, state: "off", modes: [brightness]}
+  - {id: light.bathroom, area: bathroom, label: light, state: "off", modes: [brightness]}
+  - {id: light.attic, area: attic, label: light, state: "off", modes: [onoff]}
+  - {id: light.garage, area: garage, label: light, state: "off", modes: [onoff]}
+  - {id: light.garden, area: garden, label: light, state: "off", modes: [onoff]}
+  - {id: light.driveway, area: driveway, label: light, state: "off", modes: [onoff]}
+  # Window coverings, sun protection, a roof window, a damper, the garage door and the gate
+  - {id: cover.living_curtain, area: living, label: curtain, class: curtain, state: open}
+  - {id: cover.bedroom_shutter, area: bedroom, label: shutter, class: shutter, state: open}
+  - {id: cover.office_blinds, area: office, label: blinds, class: blind, state: open, attrs: {current_position: 100, current_tilt_position: 50}}
+  - {id: cover.garden_awning, area: garden, label: awning, class: awning, state: closed}
+  - {id: cover.attic_window, area: attic, label: roof_window, class: window, state: closed}
+  - {id: cover.utility_damper, area: utility, label: damper, class: damper, state: open}
+  - {id: cover.garage_door, area: garage, label: garage_door, class: garage, state: closed}
+  - {id: cover.garden_gate, area: garden, label: gate, class: gate, state: closed}
+  # Heating, air and hot water
+  - {id: climate.living, area: living, label: thermostat, state: heat, attrs: {temperature: 20.5, current_temperature: 20.1}}
+  - {id: climate.bedroom, area: bedroom, label: radiator, state: heat, attrs: {temperature: 17, current_temperature: 17.3}}
+  - {id: climate.bedroom_child, area: bedroom_child, label: radiator, state: heat, attrs: {temperature: 18, current_temperature: 18.2}}
+  - {id: climate.bathroom, area: bathroom, label: radiator, state: heat, attrs: {temperature: 19, current_temperature: 19.2}}
+  - {id: fan.bathroom, area: bathroom, label: fan, state: "off"}
+  - {id: sensor.bathroom_humidity, area: bathroom, label: humidity, class: humidity, state: "55", unit: "%"}
+  - {id: fan.office, area: office, label: fan, state: "off"}
+  - {id: sensor.office_air_quality, area: office, label: air_quality, class: carbon_dioxide, state: "620", unit: ppm}
+  - {id: humidifier.bedroom, area: bedroom, label: humidifier, state: "off", attrs: {humidity: 45, min_humidity: 30, max_humidity: 70}}
+  - {id: water_heater.boiler, area: utility, label: water_heater, state: eco, attrs: {temperature: 50, current_temperature: 49, min_temp: 40, max_temp: 65, operation_list: [eco, performance]}}
+  # Motion and presence
+  - {id: binary_sensor.living_presence, area: living, label: presence, class: presence, state: "off"}
+  - {id: binary_sensor.dining_presence, area: dining, label: presence, class: presence, state: "off"}
+  - {id: binary_sensor.kitchen_presence, area: kitchen, label: presence, class: presence, state: "off"}
+  - {id: binary_sensor.hall_motion, area: hall, label: motion, class: motion, state: "off"}
+  - {id: binary_sensor.toilet_motion, area: toilet, label: motion, class: motion, state: "off"}
+  - {id: binary_sensor.office_presence, area: office, label: presence, class: occupancy, state: "off"}
+  - {id: binary_sensor.bedroom_motion, area: bedroom, label: motion, class: motion, state: "off"}
+  - {id: binary_sensor.bathroom_motion, area: bathroom, label: motion, class: motion, state: "off"}
+  # Every room has a sensor, so someone can be played there (E-463). In the attic it has another
+  # name: an automation below points on purpose at an attic_motion that is gone (Check-up).
+  - {id: binary_sensor.utility_motion, area: utility, label: motion, class: motion, state: "off"}
+  - {id: binary_sensor.garage_motion, area: garage, label: motion, class: motion, state: "off"}
+  - {id: binary_sensor.garden_motion, area: garden, label: motion, class: motion, state: "off"}
+  - {id: binary_sensor.bedroom_child_motion, area: bedroom_child, label: motion, class: motion, state: "off"}
+  - {id: binary_sensor.guest_room_motion, area: guest_room, label: motion, class: motion, state: "off"}
+  - {id: binary_sensor.attic_movement, area: attic, label: motion, class: motion, state: "off"}
+  - {id: sensor.living_light_level, area: living, label: light_level, class: illuminance, state: "120", unit: lx}
+  # Doors and windows
+  - {id: binary_sensor.front_door, area: hall, label: door, class: door, state: "off"}
+  - {id: binary_sensor.back_door, area: kitchen, label: back_door, class: door, state: "off"}
+  - {id: binary_sensor.bedroom_window, area: bedroom, label: window, class: window, state: "off"}
+  # Security: lock, alarm with siren, and cameras as real integrations give them (16.9): the
+  # doorbell with a package sensor, the driveway with person and vehicle sensors, the garden
+  # with one event entity for its smart detections, the hall with motion and glass breaking.
+  - {id: lock.front_door, area: hall, label: lock, state: locked}
+  - {id: alarm_control_panel.home, area: hall, label: alarm, state: disarmed, attrs: {supported_features: 7, code_arm_required: false}}
+  - {id: siren.hall, area: hall, label: siren, state: "off"}
+  - {id: camera.front_door, device: doorbell_camera, area: hall, label: camera, state: idle}
+  - {id: event.doorbell, device: doorbell_camera, area: hall, label: doorbell, class: doorbell, state: unknown, attrs: {event_types: [ring]}}
+  - {id: binary_sensor.front_door_package, device: doorbell_camera, area: hall, label: package_detected, class: occupancy, state: "off"}
+  - {id: camera.driveway, device: driveway_camera, area: driveway, label: camera_plain, state: idle}
+  - {id: binary_sensor.driveway_person, device: driveway_camera, area: driveway, label: person_detected, class: occupancy, state: "off"}
+  - {id: binary_sensor.driveway_vehicle, device: driveway_camera, area: driveway, label: vehicle_detected, class: occupancy, state: "off"}
+  - {id: camera.garden, device: garden_camera, area: garden, label: camera_plain, state: idle}
+  - {id: event.garden_detection, device: garden_camera, area: garden, label: smart_detection, class: motion, state: unknown, attrs: {event_types: [person, vehicle, animal, package]}}
+  - {id: camera.hall, device: hall_camera, area: hall, label: camera_plain, state: idle}
+  - {id: binary_sensor.hall_camera_motion, device: hall_camera, area: hall, label: camera_motion, class: motion, state: "off"}
+  - {id: binary_sensor.hall_glass_break, device: hall_camera, area: hall, label: glass_break, class: sound, state: "off"}
+  # Emergencies: smoke, carbon monoxide, gas, leak and frost – and the valves that close
+  - {id: binary_sensor.hall_smoke, area: hall, label: smoke, class: smoke, state: "off"}
+  - {id: binary_sensor.bedroom_smoke, area: bedroom, label: smoke, class: smoke, state: "off"}
+  - {id: binary_sensor.utility_co, area: utility, label: co_detector, class: carbon_monoxide, state: "off"}
+  - {id: binary_sensor.kitchen_gas, area: kitchen, label: gas_detector, class: gas, state: "off"}
+  - {id: binary_sensor.utility_leak, area: utility, label: leak, class: moisture, state: "off"}
+  - {id: binary_sensor.garage_frost, area: garage, label: frost, class: cold, state: "off"}
+  - {id: valve.water_main, area: utility, label: water_valve, class: water, state: open}
+  - {id: sensor.water_meter, area: utility, label: water_meter, class: water, state: "123.456", unit: "m³", attrs: {state_class: total_increasing}}
+  - {id: valve.gas_main, area: utility, label: gas_valve, class: gas, state: open}
+  - {id: sensor.gas_meter, area: utility, label: gas_meter, class: gas, state: "2345.678", unit: "m³", attrs: {state_class: total_increasing}}
+  # Around the house
+  - {id: binary_sensor.kitchen_fridge, area: kitchen, label: fridge_door, class: door, state: "off"}
+  - {id: sensor.kitchen_oven_power, device: oven_device, area: kitchen, label: oven_power, class: power, state: "0", unit: W}
+  - {id: switch.kitchen_oven_plug, device: oven_device, area: kitchen, label: oven_plug, state: "on"}  # off only after a yes (E-61)
+  - {id: media_player.living_tv, area: living, label: tv, class: tv, state: "off"}
+  - {id: media_player.kitchen_speaker, area: kitchen, label: speaker, class: speaker, state: "off"}
+  - {id: vacuum.robot, area: living, label: vacuum, state: docked}
+  - {id: lawn_mower.robot, area: garden, label: mower, state: docked}
+  # Energy (E-65): grouped in devices like Home Assistant does
+  - {id: sensor.grid_power, device: grid_meter, area: utility, label: power, class: power, state: "350", unit: W}
+  - {id: sensor.grid_import, device: grid_meter, area: utility, label: grid_import, class: energy, state: "0", unit: kWh}
+  - {id: sensor.grid_export, device: grid_meter, area: utility, label: grid_export, class: energy, state: "0", unit: kWh}
+  - {id: sensor.grid_current_l1, device: grid_meter, area: utility, label: current_l1, class: current, state: "1", unit: A}
+  - {id: sensor.grid_current_l2, device: grid_meter, area: utility, label: current_l2, class: current, state: "1", unit: A}
+  - {id: sensor.grid_current_l3, device: grid_meter, area: utility, label: current_l3, class: current, state: "1", unit: A}
+  - {id: sensor.solar_power, device: inverter, area: utility, label: solar, class: power, state: "0", unit: W}
+  - {id: sensor.solar_energy, device: inverter, area: utility, label: solar_energy, class: energy, state: "0", unit: kWh}
+  - {id: number.solar_export_limit, device: inverter, area: utility, label: export_limit, state: "100", unit: "%", attrs: {min: 0, max: 100}}
+  - {id: sensor.home_battery, device: home_battery, area: utility, label: battery, class: battery, state: "64", unit: "%"}
+  - {id: sensor.home_battery_power, device: home_battery, area: utility, label: battery_power, class: power, state: "0", unit: W}
+  - {id: sensor.home_battery_in, device: home_battery, area: utility, label: battery_in, class: energy, state: "0", unit: kWh}
+  - {id: sensor.home_battery_out, device: home_battery, area: utility, label: battery_out, class: energy, state: "0", unit: kWh}
+  - {id: select.home_battery_mode, device: home_battery, area: utility, label: battery_mode, state: self_consumption, attrs: {options: [self_consumption, charge, discharge, idle]}}
+  # A home battery's reserve, charging from the grid and remote control (E-337, E-338).
+  - {id: number.home_battery_minimum_soc, device: home_battery, area: utility, label: battery_min_soc, state: "10", unit: "%", attrs: {min: 0, max: 100, step: 5}}
+  - {id: switch.home_battery_charge_from_grid, device: home_battery, area: utility, label: battery_grid_charge, state: "off"}
+  - {id: switch.home_battery_remote_control, device: home_battery, area: utility, label: battery_remote, state: "off"}
+  # A power with a sign and a discharge limit: used only after calibrating (E-336, E-339).
+  - {id: number.home_battery_power_setpoint, device: home_battery, area: utility, label: battery_power_setpoint, state: "0", unit: W, attrs: {min: -5000, max: 5000, step: 50}}
+  - {id: number.home_battery_max_discharge_power, device: home_battery, area: utility, label: battery_max_discharge, state: "5000", unit: W, attrs: {min: 0, max: 5000, step: 50}}
+  # A second home battery in the attic, steered on its own (E-344); remote control as a choice.
+  - {id: sensor.attic_battery, device: attic_battery, area: utility, label: attic_battery_level, class: battery, state: "55", unit: "%"}
+  - {id: number.attic_battery_minimum_soc, device: attic_battery, area: utility, label: battery_min_soc, state: "10", unit: "%", attrs: {min: 0, max: 100, step: 10}}
+  - {id: select.attic_battery_ems_control, device: attic_battery, area: utility, label: battery_ems_control, state: self_consumption, attrs: {options: [self_consumption, remote_control]}}
+  - {id: switch.charge_point, device: charger, area: garage, label: charger, state: "on"}
+  - {id: number.charge_current, device: charger, area: garage, label: charge_current, state: "16", unit: A, attrs: {min: 6, max: 16}}
+  - {id: select.charge_point_phases, device: charger, area: garage, label: charge_phases, state: "3", attrs: {options: ["1", "3"]}}
+  - {id: sensor.charge_point_power, device: charger, area: garage, label: charger_power, class: power, state: "0", unit: W}
+  - {id: binary_sensor.charge_point_plug, device: charger, area: garage, label: car_plugged, class: plug, state: "on"}
+  - {id: sensor.car_battery, device: car, area: garage, label: car_battery, class: battery, state: "55", unit: "%"}
+  - {id: binary_sensor.washer_remote_start, device: washer_device, area: utility, label: remote_start, state: "off"}
+  - {id: button.washer_start, device: washer_device, area: utility, label: start, state: unknown}
+  - {id: sensor.washer_power, device: washer_device, area: utility, label: washer_power, class: power, state: "0", unit: W}
+  - {id: binary_sensor.dishwasher_remote_start, device: dishwasher_device, area: kitchen, label: dishwasher_remote, state: "off"}
+  - {id: switch.dishwasher_start, device: dishwasher_device, area: kitchen, label: dishwasher_start, state: "off"}
+  - {id: sensor.dishwasher_power, device: dishwasher_device, area: kitchen, label: dishwasher_power, class: power, state: "0", unit: W, away_hours: 200}
+  - {id: sensor.electricity_price, area: utility, label: price, class: monetary, state: "0.12", unit: EUR/kWh}
+  - {id: weather.home, label: weather, state: cloudy, attrs: {temperature: 11}}
+  # The phone's next alarm (HA companion app): set on workdays (E-88)
+  - {id: sensor.phone_1_next_alarm, device: phone_1, label: next_alarm, class: timestamp, state: unavailable}
+  # Home Assistant netjes (E-351): a few things that are broken, to look at in the demo. An
+  # integration that does not start, a whole device that is away, a duplicate and an entity its
+  # integration no longer gives (away_hours: since when Home Assistant says it is away).
+  - {id: sensor.garden_wind, device: weather_station, area: garden, label: wind, state: unavailable, integration: demo-weather, away_hours: 3}
+  - {id: sensor.garden_rain, device: weather_station, area: garden, label: rain, state: unavailable, integration: demo-weather, away_hours: 3}
+  - {id: sensor.garden_soil_moisture, device: garden_sensor, area: garden, label: soil_moisture, state: unavailable, integration: demo-zigbee, away_hours: 26}
+  - {id: sensor.garden_soil_temperature, device: garden_sensor, area: garden, label: soil_temperature, state: unavailable, integration: demo-zigbee, away_hours: 26}
+  - {id: sensor.garage_door_openings, area: garage, label: door_openings, state: "12", integration: demo-zigbee}
+  - {id: sensor.garage_door_openings_2, area: garage, label: door_openings, state: unavailable, integration: demo-zigbee, away_hours: 30}
+  - {id: switch.old_freezer, area: garage, label: freezer_plug, state: unavailable, restored: true, integration: demo-plugs, away_hours: 50}
+  - {id: sensor.driveway_gate_openings, area: driveway, label: door_openings, state: unavailable, integration: demo-zigbee, away_hours: 5}
+  # An old meter whose integration still runs but gives no value for days (E-370).
+  - {id: sensor.old_meter_reading_1, device: old_meter, area: utility, label: old_meter_reading, state: unknown, integration: demo-oldmeter, away_hours: 240}
+  - {id: sensor.old_meter_reading_2, device: old_meter, area: utility, label: old_meter_reading, state: unknown, integration: demo-oldmeter, away_hours: 240}
+  - {id: sensor.old_meter_reading_3, device: old_meter, area: utility, label: old_meter_reading, state: unknown, integration: demo-oldmeter, away_hours: 240}
+  - {id: switch.old_dryer, area: utility, label: dryer_plug, state: unavailable, restored: true, integration: demo-plugs, away_hours: 50}
+  # A group of the integration that lets light follow the day (E-465): its own switch.
+  - {id: switch.adaptive_lighting_office, label: day_rhythm_group, state: "on", platform: adaptive_lighting, integration: demo-day-rhythm, attrs: {manual_control: []}}
+persons:
+  - {id: person.resident_1, state: home}
+  - {id: person.resident_2, state: home}
+  - {id: person.resident_3, state: home}
+  - {id: person.resident_4, state: home}
+# An automation someone made in Home Assistant earlier (E-41, E-42).
+automations:
+  - id: automation.hall_light
+    label: hall_light_motion
+    config:
+      id: "demo-1"
+      triggers: [{trigger: state, entity_id: binary_sensor.hall_motion, to: "on"}]
+      actions: [{action: light.turn_on, target: {entity_id: light.hall}}]
+  # One that points to a motion sensor and a lamp that are gone (E-352).
+  - id: automation.attic_light_night
+    label: attic_night_light
+    config:
+      id: "demo-2"
+      triggers: [{trigger: state, entity_id: binary_sensor.attic_motion, to: "on"}]
+      actions: [{action: light.turn_on, target: {entity_id: light.attic_old}}]
+  # Automations that have not run for a long time (B-240): one that is on, one that is off,
+  # and a Christmas one that waits a year.
+  - id: automation.tablet_charging
+    label: tablet_charging
+    ran_days: 410
+    config:
+      id: "demo-3"
+      triggers: [{trigger: time, at: "22:00:00"}]
+      actions: [{action: notify.notify, data: {message: tablet}}]
+  - id: automation.old_alarm_clock
+    label: old_alarm_clock
+    state: "off"
+    ran_days: 140
+    config:
+      id: "demo-4"
+      triggers: [{trigger: time, at: "06:30:00"}]
+      actions: [{action: notify.notify, data: {message: alarm}}]
+  - id: automation.christmas_lights
+    label: christmas_lights
+    ran_days: 287
+    config:
+      id: "demo-5"
+      triggers: [{trigger: time, at: "17:00:00"}]
+      actions: [{action: notify.notify, data: {message: lights}}]
+# The integrations as Home Assistant set them up (E-352): one does not start.
+# The settings of that group, as Home Assistant's form gives them (E-465).
+light_rhythms:
+  - id: demo-day-rhythm
+    title: day_rhythm_group
+    options:
+      lights: [light.office]
+      min_brightness: 20
+      max_brightness: 100
+      min_color_temp: 2500
+      max_color_temp: 4500
+      interval: 300
+      transition: 60
+      initial_transition: 1
+      brightness_mode: linear
+integrations:
+  - {id: demo-weather, domain: weather_station, title: weather_station, state: setup_retry}
+  - {id: demo-zigbee, domain: zigbee, title: Zigbee, state: loaded}
+  - {id: demo-plugs, domain: plugs, title: plugs, state: loaded}
+  - {id: demo-oldmeter, domain: old_meter, title: old_meter, state: loaded}
+  - {id: demo-day-rhythm, domain: adaptive_lighting, title: day_rhythm_group, state: loaded}
+# What Home Assistant itself finds in these energy settings (energy/validate, E-371): a device
+# meter in watt where energy is wanted.
+energy_validation:
+  energy_sources: [[], [], []]
+  device_consumption: [[{type: entity_unexpected_unit_energy, affected_entities: [[sensor.washer_power, W]]}], []]
+# Home Assistant's energy settings for this house (E-65).
+energy:
+  energy_sources:
+    - type: grid
+      flow_from: [{stat_energy_from: sensor.grid_import, entity_energy_price: sensor.electricity_price}]
+      flow_to: [{stat_energy_to: sensor.grid_export}]
+    - {type: solar, stat_energy_from: sensor.solar_energy, config_entry_solar_forecast: [demo-forecast]}
+    - {type: battery, stat_energy_from: sensor.home_battery_out, stat_energy_to: sensor.home_battery_in}
+  device_consumption:
+    - {stat_consumption: sensor.washer_power}
+    - {stat_consumption: sensor.dishwasher_power}
+# Home Assistant's system health and backups (B-241): the newest backup with Home Assistant in
+# it is 9 days old; a newer one of one app does not count. Home Assistant keeps the last 3; with
+# backups of 2 GB about 5 more fit, and two old loose backups are a card (E-397).
+system_health:
+  homeassistant: {info: {version: "2026.10.0", installation_type: Home Assistant OS}}
+  hassio: {info: {host_os: Home Assistant OS 18.3, supervisor_version: supervisor-2026.10.3, disk_total: 32.0 GB, disk_used: 20.8 GB}}
+  recorder: {info: {estimated_db_size: 2457.60 MiB, database_engine: sqlite}}
+backups:
+  - {label: backup_full, days: 9, homeassistant_included: true, automatic: true, gb: 2.0}
+  - {label: backup_app, days: 2, homeassistant_included: false, gb: 0.1}
+  - {label: backup_update, days: 45, homeassistant_included: false, gb: 0.4}
+  - {label: backup_manual, days: 120, homeassistant_included: true, gb: 1.1}
+backup_settings: {schedule: {recurrence: daily, days: []}, retention: {copies: 3, days: null}, agents: {}}

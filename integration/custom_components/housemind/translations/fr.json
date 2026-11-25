@@ -1,0 +1,140 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "description": "HouseMind est installé comme App. Configurer la connexion ?"
+      },
+      "hassio_confirm": {
+        "description": "L'App HouseMind a été trouvée. La configurer ?"
+      }
+    },
+    "abort": {
+      "no_app": "L'App HouseMind est introuvable. Prépare de nouveau l'intégration depuis les paramètres de la maison de HouseMind.",
+      "cannot_connect": "HouseMind n'est pas joignable. L'App fonctionne-t-elle ?",
+      "already_configured": "HouseMind est déjà configuré."
+    },
+    "error": {
+      "cannot_connect": "HouseMind n'est pas joignable. L'App fonctionne-t-elle ?"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "state": {
+        "name": "État"
+      },
+      "house_mode": {
+        "name": "Mode de la maison",
+        "state": {
+          "home": "À la maison",
+          "away": "Absent",
+          "sleep": "Nuit",
+          "vacation": "Vacances",
+          "guests": "Invités"
+        }
+      },
+      "health": {
+        "name": "Santé",
+        "state": {
+          "ok": "OK",
+          "paused": "En pause",
+          "emergency": "Urgence"
+        }
+      },
+      "saving": {
+        "name": "Économie"
+      }
+    },
+    "switch": {
+      "pause": {
+        "name": "Pause"
+      }
+    },
+    "select": {
+      "house_mode_choice": {
+        "name": "Choisir le mode de la maison",
+        "state": {
+          "home": "À la maison",
+          "away": "Absent",
+          "sleep": "Nuit",
+          "vacation": "Vacances",
+          "guests": "Invités"
+        }
+      }
+    }
+  },
+  "selector": {
+    "mode": {
+      "options": {
+        "home": "À la maison",
+        "away": "Absent",
+        "sleep": "Nuit",
+        "vacation": "Vacances",
+        "guests": "Invités"
+      }
+    }
+  },
+  "services": {
+    "pause": {
+      "name": "Mettre en pause",
+      "description": "Mettre HouseMind en pause. Les réactions d'urgence continuent.",
+      "fields": {
+        "minutes": {
+          "name": "Minutes",
+          "description": "Combien de temps ; vide signifie jusqu'à la reprise."
+        }
+      }
+    },
+    "resume": {
+      "name": "Reprendre",
+      "description": "HouseMind participe de nouveau."
+    },
+    "house_mode": {
+      "name": "Choisir le mode de la maison",
+      "description": "Choisir le mode à la main ; il reste jusqu'à ce que quelqu'un arrive ou parte.",
+      "fields": {
+        "mode": {
+          "name": "Mode",
+          "description": "Le mode de la maison."
+        }
+      }
+    },
+    "feedback": {
+      "name": "Avis",
+      "description": "Pouce levé ou baissé sur la dernière action de HouseMind – il en apprend.",
+      "fields": {
+        "good": {
+          "name": "Bien",
+          "description": "Activé : pouce levé. Désactivé : pouce baissé."
+        },
+        "decision": {
+          "name": "Décision",
+          "description": "Le numéro d'une décision de HouseMind. Sans numéro : la dernière action."
+        }
+      }
+    },
+    "house_rule": {
+      "name": "Règle de la maison",
+      "description": "Une règle en mots simples. D'abord relue ; active Confirmer pour l'enregistrer.",
+      "fields": {
+        "text": {
+          "name": "Règle",
+          "description": "Par exemple : jamais la lumière du couloir après 23:00."
+        },
+        "confirm": {
+          "name": "Confirmer",
+          "description": "Enregistrer la règle."
+        }
+      }
+    },
+    "ask": {
+      "name": "Demander",
+      "description": "Pose une question à HouseMind sur la maison.",
+      "fields": {
+        "question": {
+          "name": "Question",
+          "description": "Ta question."
+        }
+      }
+    }
+  }
+}

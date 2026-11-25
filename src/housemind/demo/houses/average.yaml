@@ -1,0 +1,98 @@
+# An average home (the administrator's wish, 20-10-2026): what a household that has used Home
+# Assistant for a while typically has. Almost forty devices – lamps in most rooms, curtains and a
+# roller shutter, a thermostat with radiator valves, motion and presence sensors, door and window
+# contacts, smoke detectors on both floors, a leak sensor, a bathroom fan, a TV, a robot vacuum,
+# a smart plug under the washing machine, the smart meter and solar panels – plus the weather
+# and one automation made in Home Assistant earlier.
+key: average
+name: average
+country: NL
+residents: 3
+pets: false
+floors: [{id: ground, level: 0}, {id: first, level: 1}]
+areas:
+  - {id: living, floor: ground}
+  - {id: kitchen, floor: ground}
+  - {id: hall, floor: ground}
+  - {id: toilet, floor: ground}
+  - {id: garden, floor: ground}
+  - {id: office, floor: first}
+  - {id: bedroom, floor: first}
+  - {id: bedroom_child, floor: first}
+  - {id: bathroom, floor: first}
+entities:
+  # Lamps
+  - {id: light.living_ceiling, area: living, label: ceiling_light, state: "off", modes: [color_temp]}
+  - {id: light.living_reading, area: living, label: reading_lamp, state: "off", modes: [brightness]}
+  - {id: light.kitchen, area: kitchen, label: light, state: "off", modes: [brightness]}
+  - {id: light.hall, area: hall, label: light, state: "off", modes: [onoff]}
+  - {id: light.toilet, area: toilet, label: light, state: "off", modes: [onoff]}
+  - {id: light.office, area: office, label: desk_lamp, state: "off", modes: [brightness]}
+  - {id: light.bedroom, area: bedroom, label: light, state: "off", modes: [brightness]}
+  - {id: light.bedroom_child, area: bedroom_child, label: night_light, state: "off", modes: [color_temp]}
+  - {id: light.bathroom, area: bathroom, label: light, state: "off", modes: [brightness]}
+  - {id: light.garden, area: garden, label: light, state: "off", modes: [onoff]}
+  # Curtains and a roller shutter
+  - {id: cover.living_curtain, area: living, label: curtain, class: curtain, state: open}
+  - {id: cover.bedroom_shutter, area: bedroom, label: shutter, class: shutter, state: open}
+  # Heating: a thermostat and two radiator valves
+  - {id: climate.living, area: living, label: thermostat, state: heat, attrs: {temperature: 20.5, current_temperature: 20.1}}
+  - {id: climate.bedroom, area: bedroom, label: radiator, state: heat, attrs: {temperature: 17, current_temperature: 17.3}}
+  - {id: climate.bedroom_child, area: bedroom_child, label: radiator, state: heat, attrs: {temperature: 18, current_temperature: 18.2}}
+  # Motion and presence
+  - {id: binary_sensor.living_presence, area: living, label: presence, class: presence, state: "off"}
+  - {id: binary_sensor.kitchen_motion, area: kitchen, label: motion, class: motion, state: "off"}
+  - {id: binary_sensor.hall_motion, area: hall, label: motion, class: motion, state: "off"}
+  - {id: binary_sensor.bathroom_motion, area: bathroom, label: motion, class: motion, state: "off"}
+  - {id: binary_sensor.office_presence, area: office, label: presence, class: occupancy, state: "off"}
+  - {id: binary_sensor.toilet_motion, area: toilet, label: motion, class: motion, state: "off"}
+  - {id: binary_sensor.bedroom_motion, area: bedroom, label: motion, class: motion, state: "off"}
+  - {id: binary_sensor.bedroom_child_motion, area: bedroom_child, label: motion, class: motion, state: "off"}
+  - {id: binary_sensor.garden_motion, area: garden, label: motion, class: motion, state: "off"}
+  # Doors and windows
+  - {id: binary_sensor.front_door, area: hall, label: door, class: door, state: "off"}
+  - {id: binary_sensor.back_door, area: kitchen, label: back_door, class: door, state: "off"}
+  - {id: binary_sensor.bedroom_window, area: bedroom, label: window, class: window, state: "off"}
+  # Safety: a smoke detector on each floor and a leak sensor under the sink
+  - {id: binary_sensor.hall_smoke, area: hall, label: smoke, class: smoke, state: "off"}
+  - {id: binary_sensor.bedroom_smoke, area: bedroom, label: smoke, class: smoke, state: "off"}
+  - {id: binary_sensor.kitchen_leak, area: kitchen, label: leak, class: moisture, state: "off"}
+  # The bathroom fan and its humidity sensor
+  - {id: fan.bathroom, area: bathroom, label: fan, state: "off"}
+  - {id: sensor.bathroom_humidity, area: bathroom, label: humidity, class: humidity, state: "55", unit: "%"}
+  # Around the house
+  - {id: media_player.living_tv, area: living, label: tv, class: tv, state: "off"}
+  - {id: vacuum.robot, area: living, label: vacuum, state: docked}
+  - {id: switch.washer_plug, device: washer_device, area: bathroom, label: washer_plug, state: "on"}
+  - {id: sensor.washer_power, device: washer_device, area: bathroom, label: washer_power, class: power, state: "0", unit: W}
+  # The smart meter and the solar panels
+  - {id: sensor.grid_power, device: grid_meter, area: hall, label: power, class: power, state: "280", unit: W}
+  - {id: sensor.grid_import, device: grid_meter, area: hall, label: grid_import, class: energy, state: "0", unit: kWh}
+  - {id: sensor.grid_export, device: grid_meter, area: hall, label: grid_export, class: energy, state: "0", unit: kWh}
+  - {id: sensor.solar_power, device: inverter, area: hall, label: solar, class: power, state: "0", unit: W}
+  - {id: sensor.solar_energy, device: inverter, area: hall, label: solar_energy, class: energy, state: "0", unit: kWh}
+  - {id: weather.home, label: weather, state: cloudy, attrs: {temperature: 11}}
+  # The phone's next alarm (HA companion app): set on workdays (E-88)
+  - {id: sensor.phone_1_next_alarm, device: phone_1, label: next_alarm, class: timestamp, state: unavailable}
+persons:
+  - {id: person.resident_1, state: home}
+  - {id: person.resident_2, state: home}
+  - {id: person.resident_3, state: home}
+# An automation someone made in Home Assistant earlier. HouseMind learns from it, keeps off the
+# hall light while it is on, and asks before it switches it off (E-41, E-42).
+automations:
+  - id: automation.hall_light
+    label: hall_light_motion
+    config:
+      id: "demo-1"
+      triggers: [{trigger: state, entity_id: binary_sensor.hall_motion, to: "on"}]
+      actions: [{action: light.turn_on, target: {entity_id: light.hall}}]
+# Home Assistant's energy settings: the smart meter and the solar panels (E-65).
+energy:
+  energy_sources:
+    - type: grid
+      flow_from: [{stat_energy_from: sensor.grid_import}]
+      flow_to: [{stat_energy_to: sensor.grid_export}]
+    - {type: solar, stat_energy_from: sensor.solar_energy}
+  device_consumption:
+    - {stat_consumption: sensor.washer_power}

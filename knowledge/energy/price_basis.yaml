@@ -1,0 +1,13 @@
+# What a price entity itself says about what is in its price (E-304, B-153). HouseMind only uses
+# what the integration states – never a guess from how high the prices are. Technical data:
+# attribute keys and the words integrations use in their names; never shown in the app.
+schema: 1
+# A number: 0 means nothing is added to the market price; more means costs such as energy tax
+# were added in the integration.
+extra_costs: [additional_costs_current_hour, additional_costs, extra_costs, surcharge]
+# true or false: whether VAT is in the price.
+vat: [include_vat, vat_included, price_includes_vat, incl_vat, with_vat]
+# Words in the entity's name that say what kind of price it is (lower case, any language).
+names:
+  all_in: [all-in, all in, allin, all_in, incl. tax, including tax, inclusief belasting, inkl. steuern, toutes taxes]
+  market: [market, markt, spot, day-ahead, day ahead, kale prijs, börse, boerse, marché, marche]

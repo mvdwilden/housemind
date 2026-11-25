@@ -1,0 +1,114 @@
+# Security and emergencies (catalogue domains 8–10).
+# Hard limits (alarm off, lock open, garage door/gate open) are enforced in code (B-26);
+# these entries only describe what *is* allowed.
+schema: 1
+kinds:
+  - key: lock.any
+    match: {domain: lock}
+    safety_class: safe_direction
+    initiative: person
+    max_step: autonomous
+    actions:
+      - action: lock.lock
+    skills: [lock_when_away]
+
+  - key: alarm_control_panel.any
+    match: {domain: alarm_control_panel}
+    safety_class: propose_only
+    initiative: person
+    max_step: propose
+    actions:
+      - action: alarm_control_panel.alarm_arm_away
+        max_step: propose
+      - action: alarm_control_panel.alarm_arm_home
+        max_step: propose
+      - action: alarm_control_panel.alarm_arm_night
+        max_step: propose
+    skills: [propose_arm_when_away]
+
+  - key: valve.water
+    match: {domain: valve, device_classes: [water]}
+    safety_class: safe_direction
+    initiative: house
+    max_step: autonomous
+    actions:
+      - action: valve.close_valve
+    skills: [close_on_leak]
+
+  - key: valve.gas
+    match: {domain: valve, device_classes: [gas]}
+    safety_class: safe_direction
+    initiative: house
+    max_step: autonomous
+    actions:
+      - action: valve.close_valve
+    skills: [close_on_gas]
+
+  - key: siren.any
+    match: {domain: siren}
+    safety_class: never
+    initiative: person
+    max_step: observe
+
+  - key: camera.any
+    match: {domain: camera}
+    safety_class: never
+    initiative: person
+    max_step: observe
+
+  - key: binary_sensor.smoke
+    match: {domain: binary_sensor, device_classes: [smoke]}
+    safety_class: never
+    initiative: house
+    max_step: observe
+    skills: [emergency_smoke]
+
+  - key: binary_sensor.carbon_monoxide
+    match: {domain: binary_sensor, device_classes: [carbon_monoxide, co]}
+    safety_class: never
+    initiative: house
+    max_step: observe
+    skills: [emergency_co]
+
+  - key: binary_sensor.gas
+    match: {domain: binary_sensor, device_classes: [gas]}
+    safety_class: never
+    initiative: house
+    max_step: observe
+    skills: [emergency_gas]
+
+  - key: binary_sensor.moisture
+    match: {domain: binary_sensor, device_classes: [moisture]}
+    safety_class: never
+    initiative: house
+    max_step: observe
+    skills: [emergency_leak]
+
+  - key: binary_sensor.cold
+    match: {domain: binary_sensor, device_classes: [cold]}
+    safety_class: never
+    initiative: house
+    max_step: observe
+    skills: [emergency_frost]
+
+  - key: binary_sensor.presence
+    match: {domain: binary_sensor, device_classes: [motion, occupancy, presence]}
+    safety_class: never
+    initiative: house
+    max_step: observe
+
+  - key: binary_sensor.opening
+    match: {domain: binary_sensor, device_classes: [door, window, opening, garage_door]}
+    safety_class: never
+    initiative: house
+    max_step: observe
+
+  # The power switch of a cooking appliance (E-61, B-327): only ever off, and only after a
+  # person's yes to "Zal ik hem uitzetten?" – never on, never on HouseMind's own initiative.
+  - key: switch.cooking_off
+    match: {domain: switch, role: cooking_off}
+    safety_class: safe_direction
+    initiative: person
+    max_step: propose
+    actions:
+      - action: switch.turn_off

@@ -1,0 +1,74 @@
+# Window coverings, sun protection, garage doors and gates (catalogue domain 2).
+schema: 1
+kinds:
+  - key: cover.window_covering
+    match: {domain: cover, device_classes: [curtain, blind, shade, shutter]}
+    safety_class: careful
+    initiative: house
+    max_step: autonomous
+    actions:
+      - action: cover.open_cover
+      - action: cover.close_cover
+      - action: cover.stop_cover
+      - action: cover.set_cover_position
+        values: {position: [0, 100]}
+      - action: cover.set_cover_tilt_position
+        values: {tilt_position: [0, 100]}
+    min_interval_s: 60
+    max_changes_per_day: 24
+    people_win: until_next_daypart
+    people_win_max_hours: 6
+    skills: [covers_close_dark, covers_open_morning, covers_open_wake, privacy_street_side,
+             sun_protection]
+
+  - key: cover.awning
+    match: {domain: cover, device_classes: [awning]}
+    safety_class: careful
+    initiative: house
+    max_step: autonomous
+    actions:
+      - action: cover.open_cover
+      - action: cover.close_cover
+      - action: cover.stop_cover
+      - action: cover.set_cover_position
+        values: {position: [0, 100]}
+    min_interval_s: 120
+    max_changes_per_day: 16
+    people_win: until_next_daypart
+    skills: [sun_protection, retract_wind_rain]
+
+  - key: cover.window
+    match: {domain: cover, device_classes: [window]}
+    safety_class: safe_direction
+    initiative: house
+    max_step: autonomous
+    actions:
+      - action: cover.close_cover
+      - action: cover.open_cover
+        max_step: propose
+    min_interval_s: 300
+    people_win: until_next_daypart
+    skills: [close_on_rain]
+
+  - key: cover.damper
+    match: {domain: cover, device_classes: [damper]}
+    safety_class: free
+    initiative: house
+    max_step: autonomous
+    actions:
+      - action: cover.open_cover
+      - action: cover.close_cover
+      - action: cover.set_cover_position
+        values: {position: [0, 100]}
+    min_interval_s: 60
+
+  # Garage doors, gates and motorised doors: never open; closing only as a proposal (E-31).
+  - key: cover.garage_gate_door
+    match: {domain: cover, device_classes: [garage, gate, door]}
+    safety_class: propose_only
+    initiative: person
+    max_step: propose
+    actions:
+      - action: cover.close_cover
+        max_step: propose
+    skills: [report_open_when_away]

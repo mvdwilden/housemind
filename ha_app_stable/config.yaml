@@ -1,0 +1,41 @@
+name: HouseMind
+version: "0.4.0"
+slug: housemind
+description: A house that thinks for itself – a learning, explainable brain for your home.
+url: https://github.com/mvdwilden/housemind
+# The first public versions are a beta (B-43): Home Assistant shows it as experimental.
+stage: experimental
+arch:
+  - amd64
+  - aarch64
+# Prebuilt, signed images (E-137, B-10), on the maintainer's account (B-43).
+image: ghcr.io/mvdwilden/housemind-{arch}
+init: false
+ingress: true
+ingress_port: 8099
+# Home Assistant starts the App again when this stops answering, or answers that it is stuck
+# (QA 2, M-34).
+watchdog: "http://[HOST]:[PORT:8099]/api/health"
+panel_icon: mdi:brain
+panel_title: HouseMind
+homeassistant: "2026.4.0"   # lowest supported HA version: last 6 months (E-142)
+homeassistant_api: true
+hassio_api: true
+hassio_role: default
+# The small HouseMind integration announces itself to HA after an administrator's yes (B-06).
+discovery:
+  - housemind
+map:
+  - type: homeassistant_config
+    read_only: false
+    path: /config
+backup: hot
+backup_pre: python3 -m housemind.memory.checkpoint /data/housemind.db
+options:
+  demo_mode: false
+  demo_home: average
+  log_level: info
+schema:
+  demo_mode: bool
+  demo_home: list(simple|average|extended)
+  log_level: list(debug|info|warning|error)

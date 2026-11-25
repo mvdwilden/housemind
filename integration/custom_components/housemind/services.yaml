@@ -1,0 +1,44 @@
+pause:
+  fields:
+    minutes:
+      selector:
+        number:
+          min: 0
+          max: 10080
+          unit_of_measurement: min
+resume:
+house_mode:
+  fields:
+    mode:
+      required: true
+      selector:
+        select:
+          options: ["home", "away", "sleep", "vacation", "guests"]
+          translation_key: mode
+feedback:
+  fields:
+    good:
+      required: true
+      selector:
+        boolean:
+    decision:
+      selector:
+        number:
+          min: 1
+          max: 1000000000
+          mode: box
+house_rule:
+  fields:
+    text:
+      required: true
+      selector:
+        text:
+    confirm:
+      selector:
+        boolean:
+ask:
+  fields:
+    question:
+      required: true
+      selector:
+        text:

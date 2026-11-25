@@ -1,0 +1,193 @@
+# The website (E-146, E-149): one source, four languages, two levels (simple and technical).
+# tools/build_site.py turns this into docs/<lang>/index.html for GitHub Pages.
+# The maintainer's own GitHub account (B-43). Plain language (E-46); no brand names.
+# Level names and their one-line hints come from knowledge/languages (the same words as in the app).
+repository: https://github.com/mvdwilden/housemind
+add_repository: https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fmvdwilden%2Fhousemind
+languages:
+  en:
+    name: English
+    title: HouseMind – a house that thinks for itself
+    tagline: A house that thinks for itself.
+    intro: HouseMind is a Home Assistant App that learns how the people in your house live and looks after
+      light, curtains, heating, water and energy for you – calm, explainable and safe. No automations
+      to build.
+    simple: Simple
+    technical: Technical
+    install_button: Add to Home Assistant
+    what_title: What it does
+    what:
+    - It starts by watching. After your "yes" it learns, first proposes and only acts on its own once
+      you agreed often enough.
+    - Every action has a reason in plain words and can be undone with one tap.
+    - Smoke, CO, gas and leaks get an answer from minute one.
+    - It plans energy honestly – and shows what it saved, also when it turns out worse.
+    - It never turns off an alarm, never opens a lock, a garage door, a gate or a door.
+    levels_title: Four levels – you choose
+    privacy_title: Your house stays yours
+    privacy: Everything stays in your house. AI is optional and only ever proposes; names, addresses,
+      images and history never go to a cloud AI. No telemetry.
+    steps_title: Get started in three steps
+    steps:
+    - Press "Add to Home Assistant" above and confirm.
+    - Install HouseMind from the App store in Home Assistant and start it.
+    - Open HouseMind in the sidebar. Try Demo mode first if you like – your real house is not touched.
+    tech:
+    - - Architecture
+      - One brain with a world view, skills and learning in steps (observe → propose → act). Every action
+        – from a skill, a house rule, AI, voice or Home Assistant – passes the same safety gate with hard
+        limits in code.
+    - - Knowledge is data
+      - Device kinds, countries and languages are YAML files in knowledge/. A new language or device kind
+        is a file, not code. Signed knowledge bundles can update them between releases.
+    - - Home Assistant integration
+      - A small integration shows HouseMind's state as entities, offers actions (pause, house mode, feedback,
+        house rule, ask) and is a conversation agent for Assist. It talks to the App over the Supervisor
+        network only.
+    - - Contributing
+      - 'Translations and device kinds are the easiest way to help. Code changes need green tests: pytest,
+        ruff, mypy and the frontend checks. See CONTRIBUTING.md.'
+    disclaimer: HouseMind helps with safety, but does not replace certified smoke detectors, CO detectors
+      or alarm systems.
+    support: HouseMind is free for everyone. Want to support it? See the Sponsor button on GitHub.
+  nl:
+    name: Nederlands
+    title: HouseMind – een huis dat zelf denkt
+    tagline: Een huis dat zelf denkt.
+    intro: HouseMind is een Home Assistant App die leert hoe de mensen in je huis leven en voor je zorgt
+      voor licht, gordijnen, verwarming, water en energie – rustig, uitlegbaar en veilig. Zonder automatiseringen
+      te bouwen.
+    simple: Eenvoudig
+    technical: Technisch
+    install_button: Toevoegen aan Home Assistant
+    what_title: Wat het doet
+    what:
+    - Het begint met kijken. Na jouw "ja" leert het, stelt het eerst voor en doet het pas zelf als je
+      vaak genoeg akkoord was.
+    - Elke actie heeft een reden in gewone taal en is met één tik terug te draaien.
+    - Rook, koolmonoxide, gas en lekkage krijgen vanaf minuut één een antwoord.
+    - Het plant energie eerlijk – en laat zien wat het bespaarde, ook als het tegenvalt.
+    - Het zet nooit een alarm uit en opent nooit een slot, garagedeur, poort of deur.
+    levels_title: Vier niveaus – jij kiest
+    privacy_title: Je huis blijft van jou
+    privacy: Alles blijft in je huis. AI is optioneel en stelt alleen voor; namen, adressen, beelden en
+      geschiedenis gaan nooit naar een cloud-AI. Geen telemetrie.
+    steps_title: In drie stappen aan de slag
+    steps:
+    - Druk hierboven op "Toevoegen aan Home Assistant" en bevestig.
+    - Installeer HouseMind uit de App-winkel in Home Assistant en start het.
+    - Open HouseMind in de zijbalk. Probeer eerst de demomodus als je wilt – je echte huis wordt niet
+      aangeraakt.
+    tech:
+    - - Opbouw
+      - Eén brein met een wereldbeeld, vaardigheden en leren in stappen (observeren → voorstellen → zelf
+        doen). Elke actie – van een vaardigheid, huisregel, AI, spraak of Home Assistant – gaat door dezelfde
+        veiligheidspoort, met harde grenzen in de code.
+    - - Kennis is data
+      - Apparaatsoorten, landen en talen zijn YAML-bestanden in knowledge/. Een nieuwe taal of apparaatsoort
+        is een bestand, geen code. Ondertekende kennisbundels kunnen ze tussen releases bijwerken.
+    - - Integratie met Home Assistant
+      - Een kleine integratie toont de toestand van HouseMind als entiteiten, biedt acties (pauze, huismodus,
+        feedback, huisregel, vragen) en is een gespreksagent voor Assist. Hij praat alleen via het netwerk
+        van de Supervisor met de App.
+    - - Meehelpen
+      - 'Vertalingen en apparaatsoorten zijn de makkelijkste manier om te helpen. Codewijzigingen vragen
+        groene tests: pytest, ruff, mypy en de frontendcontroles. Zie CONTRIBUTING.md.'
+    disclaimer: HouseMind helpt bij veiligheid, maar vervangt geen gecertificeerde rookmelders, CO-melders
+      of alarmsystemen.
+    support: HouseMind is gratis voor iedereen. Wil je het steunen? Zie de knop Sponsor op GitHub.
+  de:
+    name: Deutsch
+    title: HouseMind – ein Haus, das selbst denkt
+    tagline: Ein Haus, das selbst denkt.
+    intro: HouseMind ist eine Home-Assistant-App, die lernt, wie die Menschen in deinem Haus leben, und
+      sich um Licht, Vorhänge, Heizung, Wasser und Energie kümmert – ruhig, erklärbar und sicher. Ohne
+      Automatisierungen zu bauen.
+    simple: Einfach
+    technical: Technisch
+    install_button: Zu Home Assistant hinzufügen
+    what_title: Was es tut
+    what:
+    - Es beginnt mit Zuschauen. Nach deinem „Ja“ lernt es, schlägt zuerst vor und handelt erst selbst,
+      wenn du oft genug zugestimmt hast.
+    - Jede Aktion hat einen Grund in einfachen Worten und lässt sich mit einem Tipp rückgängig machen.
+    - Rauch, Kohlenmonoxid, Gas und Wasserlecks bekommen ab der ersten Minute eine Antwort.
+    - Es plant Energie ehrlich – und zeigt, was es gespart hat, auch wenn es schlechter ausfällt.
+    - Es schaltet nie einen Alarm aus und öffnet nie ein Schloss, Garagentor, Tor oder eine Tür.
+    levels_title: Vier Stufen – du wählst
+    privacy_title: Dein Haus bleibt deins
+    privacy: Alles bleibt in deinem Haus. KI ist optional und schlägt nur vor; Namen, Adressen, Bilder
+      und Verläufe gehen nie an eine Cloud-KI. Keine Telemetrie.
+    steps_title: In drei Schritten starten
+    steps:
+    - Drück oben auf „Zu Home Assistant hinzufügen“ und bestätige.
+    - Installiere HouseMind aus dem App-Store in Home Assistant und starte es.
+    - Öffne HouseMind in der Seitenleiste. Probier zuerst den Demomodus, wenn du magst – dein echtes Haus
+      wird nicht berührt.
+    tech:
+    - - Aufbau
+      - Ein Gehirn mit einem Weltbild, Fähigkeiten und Lernen in Schritten (beobachten → vorschlagen →
+        selbst handeln). Jede Aktion – aus einer Fähigkeit, Hausregel, KI, Sprache oder Home Assistant
+        – geht durch dasselbe Sicherheitstor, mit festen Grenzen im Code.
+    - - Wissen ist Daten
+      - Gerätearten, Länder und Sprachen sind YAML-Dateien in knowledge/. Eine neue Sprache oder Geräteart
+        ist eine Datei, kein Code. Signierte Wissenspakete können sie zwischen Releases aktualisieren.
+    - - Integration in Home Assistant
+      - Eine kleine Integration zeigt den Zustand von HouseMind als Entitäten, bietet Aktionen (Pause,
+        Hausmodus, Rückmeldung, Hausregel, Fragen) und ist ein Gesprächsagent für Assist. Sie spricht
+        nur über das Netzwerk des Supervisors mit der App.
+    - - Mithelfen
+      - 'Übersetzungen und Gerätearten sind der einfachste Weg zu helfen. Codeänderungen brauchen grüne
+        Tests: pytest, ruff, mypy und die Frontend-Prüfungen. Siehe CONTRIBUTING.md.'
+    disclaimer: HouseMind hilft bei der Sicherheit, ersetzt aber keine zertifizierten Rauchmelder, CO-Melder
+      oder Alarmanlagen.
+    support: HouseMind ist für alle kostenlos. Möchtest du es unterstützen? Siehe den Sponsor-Knopf auf
+      GitHub.
+  fr:
+    name: Français
+    title: HouseMind – une maison qui pense par elle-même
+    tagline: Une maison qui pense par elle-même.
+    intro: HouseMind est une App Home Assistant qui apprend comment vivent les personnes de ta maison
+      et s'occupe de la lumière, des rideaux, du chauffage, de l'eau et de l'énergie – calme, explicable
+      et sûre. Sans automatisations à construire.
+    simple: Simple
+    technical: Technique
+    install_button: Ajouter à Home Assistant
+    what_title: Ce qu'il fait
+    what:
+    - Il commence par observer. Après ton « oui », il apprend, propose d'abord et n'agit seul qu'après
+      assez d'accords de ta part.
+    - Chaque action a une raison en mots simples et s'annule d'une touche.
+    - La fumée, le monoxyde de carbone, le gaz et les fuites ont une réponse dès la première minute.
+    - Il planifie l'énergie honnêtement – et montre ce qu'il a économisé, même quand c'est moins bien.
+    - Il ne désactive jamais une alarme et n'ouvre jamais une serrure, une porte de garage, un portail
+      ou une porte.
+    levels_title: Quatre niveaux – tu choisis
+    privacy_title: Ta maison reste à toi
+    privacy: Tout reste chez toi. L'IA est facultative et ne fait que proposer ; noms, adresses, images
+      et historique ne vont jamais vers une IA dans le cloud. Pas de télémétrie.
+    steps_title: Commencer en trois étapes
+    steps:
+    - Appuie ci-dessus sur « Ajouter à Home Assistant » et confirme.
+    - Installe HouseMind depuis la boutique d'Apps de Home Assistant et démarre-le.
+    - Ouvre HouseMind dans la barre latérale. Essaie d'abord le mode démo si tu veux – ta vraie maison
+      n'est pas touchée.
+    tech:
+    - - Architecture
+      - Un cerveau avec une vision du monde, des compétences et un apprentissage par étapes (observer
+        → proposer → agir). Chaque action – d'une compétence, d'une règle, de l'IA, de la voix ou de Home
+        Assistant – passe par la même barrière de sécurité, avec des limites fixes dans le code.
+    - - Les connaissances sont des données
+      - Types d'appareils, pays et langues sont des fichiers YAML dans knowledge/. Une nouvelle langue
+        ou un nouveau type d'appareil est un fichier, pas du code. Des paquets signés peuvent les mettre
+        à jour entre les versions.
+    - - Intégration Home Assistant
+      - Une petite intégration montre l'état de HouseMind sous forme d'entités, propose des actions (pause,
+        mode, avis, règle, question) et est un agent de conversation pour Assist. Elle parle à l'App uniquement
+        via le réseau du Supervisor.
+    - - Contribuer
+      - 'Les traductions et les types d''appareils sont la façon la plus simple d''aider. Les modifications
+        de code demandent des tests au vert : pytest, ruff, mypy et les contrôles du frontend. Voir CONTRIBUTING.md.'
+    disclaimer: HouseMind aide pour la sécurité, mais ne remplace pas les détecteurs de fumée, de CO ou
+      les systèmes d'alarme certifiés.
+    support: HouseMind est gratuit pour tous. Envie de le soutenir ? Voir le bouton Sponsor sur GitHub.

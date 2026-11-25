@@ -1,0 +1,26 @@
+# Een kleurenschema van HouseMind (E-266, E-267); uitleg staat in diep.yaml.
+id: nacht
+volgorde: 4
+naam: { nl: Nacht, en: Night, de: Nacht, fr: Nuit }
+uitleg:
+  nl: "Warm en gedimd, met weinig blauw licht. Voor 's avonds en een wandtablet in de slaapkamer."
+  en: "Warm and dimmed, with little blue light. For the evening and a wall tablet in the bedroom."
+  de: "Warm und gedimmt, mit wenig blauem Licht. Für den Abend und ein Wandtablet im Schlafzimmer."
+  fr: "Chaud et tamisé, avec peu de lumière bleue. Pour le soir et une tablette murale dans la chambre."
+basis: donker
+niveau: AA
+kleuren:
+  inkt: "#0C0907"
+  vlak: "#16110D"
+  verhoogd: "#211913"
+  lijn: "#3A2E24"
+  rand: "#7A6655"
+  tekst: "#EADBC8"
+  gedempt: "#B9A58E"
+  accent: "#E8A65A"
+  op-accent: "#241303"
+  nood: "#FF7A6B"
+  belangrijk: "#F0A060"
+  leren: "#E8C27A"
+vesta:
+  gloed: 0.5           # zachter in het donker

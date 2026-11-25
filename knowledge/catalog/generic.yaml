@@ -1,0 +1,125 @@
+# Safe generic entries per Home Assistant domain (E-156): used when the domain is known but
+# the variant is not. Anything that could power or move something unknown stays observe-only.
+schema: 1
+kinds:
+  - key: light.generic
+    match: {domain: light}
+    generic: true
+    safety_class: free
+    initiative: house
+    max_step: autonomous
+    actions:
+      - action: light.turn_on
+      - action: light.turn_off
+    min_interval_s: 2
+    people_win: until_area_empty
+
+  - key: cover.generic
+    match: {domain: cover}
+    generic: true
+    safety_class: propose_only
+    initiative: person
+    max_step: observe
+
+  - key: switch.generic
+    match: {domain: switch}
+    generic: true
+    safety_class: propose_only
+    initiative: person
+    max_step: observe
+
+  # A valve without a known purpose (a garden tap, a zone of the irrigation): HouseMind only
+  # watches. Water and gas main valves are in safety.yaml (found on a real Home Assistant).
+  - key: valve.generic
+    match: {domain: valve}
+    generic: true
+    safety_class: propose_only
+    initiative: person
+    max_step: observe
+
+  - key: binary_sensor.generic
+    match: {domain: binary_sensor}
+    generic: true
+    safety_class: never
+    initiative: house
+    max_step: observe
+
+  - key: sensor.generic
+    match: {domain: sensor}
+    generic: true
+    safety_class: never
+    initiative: house
+    max_step: observe
+
+  - key: weather.generic
+    match: {domain: weather}
+    generic: true
+    safety_class: never
+    initiative: house
+    max_step: observe
+
+  - key: number.generic
+    match: {domain: number}
+    generic: true
+    safety_class: propose_only
+    initiative: person
+    max_step: observe
+
+  - key: select.generic
+    match: {domain: select}
+    generic: true
+    safety_class: propose_only
+    initiative: person
+    max_step: observe
+
+  - key: button.generic
+    match: {domain: button}
+    generic: true
+    safety_class: never
+    initiative: person
+    max_step: observe
+
+  - key: media_player.generic
+    match: {domain: media_player}
+    generic: true
+    experimental: true
+    safety_class: careful
+    initiative: person
+    max_step: propose
+    actions:
+      - action: media_player.turn_off
+        max_step: propose
+      # Quiet when the alarm goes off or at a fire (E-542): only that fixed rule, never a skill.
+      - action: media_player.media_pause
+        max_step: propose
+        emergency: true
+
+  - key: vacuum.generic
+    match: {domain: vacuum}
+    generic: true
+    experimental: true
+    safety_class: careful
+    initiative: shared
+    max_step: autonomous
+    actions:
+      - action: vacuum.start
+      - action: vacuum.return_to_base
+
+  - key: lawn_mower.generic
+    match: {domain: lawn_mower}
+    generic: true
+    experimental: true
+    safety_class: propose_only
+    initiative: shared
+    max_step: propose
+    actions:
+      - action: lawn_mower.start_mowing
+        max_step: propose
+      - action: lawn_mower.dock
+
+  - key: event.generic
+    match: {domain: event}
+    generic: true
+    safety_class: never
+    initiative: person
+    max_step: observe

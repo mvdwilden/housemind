@@ -1,0 +1,16 @@
+# Energy rules for the Netherlands (E-69). Amounts change every year: they are defaults with a
+# source and a date; an administrator can override them, and a knowledge update may replace them.
+schema: 1
+country: NL
+currency: EUR
+energy:
+  vat: 0.21
+  # Energy tax on electricity, first bracket, excluding VAT.
+  energy_tax_per_kwh: {value: 0.09161, valid_from: "2026-01-01", source: "Rijksoverheid – opbouw energierekening 2026"}
+  # Net metering ("salderen") ends on 1 January 2027: from then on exported electricity is
+  # worth the (lower) feed-in price instead of the full consumer price.
+  net_metering: {until: "2026-12-31"}
+  export_paid_at_negative_price: false
+  quarter_hour_prices: true
+  capacity_tariff: null
+  controllable_load: null

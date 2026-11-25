@@ -1,0 +1,69 @@
+#include <tunables/global>
+
+# HouseMind's own AppArmor profile (QA 2, M-34), after Home Assistant's template; Home
+# Assistant gives it the App's slug as its name. It allows what the App does – Python, its own
+# files, the network – and keeps out what it never needs: raw and packet sockets, mounting,
+# kernel modules, tracing other processes, writing the kernel's settings. No blanket "file"
+# rule (QA 3, gat 7): it reads the system, writes only its own data, the temporary folders and
+# its own integration in Home Assistant's config, and never reads HA's secrets or accounts.
+profile housemind flags=(attach_disconnected,mediate_deleted) {
+  #include <abstractions/base>
+
+  network inet stream,
+  network inet dgram,
+  network inet6 stream,
+  network inet6 dgram,
+  network unix,
+  network netlink,
+  signal (send) set=(kill,term,int,hup,cont),
+  signal (receive) peer=unconfined,
+
+  # A deny wins over an allow: only raw IP and packet sockets, so netlink stays usable.
+  deny network inet raw,
+  deny network inet6 raw,
+  deny network packet,
+  deny mount,
+  deny umount,
+  deny pivot_root,
+  deny ptrace,
+  deny capability sys_module,
+  deny capability sys_admin,
+  deny capability sys_ptrace,
+  deny capability net_raw,
+  deny @{PROC}/sys/kernel/** w,
+
+  # The base image starts with s6-overlay.
+  /init ix,
+  /bin/** ix,
+  /usr/bin/** ix,
+  /usr/local/bin/** ix,
+  /run/{s6,s6-rc*,service}/** ix,
+  /package/** ix,
+  /command/** ix,
+  /etc/services.d/** rwix,
+  /etc/cont-init.d/** rwix,
+  /etc/cont-finish.d/** rwix,
+  /run/{,**} rwk,
+  /dev/tty rw,
+  /usr/lib/bashio/** ix,
+  /tmp/** rwk,
+
+  # Python, HouseMind and the system it runs on: read, and map libraries.
+  / r,
+  /** r,
+  /lib/** rm,
+  /usr/** rm,
+  /app/** r,
+  /dev/null rw,
+  /dev/shm/** rwk,
+  # Its own places to write.
+  /data/{,**} rwk,
+  /var/tmp/** rwk,
+  /root/** rwk,
+  # Home Assistant's config: its own folder to read, its own integration to place – never the
+  # rest of HA's config, and HA's secrets and accounts not even to read.
+  /config/custom_components/ rw,
+  /config/custom_components/housemind/{,**} rwk,
+  deny /config/secrets.yaml r,
+  deny /config/.storage/** r,
+}

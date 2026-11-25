@@ -1,0 +1,35 @@
+# Where each setting is (E-244, B-92): Vesta says where it is, what it is now when the server
+# knows, and opens that part of the screen after a yes. She never changes it herself.
+# sheet: preferences (Mijn voorkeuren, everyone), settings (Huisinstellingen, administrators) or
+# brain (a tab of Brein, E-523).
+# section: the data-section of that part of the screen. title: the text key of its heading
+# ("@vesta" is her own name). now: how the server reads the current value, or "device" when
+# only that phone or tablet knows. The words to ask with are in talk.settings.<key>.
+settings:
+  level: {sheet: preferences, section: level, title: ui.level, who: everyone, now: level}
+  voice: {sheet: preferences, section: voice, title: ui.prefs.voice, who: everyone, now: device}
+  address: {sheet: preferences, section: address, title: ui.prefs.address, who: everyone, now: address}
+  notifications: {sheet: preferences, section: notifications, title: ui.prefs.notifications, who: everyone}
+  daily: {sheet: preferences, section: daily, title: ui.prefs.daily, who: everyone}
+  tablet: {sheet: preferences, section: tablet, title: ui.tablet.title, who: everyone, now: device}
+  language: {sheet: preferences, section: language, title: ui.prefs.language, who: everyone, now: language}
+  display: {sheet: preferences, section: display, title: ui.prefs.display, who: everyone, now: device}
+  scheme: {sheet: preferences, section: scheme, title: ui.prefs.scheme, who: everyone, now: device}
+  vesta: {sheet: settings, section: vesta, title: "@vesta", who: admins, now: vesta}
+  learning: {sheet: settings, section: learning, title: ui.settings.learning, who: admins}
+  history: {sheet: settings, section: history, title: ui.history.title, who: admins}
+  max_step: {sheet: settings, section: max_step, title: ui.settings.max_step, who: admins}
+  # In Brein from Betrokken (E-523, E-524): Klaar voor autonomie? and Wat ik weet.
+  automations: {sheet: brain, section: readiness, title: ui.ready.title, who: admins}
+  knowledge: {sheet: brain, section: knowledge, title: ui.brain.tab.knowledge, who: admins}
+  people: {sheet: settings, section: people, title: ui.settings.people, who: admins}
+  pets: {sheet: settings, section: pets, title: ui.settings.pets, who: admins}
+  security: {sheet: settings, section: security, title: ui.settings.security.title, who: admins}
+  energy: {sheet: settings, section: energy, title: ui.energy.settings, who: admins}
+  ai: {sheet: settings, section: ai, title: ui.settings.ai, who: admins}
+  experimental: {sheet: settings, section: experimental, title: ui.settings.experimental.title, who: admins}
+  upkeep: {sheet: settings, section: upkeep, title: ui.settings.upkeep.title, who: admins}
+  themes: {sheet: settings, section: themes, title: ui.settings.themes.title, who: admins}
+  intro_again: {sheet: settings, section: intro_again, title: ui.restart.intro.title, who: admins}
+  learn_again: {sheet: settings, section: learn_again, title: ui.restart.learn.title, who: admins}
+  factory: {sheet: settings, section: factory, title: ui.restart.factory.title, who: admins}

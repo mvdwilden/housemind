@@ -1,0 +1,39 @@
+name: Something does not work
+description: HouseMind did something unexpected, or did not do something it should.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you! The fastest help comes with the **diagnostics package**: House settings →
+        "Download the diagnostics package". It has versions, counts and the last warnings, with
+        every device, room and name replaced by a neutral label – nothing personal.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+      description: In plain words. Which room or kind of device (no names needed)?
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: What did "Why?" or "Why not?" say?
+      description: The explanation HouseMind gave, if any.
+  - type: dropdown
+    id: level
+    attributes:
+      label: Your level
+      options: [Carefree, Informed, Involved, Expert]
+  - type: input
+    id: versions
+    attributes:
+      label: HouseMind and Home Assistant versions
+      placeholder: "HouseMind 0.1.0, Home Assistant 2026.10.1"
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostics package
+      description: Drag the housemind-diagnostics.json file here.

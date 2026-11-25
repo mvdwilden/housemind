@@ -1,0 +1,79 @@
+# What camera, doorbell and recorder detections in Home Assistant mean (E-180 – E-190, design
+# 16.1 – 16.2). HouseMind never looks at images itself: it only reads what their integrations
+# already report – an event entity's type, a binary sensor that turns on, or a counter. No
+# brand is named in the code; integrations that name things differently are added here.
+# Technical data: event types and the words integrations use in their names (lower case, any
+# language); never shown in the app.
+schema: 1
+
+detections:
+  # People count as someone in that room (E-181); a recognised face is only "a person" (E-32).
+  person:
+    event_types: [person, people, human, pedestrian, face, face_known, face_unknown, camera_person]
+    words: [person, persons, people, human, face, persoon, personen, mens, gezicht, mensch, gesicht, personne, humain, visage]
+  # A recognised licence plate is only "a vehicle" (E-32).
+  vehicle:
+    event_types: [vehicle, car, truck, motorcycle, bicycle, license_plate, licence_plate]
+    words: [vehicle, car, license plate, licence plate, voertuig, auto, kenteken, fahrzeug, kennzeichen, véhicule, vehicule, voiture, plaque]
+  animal:
+    event_types: [animal, pet, dog, cat, bird]
+    words: [animal, pet, dog, cat, bird, dier, huisdier, hond, kat, vogel, tier, haustier, hund, katze, chien, chat, oiseau]
+  package:
+    event_types: [package, parcel]
+    words: [package, parcel, pakket, pakje, paket, colis]
+  doorbell:
+    event_types: [ring, ding, doorbell, doorbell_chime, chime, pressed]
+    words: [doorbell, visitor, deurbel, aanbellen, bezoeker, türklingel, klingel, besucher, sonnette, visiteur]
+  # Sounds: per kind what it means is in the code (16.2); never a recording, only the kind.
+  smoke:
+    event_types: [smoke, smoke_alarm, alrm_smoke, alrmsmoke]
+    words: [smoke, smoke alarm, rook, rookalarm, rookmelder, rauch, rauchmelder, rauchalarm, fumée, fumee, alarme de fumée, alarme fumée]
+  co:
+    event_types: [co, co_alarm, carbon_monoxide, alrm_cmonx, alrmcmonx]
+    words: [co alarm, co-alarm, co melder, co-melder, carbon monoxide, koolmonoxide, kohlenmonoxid, monoxyde, alarme co]
+  glass:
+    event_types: [glass_break, glass, alrm_glass_break]
+    words: [glass break, glass breaking, glasbreuk, glasbruch, bris de glace]
+  baby:
+    event_types: [baby_cry, baby, alrm_baby_cry]
+    words: [baby cry, baby crying, baby, huilende baby, babygeschrei, pleurs de bébé, bébé]
+  bark:
+    event_types: [bark, dog_bark, alrm_bark]
+    words: [bark, barking, blaffen, gebell, aboiement, aboie]
+  car_alarm:
+    event_types: [car_alarm, alrm_burglar, vehicle_alarm]
+    words: [car alarm, autoalarm, alarme de voiture, alarme voiture]
+  horn:
+    event_types: [horn, car_horn, alrm_car_horn]
+    words: [horn, car horn, claxon, toeter, hupe, klaxon]
+  siren:
+    event_types: [siren, alrm_siren]
+    words: [siren, sirene, sirène]
+  # A camera's own motion without smart detection (16.2): outside it counts for nothing, inside
+  # as ordinary motion (B-63).
+  motion:
+    event_types: [motion, camera_motion, movement]
+    words: [motion, beweging, bewegung, mouvement]
+
+# Which words win when a name has more than one: sounds first ("dog bark" is barking, "car
+# alarm" no car), then what is most specific.
+order: [smoke, co, glass, baby, bark, car_alarm, horn, siren, package, doorbell, vehicle, animal, person, motion]
+
+# Never used: who it is, access by NFC or fingerprint, talking (16.1).
+ignore:
+  event_types: [nfc, fingerprint, talk, talking, speaking, speak, access, unlock]
+  words: [nfc, fingerprint, vingerafdruk, fingerabdruck, empreinte, speaking, talking, praten, spreken, sprechen, parler]
+
+# A second camera on the same device (a package camera) is only used without a main one.
+second_camera: [package, parcel, pakket, paket, colis]
+
+# How HouseMind reacts (16.4 – 16.6).
+window_minutes: 10   # at most one message per camera in this time; more detections update it
+bundle_minutes: 30   # while nobody is home all cameras are one message; a new one after this quiet (E-373)
+doorbell_seconds: 30 # the doorbell on a wall tablet
+light_minutes: 5     # an outside lamp a person switched on stays on this long after the last one
+event_fresh_seconds: 120  # an event older than this (Home Assistant came back) is not new
+same_seconds: 5     # one detection that a camera reports twice (an event and a sensor) is one
+# Sounds that only count after a choice (16.2): a crying baby with consent (care and
+# wellbeing), the others from level 4 as information.
+optional_sounds: [baby, bark, car_alarm, horn, siren]

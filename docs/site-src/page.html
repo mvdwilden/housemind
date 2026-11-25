@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="$lang"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>$title</title><link rel="icon" type="image/svg+xml" href="${prefix}favicon.svg"><meta name="description" content="$intro">
+<link rel="stylesheet" href="${prefix}style.css"></head>
+<body><main>
+<nav class="langs" aria-label="Language">$langs</nav>
+<header>$orb<h1>HouseMind</h1><p class="tagline">$tagline</p>
+<a class="cta" href="$add">$install</a></header>
+<p>$intro</p>
+<div class="views" role="group"><button data-show="simple" aria-pressed="true">$simple</button><button data-show="technical" aria-pressed="false">$technical</button></div>
+<div data-view="simple">
+<section><h2>$what_title</h2><ul>$what</ul></section>
+<section><h2>$levels_title</h2><dl>$levels</dl></section>
+<section id="privacy"><h2>$privacy_title</h2><p>$privacy</p>
+<details><summary>$statement_title</summary>$statement</details></section>
+<section><h2>$steps_title</h2><ol>$steps</ol></section>
+</div>
+<div data-view="technical" hidden>
+<section><dl>$tech</dl><p class="small"><a href="$repo">$repo</a></p></section>
+</div>
+<p class="small">$disclaimer</p>
+<footer>$support</footer>
+</main>$script</body></html>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 200" role="img" aria-label="HouseMind">
+  <!-- The mark with the name, for the App store (logo.png) and the website. -->
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0.45" stop-color="#5ed4c4" stop-opacity="0.42"/>
+      <stop offset="1" stop-color="#5ed4c4" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="orb" cx="38%" cy="33%" r="72%">
+      <stop offset="0" stop-color="#ecfffb"/>
+      <stop offset="0.32" stop-color="#7fdccc"/>
+      <stop offset="0.72" stop-color="#2c8f86"/>
+      <stop offset="1" stop-color="#145e61"/>
+    </radialGradient>
+    <clipPath id="inside"><circle cx="100" cy="100" r="46"/></clipPath>
+  </defs>
+  <rect width="500" height="200" rx="40" fill="#0a0e19"/>
+  <circle cx="100" cy="100" r="78" fill="url(#glow)"/>
+  <circle cx="100" cy="100" r="46" fill="url(#orb)"/>
+  <g clip-path="url(#inside)" stroke="#ffffff" stroke-opacity="0.32" stroke-width="1.6" fill="#ffffff" fill-opacity="0.6">
+    <path d="M81 89 L103 79 L122 95 L109 117 L85 113 Z M103 79 L109 117 M81 89 L122 95" fill="none"/>
+    <circle cx="81" cy="89" r="3"/><circle cx="103" cy="79" r="3.4"/><circle cx="122" cy="95" r="3"/>
+    <circle cx="109" cy="117" r="3"/><circle cx="85" cy="113" r="2.6"/>
+  </g>
+  <ellipse cx="85" cy="77" rx="15" ry="9" fill="#ffffff" fill-opacity="0.35" transform="rotate(-28 85 77)"/>
+  <text x="170" y="119" font-family="Sora" font-weight="600" font-size="51" letter-spacing="-0.5" fill="#e7ebf6">House<tspan fill="#5ed4c4">Mind</tspan></text>
+</svg>

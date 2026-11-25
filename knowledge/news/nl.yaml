@@ -1,0 +1,674 @@
+# Wat is nieuw, per versie (E-150): één zin voor Geïnformeerd, een korte lijst voor Betrokken
+# en Expert. In eenvoudige taal, zonder merknamen.
+"0.4.0":
+  one: "HouseMind 0.4.0 is klaar om de eerste openbare bèta te worden."
+  list:
+    - "Straks kan iedereen HouseMind installeren vanaf GitHub, met kant-en-klare, ondertekende pakketten voor gewone computers en voor ARM, zoals een Raspberry Pi."
+    - "Zolang het een bèta is, staat de App in Home Assistant als experimenteel."
+    - "Een nieuwe voorpagina en een korte, eerlijke samenvatting van hoe HouseMind getest wordt."
+    - "Een nieuwe installatie maakt haar database in één stap; een installatie vanaf 0.2.0 groeit gewoon door."
+"0.3.33":
+  one: "Eén regel voor woorden, getallen en namen, in elke taal."
+  list:
+    - "Een accent in een naam maakt niet meer uit: een relais 'Garáge deur' is net zo beschermd als 'Garagedeur'."
+    - "Een kort woord telt alleen als heel woord – 'car' is nooit 'carbon' – en 'poort2' is gewoon een poort."
+    - "Getallen en grootten schrijft HouseMind met het decimaalteken van jouw taal, ook in een eigen taalbestand."
+    - "Het scherm Energie leest de cijfers van vandaag en de besparing één keer per kwartier, niet bij elke update."
+"0.3.32":
+  one: "De ochtendkaart en de wandtablet volgen het ritme van jullie huis."
+  list:
+    - "De ochtendkaart staat er zolang het voor jullie huis ochtend is, ook op een late zondag."
+    - "Een wandtablet wordt donker in de nacht van jullie huis, niet pas om elf uur."
+    - "Een huis dat nog geen ritme heeft, houdt de klok: de kaart van 5 tot 11 uur, de tablet donker van 23 tot 6 uur."
+    - "Zo volgen nu alle schermen het huis, net als het licht en de groet van Vesta."
+"0.3.31":
+  one: "Instellingen staan op één plek, en in het geheugen."
+  list:
+    - "Elke huisinstelling staat in één tabel: de standaardwaarde, of een scherm hem mag veranderen en of hij meegaat in het instellingenbestand."
+    - "Wat Huisinstellingen bewaart, wordt voor elke instelling echt bewaard; een test houdt dat zo."
+    - "Een scherm bijwerken vraagt de database niet meer steeds om de instellingen: ze staan in het geheugen."
+    - "Verandert een instelling op een andere manier, zoals bij een teruggezette dag, dan wordt hij opnieuw gelezen."
+"0.3.30":
+  one: "Een ronde gaat sneller in een groot huis."
+  list:
+    - "HouseMind weet per ruimte en per apparaat in één keer wat erbij hoort, in plaats van dat elke regel het hele huis doorzoekt."
+    - "Ventileren, een open raam bij de verwarming, het licht in een ruimte en de sensoren van een apparaat gebruiken die ene lijst."
+    - "In een huis met ongeveer 1.750 entiteiten gaat een ronde van ongeveer 15 naar ongeveer 6 milliseconden, en een groter huis wordt niet meer kwadratisch trager."
+    - "Komt er een apparaat bij of verhuist het naar een andere ruimte, dan telt het meteen mee."
+"0.3.29":
+  one: "Schermen bijwerken kost minder werk, vooral in een groot huis."
+  list:
+    - "Klaar voor autonomie? wordt alleen opnieuw berekend als HouseMind iets besliste, leerde of een antwoord kreeg, of als er iets is ingesteld; verder één keer per ronde."
+    - "Staan er meer schermen open met dezelfde taal en hetzelfde niveau, dan delen ze dat werk."
+    - "Een druk huis geeft een scherm hooguit vijf keer per seconde een nieuw beeld, en het nieuwste komt altijd door."
+    - "In een groot huis met drie schermen open kost een sensor nu ongeveer 40 in plaats van 150 milliseconden."
+"0.3.28":
+  one: "Minder op de schermen: alleen wat iets van je vraagt."
+  list:
+    - "Apparaten zonder codes, en de kolom Status staat uit tot je hem kiest. Alleen niet beschikbaar of niet herkend staat erbij, en bovenaan staat hoeveel er niet beschikbaar zijn."
+    - "Openen in Home Assistant brengt je naar het apparaat; daar kies je ook een ander icoontje. Proef een stand voor de hele ruimte staat nu in het venster Standen."
+    - "In het ruimtevenster zie je de momenten. Aanzetten doe je met je stem of op de wandtablet."
+    - "Check-up › Systeem is één zin als alles in orde is; alleen wat mis is krijgt een tegel."
+    - "Onder het netwerk geen regel Laatst om meer, onder een rij vragen één keer de uitleg, en Klaar voor autonomie? zegt hoe vaak het goed ging, zonder score."
+"0.3.27":
+  one: "Het Logboek is rustiger: één regel per besluit, minder knoppen."
+  list:
+    - "Een vraag, jouw antwoord en wat ervan kwam staan in één regel: Jij zei ja om 09:14."
+    - "Geen overzicht met percentages en geen kleine labels per regel meer, maar één grijze regel: 18:29 · Woonkamer · gedaan. Groeperen per soort is weg; Filter › Soort doet dat al."
+    - "Waarom? staat alleen nog op Geïnformeerd; vanaf Betrokken zegt de regel het zelf. Vandaag anders? is een klein knopje."
+    - "Kolommen en Exporteren alleen op Expert, als CSV of Markdown. Filter en Groeperen verschijnen pas bij een lijst van 20 rijen of meer."
+    - "Wat er naar een AI ging staat op één plek: het Logboek op Expert. Een melding ter informatie heeft geen Later meer."
+"0.3.26":
+  one: "Brein is rustiger: wat alleen voor ontwikkelaars was, is weg."
+  list:
+    - "Geen meter, Beslisspoor of Gedachtestroom meer in Brein, en dus ook geen menu Meer. Elk besluit staat in het Logboek; op Expert klapt het open tot zijn controles, in woorden."
+    - "Op Expert staan geen codes meer onder een voorstel of een Logboek-regel, maar zinnen als: Ik weet het voor 80 % zeker."
+    - "Klaar voor autonomie?: geen dubbele kop, geen ring met een getal en geen percentages meer; één zin met Lees meer naar de handleiding. De drempels staan alleen nog in het instellingenbestand."
+    - "Energie zonder de tabel per kwartier, en zonder thuisbatterij en auto: die stuurt HouseMind niet, en Home Assistant laat ze al zien."
+    - "De reactietijd staat op Expert in Over HouseMind. Mijn voorkeuren heeft geen groep Hulp meer."
+"0.3.25":
+  one: "HouseMind is sneller en doet minder dubbel werk."
+  list:
+    - "Een scherm start sneller: het krijgt de teksten in zijn eigen taal één keer, zonder een Engelse lijst erbij."
+    - "Komt iemand thuis, dan vraagt HouseMind Home Assistant niet meer elke keer de hele lijst met acties."
+    - "Een ruimte stuurt zijn apparaten nog maar één keer naar het scherm."
+    - "Ziet een camera iemand, dan telt HouseMind die persoon meteen mee."
+"0.3.24":
+  one: "HouseMind is veiliger: een ethische hack vond een paar gaten, en die zijn dicht."
+  list:
+    - "Een garagedeur, poort of deur die achter een schakelaar, knop of relais zit, gaat nooit open door HouseMind. Ook niet als iemand hem ooit als lamp aanwees."
+    - "Langer dan een uur pauzeren kan alleen een beheerder. Wie pauzeerde, staat in het Logboek."
+    - "Wie geen beheerder is, gaat standaard tot Betrokken en maakt huisregels voor één apparaat. Een regel voor een ruimte of het hele huis maakt een beheerder."
+    - "Een noodmelding kan niemand meer wegzetten met Later. Later geldt nu voor jou alleen."
+    - "Op een gedeelde speaker telt ja op een voorstel niet meer; nee wel. De naam van Vesta mag alleen gewone letters bevatten."
+"0.3.23":
+  one: "Wat je kiest bij Beveiliging wordt nu echt bewaard."
+  list:
+    - "Welk alarm, de geluiden, de gordijnen bij het alarm, het alarm zelf aanzetten, de signaallampen en de gordijnen bij brand: het scherm zei Bewaard, maar HouseMind kreeg de keuze niet. Nu wel."
+    - "Ook het vinkje Leer ook van de historie blijft nu staan als je het uitzet."
+    - "Lukt bewaren niet, dan zegt het scherm dat, en nooit meer Bewaard."
+"0.3.22":
+  one: "Als het alarm afgaat of bij brand doet het huis meer."
+  list:
+    - "Muziek en tv gaan stil, en de waarschuwing klinkt elke halve minuut opnieuw, tot het voorbij is."
+    - "Lampen die je kiest bij Beveiliging knipperen rood bij inbraak. De wandtablet wordt rood, met het camerabeeld en een knop naar het alarm."
+    - "Op je telefoon knoppen naar de camera, het alarm en 112. Wie de melding na twee minuten niet zag, krijgt hem nog een keer."
+    - "Bij brand gaan de rolluiken die je kiest omhoog, gaat een airco uit, en zegt de melding welke deur op slot zit. HouseMind opent nooit een slot."
+"0.3.21":
+  one: "Het alarm kan zelf aangaan, en je kunt het testen."
+  list:
+    - "Zei je de laatste vijf keer ja op 'Alarm aanzetten?', dan vraagt HouseMind een beheerder één keer of het dat voortaan zelf mag. Het kan ook bij Huisinstellingen › Beveiliging."
+    - "HouseMind zet het alarm dan zelf aan als iedereen weg is of het huis slaapt, en zegt het meteen. Alleen als het veilig is: geen sensor die nog iemand ziet, geen raam open. Uitzetten doet het nooit."
+    - "Zet iemand het twee keer snel weer uit, dan vraagt HouseMind het weer."
+    - "In Test het huis kies je 'Het alarm gaat af': je ziet wat er gebeurt, en met Doe het echt gaan de lampen van die ruimte aan en krijg alleen jij de melding, als test."
+"0.3.20":
+  one: "Vesta laat zien dat het alarm aanstaat, en dat het afging."
+  list:
+    - "Staat het alarm aan, dan is Vesta blauw met een schildje: Beveiligd. 's Nachts blijft ze op Welterusten, met 'beveiligd' erbij."
+    - "Is het alarm afgegaan en weer uitgezet, dan staat Vesta op Let op, met wanneer het afging, tot iemand het gezien heeft."
+    - "Iedereen krijgt dan ook een bericht, zodat wie later thuiskomt het weet. Gaat het alarm weer aan, dan verdwijnt het."
+"0.3.19":
+  one: "Seintjes bij water dat 's nachts wegloopt, bij regen met iets open en bij een storing, en automatiseringen op één apparaat gaan samen uit en aan."
+  list:
+    - "Loopt de watermeter 's nachts elk uur een beetje door terwijl niemand water gebruikt, dan krijg je 's ochtends een seintje: misschien lekt er een kraan of loopt de wc door."
+    - "Gaat het binnen een uur regenen terwijl een raam of buitendeur openstaat, dan krijgt iedereen een seintje met wat er openstaat."
+    - "Meldt een apparaat zelf een storing, zoals een warmtepomp of een schakelaar die te heet wordt, dan hoor je het. Oververhitting en overbelasting zijn belangrijk."
+    - "Sturen meer automatiseringen dezelfde lamp, dan zet HouseMind ze samen uit en samen weer aan. Kan het er één niet overnemen, dan blijven ze allemaal aan."
+"0.3.18":
+  one: "Het alarm staat in het Logboek, en na het uitzetten zet HouseMind het huis terug."
+  list:
+    - "Aanzetten, afgaan en uitzetten van het alarm staan nu in het Logboek, elk in één regel. Bij het afgaan staat erbij wat HouseMind deed, in plaats van een regel per lamp."
+    - "Een minuut nadat het alarm is uitgezet, gaan de lampen en gordijnen terug zoals ze vlak voor het afgaan waren. Wat je in die minuut zelf veranderde, en het licht in een ruimte waar iemand is, blijft zo."
+    - "Bij elke handeling zegt Waarom? nu de echte reden, zoals 'omdat het alarm afging', ook na een herstart."
+"0.3.17":
+  one: "Elke ruimte krijgt zijn eigen licht, en HouseMind herkent een douche en bedompte lucht."
+  list:
+    - "Keuken en eetkamer met één sensor zijn nu aparte ruimtes. Loop je in het donker de keuken in, dan gaat daar het licht aan, ook als de eetkamer al brandt. Doen jullie het keukenlicht steeds weer uit, dan leert HouseMind dat het licht van de eetkamer daar genoeg is."
+    - "Stijgt het vocht in de badkamer snel terwijl er net iemand was, dan doucht er iemand. Het licht blijft dan aan, ook als de sensor je achter het douchegordijn niet ziet, en de ventilator gaat meteen aan."
+    - "Is het CO₂ ergens waar iemand is een kwartier hoog, dan krijg je één seintje om even te luchten. 's Nachts komt er geen seintje: dan zegt de ochtendbriefing het."
+    - "In Test het huis telt de zone van een ruimte nu als de sensor van die ruimte. Ook de eetkamer heeft dan Iemand komt binnen en Niemand meer."
+"0.3.16":
+  one: "Een huisdier zet 's nachts geen licht meer aan en maakt het huis niet wakker."
+  list:
+    - "In ruimtes met huisdieren telt wat alleen een sensor ziet niet als een persoon terwijl het huis slaapt of er niemand thuis is. Nu geldt dat ook voor een aanwezigheidssensor, want die ziet een hond net zo goed."
+    - "Een mens telt wel: een camera die er een persoon ziet, iemand die er een schakelaar gebruikt, iemand die net uit een ruimte zonder huisdieren komt (de trap af, uit de badkamer), of een bewoner die net thuiskomt."
+    - "De hond maakt het huis niet meer vroeg wakker. Vanaf een half uur voor jullie gewone tijd van opstaan maakt beweging het huis weer wakker. Vóór bedtijd blijft alles zoals het was."
+"0.3.15":
+  one: "De Info-pagina van HouseMind in Home Assistant laat nu in het kort zien wat HouseMind voor je doet."
+  list:
+    - "Bij Instellingen › Apps › HouseMind vertelt de Info-pagina wat HouseMind je uit handen neemt, met drie schermen van de app en een dag met HouseMind."
+    - "De Documentatie heeft nieuwe plaatjes, en legt nu ook de ochtend en de nacht uit, de seintjes zoals een boiler die niet opwarmt, de Check-up en de standen van een lamp."
+    - "De privacyverklaring in de Documentatie is nu dezelfde als die in de app."
+"0.3.14":
+  one: "Warmt de boiler meer dan een dag niet op, dan krijg je een seintje."
+  list:
+    - "Is het water in de boiler minstens 10 graden kouder dan waarop hij staat, en is hij al meer dan een dag niet opgewarmd? Dan krijgt iedereen één belangrijk bericht, met hoe warm het water nog is."
+    - "Kijk dan op het toestel of in zijn eigen app of er een storing is, of dat de stroom eraf is. HouseMind verandert zelf niets aan de boiler."
+    - "Staat de boiler uit of op afwezig, of is het huis op vakantie, dan krijg je dit niet. Warmt hij weer op, dan verdwijnt het bericht vanzelf."
+"0.3.13":
+  one: "De ochtendbriefing klinkt weer één keer, ook als het voorlezen even duurt."
+  list:
+    - "Een lange ochtendbriefing werd soms een paar keer achter elkaar gezegd. HouseMind dacht dan dat het voorlezen mislukt was, omdat het zo lang duurde."
+    - "Nu telt een zin die nog wordt voorgelezen als gezegd. Lukt het echt niet, bijvoorbeeld omdat de speaker uit staat, dan merkt HouseMind dat meteen en probeert het later nog eens."
+    - "Dat geldt voor alles wat Vesta uit zichzelf zegt, zoals de bedtijdcheck. En HouseMind wacht niet meer een halve minuut op de speaker: de rest van het huis gaat ondertussen gewoon door."
+"0.3.12":
+  one: "Test het huis: bij ‘Het huis slaapt’ staat elke lamp nog maar één keer."
+  list:
+    - "Kies je in Test het huis ‘Het huis slaapt’, dan zie je per lamp één regel: wat Welterusten doet als iedereen net naar bed is."
+    - "Eerst stond een lamp er soms twee keer: uit ‘omdat er al een tijdje niemand is’ en uit ‘omdat het huis gaat slapen’. Dat eerste hoort bij ‘Niemand meer’."
+    - "Wat HouseMind echt doet blijft hetzelfde: in het eerste halfuur van de nacht gaan de lampen in lege ruimtes uit en gaan open gordijnen dicht."
+"0.3.11":
+  one: "Leren en stappen is kort; wat HouseMind van je huis weet, staat nu in Brein en kun je altijd weer aanpassen."
+  list:
+    - "Huisinstellingen › Leren en stappen heeft alleen nog leren, de historie en de onderdelen. Twee knoppen brengen je naar Brein."
+    - "In Brein staat voor beheerders een nieuw tabje: Wat ik weet. Met tegels voor Te bevestigen, Bevestigd, Klopt niet en Scènes en scripts, per ruimte, en wat bij één apparaat hoort ingeklapt."
+    - "Alles kan terug, ook na Klopt of Klopt niet: kies iets anders, zeg Klopt toch niet, of zet het terug naar Te bevestigen. HouseMind onthoudt wat het zelf dacht."
+    - "De automatiseringen staan nu op één plek: Brein › Klaar voor autonomie? › Automatiseringen, met wat ze doen en Uitzetten of Weer aanzetten. De drempels staan in de kaart van een onderdeel; een eerdere dag terugzetten bij Opnieuw beginnen."
+    - "Wat van AI komt, staat er overal in het paars bij: van AI."
+"0.3.10":
+  one: "Welterusten: gaat het huis slapen, dan doet HouseMind uit wat nog aan is en dicht wat nog open is."
+  list:
+    - "De lampen in ruimtes waar niemand is gaan uit, ook in een ruimte zonder bewegingsmelder. De slaapkamers en buiten blijven zoals ze zijn."
+    - "Gordijnen en rolluiken die nog openstaan gaan dicht, ook in de zomer als het pas na bedtijd donker wordt."
+    - "Eén keer per nacht, in het eerste halfuur: doe je daarna zelf iets aan, dan blijft dat zo."
+    - "Net als elke regel begint het met kijken en vragen. In Test het huis zie je het met ‘Het huis slaapt’."
+"0.3.9":
+  one: "Test het huis doet het nu echt: kies wat er gebeurt, en met Doe het echt gaat de lamp aan en het gordijn dicht."
+  list:
+    - "Doe alsof en Probeer nu zijn samen Speel het na. Je kiest wat er gebeurt en ziet meteen wat HouseMind zou doen; er schakelt dan nog niets."
+    - "Met Doe het echt doet HouseMind alles uit dat lijstje echt in je huis, en in het netwerk zie je het stromen. Na een minuut gaat alles vanzelf terug, of eerder met Zet terug. Zolang de test loopt, blijven de gewone regels van die apparaten af."
+    - "Bij elke regel staat eerlijk hoe het in het echt zou gaan: doe ik ook echt, vraag ik eerst, kijk ik alleen mee, of niet en waarom. Een huisregel of een automatisering houdt ook de test tegen."
+    - "Avond neemt het licht van die avond mee: in november is het dan donker, en gaan in de test de gordijnen dicht. Keuzes die elkaar tegenspreken, zoals Uit bed en Iedereen weg, gaan niet meer samen."
+    - "Het testkwartier heet nu Loop zelf rond: een onderdeel staat even op Autonoom, en jij loopt zelf door de ruimte."
+"0.3.8":
+  one: "Test het huis staat op een computer nu als klein knopje rechtsboven."
+  list:
+    - "Op een computer, in een browser, staat Test het huis niet meer in het menu links. Je opent het met het kolfje rechtsboven, naast Help en de rondleiding."
+    - "Het paneel komt zoals altijd rechts naast je huis. Zolang het open is, licht het kolfje op. Nog eens tikken of Sluiten sluit het."
+    - "Op een telefoon verandert er niets: Test het huis blijft de tab Testen onderin. In een smaller venster en in de app van Home Assistant blijft het in het menu."
+"0.3.7":
+  one: "Terwijl je de standen van een lamp instelt, blijft HouseMind van die lamp af."
+  list:
+    - "Zolang het venster Standen open is, doet geen regel, voorstel of huisregel iets met die lamp. Alleen veiligheid gaat voor."
+    - "Een proef blijft op de lamp staan tot je op Klaar tikt of het venster sluit, niet meer maar een minuut. Zo kun je rustig schuiven en kijken."
+    - "Sluit je het venster, dan staat de lamp weer zoals hij was en neemt HouseMind het weer over."
+    - "Het vinkje om de standen ook voor alle lampen van hetzelfde type te bewaren is weg. Bewaren geldt alleen voor de lamp die je instelt."
+"0.3.6":
+  one: "In Brein › Ritme staat nu Straks: wat HouseMind de komende uren gaat doen."
+  list:
+    - "Onder de balken van Ritme zie je de volgende momenten van de dag: het wordt donker, het huis gaat slapen, opstaan en het wordt licht. Bij elk moment staat wat HouseMind dan doet."
+    - "Bij elke regel zie je of HouseMind het zelf doet, eerst vraagt, alleen kijkt, of dat het niet mag, met de reden, zoals een huisregel. Zo kun je vooraf bijsturen."
+    - "Kent HouseMind een tijd nog niet, dan staat dat erbij. Er gaat niets aan of uit: HouseMind rekent het stil uit, zoals op een gewone dag."
+    - "De pagina Wat ik nu zou doen onder Meer is weg. Wat HouseMind nu per ruimte zou doen, zie je in Test het huis."
+"0.3.5":
+  one: "Een sensor in de hal die 's nachts blijft zeggen dat er iemand is, houdt het huis niet meer wakker."
+  list:
+    - "Zei een aanwezigheidssensor in een hal of gang 's nachts urenlang dat er iemand was, dan dacht HouseMind dat er nog iemand op was. Het huis ging dan niet slapen, en die nacht telde niet mee voor het ritme."
+    - "Zo kon het gebeuren dat bij Brein › Ritme alleen Werkdagen stond, en geen weekend."
+    - "Nu telt in een hal alleen dat iemand binnenkomt, niet dat de sensor iemand blijft zien. Wie op de bank zit, houdt het huis nog steeds wakker."
+"0.3.4":
+  one: "‘Meer’ in Brein werkt nu ook op een iPhone."
+  list:
+    - "Op een iPhone liet ‘Meer’ in Brein niets zien. Het menu zat in de rij tabjes, die opzij scrolt, en daar viel het weg."
+    - "Nu ligt het menu boven de pagina, onder de knop: Wat ik nu zou doen, Beslisspoor en Gedachtestroom staan er weer."
+    - "Scrol je terwijl het open is, dan blijft het onder de knop staan."
+"0.3.3":
+  one: "In het netwerk is een groep nu één stip, en elke stip zegt welk apparaat het is."
+  list:
+    - "Heeft een ruimte een groep, zoals bij Apparaten, dan toont het netwerk alleen de groep: één stip voor al zijn apparaten. Dat geldt voor lampen, maar ook voor gordijnen en schakelaars."
+    - "Zit een kleine groep in een grotere, dan staat alleen de grote er. Zo blijft er per ruimte plaats voor de rest."
+    - "Wijs je een stip aan, dan zie je de naam en hoe het staat. Bij een groep staat erbij hoeveel apparaten erin zitten."
+    - "Doet HouseMind iets met een lamp in een groep, dan stroomt de lijn naar de stip van die groep."
+"0.3.2":
+  one: "Gordijnen en lampen die even uit het netwerk vallen, houden HouseMind niet meer uren tegen."
+  list:
+    - "Viel een apparaat een paar seconden weg uit het netwerk en kwam het terug, dan dacht HouseMind dat iemand het met de hand bediende. Het bleef er dan uren af, ook op Autonoom. Zo gingen de gordijnen 's avonds soms niet dicht."
+    - "Nu telt alleen een echte hand. Wie zelf een gordijn of lamp bedient, gaat nog steeds voor."
+    - "Test het huis toont bij Nu de temperatuur van de ruimte zelf, niet die van een apparaat zoals de oven."
+    - "Bij Doe alsof staat in de handleiding nu ook hoe je het echt laat doen: met Probeer nu onder een regel."
+"0.3.1":
+  one: "Staat een regel op Autonoom, dan doet HouseMind het gewoon, zonder bericht op je scherm."
+  list:
+    - "Het korte bericht met Waarom?, Ongedaan maken en de duimen komt niet meer na alles wat HouseMind doet."
+    - "Je ziet het alleen nog als HouseMind iets zelf probeert terwijl de regel nog op Voorstellen staat. Zet je een regel terug naar Voorstellen, dan komt het bericht dus ook weer."
+    - "Wat HouseMind op Autonoom doet, staat in het Logboek, met Waarom? en Ongedaan maken."
+    - "Ook na een eigen huisregel of na iets waar je zelf ja op zei, komt geen bericht meer."
+"0.3.0":
+  one: "Een grotere update: elk apparaat en elke ruimte heeft nu een icoontje, op alle schermen."
+  list:
+    - "Op Huis tonen de kaarten, de plattegrond en het netwerk het icoontje van elke ruimte en elk apparaat. Een lamp laat zien hoe fel hij brandt, met het percentage erin of ernaast."
+    - "Ook bij Apparaten, in Brein, in het Logboek, bij Vesta's vragen en meldingen en bij Standen staat bij elk apparaat zijn icoontje."
+    - "Bij Energie, in de Check-up en bij Test het huis ook. De thuisbatterij laat met streepjes zien hoe vol hij is."
+    - "HouseMind kiest het icoontje zelf, uit wat het al weet; een stekker met een koelkast erachter is een koelkast. Weet het niet wat iets is, dan krijgt het een vierkantje met een stip. Een ander icoontje kies je in Home Assistant, bij Pictogram."
+"0.2.59":
+  one: "Brein › Ritme toont het ritme van het huis nu als balk, al na de eerste nacht."
+  list:
+    - "Per soort dag een balk van 24 uur, zoals in de handleiding: Slapen, Ochtend, Weg en Thuis, met de tijden eronder en een legenda met icoontjes."
+    - "Weet HouseMind een tijd nog niet zeker, dan staat de balk er toch: dat stuk is gestreept, met ‘leert nog’ erbij. Eerst moest HouseMind opstaan én naar bed zeker weten."
+    - "Op de balk van vandaag laat een streep ‘nu’ zien waar je bent."
+    - "Een soort dag met nog te weinig nachten krijgt een lege balk die dat zegt."
+"0.2.58":
+  one: "De handleiding is ongeveer een derde korter, met echte schermafbeeldingen."
+  list:
+    - "De handleiding is in alle vier de talen herschreven: korter, in eenvoudige woorden, en nagekeken tegen wat de app echt doet."
+    - "Er staan nieuwe schema’s in, en per taal 18 schermafbeeldingen uit het demohuis."
+    - "Het stuk over de Help past bij de nieuwe Help: het vraagteken opent de handleiding, het kompas start de rondleiding."
+    - "‘Lees meer’ bij Vesta gaat nog steeds naar hetzelfde stuk: elk deel hield zijn plek."
+"0.2.57":
+  one: "Het vraagteken opent nu meteen de handleiding. De rondleiding heeft een eigen knopje: het kompas ernaast."
+  list:
+    - "Tik je op het vraagteken rechtsboven, dan staat de handleiding meteen open. Bovenaan kun je Vesta een vraag stellen, getypt of gezegd."
+    - "De oude Help met de korte vragen per niveau is weg. Vesta kent die vragen nog en antwoordt erop, met ‘Lees meer’ naar het goede stuk in de handleiding."
+    - "Naast het vraagteken staat een kompas: daarmee doe je de rondleiding opnieuw. In de rondleiding lichten ze samen op."
+"0.2.56":
+  one: "Bij ‘Klaar voor autonomie?’ staan de knoppen Kolommen en Exporteren niet meer."
+  list:
+    - "Boven de lijsten Vaardigheden en Automatiseringen bij ‘Klaar voor autonomie?’ staan Kolommen en Exporteren niet meer: een rij en het detail ernaast zeggen alles."
+    - "Hoeveel er in de lijst staat, zie je er nog wel."
+    - "Bij Apparaten, Logboek en Huisinstellingen blijven beide knoppen."
+"0.2.55":
+  one: "Een wc met alleen een deursensor: HouseMind kan nu aan de deur zien of er iemand is."
+  list:
+    - "Bij een toilet of badkamer met één deur en geen andere sensor vraagt HouseMind één keer of het een kleine ruimte met één deur is. De vraag staat bij Huisinstellingen › Leren en stappen › Wat HouseMind van je huis weet."
+    - "Zeg je Klopt, dan is dicht na binnengaan ‘iemand binnen’: het licht blijft aan, hoe lang ook. Weer open en dicht is ‘weg’: het licht gaat eerst gedimd en dan uit. Staat de deur open, dan doet HouseMind niets."
+    - "Zet iemand het licht aan terwijl de deur dicht is, dan is er iemand binnen. Het werkt in elk huis: het volgt uit de soort ruimte en de sensoren, niet uit namen."
+"0.2.54":
+  one: "Het Logboek bleef soms leeg; dat is verholpen."
+  list:
+    - "Gebeurden er in dezelfde seconde twee dingen die HouseMind alleen bekeek, dan toonde het Logboek geen enkele regel meer, alleen het aantal."
+    - "Nu krijgt elke regel zijn eigen plek, en staan alle regels er weer."
+    - "Er is een test bij die dit in een echte browser nakijkt."
+"0.2.53":
+  one: "Bij een ruimte zonder bewegings- of aanwezigheidssensor zegt Brein nu duidelijker waarom HouseMind daar het licht niet zelf uitdoet."
+  list:
+    - "In zo’n ruimte kan HouseMind niet zien of er nog iemand is: een deur of een schakelaar zegt alleen dat er iemand was. Daarom kijkt het daar alleen mee bij ‘licht uit bij weggaan’."
+    - "Zette je die regel zelf op Autonoom, dan staat er nu bij dat je keuze bewaard blijft en meteen geldt zodra er zo’n sensor is."
+    - "De handleiding zegt het ook, bij ‘Wie er is’."
+"0.2.52":
+  one: "Ook de lijst Automatiseringen is rustiger: één rij per automatisering, alles erover op één plek."
+  list:
+    - "Bij ‘Klaar voor autonomie?’ › Automatiseringen is elke automatisering één rij: een rondje met hoeveel ruimtes klaar zijn, de naam, de ruimtes, één zin en waar ze staat."
+    - "Waar ze staat zie je aan een label: ‘Kan HouseMind overnemen’, ‘Overgenomen door HouseMind’, ‘HouseMind leert hiervan’ of ‘Blijft zoals het is’."
+    - "Tik op een rij: op een computer staat rechts alles over die automatisering, op een telefoon in een venster. De techniek staat onder ‘Details’."
+"0.2.51":
+  one: "Brein is rustiger: elke regel is één rij, en alles erover staat op één plek."
+  list:
+    - "Bij ‘Klaar voor autonomie?’ is elke regel één rij: een rondje met hoe vaak het goed ging, de naam, de ruimte, één zin en de stap. Waar een regel op wacht, staat er kort bij."
+    - "Tik op een rij: op een computer staat rechts alles over die regel, op een telefoon in een venster. De tellers staan er als vinkjes, de techniek onder ‘Details’."
+    - "Met ‘Wacht op iets’ en ‘Klaar’ filter je snel."
+    - "Wat ik nu zou doen, Beslisspoor en Gedachtestroom staan op Expert onder ‘Meer’."
+"0.2.50":
+  one: "Het kruisje en de luidspreker in Vesta's venster zijn groter."
+  list:
+    - "Het kruisje om Vesta's venster te sluiten en de luidspreker om haar stem aan of uit te zetten zijn nu ronde knoppen, groter dan eerst."
+    - "Het teken erin is ook groter en duidelijker, ook op Diep."
+    - "Op een telefoon raak je ze zo makkelijker met je duim."
+"0.2.49":
+  one: "Een vraag over een stand gaat nu over de hele ruimte, en bij elke lamp zie je wat er vandaag mee gebeurde."
+  list:
+    - "Vraagt HouseMind of het een stand mag zetten, dan staat er één kaart: ‘Mag ik de eetkamer op Gedimd zetten?’, met waarom, en per lamp wat hij krijgt of dat hij blijft zoals hij is."
+    - "Eén antwoord geldt voor alle lampen van die vraag. Op de telefoon en bij Vesta is het dezelfde vraag."
+    - "Onderaan het venster ‘Standen’ staat ‘Vandaag met deze lamp’: wanneer er iets veranderde, wat, wie voorging (het dagritme, jij met de hand, een regel, veiligheid) en hoe fel en welke kleur."
+"0.2.48":
+  one: "Op Autonoom vraagt HouseMind niets meer: het doet het gewoon, en vraagt achteraf ook niet meer of het goed was."
+  list:
+    - "Een regel op Autonoom doet het zelf, zonder vraag vooraf en zonder ‘Was dat goed?’ achteraf. Vragen horen bij Voorstellen."
+    - "‘Was dat goed?’ komt alleen nog als HouseMind iets zelf probeerde terwijl het nog op Voorstellen stond, omdat niemand de vraag kon zien. Hooguit één keer per dag per persoon."
+    - "Die ene keer per dag geldt nu ook als de App opnieuw start, bijvoorbeeld na een update. Eerst kon de vraag dan op één dag vaker komen."
+    - "Wil je zelf iets zeggen over wat HouseMind deed? De duimen onder het bericht na een actie en bij ‘Waarom?’ blijven."
+"0.2.47":
+  one: "Elke lamp heeft nu vier standen: Gedimd, Normaal, Helder en Maximaal, met de helderheid en de kleur die bij die lamp passen."
+  list:
+    - "Bij Brein › Apparaten en entiteiten tik je als beheerder bij een lamp op ‘Standen’. Per stand kies je de helderheid, en de kleur: die volgt het dagritme, of je zet hem vast van warm tot wit. Een lamp die kleuren kan, kan ook een kleur krijgen."
+    - "Met ‘Proef’ gaat de lamp zelf naar die stand; na een minuut staat hij weer zoals hij was. Met ‘Proef een stand’ bij een ruimte zie je of alle lampen daar bij elkaar passen."
+    - "HouseMind praat nu in standen: ‘Mag ik de eetkamer op Gedimd zetten?’ Elke lamp krijgt dan zijn eigen percentage. Rustige avond, nachtlicht en even dimmen voordat het licht uitgaat gaan naar Gedimd; licht bij binnenkomen gebruikt ook standen, zolang HouseMind daar nog niets leerde."
+    - "Een lamp die alleen aan en uit kan, blijft bij Gedimd zoals hij is, of gaat uit als je dat kiest en er een andere lamp aan blijft. Een nieuwe lamp krijgt de standen van een lamp van hetzelfde type."
+    - "Bij rook, koolmonoxide of inbraak gaan de lampen vol aan, en nu ook wit."
+"0.2.46":
+  one: "Een lamp waar HouseMind bewust van afblijft, houdt zijn regels in Brein."
+  list:
+    - "Bedienen jullie een lamp met een eigen knop, dan blijft HouseMind ervan af. Een regel die je daar zelf koos, blijft nu gewoon in Brein staan."
+    - "Alleen een apparaat dat uit Home Assistant is gehaald of daar is uitgeschakeld, telt als weg. Alleen dan bewaart HouseMind het geleerde 30 dagen en vergeet het daarna."
+    - "Een nieuwe regel komt nog steeds alleen voor een apparaat dat HouseMind zelf mag bedienen."
+"0.2.45":
+  one: "Een nieuw apparaat krijgt nu meteen zijn regels in Brein, en een regel gaat weg als het apparaat weg is."
+  list:
+    - "Hang je nieuwe gordijnen op of komt er een lamp bij, dan staan de regels die erbij horen meteen bij ‘Klaar voor autonomie?’, met ‘Nog niet gezien’."
+    - "Kent HouseMind de soort van een ruimte niet, zoals een muziekkamer, dan vraagt het een beheerder één keer wat voor ruimte het is. Tot dan krijgt die ruimte de regels die overal passen, zoals gordijnen dicht als het donker wordt."
+    - "Haal je een apparaat weg, dan verdwijnt de regel uit Brein. Wat HouseMind ervoor leerde, bewaart het 30 dagen, voor als er weer een apparaat komt."
+    - "Een regel voor vocht of CO₂ komt pas als de ruimte die sensor ook heeft."
+"0.2.44":
+  one: "Een camera die ook rook kan herkennen, geeft geen vals alarm meer. En Vesta zwijgt over wat op ‘Niet meer tonen’ staat."
+  list:
+    - "Sommige camera's kunnen ook rook of koolmonoxide herkennen. Stond dat in de camera uit, dan meldde HouseMind na een dag dat een veiligheidssensor niet meer reageert. Dat gebeurt nu niet meer."
+    - "Een rook-, CO-, gas- of lekmelder telt nu alleen als stil als het hele apparaat niets meer laat horen. Valt een echte melder stil, dan krijg je de melding nog steeds."
+    - "Staat een melding op ‘Niet meer tonen’, dan zegt Vesta hem ook zelf niet meer: niet in de kamer en niet op de telefoon."
+    - "Zet je een melding op ‘Later’, dan krijg je hem tot dan ook niet van Vesta op je telefoon."
+"0.2.43":
+  one: "De gordijnen in de slaapkamer gaan nu open als jullie op zijn."
+  list:
+    - "In een slaapkamer gaan de gordijnen ’s ochtends open als je uit bed bent, niemand meer in die ruimte slaapt en het buiten licht is. Wie nog slaapt, wordt niet gewekt."
+    - "HouseMind kijkt met wat de ruimte heeft: een sensor die het bed ziet, een aanwezigheidssensor in de ruimte, of niets. Zonder sensor doet het ze alleen open als iedereen weg is, of op een moment dat het van jullie leerde."
+    - "Een automatisering die de gordijnen in een slaapkamer opent, leert HouseMind nu ook. In Brein staat ‘Gordijnen open als je opstaat’ als eigen regel per ruimte."
+    - "In Test het huis kun je bij een slaapkamer ‘Iemand ligt in bed’ en ‘Uit bed’ kiezen."
+"0.2.42":
+  one: "Kijken verandert niets meer: het scherm werkt de stand van het huis niet meer bij."
+  list:
+    - "Het Huis-scherm, de ochtendkaart, een wandtablet en de teller van ruimtes waar iets gebeurt, kijken nu alleen naar het huis."
+    - "Alleen HouseMind zelf, elke halve minuut, bepaalt of het huis thuis, weg of in slaap is. Een open scherm maakt daar geen verschil meer in."
+    - "Zo gedraagt het huis zich hetzelfde, of er nu wel of geen scherm openstaat."
+"0.2.41":
+  one: "Met een testkwartier loop je zelf door je huis, terwijl een onderdeel even op Autonoom staat."
+  list:
+    - "Kies in Test het huis een ruimte, hoe lang (5, 15 of 60 minuten) en bij een onderdeel ‘Start’. Dat onderdeel staat dan op Autonoom, met de echte sensoren."
+    - "Bovenaan elk scherm staat zolang ‘Test loopt tot …’, met ‘Stop’. Daarna gaat de stap terug, en zet HouseMind terug wat het deed, behalve wat iemand zelf veranderde."
+    - "Een testkwartier zet geen automatisering en geen Adaptive Lighting uit, telt niet mee voor het leren, en stopt meteen bij een noodgeval."
+    - "‘Stop test en zet alles terug’ beëindigt elke test in één keer."
+"0.2.40":
+  one: "In Test het huis probeer je nu ook echt: één keer, en na een minuut weer terug."
+  list:
+    - "Bij een regel die echt kan, staat ‘Probeer nu’. HouseMind doet het dan één keer, zoals het het zelf zou doen."
+    - "Na een minuut zet HouseMind alles vanzelf terug. Met ‘Laat zo’ blijft het zo, met ‘Zet terug’ gaat het meteen terug."
+    - "Verandert iemand het in die minuut zelf, dan blijft het zo. Sloten, alarm en wat een automatisering stuurt, probeer je nooit echt."
+    - "Kies je geen situatie, dan zie je wat HouseMind nu zou doen. Een test telt niet mee voor het leren, en na een herstart zet HouseMind alsnog terug wat een test deed."
+"0.2.39":
+  one: "Op Expert test je HouseMind nu in je eigen huis, zonder dat er iets schakelt."
+  list:
+    - "Kies als beheerder in het menu ‘Test het huis’. Op een breed scherm staat het paneel rechts, naast het huis."
+    - "Bij ‘Doe alsof’ kies je wat er gebeurt, zoals iemand die in het donker binnenkomt. HouseMind zegt wat het zou doen, of dat nu mag, en wat het op Autonoom zou doen."
+    - "Onder ‘Wat er net gebeurde’ zie je per ruimte wat HouseMind besloot, welke controle nee zei, en hoe snel het ging. Een test telt niet mee voor het leren."
+    - "De Help op Expert toont weer alle vragen: een deel ontbrak sinds een eerdere versie."
+"0.2.38":
+  one: "Wat je doet, zie je nu meteen: in de lijst met apparaten en in het demohuis."
+  list:
+    - "Bij Brein › Apparaten werkt de status vanzelf bij. Gaat een lamp of sensor aan of uit, dan zie je dat meteen, zonder het tabje opnieuw te openen."
+    - "In het demohuis werken de knoppen bij Zelf spelen ook terwijl de tijd loopt. Zo zie je bijvoorbeeld een ruimte na ‘Geen beweging’ vanzelf leeg worden."
+    - "Verhalen en sprongen in de tijd kies je nog steeds bij Stop."
+"0.2.37":
+  one: "Het dagritme van het licht volgt nu álle instellingen van Adaptive Lighting."
+  list:
+    - "HouseMind las een deel van de instellingen niet: de helderheidsmodus en de tijden rond zonsondergang en zonsopkomst. Nu wel."
+    - "’s Avonds gaat het licht daardoor zo zacht als je het hebt ingesteld, en niet een paar procent feller."
+    - "Ook de overgang bij het aangaan, en of een lamp alleen bij het aangaan wordt bijgesteld, volgen nu de instellingen."
+"0.2.36":
+  one: "Het licht volgt nu de dag: overdag feller en witter, ’s avonds zachter en warmer."
+  list:
+    - "Heb je Adaptive Lighting, dan leest HouseMind die instellingen, per groep lampen, en neemt het ze op Autonoom over. Je blijft ze daar instellen, en bij een stap terug gaat die integratie meteen weer aan."
+    - "Heb je die integratie niet, dan maakt HouseMind zelf zo’n lijn voor lampen die het kunnen, uit wat het in die ruimte voor de avond en de dag leerde."
+    - "Een lamp die brandt, loopt mee met de avond. Kies je zelf een andere kleur of helderheid, dan blijft dat zo tot de lamp uitgaat, en doe je dat vaak, dan onthoudt HouseMind het."
+    - "Weet HouseMind weinig van een half uur, dan kiest het nu wat bij dat deel van de dag past en niet het gemiddelde van de hele dag. Check-up meldt een groep die naar een lamp wijst die niet meer bestaat."
+"0.2.35":
+  one: "In het netwerk zie je nu langer wat HouseMind net deed."
+  list:
+    - "De lijn van de ruimte via Vesta naar het apparaat stroomt nu twintig seconden in plaats van vijf. Zo zie je hem ook als je even later kijkt."
+    - "Doet HouseMind in die tijd iets anders, dan gaat de lijn daarheen."
+    - "Onder het netwerk blijft de regel staan met wat HouseMind het laatst deed, de tijd en ‘Waarom?’."
+"0.2.34":
+  one: "Vesta stelt nu één vraag tegelijk, met de knoppen erbij, en luistert pas als je op haar tikt."
+  list:
+    - "Een vraag van Vesta blijft staan tot je antwoordt of haar venster sluit. Er komt geen andere vraag meer tussendoor, ook niet als er in huis iets verandert."
+    - "De knoppen staan er altijd bij, ook terwijl ze luistert, en ook bij een vraag die ze noemt als je op haar tikt."
+    - "Na haar antwoord luistert ze niet meer vanzelf verder. Wil je nog iets vragen, tik dan op Vesta, ook in haar venster."
+    - "Haar venster blijft na een antwoord langer staan, zodat je het rustig kunt lezen."
+"0.2.33":
+  one: "In de demohuizen kun je nu in elke ruimte iemand nadoen."
+  list:
+    - "Elke ruimte van de drie demohuizen heeft nu een bewegings- of aanwezigheidssensor, ook de keuken, de slaapkamer, de garage en de tuin."
+    - "Daardoor staan bij Speel het huis alle ruimtes onder Mensen en beweging, en HouseMind reageert erop zoals in een echt huis."
+    - "Het eenvoudige demohuis heeft nu twaalf apparaten en het gemiddelde bijna veertig."
+    - "Het verhaal Wakker worden loopt nu via de slaapkamer, de badkamer, de gang en de keuken."
+"0.2.32":
+  one: "Heb je een lamp met de hand bediend, dan krijgt wie later binnenkomt gewoon weer licht."
+  list:
+    - "Zolang er iemand in de ruimte is, blijft jouw keuze staan. Is de ruimte leeg geweest en komt iemand binnen, dan is dat een nieuw moment en gaat het licht weer gewoon aan als het donker is."
+    - "Druk je op een knop die alles uitzet, dan hebben ruimtes waar niemand was daar geen last van: wie er later binnenkomt, krijgt licht."
+    - "Zet je een lamp op afstand aan terwijl er niemand is, dan blijft hij aan, net als eerst."
+    - "In een ruimte zonder aanwezigheids- of bewegingssensor doet HouseMind het licht niet meer uit omdat het denkt dat er niemand is. Dat kan het daar niet zien. Het vraagt dat ook niet meer."
+"0.2.31":
+  one: "Het licht van het alarm of de deurbel houdt een ruimte niet meer tegen."
+  list:
+    - "Een automatisering die alleen een signaal geeft met een lamp, zoals een kleur bij het alarm of een knipper bij de deurbel, houdt niets meer tegen. Ze blijft gewoon aan, en HouseMind leert er niets van."
+    - "Zolang zo'n signaal duurt, blijft HouseMind van de lamp af. Blijft de lamp aan, zoals bij een alarm dat afgaat, dan blijft HouseMind eraf tot die lamp verandert."
+    - "Een automatisering die alleen lampen schakelt, gaat mee in de ene vraag zodra de regels van die lampen bewezen zijn. Ze staat er met naam in."
+    - "Doet een automatisering meer, zoals ook een stopcontact schakelen? Dan blijft ze aan en houdt ze alleen haar eigen lamp. De rest van de ruimte kan gewoon."
+    - "HouseMind begrijpt nu ook de nieuwe manier waarop Home Assistant aanwezigheid en deuren als start van een automatisering schrijft, dus ook daarvan leert het."
+"0.2.30":
+  one: "Wat vaak genoeg goed gaat, doet HouseMind na één ja zelf."
+  list:
+    - "Ziet HouseMind iets vaak genoeg goed gaan, dan vraagt het één keer of het dit voortaan zelf mag doen. Die vraag staat bij Wacht op jou en verloopt niet. Eén ja is genoeg."
+    - "Stuurt een automatisering het, dan gaat de vraag over de hele automatisering, en alleen een beheerder krijgt hem. Na ja doet HouseMind het zelf en gaat zij uit. Twee keer terugzetten in een week: ze gaat vanzelf weer aan."
+    - "De balk en de ring bij Klaar voor autonomie? tonen nu hoe vaak het goed ging, en daaronder wat er nog nodig is. Kijkt HouseMind alleen mee, dan staat dat er ook, met de reden."
+    - "Doe je zelf wat HouseMind vraagt, dan telt dat als ja. Doe je het licht uit en loop je weg, dan telt dat ook."
+    - "Op een vraag staat nu ‘Voortaan zelf’ in plaats van ‘Altijd zo’. Eén lamp houdt een hele groep niet meer tegen."
+"0.2.29":
+  one: "Een stopcontact wordt geen lamp meer omdat het na een herstart tegelijk met een lamp terugkwam."
+  list:
+    - "HouseMind leidt alleen nog af dat een schakelaar bij een lamp hoort als hij echt aan en uit gaat. Een herstart van Home Assistant telt niet meer mee."
+    - "Wat HouseMind eerder zo als lamp had afgeleid, bekijkt het na de update meteen opnieuw. Wat jij met Klopt of Klopt niet beantwoordde, blijft staan."
+    - "Zegt een label in Home Assistant dat een apparaat iets anders is, zoals verwarming, dan maakt HouseMind er geen lamp van."
+    - "Zo staan een bedverwarming of de update-schakelaar van een meter niet meer tussen de lampen van een kamer."
+"0.2.28":
+  one: "Zitten lampen in een groep, dan gebruikt en toont HouseMind de groep, niet elke lamp apart."
+  list:
+    - "In het Logboek, bij Wat ik bedacht, in het Beslisspoor en bij Klaar voor autonomie? staat één regel voor de groep, niet één per lamp."
+    - "Met rust laten is met rust laten: zo'n apparaat staat alleen nog bij Apparaten, waar je het vinkje weer weghaalt."
+    - "Staat een lamp uit een groep op Met rust laten, dan neemt de groep hem mee. Zet je de groep zelf op Met rust laten, dan blijft alles erin stil."
+    - "Een extra schakelaar van een stopcontact, zoals een laadbeveiliging, staat niet meer tussen de lampen."
+    - "Het uitgebreide demohuis heeft nu elke soort groep lampen, en bij Apparaten staat waarom een groep alleen verzamelt."
+"0.2.27":
+  one: "‘Home Assistant netjes’ heet nu Check-up."
+  list:
+    - "In het menu en op de telefoon heet de pagina die Home Assistant nakijkt nu Check-up."
+    - "Het venster dat ‘Bekijken’ opent, heet Check-up van Home Assistant."
+    - "Help en de handleiding gebruiken de nieuwe naam, in alle vier talen."
+    - "Vraag je Vesta naar de check-up, dan weet ze wat je bedoelt; de oude naam kent ze ook nog."
+"0.2.26":
+  one: "Het scherm maakt meteen weer verbinding als je terugkomt."
+  list:
+    - "Was het scherm even los, bijvoorbeeld na een update of als het netwerk weg was? Kom je terug naar het scherm, dan verbindt het meteen weer."
+    - "Is het netwerk terug, dan probeert het scherm het ook meteen."
+    - "Kijk je naar het scherm, dan wacht het nooit langer dan tien seconden tussen twee pogingen."
+    - "Help en handleiding zeggen wat ‘Geen verbinding – opnieuw proberen…’ betekent."
+"0.2.25":
+  one: "HouseMind kent nu het deel van de dag uit jullie eigen ritme: nacht, ochtend, dag en avond."
+  list:
+    - "Het is nacht zodra het huis slaapt. Is er nog iemand op, dan twee uur na jullie gewone bedtijd."
+    - "De ochtend begint als het huis wakker wordt, de avond als jullie meestal thuiskomen. Kent HouseMind een tijd nog niet, dan telt de klok."
+    - "Het licht bij binnenkomen en de groet van Vesta passen zich daaraan aan. In een slaapkamer gaat vanaf de gewone bedtijd geen lamp vanzelf aan."
+    - "In Brein › Ritme staat bovenaan wat het nu is, sinds wanneer en waarom."
+"0.2.24":
+  one: "In het netwerk stroomt de lijn nu alleen terwijl HouseMind iets doet, en een vraag kun je daar meteen beantwoorden."
+  list:
+    - "Doet HouseMind iets, dan stroomt de lijn een paar tellen en gaat dan vanzelf uit, in plaats van tien minuten."
+    - "Onder de tekening blijft staan wat het vandaag het laatst deed, met de tijd en Waarom?."
+    - "Een vraag blijft een stippellijn zolang hij open is, met eronder Doe het en Nu niet: je hoeft er niet voor naar het Logboek."
+"0.2.23":
+  one: "Op de tegels bij Klaar voor autonomie? staat de ring nu onderaan rechts."
+  list:
+    - "De ring staat naast het aantal ruimtes, en ligt nooit over de stappen."
+    - "De naam heeft de hele breedte, zodat een lang woord zoals Raambekleding heel blijft."
+    - "De ringen staan op één lijn onder in de tegels, ook op een telefoon."
+"0.2.22":
+  one: "De tegels bij Klaar voor autonomie? zijn rustiger: de ring staat nu rechtsboven."
+  list:
+    - "De ring met de score staat naast de naam, en ligt nooit meer over de stappen."
+    - "De tegels vullen samen de hele rij, ook op een breed scherm."
+    - "Op een telefoon staan er nog steeds twee naast elkaar."
+"0.2.21":
+  one: "Klaar voor autonomie? is kleiner: de onderdelen staan nu als tegels naast elkaar."
+  list:
+    - "Elke tegel toont de naam, de stappen, de ring en het aantal ruimtes. Op een computer staan ze op één rij, op een telefoon twee naast elkaar."
+    - "Tik op een tegel: eronder komt één kaart met de uitleg en de knoppen van dat onderdeel, en de lijst staat er direct onder, met alleen dat onderdeel."
+    - "Het overzicht per soort boven een lange lijst is ook tegels, bij Logboek, Apparaten, Bestaande automatiseringen, Scènes en Home Assistant netjes."
+"0.2.20":
+  one: "Bij Energie zegt een schermlezer nu hoe ver het meten is, en bereikt hij de blokken in het plan."
+  list:
+    - "In de eerste weken toont Energie een balk met de dagen die HouseMind gemeten heeft. Een schermlezer leest die nu voor met dezelfde woorden als erboven, zoals ‘Dag 3 van 14’."
+    - "In het plan (Betrokken en Expert) bereikt een schermlezer nu ook de blokken op de tijdlijn. Kies er een en hij zegt wat HouseMind dan doet, en waarom."
+    - "Elke balk in de app die laat zien hoe ver iets is, heeft nu een naam: bij Energie, bij leren uit de historie, terwijl Vesta luistert en in het demohuis."
+    - "De controle die elk scherm op elk niveau opent, op een telefoon en een groot scherm, in licht en donker, vindt weer niets om te verbeteren."
+"0.2.19":
+  one: "Bovenaan het Logboek staat nu ‘Wacht op jou’, en een antwoord van AI gaat minder vaak verloren."
+  list:
+    - "Het cijfer bij Logboek telt de meldingen die nog op je wachten. Die staan nu bovenaan het Logboek, met hun knoppen; afgehandeld staan ze in de tijdlijn."
+    - "Elke vraag aan AI krijgt de vorm van het antwoord mee. Kan de dienst dat, dan kan de AI niet anders antwoorden."
+    - "Past een antwoord niet, dan telt wat heel was. Geeft de AI na het opzoeken geen antwoord, dan vraagt HouseMind het nog één keer."
+    - "Hoe een integratie een apparaat zelf noemt, zoals ‘Lichten’, blijft een gewoon woord in je vraag aan Vesta."
+"0.2.18":
+  one: "Op Home Assistant netjes staat Systeem nu bovenaan, met een ring zoals de klok bij Energie."
+  list:
+    - "De buitenring laat zien wat er op de schijf staat: de database, de back-ups, oude losse back-ups, de rest en wat vrij is."
+    - "Streepjes bij 85 % en 95 % laten zien wanneer HouseMind het meldt. De binnenring telt de dagen sinds de nieuwste back-up."
+    - "Wijs een deel van de ring aan, en HouseMind zegt het in woorden. De tegels met de back-up, de database en de schijf staan eronder."
+"0.2.17":
+  one: "Het netwerk bij Huis › Ruimtes ziet er nu uit zoals het ontwerp: met Vesta groot in het midden."
+  list:
+    - "Vesta ademt in het midden in haar kleur, met haar woord eronder. Staat AI aan, dan staat er een gestippelde ring om haar heen."
+    - "De ruimtes zijn blokjes met hun naam, met hun apparaten als stipjes. Op een telefoon staat het netwerk rechtop."
+    - "Deed of vroeg HouseMind net iets, dan stroomt er tien minuten een lijn van de ruimte via Vesta naar het apparaat. Eronder staat wat er gebeurde, met ‘Waarom?’."
+    - "Is het rustig, dan zegt een regel wanneer er een lijn stroomt. Een legenda zegt wat de lijnen betekenen."
+"0.2.16":
+  one: "Of Vesta zelf haar venster opent met een vraag, is nu één keuze voor het hele huis."
+  list:
+    - "Een beheerder op Expert vindt de keuze bij Huisinstellingen, in de groep Vesta. Uit geldt voor iedereen in huis."
+    - "Staat het uit, dan springt haar vraag bij niemand meer open en wacht hij in Logboek. Tik op Vesta, dan stelt ze hem alsnog."
+    - "Bij Mijn voorkeuren staat de keuze niet meer; een eigen keuze van eerder telt niet meer."
+"0.2.15":
+  one: "Energie ‘Nu en vandaag’ laat de zon, het net en het huis nu ook zien als een meter een lege sensor heeft."
+  list:
+    - "Een apparaat kan meer stroomsensoren hebben. HouseMind nam de eerste, ook als die geen waarde had of iets anders mat, zoals het net bij de zonnepanelen."
+    - "Nu kiest het de sensor die zegt wat hij meet en een waarde heeft. Valt die weg, dan leest het de volgende."
+    - "Wordt het net alleen per fase gemeten, dan telt HouseMind de fases op. Geeft de thuisbatterij zelf niets, dan leest het de batterij van het systeem waar ze bij hoort."
+    - "Zo vult ‘Vandaag’ zich ook weer, en weet Vesta wat het huis nu gebruikt."
+"0.2.14":
+  one: "Home Assistant netjes is nu een eigen pagina in het menu, alleen voor een beheerder op Expert."
+  list:
+    - "Het stond als groep in Huisinstellingen, in een klein venster. Nu heeft het de hele breedte van het scherm."
+    - "Op een computer staat het links in het menu, op een telefoon als vijfde knop onderin."
+    - "Op de andere niveaus staat het niet meer in Huisinstellingen. ‘Bekijken’ bij een melding erover laat het nog steeds zien."
+"0.2.13":
+  one: "Zeg je ‘Doe het’ als HouseMind vraagt de verwarming op afwezig te zetten, dan komt bij thuiskomen de stand van daarvoor terug."
+  list:
+    - "Is er een dag niemand thuis, dan kan HouseMind vragen of een warmtepomp op afwezig mag. Na ‘Doe het’ vergat het hoe die daarvoor stond."
+    - "Bij thuiskomen zette het de warmtepomp daarom terug op de gewone stand, ook als die eerst bijvoorbeeld op eco stond."
+    - "Nu onthoudt HouseMind de stand van daarvoor en zet het precies die terug."
+"0.2.12":
+  one: "Vraagt Vesta iets, dan noemt ze nu dezelfde reden als het scherm."
+  list:
+    - "Bij sommige vragen noemde Vesta een andere reden dan het scherm. Ze zei bijvoorbeeld ‘omdat iemand in het donker thuiskwam’, terwijl het scherm zei ‘omdat iemand 5 min geleden thuiskwam en er niemand meer buiten is’."
+    - "Nu onthoudt HouseMind bij elke vraag de hele reden, dus Vesta noemt dezelfde."
+    - "Dat geldt ook voor ‘Waarom?’ onder haar vraag, en voor vragen over het avondlicht of verwarmen."
+"0.2.11":
+  one: "Een wandschakelaar van een knop-automatisering telt bij het licht niet meer als lamp."
+  list:
+    - "HouseMind hield sommige wandschakelaars voor een lamp, omdat ze samen met een lamp aan en uit gaan."
+    - "Nu laat het bij het licht de schakelaars van een knop-automatisering helemaal weg. Die bedienen jullie zelf."
+    - "Zo komt er in Logboek ook geen ‘niet gedaan’ meer voor zo’n schakelaar."
+"0.2.10":
+  one: "Een knop of wandschakelaar die een lamp bedient, houdt HouseMind niet meer van die lamp af."
+  list:
+    - "Een automatisering die alleen doorgeeft wat jullie zelf doen, zoals een wandschakelaar, een afstandsbediening of een knop in de app, is jullie eigen hand. HouseMind bedient die lampen nu gewoon mee, ook op Autonoom."
+    - "HouseMind vraagt nooit om zo’n automatisering uit te zetten; de knop blijft werken. Wat ze doet, telt als iets wat jullie deden, dus HouseMind blijft daarna even van de lamp af."
+    - "De schakelaar zelf zet HouseMind nooit om. Deed HouseMind de lamp uit terwijl de schakelaar nog op aan staat, dan zet je hem één keer extra om."
+"0.2.9":
+  one: "Kom je in het donker thuis, dan gaat het licht bij de ingang aan, en na een paar minuten weer uit."
+  list:
+    - "Het gaat om de lampen op de oprit, bij de voordeur of bij de carport. Een tuin of terras achter het huis blijft donker."
+    - "Na 5 minuten gaan ze uit, later als er dan nog iemand buiten is. Brandt het licht al, zoals het avondlicht, dan blijft het zoals het is."
+    - "Een automatisering die de oprit aandoet bij thuiskomen en uitdoet bij vertrek, leert HouseMind nu. Op Autonoom kan HouseMind haar overnemen."
+"0.2.8":
+  one: "Zet je iets op Autonoom, dan zet HouseMind de automatisering die het deed meteen uit. Gaat het terug, dan gaat ze meteen weer aan."
+  list:
+    - "Zet je in ‘Klaar voor autonomie?’ een regel of een onderdeel op Autonoom, dan zet HouseMind de automatisering in Home Assistant die dat deed meteen uit en doet het zelf. Doet die automatisering meer, zoals een bericht sturen, dan vraagt het eerst."
+    - "Gaat het terug naar Voorstellen of Observeren, zet je een onderdeel uit, of zet HouseMind zelf een stap terug, dan gaat de automatisering meteen weer aan. Zo blijft er niets liggen; je leest het in een melding en in Logboek."
+    - "Bij opnieuw leren, fabrieksinstellingen en verwijderen gaan ze, zoals altijd, eerst weer aan."
+"0.2.7":
+  one: "Het licht buiten gaat aan als het donker wordt, ook als er niemand thuis is."
+  list:
+    - "Zo lijkt het huis bewoond en blijven inbrekers op afstand. Het gaat uit als het huis gaat slapen, en uiterlijk op het tijdstip dat bij jullie huis past; tot HouseMind dat weet, om 23:30."
+    - "Is er niemand thuis, dan gaat het uit rond de gewone bedtijd, elke avond een paar minuten anders, zodat het niet op een tijdklok lijkt."
+    - "Een automatisering die het licht buiten aan- en uitdoet, leert HouseMind nu de helderheid en het tijdstip. Op Autonoom vraagt HouseMind of hij haar mag overnemen."
+"0.2.6":
+  one: "In de handleiding staat ‘Voorstellen van AI’ nu bij Huisregels."
+  list:
+    - "Het stuk over de huisregels die een AI mag voorstellen, stond per ongeluk bij Ochtend en avond."
+    - "Het staat nu aan het eind van Huisregels, in alle vier de talen, en in de online handleiding net zo."
+    - "Een link naar dat stuk komt nog steeds op de goede plek uit."
+"0.2.5":
+  one: "De changelog is kort en leesbaar, en de Documentatie in Home Assistant legt uit hoe HouseMind werkt."
+  list:
+    - "De changelog in Home Assistant toont per versie alleen wat er nieuw is, in gewone woorden, vanaf 0.2.0."
+    - "De Documentatie legt de drie stappen Observeren, Voorstellen en Autonoom uit, de onderdelen van het huis, en apparaten en entiteiten."
+    - "Twee tekeningen laten zien wat HouseMind een stap verder brengt, en hoe het in de loop van de tijd leert terwijl oude gewoontes minder tellen."
+"0.2.4":
+  one: "In Brein › Apparaten springen de lampen van een groep nu in onder de groep."
+  list:
+    - "De groep staat bovenaan; de lampen die erin zitten, springen eronder in, met een lijntje ernaast."
+    - "Zo zie je meteen welke lampen bij een groep horen, zoals ‘Garage - Lamp 1’ onder ‘Garage’."
+    - "Een kleinere groep in een grotere springt ook in, met zijn eigen lampen daaronder."
+"0.2.3":
+  one: "Het licht gaat meteen aan als je binnenkomt, en uit na de tijd die bij jullie huis past."
+  list:
+    - "Kom je in het donker binnen, dan gaat het licht meteen aan. In een ruimte waar je vaak doorloopt na 10 seconden, en niet meer na een halve minuut of langer."
+    - "Een bewegingssensor die sneller is dan de aanwezigheidssensor telt weer meteen mee. Wordt het donker terwijl je in een ruimte zit, dan gaat het licht zonder te wachten aan."
+    - "Hoe lang het licht aanblijft als er niemand meer is, leert HouseMind per ruimte van jullie huis. Tot dan is het kort in een toilet, badkamer, berging of kelder, en langer in een hal."
+    - "Kom je terug terwijl het licht dimt, of doe je het meteen weer aan, dan wacht HouseMind daar voortaan langer. De wachttijd telt vanaf het moment dat de sensor niemand meer ziet."
+"0.2.2":
+  one: "Duits en Frans staan nu zonder ‘nog niet nagekeken’ in de lijst met talen."
+  list:
+    - "Bij Mijn voorkeuren › Taal staat achter Duits en Frans niet meer ‘nog niet nagekeken’."
+    - "Ook bij Huisinstellingen › Vesta › Taal van het huis is dat weg."
+    - "De handleiding noemt het niet meer, in alle vier de talen."
+"0.2.1":
+  one: "De anonieme telling per week is weg: er is één weg naar buiten minder."
+  list:
+    - "Bij Onderhoud en privacy staan het vinkje en het voorbeeld niet meer. Ze stuurde nooit iets, en zo blijft het."
+    - "De privacyverklaring, Help, de handleiding en de website noemen haar niet meer."
+    - "Had een beheerder ooit ja gezegd, dan is dat na de update weg; HouseMind bewaart er niets van."
+"0.2.0":
+  one: "Je ziet nu in beeld hoe HouseMind beslist, en HouseMind weet van elk apparaat beter wat het is."
+  list:
+    - "Je ziet nu hoe HouseMind beslist, als een stroom: wat het zag, wat het dacht en wat het deed. Een lijn die stroomt is gedaan, stippels wachten op jou, een lijn die stopt is niet gedaan."
+    - "Op Ontzorgd staat om Vesta een dunne ring met een stip voor alles wat HouseMind vandaag deed. Vanaf Geïnformeerd staat onder Wat ik bedacht ‘Vandaag’: per ruimte wat het deed, vroeg of liet."
+    - "Bij Energie zie je de stroom lopen: van de zon en het net naar het huis, de batterij en de auto."
+    - "Op Expert staat bij Brein › Beslisspoor elk besluit als een pijplijn met de zes stappen van de poort, de kern en de AI apart, en vandaag van bron naar uitkomst. In het netwerk licht het pad op van wat HouseMind net deed."
+    - "HouseMind weet nu van elke entiteit wat het is: een lamp, de thermostaat van een ruimte, iets dat de lucht of het apparaat zelf meet, een status-LED of een instelling. Het handelt daar overal naar en raakt een instelling nooit aan."
+    - "In een ruimte staan de entiteiten nu per apparaat, met bij elke entiteit wat het is. Bij Wat HouseMind van je huis weet bevestig je per apparaat in één keer."
+    - "Het lampje van een sensor of spraakassistent telt niet meer als licht in de ruimte."
+    - "Een ruimte met een aanwezigheidssensor is meteen leeg zodra die sensor niemand meer ziet."
+    - "Met AI begrijpt HouseMind je huis beter en is Vesta slimmer: ze zoekt dingen op en praat door. Iets belangrijks zegt ze altijd in eigen woorden, en de kern wacht nooit op de AI."
+    - "Met AI zie je je gewoontes en het weekoverzicht in gewone woorden, krijg je een vraag bij iets ongewoons, zoals een lamp die uren brandt in een lege ruimte, en stelt de AI huisregels voor."
+    - "Je kunt de AI van Home Assistant zelf kiezen. Werkt die in huis, dan kan een beheerder camerabeelden laten beschrijven; die gaan nooit naar de cloud."
+    - "Bij elke vraag aan de AI zie je de opdracht: waarom HouseMind iets vraagt en welk antwoord het wil."
+    - "Een kookplaat of oven die aan staat terwijl niemand thuis is, wordt een vraag om hem uit te zetten."
+    - "Brein heeft tabjes, onderdelen zet je aan en uit bij Huisinstellingen, en Niet meer tonen beslist de beheerder."
+    - "Over HouseMind heeft ‘Goed om te weten’. De handleiding is korter en is er nu ook in het Duits en het Frans."
+"0.1.0":
+  one: "Vesta zegt nu alleen wat er echt gebeurde, en HouseMind werkt beter met het toetsenbord, op een telefoon en met grote letters."
+  list:
+    - "Home Assistant netjes zegt nu hoeveel back-ups er nog op de schijf passen, en wat Home Assistant zelf bewaart. Oude losse back-ups, die Home Assistant niet zelf opruimt, staan op één kaart. HouseMind wist niets."
+    - "Extra warm water en voorverwarmen gebeuren alleen nog als het echt oplevert: HouseMind rekent mee hoeveel warmte er weglekt, leert dat zelf, en meet per onderdeel na wat het opleverde. Kost iets drie weken geld, dan stopt het ermee."
+    - "Beheerders horen nu meteen als er in Home Assistant iets belangrijks is, zoals een oude back-up, met Bekijken. Vesta weet het ook: ‘Is er iets stuk in Home Assistant?’"
+    - "Home Assistant netjes laat nu ook automatiseringen zien die lang niet liepen, de back-up, de database en de schijf, en wat er na een update niet meer werkt."
+    - "In Home Assistant netjes kun je nu na een ja iets uitzetten, zoals een dubbele entiteit. HouseMind wist niets en Terugzetten kan altijd. Met Bewust uit, Laat zo en Geen dubbele blijft wat je besloot."
+    - "Home Assistant netjes ziet nu ook meters uit de energie-instellingen die stilstaan, een koppeling die al een dag niets meet, en een netmeter die ontbreekt in de energie-instellingen."
+    - "Beheerders zien bij Huisinstellingen › Home Assistant netjes wat er in Home Assistant stuk is: een koppeling die niet start, een apparaat dat niet antwoordt, een dubbele entiteit, of een automatisering die verwijst naar iets dat er niet meer is. Elke kaart opent de juiste plek in Home Assistant."
+    - "Noodberichten zeggen precies wat er gebeurde, zoals hoeveel lampen aangingen."
+    - "Vraag ‘Waarom staat de verwarming niet aan?’: Vesta zegt waarom en wanneer, of dat ze het niet weet."
+    - "Bij ‘Klaar voor autonomie?’ zie je per onderdeel hoe vaak iemand ingreep, over vier weken."
+    - "Vensters werken goed met het toetsenbord, en Groot maakt alleen de letters groter."
+    - "Een huisregel of een moment weghalen vraagt eerst ja of nee."
+    - "HouseMind start betrouwbaarder op en herstelt zich zelf na een storing."
+    - "HouseMind reageert veel sneller, ook in een groot huis: het rekent na een verandering alleen de ruimte uit waar het om gaat."
+    - "Schermen worden lichter bijgewerkt: na de eerste keer gaat alleen mee wat veranderde, zodat telefoons en de wandtablet sneller zijn."
+    - "De handleiding in de app ziet er nu uit zoals online, met genummerde hoofdstukken, en kan op het hele scherm of in een eigen venster."
+    - "Lange lijsten tonen hoeveel er is en hebben pagina's, kolommen naar keuze, compacte rijen, een overzicht per soort en, op een computer, Exporteren als CSV, Markdown of JSON."
+    - "Wat HouseMind zelf instelde aan boiler, warmtepomp of teruglevering, zet het terug als het niet meer nodig is, bij pauze en als het stopt. Reageert HouseMind niet, dan doet de koppeling in Home Assistant dat."
+    - "Bij Energie zie je nu en vandaag: de zon, het net, het huis, elke thuisbatterij en de auto, wat stroom vandaag en deze maand kost, tips en de grootste verbruikers. De thuisbatterij en de auto stuurt HouseMind niet; Vesta zegt wel wanneer laden het goedkoopst is."
+    - "HouseMind leert ook van de labels en categorieën in Home Assistant, als hint: het vraagt eerst voordat het iets daardoor bedient, en je filtert er in de lijsten op. Een label als Home Assistant of Netwerk laat alleen met rust wat HouseMind zelf niet kent."
+    - "Bij Energie staat de komende 24 uur als klok, en het plan in één grafiek: de prijs (blauw als hij negatief is), wat er binnenkomt en waar het heen gaat, vóór nu wat er gemeten is en per apparaat wat HouseMind doet. Energie staat nu ook op ‘Klaar voor autonomie?’."
+    - "Op Expert kies je bij Mijn voorkeuren of Vesta zelf haar venster opent met een vraag. ‘Tot morgen’ pauzeert tot de eerstvolgende 06:00, ook na middernacht."
+    - "Vesta luistert: een antwoord hoort bij haar vraag, getypt of gezegd. Zonder AI geeft ze keuzes als knoppen, ook Waarom?, en zegt ze eerlijk wat ze niet weet in plaats van te raden. Met een AI praat je vrij met haar, met het gesprek erbij; iets laten doen gebeurt pas na jouw ja."
+    - "Is Vesta rood, oranje of amber, dan staat in de regel onder haar woord waarom, op elk tabblad, met ‘+2’ als er meer wacht. Tik erop en Logboek opent bij die melding."
+    - "Op Supervised werkt HouseMind gewoon. Home Assistant ondersteunt die manier van installeren sinds 2025.12 niet meer; is Home Assistant Supervised, of noemt de Supervisor de installatie niet ondersteund of niet gezond, dan krijgen de beheerders één rustige melding."
+    - "In Brein, bij ‘Klaar voor autonomie?’, zegt elke vaardigheid in een ruimte in één zin wanneer HouseMind het doet, met wat het leerde, zoals ‘Ik doe de lamp in de hal aan zodra iemand binnenkomt en het donker is’. Op Expert staat eronder precies waarom."

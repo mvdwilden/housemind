@@ -1,0 +1,30 @@
+# A small apartment with few sensors (B-41).
+key: apartment
+name: apartment
+country: NL
+residents: 1
+pets: false
+floors: [{id: ground, level: 0}]
+areas:
+  - {id: living, floor: ground}
+  - {id: bedroom, floor: ground}
+  - {id: bathroom, floor: ground}
+  - {id: hall, floor: ground}
+entities:
+  - {id: light.living_ceiling, area: living, label: ceiling_light, state: "off", modes: [color_temp]}
+  - {id: light.living_reading, area: living, label: reading_lamp, state: "off", modes: [brightness]}
+  - {id: light.bedroom, area: bedroom, label: light, state: "off", modes: [brightness]}
+  - {id: light.hall, area: hall, label: light, state: "off", modes: [onoff]}
+  - {id: cover.living_curtain, area: living, label: curtain, class: curtain, state: open}
+  - {id: climate.living, area: living, label: thermostat, state: heat, attrs: {temperature: 20, current_temperature: 19.5}}
+  - {id: binary_sensor.living_presence, area: living, label: presence, class: presence, state: "off"}
+  - {id: binary_sensor.hall_motion, area: hall, label: motion, class: motion, state: "off"}
+  - {id: binary_sensor.front_door, area: hall, label: door, class: door, state: "off"}
+  - {id: binary_sensor.living_smoke, area: living, label: smoke, class: smoke, state: "off"}
+  - {id: binary_sensor.bathroom_leak, area: bathroom, label: leak, class: moisture, state: "off"}
+  - {id: fan.bathroom, area: bathroom, label: fan, state: "off"}
+  - {id: sensor.bathroom_humidity, area: bathroom, label: humidity, class: humidity, state: "55", unit: "%"}
+  - {id: lock.front_door, area: hall, label: lock, state: locked}
+  - {id: sensor.living_temperature, area: living, label: temperature, class: temperature, state: "19.5", unit: "°C"}
+persons:
+  - {id: person.resident_1, state: home}

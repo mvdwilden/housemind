@@ -1,0 +1,10 @@
+configuration:
+  demo_mode:
+    name: Demo mode
+    description: Try HouseMind with an invented house. Your real house and its memory are never touched.
+  demo_home:
+    name: Demo house
+    description: "Which invented house to show: simple (twelve devices), average (almost forty) or extended (every kind of device HouseMind knows)."
+  log_level:
+    name: Log level
+    description: How much detail goes into the log.

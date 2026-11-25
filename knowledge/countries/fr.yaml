@@ -1,0 +1,13 @@
+# Energy rules for France (E-69). Amounts are defaults with a source and a date; an
+# administrator can override them.
+schema: 1
+country: FR
+currency: EUR
+energy:
+  vat: 0.20
+  energy_tax_per_kwh: {value: 0.03085, valid_from: "2026-02-01", source: "Accise sur l'électricité, ménages, 2026"}
+  net_metering: null
+  export_paid_at_negative_price: false
+  quarter_hour_prices: true
+  capacity_tariff: null
+  controllable_load: null

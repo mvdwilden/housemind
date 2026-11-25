@@ -1,0 +1,10 @@
+configuration:
+  demo_mode:
+    name: Mode démo
+    description: Essaie HouseMind avec une maison inventée. Ta vraie maison et sa mémoire ne sont jamais touchées.
+  demo_home:
+    name: Maison de démo
+    description: "Quelle maison inventée tu veux voir : simple – simple (douze appareils), average – moyenne (près de quarante) ou extended – complète (chaque sorte d'appareil que HouseMind connaît)."
+  log_level:
+    name: Niveau de journal
+    description: Le niveau de détail dans le journal.

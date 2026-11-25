@@ -1,0 +1,19 @@
+# Ways to support HouseMind (E-138, E-233): one list, chosen by the maker when publishing.
+# A way without a link is left out. Until the first release every link is empty, and the
+# block in the README and the changelog stays empty too. Run tools/build_support.py after a
+# change. Everything stays free for everyone (E-140); the app itself stays calm (E-139).
+schema: 1
+owner: ""  # the GitHub owner of the repository: for the star and sponsor counts
+ways:
+  - {name: GitHub Sponsors, link: ""}
+  - {name: Buy Me a Coffee, link: ""}
+  - {name: Ko-fi, link: ""}
+  - {name: PayPal, link: ""}
+  - {name: Revolut, link: ""}
+  - {name: Wise, link: ""}
+  - {name: Wero, link: ""}
+text:
+  title: "Support HouseMind"
+  thanks: "Thank you to everyone who already supports HouseMind."
+  why: "HouseMind is free for everyone, without paid features. Support pays for the time to build it and to test it in real houses, and keeps it independent."
+  star: "Do you like it? A star on GitHub helps others find it."

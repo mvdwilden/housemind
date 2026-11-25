@@ -1,0 +1,172 @@
+# Einfache Namen für Geräte (E-248, B-93): wie Vesta ein Gerät nennt, wie ein Mensch.
+# Keine Namen aus einem Haus: nur gewöhnliche Wörter. Eine neue Sprache ist eine neue Datei.
+grammar: de
+and: "und"
+one_of: ""  # "eine der Lampen" hängt vom Geschlecht ab: dann einfach der Name
+of: "von"  # a person in a room's name, only when two rooms would sound the same
+numbers: [eins, ein, eine, zwei, drei, vier, fünf, sechs, sieben, acht, neun, zehn, erste, zweite, dritte]
+fillers: [von, der, die, das, den, dem, ein, eine, mit, und, für, bei, auf, im, in, am, an, gruppe, neu, alt, haupt]
+# Wort: [Geschlecht, Mehrzahl] – m, f oder n. Auch Zusammensetzungen: "Schreibtischlampe" → Lampe.
+nouns:
+  Lampe: [f, Lampen]
+  Leuchte: [f, Leuchten]
+  Licht: [n, Lichter]
+  Beleuchtung: [f, Beleuchtungen]
+  Spot: [m, Spots]
+  Strahler: [m, Strahler]
+  Lichtleiste: [f, Lichtleisten]
+  Fenster: [n, Fenster]
+  Tür: [f, Türen]
+  Tor: [n, Tore]
+  Vorhang: [m, Vorhänge]
+  Gardine: [f, Gardinen]
+  Rollladen: [m, Rollläden]
+  Rolladen: [m, Rolläden]
+  Rollo: [n, Rollos]
+  Jalousie: [f, Jalousien]
+  Markise: [f, Markisen]
+  Thermostat: [n, Thermostate]
+  Heizkörper: [m, Heizkörper]
+  Heizung: [f, Heizungen]
+  Klimaanlage: [f, Klimaanlagen]
+  Ventilator: [m, Ventilatoren]
+  Lüfter: [m, Lüfter]
+  Dunstabzug: [m, Dunstabzüge]
+  Kamera: [f, Kameras]
+  Klingel: [f, Klingeln]
+  Schloss: [n, Schlösser]
+  Alarm: [m, Alarme]
+  Alarmanlage: [f, Alarmanlagen]
+  Sirene: [f, Sirenen]
+  Rauchmelder: [m, Rauchmelder]
+  Melder: [m, Melder]
+  Sensor: [m, Sensoren]
+  Steckdose: [f, Steckdosen]
+  Schalter: [m, Schalter]
+  Stecker: [m, Stecker]
+  Waschmaschine: [f, Waschmaschinen]
+  Maschine: [f, Maschinen]
+  Trockner: [m, Trockner]
+  Spülmaschine: [f, Spülmaschinen]
+  Geschirrspüler: [m, Geschirrspüler]
+  Kühlschrank: [m, Kühlschränke]
+  Gefrierschrank: [m, Gefrierschränke]
+  Backofen: [m, Backöfen]
+  Ofen: [m, Öfen]
+  Herd: [m, Herde]
+  Kochfeld: [n, Kochfelder]
+  Mikrowelle: [f, Mikrowellen]
+  Boiler: [m, Boiler]
+  Wärmepumpe: [f, Wärmepumpen]
+  Fernseher: [m, Fernseher]
+  Lautsprecher: [m, Lautsprecher]
+  Verstärker: [m, Verstärker]
+  Staubsauger: [m, Staubsauger]
+  Saugroboter: [m, Saugroboter]
+  Roboter: [m, Roboter]
+  Rasenmäher: [m, Rasenmäher]
+  Mähroboter: [m, Mähroboter]
+  Ventil: [n, Ventile]
+  Wasserhahn: [m, Wasserhähne]
+  Hahn: [m, Hähne]
+  Wallbox: [f, Wallboxen]
+  Ladestation: [f, Ladestationen]
+  Batterie: [f, Batterien]
+  Pumpe: [f, Pumpen]
+  Luftbefeuchter: [m, Luftbefeuchter]
+  Luftentfeuchter: [m, Luftentfeuchter]
+  Thermometer: [n, Thermometer]
+  Router: [m, Router]
+  Drucker: [m, Drucker]
+  Computer: [m, Computer]
+  Wasserkocher: [m, Wasserkocher]
+defaults:
+  light: Lampe
+  switch: Schalter
+  switch.outlet: Steckdose
+  cover: Rollladen
+  cover.curtain: Vorhang
+  cover.shutter: Rollladen
+  cover.blind: Jalousie
+  cover.garage: Garagentor
+  cover.gate: Tor
+  cover.door: Tür
+  cover.window: Fenster
+  binary_sensor: Sensor
+  binary_sensor.door: Tür
+  binary_sensor.window: Fenster
+  binary_sensor.garage_door: Garagentor
+  binary_sensor.opening: Tür
+  binary_sensor.smoke: Rauchmelder
+  binary_sensor.carbon_monoxide: Melder
+  binary_sensor.gas: Melder
+  sensor: Sensor
+  sensor.temperature: Thermometer
+  climate: Thermostat
+  fan: Ventilator
+  camera: Kamera
+  lock: Schloss
+  alarm_control_panel: Alarmanlage
+  siren: Sirene
+  media_player: Lautsprecher
+  media_player.tv: Fernseher
+  media_player.receiver: Verstärker
+  vacuum: Saugroboter
+  lawn_mower: Mähroboter
+  valve: Ventil
+  water_heater: Boiler
+  humidifier: Luftbefeuchter
+  Schirm: [m, Schirme]
+  Zähler: [m, Zähler]
+  binary_sensor.motion: Bewegungsmelder
+  binary_sensor.occupancy: Präsenzmelder
+  binary_sensor.presence: Präsenzmelder
+  binary_sensor.moisture: Wassermelder
+  sensor.humidity: Feuchtesensor
+  sensor.illuminance: Lichtsensor
+# Wort: [Geschlecht, Präposition] – der Ort steht im Dativ ("in der Küche", "im Flur").
+places:
+  Küche: [f, in]
+  Zimmer: [n, in]
+  Raum: [m, in]
+  Flur: [m, in]
+  Diele: [f, in]
+  Gang: [m, in]
+  Keller: [m, in]
+  Dachboden: [m, auf]
+  Garage: [f, in]
+  Garten: [m, in]
+  Terrasse: [f, auf]
+  Balkon: [m, auf]
+  Dach: [n, auf]
+  Einfahrt: [f, in]
+  Carport: [m, unter]
+  Schuppen: [m, in]
+  Büro: [n, in]
+  Toilette: [f, in]
+  WC: [n, in]
+  Bad: [n, in]
+  Haus: [n, in]
+  Eingang: [m, in]
+  Treppe: [f, auf]
+  Hof: [m, in]
+  Werkstatt: [f, in]
+  Bett: [n, an]
+  Decke: [f, an]
+  Wand: [f, an]
+  Haustür: [f, an]
+  Straße: [f, an]
+  Sofa: [n, an]
+  Tisch: [m, über]
+  Schreibtisch: [m, an]
+  Spiegel: [m, an]
+alone: [draußen, drinnen, oben, unten]
+sides: [links, rechts, mitte, vorne, hinten, oben, unten, groß, klein]
+# How a state is said (E-243). French agrees: masculine, feminine, and both plurals.
+states:
+  "on": ["an"]
+  "off": ["aus"]
+  open: ["offen"]
+  closed: ["zu"]
+  locked: ["abgeschlossen"]
+  unlocked: ["nicht abgeschlossen"]

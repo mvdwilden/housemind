@@ -1,0 +1,237 @@
+# Start knowledge for the core skills (E-160, H3.2). Values are what HouseMind proposes before
+# it has learned anything; learned behaviour replaces them (H3.3). Parts of the day:
+# night 23–06, morning 06–09, day 09–17, evening 17–23 (local time).
+# learn_from: answers – people rarely do this by hand (saving heat), so doing nothing is no
+# "no": the skill learns from answers to its proposals (and from people choosing otherwise).
+# from_automations – which existing Home Assistant automations teach this skill (E-41, E-160):
+# what it does (turn_on, turn_off, open, close, heat), when it starts (presence_on/off,
+# opening_on/off, sun_down/up, people_arrive/leave, time_morning/day/evening/night) and which
+# of its values HouseMind takes over as start knowledge.
+# Which rooms get a rule as soon as they have the device (E-485, design 72): the skills a
+# device's kind names in the catalogue, where the room fits ``in``/``only_in``/``never_in``, and
+# where the room has what the rule needs. needs – what the room must measure as well: humidity,
+# carbon_dioxide or opening (a window or door sensor). modes – for a thermostat, the modes it
+# must offer (hvac_modes) for the rule to be about it.
+schema: 1
+skills:
+  light_on_entry:
+    domain: lighting
+    never_at_night_in: [bedroom, child_bedroom, guest_room]
+    never_in: [outside]
+    # A garage: only where an automation already puts the light on (E-460).
+    only_with_automation: [garage]
+    # Felt percentages on the standen (E-494, design 73): 15 Gedimd, 35 Normaal, 60 Helder,
+    # 100 Maximaal – each lamp turns them into its own.
+    brightness_pct: {night: 15, morning: 60, day: 60, evening: 35}
+    color_temp_kelvin: {night: 2200, morning: 3500, day: 4000, evening: 2700}
+    from_automations:
+      does: [turn_on]
+      when: [presence_on]
+      values: [brightness_pct, color_temp_kelvin]
+  light_off_leave:
+    domain: lighting
+    # Outside nobody can be sensed, and garden lights are on in the evening on purpose (found
+    # in a real house: a proposal for every garden lamp, every quarter of an hour).
+    never_in: [outside]
+    # Whether someone is still there takes a sensor that can see it. A door or a switch only says
+    # someone was: without such a sensor the lamp would go out on someone sitting there (E-462).
+    needs_sensor: true
+    # Minutes a room is empty before its lamps go off – start knowledge only: what people and
+    # automations do in the room soon decides (E-444). Rooms you are in briefly (toilet,
+    # bathroom, storage, cellar, closet) go off soon; in a hall people walk back and forth.
+    hold_minutes: {hall: 5, toilet: 1, bathroom: 2, kitchen: 10, dining: 15, living: 20,
+                   office: 15, bedroom: 10, child_bedroom: 10, guest_room: 10, utility: 1,
+                   garage: 5, outside: 5, other: 10,
+                   part: 3}  # a part of a room with its own lamps (a zone, E-215)
+    dim_warning_seconds: 60
+    dim_to_pct: 15  # Gedimd, felt (E-494)
+    from_automations: {does: [turn_off], when: [presence_off]}
+  # Outside, a person a camera sees (E-183, 16.2): the lamps there go on in the dark and off
+  # again a few minutes after the last one – never for an animal, a car or a sound.
+  light_on_person_outside:
+    domain: lighting
+    only_in: [outside]
+  # Outside in the evening (E-446): the lamps outside go on when it gets dark – also when
+  # nobody is home, so the house looks lived in and keeps burglars at a distance – and off when
+  # the house goes to sleep, at the latest at off_at. With nobody home: at the usual bedtime,
+  # each evening up to vary_minutes earlier or later. An automation that does this teaches
+  # its light and the time it puts them out (off_minutes: minutes after noon).
+  light_outside_evening:
+    domain: lighting
+    only_in: [outside]
+    brightness_pct: 80
+    color_temp_kelvin: 2700
+    off_at: "23:30"
+    vary_minutes: 15
+    # People and automations do this around dusk, a little before or after HouseMind's
+    # "dark": within this many minutes it is the same evening light.
+    window_minutes: 45
+    from_automations:
+      does: [turn_on, turn_off]
+      when: [sun_down, time_evening, time_night]
+      values: [brightness_pct, color_temp_kelvin]
+  # Coming home in the dark (E-447): the lamps at the entrance go on – an outside place whose
+  # name says so (daily_words.entrance), or where an automation does this – and off again
+  # on_minutes after, later while someone is still outside there, at the latest after
+  # max_minutes. Only lamps it put on itself; when everyone leaves, those go off at once. The
+  # switch is inside, so people rarely do this by hand: nobody doing it is no "no".
+  light_outside_arrival:
+    domain: lighting
+    only_in: [outside]
+    learn_from: answers
+    brightness_pct: 100
+    color_temp_kelvin: 2700
+    on_minutes: 5
+    max_minutes: 30
+    # Coming home counts this long: later than that the lamps stay as they are.
+    arrive_seconds: 120
+    from_automations:
+      does: [turn_on, turn_off]
+      when: [people_arrive, people_leave]
+      values: [brightness_pct, color_temp_kelvin]
+  night_light:
+    domain: lighting
+    only_in: [hall, toilet, bathroom]
+    # Under the same lamps: goes along when an automation that puts them on is taken over (E-460).
+    goes_with: light_on_entry
+    brightness_pct: 15  # Gedimd, felt (E-494)
+    color_temp_kelvin: 2200
+  covers_close_dark:
+    domain: covers
+    # A room HouseMind does not know (other) gets what fits anywhere (E-486).
+    in: [living, dining, kitchen, bedroom, child_bedroom, guest_room, office, other]
+    from_automations: {does: [close], when: [sun_down, time_evening]}
+  covers_open_morning:
+    domain: covers
+    in: [living, dining, kitchen, other]
+    not_before: {workday: "07:00", free: "08:30", holiday: "08:30", deviant: "07:30"}
+    from_automations: {does: [open], when: [sun_up, time_morning]}
+  # A bedroom opens when the people there are up (E-482 – E-484, design 71): the night is over,
+  # nobody sleeps in the room any more – its bed sign or its presence a few minutes empty – and
+  # it is light. A room nobody slept in opens with the rest of the house (covers_open_morning).
+  covers_open_wake:
+    domain: covers
+    in: [bedroom, child_bedroom, guest_room]
+    wait_minutes: 5
+    latest: "12:00"
+    from_automations: {does: [open], when: [sun_up, time_morning, presence_off]}
+  heat_on_presence:
+    domain: climate
+    learn_from: answers
+    modes: [heat, heat_cool]
+    comfort_c: {living: 20.5, kitchen: 20.0, dining: 20.5, office: 20.0, bathroom: 21.0,
+                bedroom: 17.5, child_bedroom: 18.5, guest_room: 16.0, other: 19.0}
+    from_automations: {does: [heat], when: [people_arrive], values: [temperature]}
+  # Cooling (E-315): an airco or heat pump set to cool reaches what the residents want; learned
+  # apart from heating.
+  cool_on_presence:
+    domain: climate
+    learn_from: answers
+    modes: [cool, heat_cool]
+    cool_c: {bedroom: 22.0, child_bedroom: 22.0, other: 24.0}
+  # A heat pump that heats and cools with one setpoint (E-318): the wish a person set, reached
+  # in the room itself; a day away uses its own "away".
+  keep_temperature:
+    domain: climate
+    learn_from: answers
+    modes: [heat_cool]
+  # Lower only after a day away – a vacation, a business trip – or at once on vacation (E-315);
+  # cooling then goes less cold.
+  setback_away:
+    domain: climate
+    learn_from: answers
+    modes: [heat, cool, heat_cool]
+    after_hours: 24
+    setback_c: 3.0
+    minimum_c: 15.0
+    maximum_c: 28.0
+    from_automations: {does: [heat], when: [people_leave]}
+  setback_sleep:
+    domain: climate
+    learn_from: answers
+    sleep_c: {bedroom: 16.5, child_bedroom: 18.0, other: 17.0}
+    from_automations: {does: [heat], when: [time_night]}
+  window_open_setback:
+    domain: climate
+    learn_from: answers
+    modes: [heat, heat_cool]
+    needs: [opening]
+    after_minutes: 3
+    setback_to_c: 12.0
+    from_automations: {does: [heat], when: [opening_on]}
+  ventilate_humidity:
+    domain: air
+    learn_from: answers
+    needs: [humidity]
+    on_pct: 70
+    off_pct: 60
+  ventilate_co2:
+    domain: air
+    learn_from: answers
+    needs: [carbon_dioxide]
+    on_ppm: 1000
+    off_ppm: 800
+  # Sleeping and waking up (E-88). Waking happens before the phone's alarm or, without one,
+  # before the usual wake-up time for this type of day – only when that rhythm is clear. In the
+  # step Propose, HouseMind asks the evening before ("Shall I wake you at 6:40?").
+  wake_light:
+    domain: lighting
+    learn_from: answers
+    in: [bedroom]
+    ramp_minutes: 20
+    hold_minutes: 15
+    steps_pct: [3, 15, 35, 60]  # felt: softer than Gedimd, Gedimd, Normaal, Helder (E-494)
+    kelvin_steps: [2200, 2500, 2900, 3300]
+  wake_warmth:
+    domain: climate
+    learn_from: answers
+    in: [bedroom, bathroom]
+    lead_minutes: 30
+    hold_minutes: 30
+  bedtime_dim:
+    domain: lighting
+    learn_from: answers
+    in: [living, dining, kitchen]
+    minutes_before: 30
+    dim_to_pct: 15  # Gedimd, felt (E-494); its colour is the stand's
+    color_temp_kelvin: 2200
+  # Welterusten (E-517): when the house goes to sleep, what is still on or open goes off and
+  # shut – once a night, in the first window_minutes of sleep. The lamps of a room where nobody
+  # is, also one without a sensor that sees people (the house sleeps), not in a bedroom and not
+  # outside (the evening light, E-446); the window coverings that are still open.
+  light_off_sleep:
+    domain: lighting
+    not_in: [bedroom, child_bedroom, guest_room, outside]
+    window_minutes: 30
+  covers_close_sleep:
+    domain: covers
+    not_in: [outside]
+    window_minutes: 30
+  # Water (domain 11): water that keeps running while nobody uses it. Closing the main water
+  # valve is the only direction HouseMind may take (safe direction, E-58).
+  water_leak_flow:
+    domain: water
+    learn_from: answers
+    sleep_hours: 2
+    away_minutes: 30
+    home_hours: 6
+  # Around the house. Experimental domains stay on Observe until an administrator turns them on
+  # (E-60); then they learn in steps like every skill.
+  media_off_empty:
+    domain: media
+    experimental: true
+    learn_from: answers
+    after_minutes: 30
+  vacuum_when_away:
+    domain: cleaning
+    experimental: true
+    learn_from: answers
+    hours: [9, 18]
+  mower_when_dry:
+    domain: garden
+    experimental: true
+    learn_from: answers
+    hours: [10, 18]
+  fridge_door:
+    domain: household
+    after_minutes: 3

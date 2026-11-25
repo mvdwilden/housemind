@@ -1,0 +1,81 @@
+# A house with solar panels, home battery, heat pump and an electric car (B-41).
+key: energy_home
+name: energy_home
+country: NL
+residents: 2
+pets: false
+floors: [{id: ground, level: 0}, {id: first, level: 1}]
+areas:
+  - {id: living, floor: ground}
+  - {id: kitchen, floor: ground}
+  - {id: hall, floor: ground}
+  - {id: utility, floor: ground}
+  - {id: garage, floor: ground}
+  - {id: bedroom, floor: first}
+  - {id: bathroom, floor: first}
+entities:
+  - {id: light.living_ceiling, area: living, label: ceiling_light, state: "off", modes: [color_temp]}
+  - {id: light.kitchen, area: kitchen, label: light, state: "off", modes: [brightness]}
+  - {id: light.hall, area: hall, label: light, state: "off", modes: [onoff]}
+  - {id: light.bedroom, area: bedroom, label: light, state: "off", modes: [brightness]}
+  - {id: light.bathroom, area: bathroom, label: light, state: "off", modes: [brightness]}
+  - {id: cover.living_curtain, area: living, label: curtain, class: blind, state: open}
+  - {id: climate.heat_pump, area: utility, label: heat_pump, state: heat, attrs: {temperature: 20, current_temperature: 19.8}}
+  - {id: water_heater.boiler, area: utility, label: water_heater, state: eco, attrs: {temperature: 50, current_temperature: 49, min_temp: 40, max_temp: 65, operation_list: [eco, performance]}}
+  - {id: binary_sensor.living_presence, area: living, label: presence, class: presence, state: "off"}
+  - {id: binary_sensor.kitchen_presence, area: kitchen, label: presence, class: presence, state: "off"}
+  - {id: binary_sensor.hall_motion, area: hall, label: motion, class: motion, state: "off"}
+  - {id: binary_sensor.living_smoke, area: living, label: smoke, class: smoke, state: "off"}
+  - {id: binary_sensor.utility_leak, area: utility, label: leak, class: moisture, state: "off"}
+  - {id: valve.water_main, area: utility, label: water_valve, class: water, state: open}
+  - {id: fan.bathroom, area: bathroom, label: fan, state: "off"}
+  - {id: sensor.bathroom_humidity, area: bathroom, label: humidity, class: humidity, state: "55", unit: "%"}
+  - {id: lock.front_door, area: hall, label: lock, state: locked}
+  # Energy (R2): grouped in devices like Home Assistant does, so HouseMind finds the live power
+  # and what it can steer next to the meters from the energy settings (E-65).
+  - {id: sensor.grid_power, device: grid_meter, area: utility, label: power, class: power, state: "350", unit: W}
+  - {id: sensor.grid_import, device: grid_meter, area: utility, label: grid_import, class: energy, state: "0", unit: kWh}
+  - {id: sensor.grid_export, device: grid_meter, area: utility, label: grid_export, class: energy, state: "0", unit: kWh}
+  - {id: sensor.grid_current_l1, device: grid_meter, area: utility, label: current_l1, class: current, state: "1", unit: A}
+  - {id: sensor.grid_current_l2, device: grid_meter, area: utility, label: current_l2, class: current, state: "1", unit: A}
+  - {id: sensor.grid_current_l3, device: grid_meter, area: utility, label: current_l3, class: current, state: "1", unit: A}
+  - {id: sensor.solar_power, device: inverter, area: utility, label: solar, class: power, state: "0", unit: W}
+  - {id: sensor.solar_energy, device: inverter, area: utility, label: solar_energy, class: energy, state: "0", unit: kWh}
+  - {id: number.solar_export_limit, device: inverter, area: utility, label: export_limit, state: "100", unit: "%", attrs: {min: 0, max: 100}}
+  - {id: sensor.home_battery, device: home_battery, area: utility, label: battery, class: battery, state: "64", unit: "%"}
+  - {id: sensor.home_battery_power, device: home_battery, area: utility, label: battery_power, class: power, state: "0", unit: W}
+  - {id: sensor.home_battery_in, device: home_battery, area: utility, label: battery_in, class: energy, state: "0", unit: kWh}
+  - {id: sensor.home_battery_out, device: home_battery, area: utility, label: battery_out, class: energy, state: "0", unit: kWh}
+  - {id: select.home_battery_mode, device: home_battery, area: utility, label: battery_mode, state: self_consumption, attrs: {options: [self_consumption, charge, discharge, idle]}}
+  - {id: switch.charge_point, device: charger, area: garage, label: charger, state: "on"}
+  - {id: number.charge_current, device: charger, area: garage, label: charge_current, state: "16", unit: A, attrs: {min: 6, max: 16}}
+  - {id: sensor.charge_point_power, device: charger, area: garage, label: charger_power, class: power, state: "0", unit: W}
+  - {id: binary_sensor.charge_point_plug, device: charger, area: garage, label: car_plugged, class: plug, state: "on"}
+  - {id: sensor.car_battery, device: car, area: garage, label: car_battery, class: battery, state: "55", unit: "%"}
+  - {id: binary_sensor.washer_remote_start, device: washer_device, area: utility, label: remote_start, state: "off"}
+  - {id: button.washer_start, device: washer_device, area: utility, label: start, state: unknown}
+  - {id: sensor.washer_power, device: washer_device, area: utility, label: washer_power, class: power, state: "0", unit: W}
+  - {id: sensor.electricity_price, area: utility, label: price, class: monetary, state: "0.12", unit: EUR/kWh}
+  - {id: weather.home, area: utility, label: weather, state: cloudy, attrs: {temperature: 11}}
+persons:
+  - {id: person.resident_1, state: home}
+  - {id: person.resident_2, state: not_home}
+# An automation someone made in Home Assistant earlier. HouseMind learns from it, keeps off the
+# hall light while it is on, and asks before it switches it off (E-41, E-42).
+automations:
+  - id: automation.hall_light
+    label: hall_light_motion
+    config:
+      id: "demo-1"
+      triggers: [{trigger: state, entity_id: binary_sensor.hall_motion, to: "on"}]
+      actions: [{action: light.turn_on, target: {entity_id: light.hall}}]
+# Home Assistant's energy settings for this house (E-65).
+energy:
+  energy_sources:
+    - type: grid
+      flow_from: [{stat_energy_from: sensor.grid_import, entity_energy_price: sensor.electricity_price}]
+      flow_to: [{stat_energy_to: sensor.grid_export}]
+    - {type: solar, stat_energy_from: sensor.solar_energy, config_entry_solar_forecast: [demo-forecast]}
+    - {type: battery, stat_energy_from: sensor.home_battery_out, stat_energy_to: sensor.home_battery_in}
+  device_consumption:
+    - {stat_consumption: sensor.washer_power}

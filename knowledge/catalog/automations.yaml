@@ -1,0 +1,34 @@
+# Existing Home Assistant automations (E-03, E-41, E-42, E-112).
+# HouseMind never makes, changes or deletes an automation; it reads them to learn. It may only
+# switch one off after a person's yes, and switch it back on. Maximum step "propose": HouseMind
+# can never do either by itself. The code adds the same limit (hard limits and the gate).
+schema: 1
+kinds:
+  - key: automation.existing
+    match: {domain: automation}
+    safety_class: propose_only
+    initiative: person
+    max_step: propose
+    actions:
+      - action: automation.turn_off
+        max_step: propose
+      - action: automation.turn_on
+        max_step: propose
+    people_win: fixed_hours
+    people_win_max_hours: 0
+
+  # The switch of a group of the integration that lets light follow the day (E-468). Like an
+  # automation: never by itself; HouseMind switches it off when it does the work itself on
+  # Autonomous, and back on when it no longer does.
+  - key: switch.day_rhythm
+    match: {domain: switch, platforms: [adaptive_lighting]}
+    safety_class: propose_only
+    initiative: person
+    max_step: propose
+    actions:
+      - action: switch.turn_off
+        max_step: propose
+      - action: switch.turn_on
+        max_step: propose
+    people_win: fixed_hours
+    people_win_max_hours: 0

@@ -1,0 +1,26 @@
+# Een kleurenschema van HouseMind (E-266, E-267); uitleg staat in diep.yaml.
+id: licht
+volgorde: 2
+naam: { nl: Licht, en: Light, de: Hell, fr: Clair }
+uitleg:
+  nl: "Licht en helder, voor overdag."
+  en: "Light and clear, for daytime."
+  de: "Hell und klar, für den Tag."
+  fr: "Clair et lumineux, pour la journée."
+basis: licht
+niveau: AA
+kleuren:
+  inkt: "#F2F4F9"
+  vlak: "#FFFFFF"
+  verhoogd: "#EEF1F7"
+  lijn: "#D6DCEA"
+  rand: "#76829C"
+  tekst: "#121829"
+  gedempt: "#4E5A77"
+  accent: "#0B7A70"
+  op-accent: "#FFFFFF"
+  nood: "#C4213A"
+  belangrijk: "#B04A0E"
+  leren: "#8A5A10"
+vesta:
+  gloed: 0.8           # op een lichte ondergrond iets zachter

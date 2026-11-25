@@ -1,0 +1,10 @@
+title: "Idea: "
+labels: [idea]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: The situation in your house
+      description: What happens now, and what would be better?
+    validations:
+      required: true

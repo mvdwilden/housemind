@@ -1,0 +1,10 @@
+configuration:
+  demo_mode:
+    name: Demomodus
+    description: Probiere HouseMind mit einem erfundenen Haus aus. Dein echtes Haus und sein Gedächtnis werden nie berührt.
+  demo_home:
+    name: Demohaus
+    description: "Welches erfundene Haus du sehen willst: simple – einfach (zwölf Geräte), average – mittel (fast vierzig) oder extended – umfangreich (jede Art von Gerät, die HouseMind kennt)."
+  log_level:
+    name: Protokollstufe
+    description: Wie viel Detail ins Protokoll kommt.

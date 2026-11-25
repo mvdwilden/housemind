@@ -1,0 +1,30 @@
+# Een kleurenschema van HouseMind (E-266, E-267). Eigen schema's maak je net zo, in
+# /config/housemind/themes/ (een kopie van dit bestand met een andere id is een goed begin).
+# De App toetst elk schema op leesbaarheid voordat het in de lijst komt: tekst minstens 4,5:1
+# (bij niveau AAA 7:1) en de rand van velden en knoppen minstens 3:1. De kleuren van Vesta
+# veranderen nooit; een schema zegt alleen hoe sterk haar gloed is.
+id: diep
+volgorde: 1
+naam: { nl: Diep, en: Deep, de: Tief, fr: Profond }
+uitleg:
+  nl: "Donker en rustig, de standaard."
+  en: "Dark and calm, the default."
+  de: "Dunkel und ruhig, der Standard."
+  fr: "Sombre et calme, par défaut."
+basis: donker          # donker of licht
+niveau: AA             # AA, of AAA (strenger)
+kleuren:
+  inkt: "#0A0E19"      # achtergrond
+  vlak: "#10162A"      # kaarten en velden
+  verhoogd: "#172038"  # knop op een kaart, iets gekozen
+  lijn: "#24304F"      # dunne scheidingslijn (alleen versiering)
+  rand: "#63708F"      # rand van velden en knoppen, minstens 3:1
+  tekst: "#E7EBF6"
+  gedempt: "#9AA6C4"   # bijzinnen en labels
+  accent: "#5ED4C4"    # links, de primaire knop, de focusring
+  op-accent: "#06201D" # tekst op een primaire knop
+  nood: "#FF5468"
+  belangrijk: "#FF9150"
+  leren: "#F3B65B"
+vesta:
+  gloed: 1             # 1 is normaal

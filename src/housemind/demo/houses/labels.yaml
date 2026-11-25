@@ -1,0 +1,659 @@
+# Words used to name demo areas and devices, in the four start languages (E-34, E-48).
+# Demo houses are invented: no real people, brands or addresses.
+en:
+  driveway: "Driveway"
+  doorbell_camera: "doorbell camera"
+  driveway_camera: "driveway camera"
+  garden_camera: "garden camera"
+  hall_camera: "hall camera"
+  camera_plain: "camera"
+  package_detected: "package detected"
+  person_detected: "person detected"
+  vehicle_detected: "vehicle detected"
+  smart_detection: "smart detection"
+  camera_motion: "camera motion"
+  glass_break: "glass break detected"
+  water_meter: "water meter"
+  phone_1: "phone of resident 1"
+  next_alarm: "next alarm"
+  living: Living room
+  kitchen: Kitchen
+  hall: Hall
+  bedroom: Bedroom
+  bedroom_child: Children's room
+  guest_room: Guest room
+  bathroom: Bathroom
+  toilet: Toilet
+  utility: Utility room
+  garage: Garage
+  garden: Garden
+  ground: Ground floor
+  first: First floor
+  ceiling_light: ceiling light
+  reading_lamp: reading lamp
+  light: light
+  night_light: night light
+  curtain: curtains
+  awning: awning
+  thermostat: thermostat
+  radiator: radiator valve
+  presence: presence
+  motion: motion
+  hall_light_motion: "Hall light at motion"
+  door: door
+  window: window
+  smoke: smoke detector
+  leak: leak sensor
+  fan: ventilation
+  lock: front door lock
+  garage_door: garage door
+  alarm: alarm system
+  water_valve: main water valve
+  tv: TV
+  vacuum: robot vacuum
+  washer: washing machine
+  temperature: temperature
+  humidity: humidity
+  power: grid power
+  solar: solar power
+  battery: home battery
+  battery_mode: battery mode
+  charger: charge point
+  charge_current: charge current
+  water_heater: hot water
+  price: electricity market price
+  resident: Resident
+  grid_meter: "smart meter"
+  current_l1: "current phase 1"
+  current_l2: "current phase 2"
+  current_l3: "current phase 3"
+  grid_import: "energy taken from the grid"
+  grid_export: "energy given back to the grid"
+  inverter: "solar inverter"
+  solar_energy: "solar energy"
+  export_limit: "export limit"
+  home_battery: "home battery"
+  attic_battery: "attic home battery"
+  attic_battery_level: "attic home battery level"
+  battery_min_soc: "minimum SoC"
+  battery_grid_charge: "charge from grid"
+  battery_remote: "remote control"
+  battery_ems_control: "EMS control"
+  battery_power_setpoint: "power setpoint"
+  battery_max_discharge: "max discharge power"
+  battery_power: "home battery power"
+  battery_in: "home battery energy in"
+  battery_out: "home battery energy out"
+  charger_power: "charge point power"
+  car_plugged: "charge point cable connected"
+  car: "car"
+  car_battery: "car battery"
+  heat_pump: "heat pump"
+  washer_device: "washing machine"
+  remote_start: "washing machine remote start"
+  start: "washing machine start"
+  washer_power: "washing machine power"
+  weather: "weather"
+  apartment: Compact apartment
+  family_home: Family home
+  energy_home: Energy home
+  # The three demo houses of the App options (20-10-2026).
+  simple: "Simple home"
+  average: "Average home"
+  extended: "Extended home"
+  office: "Office"
+  dining: "Dining room"
+  attic: "Attic"
+  second: "Second floor"
+  back_door: "back door"
+  desk_lamp: "desk lamp"
+  day_rhythm_group: "Office light that follows the day"
+  mood_light: "mood light"
+  pendant_left: "pendant left"
+  pendant_right: "pendant right"
+  table_lights: "table lights"
+  room_lights: "lights"
+  bedside_lamp: "bedside lamp"
+  mirror_light: "mirror light"
+  downstairs_lights: "downstairs lights"
+  shutter: "roller shutter"
+  blinds: "blinds"
+  roof_window: "roof window"
+  damper: "ventilation damper"
+  gate: "gate"
+  air_quality: "air quality"
+  humidifier: "humidifier"
+  gas_valve: "main gas valve"
+  gas_meter: "gas meter"
+  gas_detector: "gas detector"
+  co_detector: "carbon monoxide detector"
+  frost: "frost sensor"
+  siren: "siren"
+  camera: "doorbell camera"
+  doorbell: "doorbell"
+  speaker: "speaker"
+  mower: "robot mower"
+  fridge_door: "fridge door"
+  oven_power: "oven power"
+  oven_device: "oven"
+  oven_plug: "oven plug"
+  light_level: "light level"
+  charge_phases: "charge point phases"
+  dishwasher_device: "dishwasher"
+  dishwasher_remote: "dishwasher remote start"
+  dishwasher_start: "dishwasher start"
+  dishwasher_power: "dishwasher power"
+  washer_plug: "washing machine plug"
+  # Home Assistant netjes in the extended house (E-351)
+  wind: "wind speed"
+  rain: "rain"
+  weather_station: "weather station"
+  soil_moisture: "soil moisture"
+  soil_temperature: "soil temperature"
+  garden_sensor: "garden sensor"
+  door_openings: "door openings"
+  freezer_plug: "old freezer plug"
+  dryer_plug: "old dryer plug"
+  old_meter: "old meter"
+  old_meter_reading: "old meter reading"
+  attic_night_light: "Attic light at night"
+  tablet_charging: "Charge the tablet"
+  old_alarm_clock: "Old alarm clock bedroom"
+  christmas_lights: "Christmas lights on"
+  backup_full: "Automatic backup"
+  backup_app: "Zigbee app"
+  backup_update: "Z-Wave app 1.4.0"
+  backup_manual: "Before moving"
+  plugs: "Smart plugs"
+nl:
+  driveway: "Oprit"
+  doorbell_camera: "deurbelcamera"
+  driveway_camera: "opritcamera"
+  garden_camera: "tuincamera"
+  hall_camera: "gangcamera"
+  camera_plain: "camera"
+  package_detected: "pakket gedetecteerd"
+  person_detected: "persoon gedetecteerd"
+  vehicle_detected: "voertuig gedetecteerd"
+  smart_detection: "slimme detectie"
+  camera_motion: "camerabeweging"
+  glass_break: "glasbreuk gehoord"
+  water_meter: "watermeter"
+  phone_1: "telefoon van bewoner 1"
+  next_alarm: "volgende wekker"
+  living: Woonkamer
+  kitchen: Keuken
+  hall: Gang
+  bedroom: Slaapkamer
+  bedroom_child: Kinderkamer
+  guest_room: Logeerkamer
+  bathroom: Badkamer
+  toilet: Toilet
+  utility: Bijkeuken
+  garage: Garage
+  garden: Tuin
+  ground: Begane grond
+  first: Eerste verdieping
+  ceiling_light: plafondlamp
+  reading_lamp: leeslamp
+  light: lamp
+  night_light: nachtlampje
+  curtain: gordijnen
+  awning: zonnescherm
+  thermostat: thermostaat
+  radiator: radiatorkraan
+  presence: aanwezigheid
+  motion: beweging
+  hall_light_motion: "Hallamp bij beweging"
+  door: deur
+  window: raam
+  smoke: rookmelder
+  leak: lekkagesensor
+  fan: ventilatie
+  lock: voordeurslot
+  garage_door: garagedeur
+  alarm: alarmsysteem
+  water_valve: hoofdkraan water
+  tv: tv
+  vacuum: robotstofzuiger
+  washer: wasmachine
+  temperature: temperatuur
+  humidity: luchtvochtigheid
+  power: netvermogen
+  solar: zonnestroom
+  battery: thuisbatterij
+  battery_mode: batterijstand
+  charger: laadpaal
+  charge_current: laadstroom
+  water_heater: warm water
+  price: marktprijs stroom
+  resident: Bewoner
+  grid_meter: "slimme meter"
+  current_l1: "stroom fase 1"
+  current_l2: "stroom fase 2"
+  current_l3: "stroom fase 3"
+  grid_import: "energie van het net"
+  grid_export: "energie terug naar het net"
+  inverter: "omvormer zonnepanelen"
+  solar_energy: "zonne-energie"
+  export_limit: "terugleverlimiet"
+  home_battery: "thuisbatterij"
+  attic_battery: "thuisbatterij zolder"
+  attic_battery_level: "lading thuisbatterij zolder"
+  battery_min_soc: "minimum-SoC"
+  battery_grid_charge: "laden van het net"
+  battery_remote: "sturing op afstand"
+  battery_ems_control: "EMS-sturing"
+  battery_power_setpoint: "vermogen-instelpunt"
+  battery_max_discharge: "max. ontlaadvermogen"
+  battery_power: "thuisbatterij vermogen"
+  battery_in: "thuisbatterij energie in"
+  battery_out: "thuisbatterij energie uit"
+  charger_power: "laadpaal vermogen"
+  car_plugged: "laadpaal kabel aangesloten"
+  car: "auto"
+  car_battery: "auto accu"
+  heat_pump: "warmtepomp"
+  washer_device: "wasmachine"
+  remote_start: "wasmachine start op afstand"
+  start: "wasmachine starten"
+  washer_power: "wasmachine vermogen"
+  weather: "weer"
+  apartment: Compact appartement
+  family_home: Gezinswoning
+  energy_home: Energiehuis
+  simple: "Eenvoudig huis"
+  average: "Gemiddeld huis"
+  extended: "Uitgebreid huis"
+  office: "Werkkamer"
+  dining: "Eetkamer"
+  attic: "Zolder"
+  second: "Tweede verdieping"
+  back_door: "achterdeur"
+  desk_lamp: "bureaulamp"
+  day_rhythm_group: "Kantoorlicht dat de dag volgt"
+  mood_light: "sfeerlamp"
+  pendant_left: "hanglamp links"
+  pendant_right: "hanglamp rechts"
+  table_lights: "tafellampen"
+  room_lights: "lampen"
+  bedside_lamp: "bedlampje"
+  mirror_light: "spiegellamp"
+  downstairs_lights: "lampen beneden"
+  shutter: "rolluik"
+  blinds: "jaloezieën"
+  roof_window: "dakraam"
+  damper: "ventilatieklep"
+  gate: "poort"
+  air_quality: "luchtkwaliteit"
+  humidifier: "luchtbevochtiger"
+  gas_valve: "hoofdkraan gas"
+  gas_meter: "gasmeter"
+  gas_detector: "gasmelder"
+  co_detector: "koolmonoxidemelder"
+  frost: "vorstsensor"
+  siren: "sirene"
+  camera: "deurbelcamera"
+  doorbell: "deurbel"
+  speaker: "speaker"
+  mower: "robotmaaier"
+  fridge_door: "koelkastdeur"
+  oven_power: "oven vermogen"
+  oven_device: "oven"
+  oven_plug: "oven stekker"
+  light_level: "lichtsterkte"
+  charge_phases: "laadpaal fasen"
+  dishwasher_device: "vaatwasser"
+  dishwasher_remote: "vaatwasser start op afstand"
+  dishwasher_start: "vaatwasser starten"
+  dishwasher_power: "vaatwasser vermogen"
+  washer_plug: "wasmachine stekker"
+  # Home Assistant netjes in the extended house (E-351)
+  wind: "windsnelheid"
+  rain: "regen"
+  weather_station: "weerstation"
+  soil_moisture: "bodemvocht"
+  soil_temperature: "bodemtemperatuur"
+  garden_sensor: "tuinsensor"
+  door_openings: "keer open"
+  freezer_plug: "stekker oude vriezer"
+  dryer_plug: "stekker oude droger"
+  old_meter: "oude meter"
+  old_meter_reading: "oude meterstand"
+  attic_night_light: "Zolderlamp ’s nachts"
+  tablet_charging: "Tablet laden"
+  old_alarm_clock: "Oude wekker slaapkamer"
+  christmas_lights: "Kerstverlichting aan"
+  backup_full: "Automatische back-up"
+  backup_app: "Zigbee-app"
+  backup_update: "Z-Wave-app 1.4.0"
+  backup_manual: "Voor de verhuizing"
+  plugs: "Slimme stekkers"
+de:
+  driveway: "Einfahrt"
+  doorbell_camera: "Türklingelkamera"
+  driveway_camera: "Einfahrtkamera"
+  garden_camera: "Gartenkamera"
+  hall_camera: "Flurkamera"
+  camera_plain: "Kamera"
+  package_detected: "Paket erkannt"
+  person_detected: "Person erkannt"
+  vehicle_detected: "Fahrzeug erkannt"
+  smart_detection: "intelligente Erkennung"
+  camera_motion: "Kamerabewegung"
+  glass_break: "Glasbruch erkannt"
+  water_meter: "Wasserzähler"
+  phone_1: "Telefon von Bewohner 1"
+  next_alarm: "nächster Wecker"
+  living: Wohnzimmer
+  kitchen: Küche
+  hall: Flur
+  bedroom: Schlafzimmer
+  bedroom_child: Kinderzimmer
+  guest_room: Gästezimmer
+  bathroom: Badezimmer
+  toilet: Toilette
+  utility: Hauswirtschaftsraum
+  garage: Garage
+  garden: Garten
+  ground: Erdgeschoss
+  first: Obergeschoss
+  ceiling_light: Deckenleuchte
+  reading_lamp: Leselampe
+  light: Lampe
+  night_light: Nachtlicht
+  curtain: Vorhänge
+  awning: Markise
+  thermostat: Thermostat
+  radiator: Heizkörperventil
+  presence: Anwesenheit
+  motion: Bewegung
+  hall_light_motion: "Flurlicht bei Bewegung"
+  door: Tür
+  window: Fenster
+  smoke: Rauchmelder
+  leak: Wassersensor
+  fan: Lüftung
+  lock: Haustürschloss
+  garage_door: Garagentor
+  alarm: Alarmanlage
+  water_valve: Hauptwasserhahn
+  tv: Fernseher
+  vacuum: Saugroboter
+  washer: Waschmaschine
+  temperature: Temperatur
+  humidity: Luftfeuchtigkeit
+  power: Netzleistung
+  solar: Solarstrom
+  battery: Hausbatterie
+  battery_mode: Batteriemodus
+  charger: Ladestation
+  charge_current: Ladestrom
+  water_heater: Warmwasser
+  price: Börsenstrompreis
+  resident: Bewohner
+  grid_meter: "Stromzähler"
+  current_l1: "Strom Phase 1"
+  current_l2: "Strom Phase 2"
+  current_l3: "Strom Phase 3"
+  grid_import: "Netzbezug"
+  grid_export: "Netzeinspeisung"
+  inverter: "Wechselrichter"
+  solar_energy: "Solarenergie"
+  export_limit: "Einspeiselimit"
+  home_battery: "Hausbatterie"
+  attic_battery: "Hausbatterie Dachboden"
+  attic_battery_level: "Ladestand Hausbatterie Dachboden"
+  battery_min_soc: "Mindest-SoC"
+  battery_grid_charge: "Laden aus dem Netz"
+  battery_remote: "Fernsteuerung"
+  battery_ems_control: "EMS-Steuerung"
+  battery_power_setpoint: "Leistungs-Sollwert"
+  battery_max_discharge: "max. Entladeleistung"
+  battery_power: "Hausbatterie Leistung"
+  battery_in: "Hausbatterie Ladung"
+  battery_out: "Hausbatterie Entladung"
+  charger_power: "Ladestation Leistung"
+  car_plugged: "Ladestation Kabel angeschlossen"
+  car: "Auto"
+  car_battery: "Auto Akku"
+  heat_pump: "Wärmepumpe"
+  washer_device: "Waschmaschine"
+  remote_start: "Waschmaschine Fernstart"
+  start: "Waschmaschine starten"
+  washer_power: "Waschmaschine Leistung"
+  weather: "Wetter"
+  apartment: Kompakte Wohnung
+  family_home: Familienhaus
+  energy_home: Energiehaus
+  simple: "Einfaches Haus"
+  average: "Durchschnittliches Haus"
+  extended: "Umfangreiches Haus"
+  office: "Arbeitszimmer"
+  dining: "Esszimmer"
+  attic: "Dachboden"
+  second: "Dachgeschoss"
+  back_door: "Hintertür"
+  desk_lamp: "Schreibtischlampe"
+  day_rhythm_group: "Bürolicht, das dem Tag folgt"
+  mood_light: "Stimmungslicht"
+  pendant_left: "Pendelleuchte links"
+  pendant_right: "Pendelleuchte rechts"
+  table_lights: "Tischleuchten"
+  room_lights: "Lampen"
+  bedside_lamp: "Nachttischlampe"
+  mirror_light: "Spiegelleuchte"
+  downstairs_lights: "Lampen unten"
+  shutter: "Rollladen"
+  blinds: "Jalousie"
+  roof_window: "Dachfenster"
+  damper: "Lüftungsklappe"
+  gate: "Tor"
+  air_quality: "Luftqualität"
+  humidifier: "Luftbefeuchter"
+  gas_valve: "Hauptgashahn"
+  gas_meter: "Gaszähler"
+  gas_detector: "Gasmelder"
+  co_detector: "Kohlenmonoxidmelder"
+  frost: "Frostsensor"
+  siren: "Sirene"
+  camera: "Türklingelkamera"
+  doorbell: "Türklingel"
+  speaker: "Lautsprecher"
+  mower: "Mähroboter"
+  fridge_door: "Kühlschranktür"
+  oven_power: "Backofen Leistung"
+  oven_device: "Backofen"
+  oven_plug: "Backofen Stecker"
+  light_level: "Helligkeit"
+  charge_phases: "Ladestation Phasen"
+  dishwasher_device: "Geschirrspüler"
+  dishwasher_remote: "Geschirrspüler Fernstart"
+  dishwasher_start: "Geschirrspüler starten"
+  dishwasher_power: "Geschirrspüler Leistung"
+  washer_plug: "Waschmaschine Steckdose"
+  # Home Assistant netjes in the extended house (E-351)
+  wind: "Windgeschwindigkeit"
+  rain: "Regen"
+  weather_station: "Wetterstation"
+  soil_moisture: "Bodenfeuchte"
+  soil_temperature: "Bodentemperatur"
+  garden_sensor: "Gartensensor"
+  door_openings: "Türöffnungen"
+  freezer_plug: "Stecker alte Gefriertruhe"
+  dryer_plug: "Stecker alter Trockner"
+  old_meter: "alter Zähler"
+  old_meter_reading: "alter Zählerstand"
+  attic_night_light: "Dachbodenlicht nachts"
+  tablet_charging: "Tablet laden"
+  old_alarm_clock: "Alter Wecker Schlafzimmer"
+  christmas_lights: "Weihnachtsbeleuchtung an"
+  backup_full: "Automatisches Backup"
+  backup_app: "Zigbee-App"
+  backup_update: "Z-Wave-App 1.4.0"
+  backup_manual: "Vor dem Umzug"
+  plugs: "Smarte Stecker"
+fr:
+  driveway: "Allée"
+  doorbell_camera: "caméra de sonnette"
+  driveway_camera: "caméra de l'allée"
+  garden_camera: "caméra du jardin"
+  hall_camera: "caméra de l'entrée"
+  camera_plain: "caméra"
+  package_detected: "colis détecté"
+  person_detected: "personne détectée"
+  vehicle_detected: "véhicule détecté"
+  smart_detection: "détection intelligente"
+  camera_motion: "mouvement caméra"
+  glass_break: "bris de glace détecté"
+  water_meter: "compteur d'eau"
+  phone_1: "téléphone du résident 1"
+  next_alarm: "prochaine alarme"
+  living: Salon
+  kitchen: Cuisine
+  hall: Couloir
+  bedroom: Chambre
+  bedroom_child: Chambre d'enfant
+  guest_room: Chambre d'amis
+  bathroom: Salle de bain
+  toilet: Toilettes
+  utility: Buanderie
+  garage: Garage
+  garden: Jardin
+  ground: Rez-de-chaussée
+  first: Premier étage
+  ceiling_light: plafonnier
+  reading_lamp: lampe de lecture
+  light: lampe
+  night_light: veilleuse
+  curtain: rideaux
+  awning: store banne
+  thermostat: thermostat
+  radiator: vanne de radiateur
+  presence: présence
+  motion: mouvement
+  hall_light_motion: "Lumière de l'entrée au mouvement"
+  door: porte
+  window: fenêtre
+  smoke: détecteur de fumée
+  leak: détecteur de fuite
+  fan: ventilation
+  lock: serrure porte d'entrée
+  garage_door: porte de garage
+  alarm: alarme
+  water_valve: vanne d'eau principale
+  tv: télévision
+  vacuum: robot aspirateur
+  washer: lave-linge
+  temperature: température
+  humidity: humidité
+  power: puissance réseau
+  solar: production solaire
+  battery: batterie domestique
+  battery_mode: mode batterie
+  charger: borne de recharge
+  charge_current: courant de charge
+  water_heater: eau chaude
+  price: prix du marché de l'électricité
+  resident: Résident
+  grid_meter: "compteur électrique"
+  current_l1: "courant phase 1"
+  current_l2: "courant phase 2"
+  current_l3: "courant phase 3"
+  grid_import: "énergie du réseau"
+  grid_export: "énergie injectée"
+  inverter: "onduleur solaire"
+  solar_energy: "énergie solaire"
+  export_limit: "limite d'injection"
+  home_battery: "batterie domestique"
+  attic_battery: "batterie domestique grenier"
+  attic_battery_level: "charge batterie domestique grenier"
+  battery_min_soc: "SoC minimum"
+  battery_grid_charge: "charge depuis le réseau"
+  battery_remote: "pilotage à distance"
+  battery_ems_control: "pilotage EMS"
+  battery_power_setpoint: "consigne de puissance"
+  battery_max_discharge: "puissance de décharge max."
+  battery_power: "batterie domestique puissance"
+  battery_in: "batterie domestique charge"
+  battery_out: "batterie domestique décharge"
+  charger_power: "borne de recharge puissance"
+  car_plugged: "borne de recharge câble branché"
+  car: "voiture"
+  car_battery: "voiture batterie"
+  heat_pump: "pompe à chaleur"
+  washer_device: "lave-linge"
+  remote_start: "lave-linge démarrage à distance"
+  start: "lave-linge démarrer"
+  washer_power: "lave-linge puissance"
+  weather: "météo"
+  apartment: Appartement compact
+  family_home: Maison familiale
+  energy_home: Maison énergie
+  simple: "Maison simple"
+  average: "Maison moyenne"
+  extended: "Maison complète"
+  office: "Bureau"
+  dining: "Salle à manger"
+  attic: "Grenier"
+  second: "Deuxième étage"
+  back_door: "porte arrière"
+  desk_lamp: "lampe de bureau"
+  day_rhythm_group: "Lumière du bureau qui suit le jour"
+  mood_light: "lampe d'ambiance"
+  pendant_left: "suspension gauche"
+  pendant_right: "suspension droite"
+  table_lights: "lampes de table"
+  room_lights: "lampes"
+  bedside_lamp: "lampe de chevet"
+  mirror_light: "lampe du miroir"
+  downstairs_lights: "lampes du bas"
+  shutter: "volet roulant"
+  blinds: "stores"
+  roof_window: "fenêtre de toit"
+  damper: "clapet de ventilation"
+  gate: "portail"
+  air_quality: "qualité de l'air"
+  humidifier: "humidificateur"
+  gas_valve: "vanne de gaz principale"
+  gas_meter: "compteur de gaz"
+  gas_detector: "détecteur de gaz"
+  co_detector: "détecteur de monoxyde de carbone"
+  frost: "capteur de gel"
+  siren: "sirène"
+  camera: "caméra de sonnette"
+  doorbell: "sonnette"
+  speaker: "enceinte"
+  mower: "robot tondeuse"
+  fridge_door: "porte du frigo"
+  oven_power: "four puissance"
+  oven_device: "four"
+  oven_plug: "four prise"
+  light_level: "luminosité"
+  charge_phases: "borne de recharge phases"
+  dishwasher_device: "lave-vaisselle"
+  dishwasher_remote: "lave-vaisselle démarrage à distance"
+  dishwasher_start: "lave-vaisselle démarrer"
+  dishwasher_power: "lave-vaisselle puissance"
+  washer_plug: "lave-linge prise"
+  # Home Assistant netjes in the extended house (E-351)
+  wind: "vitesse du vent"
+  rain: "pluie"
+  weather_station: "station météo"
+  soil_moisture: "humidité du sol"
+  soil_temperature: "température du sol"
+  garden_sensor: "capteur de jardin"
+  door_openings: "ouvertures de porte"
+  freezer_plug: "prise ancien congélateur"
+  dryer_plug: "prise ancien sèche-linge"
+  old_meter: "ancien compteur"
+  old_meter_reading: "ancien relevé"
+  attic_night_light: "Lumière du grenier la nuit"
+  tablet_charging: "Charger la tablette"
+  old_alarm_clock: "Ancien réveil chambre"
+  christmas_lights: "Lumières de Noël"
+  backup_full: "Sauvegarde automatique"
+  backup_app: "App Zigbee"
+  backup_update: "App Z-Wave 1.4.0"
+  backup_manual: "Avant le déménagement"
+  plugs: "Prises connectées"

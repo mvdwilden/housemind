@@ -1,0 +1,16 @@
+name: An idea
+description: Something HouseMind could do better or new.
+labels: [idea]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would help you?
+      description: Describe the situation in your house, not the solution – HouseMind decides with rules, steps and safety first.
+    validations:
+      required: true
+  - type: dropdown
+    id: domain
+    attributes:
+      label: Which part of the house?
+      options: [Light, Curtains and blinds, Climate, Air, Hot water, Energy, Charging, Safety, Water, Daily life, Other]

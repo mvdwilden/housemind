@@ -1,0 +1,17 @@
+# Energy skills (H10, R2). People rarely do these by hand, so they learn from answers to their
+# proposals (learn_from: answers). The energy plan only acts after the first two weeks of
+# measuring (S-03).
+schema: 1
+skills:
+  energy_boiler:
+    domain: energy
+    learn_from: answers
+  energy_heat_pump:
+    domain: energy
+    learn_from: answers
+  energy_appliance:
+    domain: energy
+    learn_from: answers
+  energy_export:
+    domain: energy
+    learn_from: answers

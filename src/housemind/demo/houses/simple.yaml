@@ -1,0 +1,32 @@
+# A simple home (the administrator's wish, 20-10-2026): what most people start Home Assistant
+# with. Twelve devices – four smart lamps, a thermostat, a motion sensor in every room (so each
+# can be played, E-463), a door contact, a smoke detector and a leak sensor – and the phone with
+# the Home Assistant app. One resident, who works away from home on workdays.
+key: simple
+name: simple
+country: NL
+residents: 1
+pets: false
+floors: [{id: ground, level: 0}, {id: first, level: 1}]
+areas:
+  - {id: living, floor: ground}
+  - {id: kitchen, floor: ground}
+  - {id: hall, floor: ground}
+  - {id: bedroom, floor: first}
+entities:
+  - {id: light.living_ceiling, area: living, label: ceiling_light, state: "off", modes: [color_temp]}
+  - {id: light.kitchen, area: kitchen, label: light, state: "off", modes: [brightness]}
+  - {id: light.hall, area: hall, label: light, state: "off", modes: [onoff]}
+  - {id: light.bedroom, area: bedroom, label: light, state: "off", modes: [brightness]}
+  - {id: climate.living, area: living, label: thermostat, state: heat, attrs: {temperature: 20, current_temperature: 19.6}}
+  - {id: binary_sensor.living_presence, area: living, label: motion, class: motion, state: "off"}
+  - {id: binary_sensor.kitchen_motion, area: kitchen, label: motion, class: motion, state: "off"}
+  - {id: binary_sensor.hall_motion, area: hall, label: motion, class: motion, state: "off"}
+  - {id: binary_sensor.bedroom_motion, area: bedroom, label: motion, class: motion, state: "off"}
+  - {id: binary_sensor.front_door, area: hall, label: door, class: door, state: "off"}
+  - {id: binary_sensor.hall_smoke, area: hall, label: smoke, class: smoke, state: "off"}
+  - {id: binary_sensor.kitchen_leak, area: kitchen, label: leak, class: moisture, state: "off"}
+  # The phone's next alarm (HA companion app): set on workdays (E-88)
+  - {id: sensor.phone_1_next_alarm, device: phone_1, label: next_alarm, class: timestamp, state: unavailable}
+persons:
+  - {id: person.resident_1, state: home}

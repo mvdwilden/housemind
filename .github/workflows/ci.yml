@@ -1,0 +1,66 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_call: # the release runs every check first (QA 3, gat 8)
+
+permissions:
+  contents: read
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: astral-sh/setup-uv@d4b2f3b6ecc6e67c4457f6d3e41ec42d3d0fcb86 # v5
+      - run: uv sync --locked
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+      - run: uv run mypy
+      - run: uv run pytest -n auto
+      - name: Validate knowledge files
+        run: uv run python -m housemind.knowledge.validate knowledge
+      # The image installs requirements.lock; it must be uv.lock, and have no known holes (M-33).
+      - run: uv export --frozen --no-dev --no-emit-project --format requirements-txt -o /tmp/requirements.lock
+      - run: diff <(grep -v '^#' requirements.lock) <(grep -v '^#' /tmp/requirements.lock)
+      - run: uvx pip-audit --strict --require-hashes --disable-pip -r requirements.lock
+      # No code that is certainly unused (code QA, C3); functions called by name are not certain.
+      - run: uvx vulture src --min-confidence 100
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm audit --omit=dev --audit-level=high
+      - run: npm run check
+      - run: npm test
+      - run: npm run build
+
+  screens:
+    # Every screen in a real browser with axe, and the checks of group 3 (QA 2, M-26, E-46).
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: astral-sh/setup-uv@d4b2f3b6ecc6e67c4457f6d3e41ec42d3d0fcb86 # v5
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: uv sync --locked
+      - run: npm ci && npm run build
+        working-directory: frontend
+      - run: uv run playwright install --with-deps chromium
+      - run: uv run pytest -m ui -s

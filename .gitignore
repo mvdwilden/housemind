@@ -1,0 +1,24 @@
+__pycache__/
+*.py[cod]
+.venv
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+node_modules/
+frontend/dist/
+.DS_Store
+*.db
+*.db-wal
+*.db-shm
+/data/
+.data/
+.claude/
+# Signing keys for knowledge bundles never go into the repository (E-143).
+*.key
+*.pem

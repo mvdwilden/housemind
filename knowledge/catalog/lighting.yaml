@@ -1,0 +1,68 @@
+# Lighting (design H3, catalogue domain 1). Terms from the Home Assistant docs; no brands.
+schema: 1
+kinds:
+  - key: light.onoff
+    match: {domain: light, color_modes_any: [onoff]}
+    safety_class: free
+    initiative: house
+    max_step: autonomous
+    actions:
+      - action: light.turn_on
+        values: {transition: [0, 30]}
+      - action: light.turn_off
+        values: {transition: [0, 30]}
+    min_interval_s: 2
+    people_win: until_area_empty
+    people_win_max_hours: 4
+    skills: [light_on_entry, light_off_leave, night_light]
+
+  - key: light.dimmable
+    match: {domain: light, color_modes_any: [brightness]}
+    safety_class: free
+    initiative: house
+    max_step: autonomous
+    actions:
+      - action: light.turn_on
+        values: {brightness_pct: [1, 100], transition: [0, 300]}
+      - action: light.turn_off
+        values: {transition: [0, 30]}
+    min_interval_s: 2
+    people_win: until_area_empty
+    people_win_max_hours: 4
+    skills: [light_on_entry, light_off_leave, night_light, dim_warning]
+
+  - key: light.color_temperature
+    match: {domain: light, color_modes_any: [color_temp, hs, rgb, rgbw, rgbww, xy]}
+    safety_class: free
+    initiative: house
+    max_step: autonomous
+    actions:
+      - action: light.turn_on
+        values:
+          brightness_pct: [1, 100]
+          color_temp_kelvin: [2000, 6500]
+          transition: [0, 300]
+          # A stand's colour on a lamp that shows colours (E-490, B-407): only these names.
+          color_name: {one_of: [orange, red, hotpink, mediumpurple, royalblue, turquoise, limegreen, gold]}
+          # A signal lamp at a break-in flashes by itself, when it can (E-543).
+          flash: {one_of: [long]}
+      - action: light.turn_off
+        values: {transition: [0, 30]}
+    min_interval_s: 2
+    people_win: until_area_empty
+    people_win_max_hours: 4
+    skills: [light_on_entry, light_off_leave, night_light, dim_warning, daylight_rhythm]
+
+  # A switch or plug that powers a lamp: only once HouseMind knows that role (E-109).
+  - key: switch.light
+    match: {domain: switch, role: light}
+    safety_class: free
+    initiative: house
+    max_step: autonomous
+    actions:
+      - action: switch.turn_on
+      - action: switch.turn_off
+    min_interval_s: 2
+    people_win: until_area_empty
+    people_win_max_hours: 4
+    skills: [light_on_entry, light_off_leave]

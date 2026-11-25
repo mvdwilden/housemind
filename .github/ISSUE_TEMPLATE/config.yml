@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions and ideas
+    url: https://github.com/mvdwilden/housemind/discussions
+    about: Ask a question or share an idea in Discussions.
+  - name: Security problem
+    url: https://github.com/mvdwilden/housemind/security/policy
+    about: Please report security problems privately (see SECURITY.md), not as an issue.

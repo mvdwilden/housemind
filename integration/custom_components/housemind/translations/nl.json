@@ -1,0 +1,140 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "description": "HouseMind is geïnstalleerd als App. De koppeling ermee instellen?"
+      },
+      "hassio_confirm": {
+        "description": "De HouseMind-App is gevonden. Instellen?"
+      }
+    },
+    "abort": {
+      "no_app": "De HouseMind-App is niet gevonden. Zet de koppeling opnieuw klaar via de huisinstellingen van HouseMind.",
+      "cannot_connect": "HouseMind is niet bereikbaar. Draait de App?",
+      "already_configured": "HouseMind is al ingesteld."
+    },
+    "error": {
+      "cannot_connect": "HouseMind is niet bereikbaar. Draait de App?"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "state": {
+        "name": "Toestand"
+      },
+      "house_mode": {
+        "name": "Huismodus",
+        "state": {
+          "home": "Thuis",
+          "away": "Weg",
+          "sleep": "Slapen",
+          "vacation": "Vakantie",
+          "guests": "Gasten"
+        }
+      },
+      "health": {
+        "name": "Gezondheid",
+        "state": {
+          "ok": "In orde",
+          "paused": "Gepauzeerd",
+          "emergency": "Nood"
+        }
+      },
+      "saving": {
+        "name": "Besparing"
+      }
+    },
+    "switch": {
+      "pause": {
+        "name": "Pauze"
+      }
+    },
+    "select": {
+      "house_mode_choice": {
+        "name": "Huisstand kiezen",
+        "state": {
+          "home": "Thuis",
+          "away": "Weg",
+          "sleep": "Slapen",
+          "vacation": "Vakantie",
+          "guests": "Gasten"
+        }
+      }
+    }
+  },
+  "selector": {
+    "mode": {
+      "options": {
+        "home": "Thuis",
+        "away": "Weg",
+        "sleep": "Slapen",
+        "vacation": "Vakantie",
+        "guests": "Gasten"
+      }
+    }
+  },
+  "services": {
+    "pause": {
+      "name": "Pauzeren",
+      "description": "HouseMind pauzeren. Noodreacties blijven werken.",
+      "fields": {
+        "minutes": {
+          "name": "Minuten",
+          "description": "Hoe lang; leeg betekent tot je hervat."
+        }
+      }
+    },
+    "resume": {
+      "name": "Hervatten",
+      "description": "HouseMind doet weer mee."
+    },
+    "house_mode": {
+      "name": "Huismodus zetten",
+      "description": "Zet de huismodus met de hand; die blijft tot er iemand komt of gaat.",
+      "fields": {
+        "mode": {
+          "name": "Modus",
+          "description": "De huismodus."
+        }
+      }
+    },
+    "feedback": {
+      "name": "Feedback",
+      "description": "Duim omhoog of omlaag op de laatste actie van HouseMind – het leert ervan.",
+      "fields": {
+        "good": {
+          "name": "Goed",
+          "description": "Aan: duim omhoog. Uit: duim omlaag."
+        },
+        "decision": {
+          "name": "Besluit",
+          "description": "Het nummer van één besluit van HouseMind. Zonder nummer: de laatste actie."
+        }
+      }
+    },
+    "house_rule": {
+      "name": "Huisregel",
+      "description": "Een huisregel in gewone taal. Eerst teruglezen; zet Bevestigen aan om te bewaren.",
+      "fields": {
+        "text": {
+          "name": "Regel",
+          "description": "Bijvoorbeeld: nooit het licht in de gang aan na 23:00."
+        },
+        "confirm": {
+          "name": "Bevestigen",
+          "description": "De regel bewaren."
+        }
+      }
+    },
+    "ask": {
+      "name": "Vragen",
+      "description": "Stel HouseMind een vraag over het huis.",
+      "fields": {
+        "question": {
+          "name": "Vraag",
+          "description": "Je vraag."
+        }
+      }
+    }
+  }
+}

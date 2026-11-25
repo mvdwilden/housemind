@@ -1,0 +1,42 @@
+# Energy devices (catalogue domains 6 and 7, H10). HouseMind recognises these by the role the
+# energy setup gives them (E-65); every action still passes the safety gate (H4).
+schema: 1
+kinds:
+  - key: number.export_limit
+    match: {domain: number, role: export_limit}
+    safety_class: careful
+    initiative: house
+    max_step: autonomous
+    actions:
+      - action: number.set_value
+        values: {value: [0, 100000]}
+    min_interval_s: 300
+    people_win: until_situation_changes
+    people_win_max_hours: 12
+    skills: [energy_export]
+
+  - key: button.appliance_start
+    match: {domain: button, role: appliance_start}
+    safety_class: careful
+    initiative: shared
+    max_step: propose
+    actions:
+      - action: button.press
+    min_interval_s: 1800
+    max_changes_per_day: 4
+    people_win: until_situation_changes
+    people_win_max_hours: 12
+    skills: [energy_appliance]
+
+  - key: switch.appliance_start
+    match: {domain: switch, role: appliance_start}
+    safety_class: careful
+    initiative: shared
+    max_step: propose
+    actions:
+      - action: switch.turn_on
+    min_interval_s: 1800
+    max_changes_per_day: 4
+    people_win: until_situation_changes
+    people_win_max_hours: 12
+    skills: [energy_appliance]

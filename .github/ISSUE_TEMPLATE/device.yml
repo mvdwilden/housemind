@@ -1,0 +1,23 @@
+name: A device kind HouseMind does not know
+description: HouseMind says "I only watch this device" or recognises it wrongly.
+labels: [catalogue]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Device kinds live in `knowledge/catalog/*.yaml`, in Home Assistant's own terms (domain,
+        device_class, supported_features) – never brand names. A new kind may only be stricter
+        than the general one for its domain.
+  - type: input
+    id: domain
+    attributes:
+      label: Home Assistant domain and device class
+      placeholder: "cover, device_class: awning"
+    validations:
+      required: true
+  - type: textarea
+    id: should
+    attributes:
+      label: What should HouseMind be allowed to do with it, and what never?
+    validations:
+      required: true

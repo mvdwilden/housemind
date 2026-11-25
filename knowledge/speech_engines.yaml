@@ -1,0 +1,30 @@
+# Which speech engines work in the house and which in the cloud (E-14, 20.19).
+# HouseMind matches these words in the engine's id in Home Assistant (stt.… and tts.…). When
+# her voice or her listening goes through a cloud engine, Vesta says so at setting up and the
+# privacy statement in the app names it. An engine on neither list counts as unknown.
+schema: 1
+local:
+  - piper
+  - whisper
+  - wyoming
+  - speech_to_phrase
+  - vosk
+  - sherpa
+  - kokoro
+  - marytts
+  - picotts
+  - espeak
+cloud:
+  - cloud
+  - google
+  - amazon
+  - polly
+  - azure
+  - microsoft
+  - openai
+  - elevenlabs
+  - watson
+  - yandex
+  - baidu
+  - voicerss
+  - deepgram

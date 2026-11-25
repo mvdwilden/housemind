@@ -1,0 +1,674 @@
+# Quoi de neuf, par version (E-150) : une phrase pour Informé, une courte liste pour Impliqué et
+# Expert. Langage simple, sans noms de marques.
+"0.4.0":
+  one: "HouseMind 0.4.0 est prêt à devenir la première bêta publique."
+  list:
+    - "Bientôt, chacun pourra installer HouseMind depuis GitHub, avec des paquets prêts et signés pour les ordinateurs ordinaires et pour ARM, comme un Raspberry Pi."
+    - "Tant que c'est une bêta, l'App apparaît comme expérimentale dans Home Assistant."
+    - "Une nouvelle page d'accueil et un résumé court et honnête de la façon dont HouseMind est testé."
+    - "Une nouvelle installation crée sa base de données en une étape ; une installation à partir de 0.2.0 suit simplement."
+"0.3.33":
+  one: "Une règle pour les mots, les nombres et les noms, dans chaque langue."
+  list:
+    - "Un accent dans un nom ne change plus rien : un relais « Garáge deur » est aussi protégé que « Garagedeur »."
+    - "Un mot court ne compte que comme mot entier – « car » n'est jamais « carbon » – et « portail2 » est tout simplement un portail."
+    - "HouseMind écrit les nombres et les tailles avec le séparateur décimal de ta langue, même dans ton propre fichier de langue."
+    - "L'écran Énergie lit les chiffres du jour et l'économie une fois par quart d'heure, pas à chaque mise à jour."
+"0.3.32":
+  one: "La carte du matin et la tablette murale suivent le rythme de votre maison."
+  list:
+    - "La carte du matin reste tant que c'est le matin dans votre maison, même un dimanche tardif."
+    - "Une tablette murale s'assombrit dans la nuit de votre maison, pas seulement à onze heures."
+    - "Une maison sans rythme garde l'horloge : la carte de 5 à 11 heures, la tablette sombre de 23 à 6 heures."
+    - "Ainsi tous les écrans suivent la maison, comme la lumière et la salutation de Vesta."
+"0.3.31":
+  one: "Les réglages sont au même endroit, et en mémoire."
+  list:
+    - "Chaque réglage de la maison est dans un seul tableau : sa valeur par défaut, si un écran peut le changer et s'il part dans le fichier de réglages."
+    - "Ce que les Paramètres de la maison enregistrent est vraiment gardé, pour chaque réglage ; un test y veille."
+    - "Mettre un écran à jour ne demande plus sans cesse les réglages à la base de données : ils sont en mémoire."
+    - "Un réglage qui change autrement, comme lors d'une journée remise, est relu."
+"0.3.30":
+  one: "Un tour est plus rapide dans une grande maison."
+  list:
+    - "HouseMind sait d'un coup, par pièce et par appareil, ce qui en fait partie, au lieu que chaque règle fouille toute la maison."
+    - "Aérer, une fenêtre ouverte avec le chauffage, la lumière d'une pièce et les capteurs d'un appareil utilisent cette seule liste."
+    - "Dans une maison d'environ 1 750 entités, un tour passe d'environ 15 à environ 6 millisecondes, et une maison plus grande ne ralentit plus au carré."
+    - "Un appareil ajouté ou déplacé dans une autre pièce compte tout de suite."
+"0.3.29":
+  one: "Mettre les écrans à jour demande moins de travail, surtout dans une grande maison."
+  list:
+    - "Prêt pour l'autonomie ? n'est recalculé que si HouseMind a décidé, appris ou reçu une réponse, ou si quelque chose a été réglé ; sinon une fois par tour."
+    - "Les écrans ouverts dans la même langue et au même niveau partagent ce travail."
+    - "Une maison animée donne à un écran une nouvelle image au plus cinq fois par seconde, et la plus récente passe toujours."
+    - "Dans une grande maison avec trois écrans ouverts, un capteur prend maintenant environ 40 au lieu de 150 millisecondes."
+"0.3.28":
+  one: "Moins sur les écrans : seulement ce qui te demande quelque chose."
+  list:
+    - "Appareils sans codes, et la colonne État est masquée jusqu'à ce que tu la choisisses. Seul non disponible ou non reconnu s'y ajoute, et le haut dit combien ne sont pas disponibles."
+    - "Ouvrir dans Home Assistant t'amène à l'appareil ; c'est là aussi que tu choisis une autre icône. Essayer un niveau pour toute la pièce est maintenant dans la fenêtre Niveaux."
+    - "La fenêtre de la pièce montre les moments. Tu en lances un avec ta voix ou sur la tablette murale."
+    - "Check-up › Système tient en une phrase quand tout va bien ; seul ce qui ne va pas a une tuile."
+    - "Plus de ligne Dernière fois à sous le réseau, l'explication une seule fois sous plusieurs questions, et Prêt pour l'autonomie ? dit combien de fois tout s'est bien passé, sans score."
+"0.3.27":
+  one: "Le Journal est plus calme : une ligne par décision, moins de boutons."
+  list:
+    - "Une question, ta réponse et ce qui en est sorti tiennent en une ligne : Tu as dit oui à 09:14."
+    - "Plus d’aperçu avec des pourcentages ni de petites étiquettes par ligne, mais une ligne grise : 18:29 · Salon · fait. Regrouper par type a disparu ; Filtrer › Type le fait déjà."
+    - "Pourquoi ? n’est plus qu’en Informé ; à partir d’Impliqué, la ligne le dit elle-même. Journée différente ? est un petit bouton."
+    - "Colonnes et Exporter seulement en Expert, en CSV ou Markdown. Filtrer et Regrouper n’apparaissent qu’à partir d’une liste de 20 lignes."
+    - "Ce qui est parti vers une IA est à un seul endroit : le Journal en Expert. Une notification pour information n’a plus de Plus tard."
+"0.3.26":
+  one: "Cerveau est plus calme : ce qui n’était que pour les développeurs est parti."
+  list:
+    - "Plus de jauge, de trace des décisions ni de fil des pensées dans Cerveau, donc plus de menu Plus. Chaque décision est dans le Journal ; en Expert elle se déplie jusqu’à ses contrôles, en mots."
+    - "En Expert, plus de codes sous une proposition ou une ligne du Journal, mais des phrases comme : J’en suis sûr à 80 %."
+    - "Prêt pour l’autonomie ? : plus de double titre, plus d’anneau avec un chiffre ni de pourcentages ; une phrase avec En savoir plus vers le manuel. Les seuils ne sont plus que dans le fichier de réglages."
+    - "Énergie sans le tableau par quart d’heure, et sans batterie domestique ni voiture : HouseMind ne les pilote pas, et Home Assistant les montre déjà."
+    - "Le temps de réaction est dans À propos de HouseMind en Expert. Mes préférences n’ont plus de groupe Aide."
+"0.3.25":
+  one: "HouseMind est plus rapide et fait moins de travail en double."
+  list:
+    - "Un écran démarre plus vite : il reçoit les textes dans sa langue une seule fois, sans liste en anglais à côté."
+    - "Quand quelqu'un rentre, HouseMind ne demande plus à chaque fois toute la liste des actions à Home Assistant."
+    - "Une pièce n'envoie plus ses appareils qu'une seule fois à l'écran."
+    - "Quand une caméra voit quelqu'un, HouseMind compte cette personne tout de suite."
+"0.3.24":
+  one: "HouseMind est plus sûr : un piratage éthique a trouvé quelques failles, et elles sont fermées."
+  list:
+    - "Une porte de garage, un portail ou une porte derrière un interrupteur, un bouton ou un relais n'est jamais ouvert par HouseMind. Même si quelqu'un l'a un jour indiqué comme lampe."
+    - "Seul un administrateur peut mettre en pause plus d'une heure. Le Journal dit qui a mis en pause."
+    - "Qui n'est pas administrateur va jusqu'à Impliqué par défaut et crée des règles pour un seul appareil. Une règle pour une pièce ou toute la maison, c'est un administrateur qui la crée."
+    - "Personne ne peut plus écarter un message d'urgence avec Plus tard. Plus tard ne vaut plus que pour toi."
+    - "Sur une enceinte partagée, un oui à une proposition ne compte plus ; un non, si. Le nom de Vesta ne peut contenir que des lettres ordinaires."
+"0.3.23":
+  one: "Ce que tu choisis dans Sécurité est maintenant vraiment enregistré."
+  list:
+    - "Quelle alarme, les sons, les rideaux à l'alarme, activer l'alarme toute seule, les lampes de signal et les rideaux en cas d'incendie : l'écran disait Enregistré, mais HouseMind ne recevait jamais le choix. Maintenant oui."
+    - "La case Apprendre aussi de l'historique reste aussi quand tu la décoches."
+    - "Si l'enregistrement ne marche pas, l'écran le dit, et plus jamais Enregistré."
+"0.3.22":
+  one: "Quand l'alarme se déclenche, ou en cas d'incendie, la maison en fait plus."
+  list:
+    - "La musique et la télé se taisent, et l'avertissement retentit chaque demi-minute jusqu'à la fin."
+    - "Les lampes que tu choisis dans Sécurité clignotent en rouge en cas d'intrusion. La tablette murale devient rouge, avec l'image de la caméra et un bouton vers l'alarme."
+    - "Sur ton téléphone, des boutons vers la caméra, l'alarme et le 112. Qui n'a pas vu le message après deux minutes le reçoit une fois de plus."
+    - "En cas d'incendie, les volets choisis remontent, une climatisation s'éteint, et le message dit quelle porte est verrouillée. HouseMind n'ouvre jamais une serrure."
+"0.3.21":
+  one: "L'alarme peut s'activer toute seule, et tu peux la tester."
+  list:
+    - "Si tu as dit oui à « Activer l'alarme ? » les cinq dernières fois, HouseMind demande une fois à un administrateur s'il peut le faire lui-même désormais. C'est aussi dans Paramètres de la maison › Sécurité."
+    - "HouseMind active alors l'alarme lui-même quand tout le monde est parti ou que la maison va dormir, et le dit tout de suite. Seulement quand c'est sûr : aucun capteur qui voit encore quelqu'un, aucune fenêtre ouverte. Il ne la désactive jamais."
+    - "Si quelqu'un la désactive vite deux fois, HouseMind redemande."
+    - "Dans Tester la maison, tu choisis « L'alarme se déclenche » : tu vois ce qui se passe, et avec Le faire pour de vrai les lampes de cette pièce s'allument et toi seul reçois le message, comme test."
+"0.3.20":
+  one: "Vesta montre que l'alarme est activée, et qu'elle s'est déclenchée."
+  list:
+    - "Quand l'alarme est activée, Vesta est bleue avec un bouclier : Sécurisé. La nuit, elle reste sur Bonne nuit, avec « sécurisé » en plus."
+    - "Quand l'alarme s'est déclenchée puis a été désactivée, Vesta affiche Attention, avec l'heure, jusqu'à ce que quelqu'un l'ait vu."
+    - "Tout le monde reçoit aussi un message, pour que celui qui rentre plus tard le sache. Quand l'alarme est réactivée, il disparaît."
+"0.3.19":
+  one: "Des rappels pour l'eau qui coule la nuit, la pluie avec quelque chose d'ouvert et une panne, et les automatisations d'un même appareil s'arrêtent et reprennent ensemble."
+  list:
+    - "Si le compteur d'eau avance un peu chaque heure la nuit alors que personne n'utilise d'eau, tu reçois un rappel le matin : un robinet goutte peut-être, ou la chasse d'eau coule."
+    - "S'il va pleuvoir dans l'heure alors qu'une fenêtre ou une porte extérieure est ouverte, tout le monde reçoit un rappel qui dit ce qui est ouvert."
+    - "Si un appareil signale lui-même une panne, comme une pompe à chaleur ou un interrupteur qui chauffe trop, tu le sais. Une surchauffe ou une surcharge est importante."
+    - "Si plusieurs automatisations pilotent la même lampe, HouseMind les arrête ensemble et les réactive ensemble. S'il ne peut pas en reprendre une, elles restent toutes activées."
+"0.3.18":
+  one: "L'alarme apparaît dans le Journal, et après sa désactivation HouseMind remet la maison comme avant."
+  list:
+    - "L'activation, le déclenchement et la désactivation de l'alarme sont maintenant dans le Journal, chacun en une ligne. Au déclenchement, la ligne dit ce que HouseMind a fait, au lieu d'une ligne par lampe."
+    - "Une minute après la désactivation de l'alarme, les lampes et les rideaux reviennent comme ils étaient juste avant le déclenchement. Ce que tu as changé toi-même pendant cette minute, et la lumière d'une pièce où quelqu'un se trouve, reste ainsi."
+    - "Pour chaque action, Pourquoi ? donne maintenant la vraie raison, comme « parce que l'alarme s'est déclenchée », même après un redémarrage."
+"0.3.17":
+  one: "Chaque pièce a sa propre lumière, et HouseMind reconnaît une douche et l'air confiné."
+  list:
+    - "Une cuisine et une salle à manger avec un seul capteur sont maintenant des pièces à part. Entre dans la cuisine dans le noir, et sa lumière s'allume, même si la salle à manger est éclairée. Si vous éteignez à chaque fois la lumière de la cuisine, HouseMind apprend que la lumière de la salle à manger y suffit."
+    - "Si l'humidité de la salle de bain monte vite alors que quelqu'un vient d'y être, quelqu'un prend une douche. La lumière reste allumée, même si le capteur ne te voit pas derrière le rideau de douche, et le ventilateur se met en marche tout de suite."
+    - "Si le CO₂ reste élevé pendant un quart d'heure là où quelqu'un se trouve, tu reçois un rappel pour aérer. La nuit, il n'y en a pas : le point du matin te le dit."
+    - "Dans Tester la maison, la zone d'une pièce compte maintenant comme le capteur de cette pièce. La salle à manger a alors aussi Quelqu'un entre et Plus personne."
+"0.3.16":
+  one: "Un animal n'allume plus la lumière la nuit et ne réveille plus la maison."
+  list:
+    - "Dans les pièces avec des animaux, ce que seul un capteur voit ne compte pas comme une personne pendant que la maison dort ou que personne n'est là. Cela vaut maintenant aussi pour un capteur de présence, car il voit un chien tout aussi bien."
+    - "Une personne compte : une caméra qui y voit une personne, quelqu'un qui y utilise un interrupteur, quelqu'un qui vient d'une pièce sans animaux (l'escalier, la salle de bain), ou un habitant qui vient de rentrer."
+    - "Le chien ne réveille plus la maison tôt. À partir d'une demi-heure avant votre heure habituelle de lever, un mouvement réveille à nouveau la maison. Avant l'heure du coucher, tout reste comme avant."
+"0.3.15":
+  one: "La page Info de HouseMind dans Home Assistant montre maintenant en bref ce que HouseMind fait pour toi."
+  list:
+    - "Dans Paramètres › Applications › HouseMind, la page Info raconte ce que HouseMind t'enlève des mains, avec trois écrans de l'application et une journée avec HouseMind."
+    - "La Documentation a de nouvelles images, et explique maintenant aussi le matin et la nuit, les signalements comme un chauffe-eau qui ne chauffe pas, le Check-up et les niveaux d'une lampe."
+    - "La déclaration de confidentialité dans la Documentation est maintenant la même que dans l'application."
+"0.3.14":
+  one: "Si le chauffe-eau ne chauffe plus depuis plus d'un jour, tu reçois un rappel."
+  list:
+    - "L'eau du chauffe-eau est au moins 10 degrés plus froide que son réglage, et il n'a pas chauffé depuis plus d'un jour ? Alors tout le monde reçoit un message important, avec la température de l'eau."
+    - "Regarde alors sur l'appareil ou dans sa propre app s'il y a une panne, ou si le courant est coupé. HouseMind lui-même ne change rien au chauffe-eau."
+    - "Si le chauffe-eau est éteint ou sur absence, ou si la maison est en vacances, tu ne reçois pas ce message. Dès qu'il chauffe à nouveau, le message disparaît tout seul."
+"0.3.13":
+  one: "Le point du matin ne se dit plus qu'une fois, même quand la lecture prend un moment."
+  list:
+    - "Un long point du matin était parfois dit plusieurs fois de suite. HouseMind pensait que la lecture avait échoué, parce qu'elle durait si longtemps."
+    - "Maintenant, une phrase encore en cours de lecture compte comme dite. Si cela ne marche vraiment pas, par exemple parce que l'enceinte est éteinte, HouseMind le remarque tout de suite et réessaie plus tard."
+    - "C'est vrai pour tout ce que Vesta dit d'elle-même, comme la vérification du coucher. Et HouseMind n'attend plus une demi-minute l'enceinte : le reste de la maison continue pendant ce temps."
+"0.3.12":
+  one: "Tester la maison : avec « La maison dort », chaque lampe n'apparaît plus qu'une fois."
+  list:
+    - "Quand tu choisis « La maison dort » dans Tester la maison, tu vois une ligne par lampe : ce que fait Bonne nuit quand tout le monde vient de se coucher."
+    - "Avant, une lampe apparaissait parfois deux fois : éteinte « parce qu'il n'y a plus personne depuis un moment » et éteinte « parce que la maison va dormir ». La première va avec « Plus personne »."
+    - "Ce que HouseMind fait vraiment ne change pas : dans la première demi-heure de la nuit, les lampes des pièces vides s'éteignent et les rideaux ouverts se ferment."
+"0.3.11":
+  one: "Apprentissage et étapes est court ; ce que HouseMind sait de ta maison est maintenant dans Cerveau, et tu peux toujours le changer."
+  list:
+    - "Paramètres de la maison › Apprentissage et étapes n'a plus que l'apprentissage, l'historique et les domaines. Deux boutons t'amènent dans Cerveau."
+    - "Cerveau a un nouvel onglet pour les administrateurs : Ce que je sais. Avec des tuiles pour À confirmer, Confirmé, Pas juste et Scènes et scripts, par pièce, et ce qui appartient à un appareil replié ensemble."
+    - "Tout peut revenir en arrière, même après C'est juste ou Pas juste : choisis autre chose, dis Pas juste finalement, ou remets-le dans À confirmer. HouseMind se souvient de ce qu'il pensait lui-même."
+    - "Les automatisations sont maintenant à un seul endroit : Cerveau › Prêt pour l'autonomie ? › Automatisations, avec ce qu'elles font et Désactiver ou Réactiver. Les seuils sont dans la carte d'un domaine ; revenir à un jour précédent, dans Recommencer."
+    - "Ce qui vient de l'IA est marqué en violet partout : de l'IA."
+"0.3.10":
+  one: "Bonne nuit : quand la maison va dormir, HouseMind éteint ce qui est encore allumé et ferme ce qui est encore ouvert."
+  list:
+    - "Les lampes des pièces où il n'y a personne s'éteignent, aussi dans une pièce sans détecteur de mouvement. Les chambres et l'extérieur restent comme ils sont."
+    - "Les rideaux et volets encore ouverts se ferment, aussi en été quand il ne fait nuit qu'après l'heure du coucher."
+    - "Une fois par nuit, dans la première demi-heure : si tu rallumes quelque chose ensuite, cela reste ainsi."
+    - "Comme chaque règle, cela commence par observer et demander. Dans Tester la maison, tu le vois avec ‘La maison dort’."
+"0.3.9":
+  one: "Tester la maison le fait maintenant pour de vrai : choisis ce qui se passe, et avec Le faire pour de vrai la lampe s'allume et le rideau se ferme."
+  list:
+    - "Faire comme si et Essayer maintenant forment ensemble Rejouer. Tu choisis ce qui se passe et vois tout de suite ce que HouseMind ferait ; rien n'est encore commandé."
+    - "Avec Le faire pour de vrai, HouseMind fait vraiment tout ce qui est dans cette liste, dans ta maison, et tu le vois circuler dans le réseau. Après une minute tout revient tout seul, ou plus tôt avec Remettre. Tant que le test tourne, les règles habituelles laissent ces appareils tranquilles."
+    - "Chaque ligne dit honnêtement comment cela irait pour de vrai : je le fais aussi pour de vrai, je demande d'abord, je regarde seulement, ou non et pourquoi. Une règle de la maison ou une automatisation arrête aussi le test."
+    - "Le soir apporte la lumière de ce soir-là : en novembre il fait alors nuit, et dans le test les rideaux se ferment. Les choix qui se contredisent, comme Levé et Tout le monde parti, ne vont plus ensemble."
+    - "Le quart d'heure de test s'appelle maintenant Fais le tour toi-même : un domaine passe un moment en Autonome, et tu traverses toi-même la pièce."
+"0.3.8":
+  one: "Sur un ordinateur, Tester la maison est maintenant un petit bouton en haut à droite."
+  list:
+    - "Sur un ordinateur, dans un navigateur, Tester la maison n'est plus dans le menu à gauche. Tu l'ouvres avec la fiole en haut à droite, à côté de l'Aide et de la visite."
+    - "Le panneau s'ouvre comme avant à droite de ta maison. Tant qu'il est ouvert, la fiole est allumée. Touche-la encore ou Fermer pour le fermer."
+    - "Rien ne change sur un téléphone : Tester la maison reste l'onglet Tester en bas. Dans une fenêtre plus étroite et dans l'app Home Assistant, il reste dans le menu."
+"0.3.7":
+  one: "Pendant que tu règles les niveaux d'une lampe, HouseMind laisse cette lampe tranquille."
+  list:
+    - "Tant que la fenêtre Niveaux est ouverte, aucune règle, proposition ou règle de la maison ne fait quoi que ce soit avec cette lampe. Seule la sécurité passe avant."
+    - "Un essai reste sur la lampe jusqu'à ce que tu touches Terminé ou fermes la fenêtre, plus seulement une minute. Tu peux donc régler et regarder tranquillement."
+    - "Quand tu fermes la fenêtre, la lampe est de nouveau comme elle était et HouseMind reprend la main."
+    - "La case pour enregistrer les niveaux aussi pour toutes les lampes du même type a disparu. Enregistrer ne vaut que pour la lampe que tu règles."
+"0.3.6":
+  one: "Cerveau › Rythme a maintenant À venir : ce que HouseMind fera dans les heures qui viennent."
+  list:
+    - "Sous les barres de Rythme, tu vois les prochains moments de la journée : la nuit tombe, la maison va dormir, le lever et le jour se lève. Pour chaque moment, il est indiqué ce que HouseMind fera alors."
+    - "À chaque ligne, tu vois si HouseMind le fait lui-même, demande d'abord, regarde seulement, ou s'il n'en a pas le droit, avec la raison, comme une règle de la maison. Tu peux ainsi ajuster à l'avance."
+    - "Si HouseMind ne connaît pas encore une heure, il le dit. Rien ne s'allume ni ne s'éteint : HouseMind le calcule en silence, comme un jour ordinaire."
+    - "La page Ce que je ferais maintenant sous Plus a disparu. Ce que HouseMind ferait maintenant dans chaque pièce, tu le vois dans Tester la maison."
+"0.3.5":
+  one: "Un capteur dans l'entrée qui continue la nuit à dire que quelqu'un est là ne garde plus la maison éveillée."
+  list:
+    - "Quand un capteur de présence dans une entrée ou un couloir disait pendant des heures la nuit que quelqu'un était là, HouseMind croyait que quelqu'un était encore debout. La maison ne s'endormait alors pas, et cette nuit ne comptait pas pour le rythme."
+    - "Ainsi, Cerveau › Rythme pouvait n'afficher que les Jours ouvrés, et pas de week-end."
+    - "Maintenant, dans une entrée, seul le fait que quelqu'un entre compte, pas un capteur qui continue à voir quelqu'un. Quelqu'un sur le canapé garde toujours la maison éveillée."
+"0.3.4":
+  one: "‘Plus’ dans Cerveau fonctionne maintenant aussi sur un iPhone."
+  list:
+    - "Sur un iPhone, ‘Plus’ dans Cerveau ne montrait rien. Son menu était dans la rangée d'onglets, qui défile sur le côté, et s'y perdait."
+    - "Maintenant, le menu est au-dessus de la page, sous son bouton : Ce que je ferais maintenant, Fil des décisions et Flux de pensées sont de retour."
+    - "Si tu fais défiler la page pendant qu'il est ouvert, il reste sous son bouton."
+"0.3.3":
+  one: "Dans le réseau, un groupe est maintenant un seul point, et chaque point dit de quel appareil il s'agit."
+  list:
+    - "Si une pièce a un groupe, comme dans Appareils, le réseau ne montre que le groupe : un point pour tous ses appareils. Cela vaut pour les lampes, mais aussi pour les rideaux et les interrupteurs."
+    - "Si un petit groupe est dans un plus grand, seul le grand est là. Ainsi, chaque pièce garde de la place pour le reste."
+    - "Pointe un point pour voir son nom et son état. Un groupe dit aussi combien d'appareils il contient."
+    - "Quand HouseMind fait quelque chose avec une lampe d'un groupe, la ligne va jusqu'au point de ce groupe."
+"0.3.2":
+  one: "Les rideaux et les lampes qui disparaissent un instant du réseau ne bloquent plus HouseMind pendant des heures."
+  list:
+    - "Quand un appareil disparaissait quelques secondes du réseau puis revenait, HouseMind croyait que quelqu'un l'avait utilisé à la main. Il n'y touchait alors plus pendant des heures, même sur Autonome. Ainsi, les rideaux ne se fermaient parfois pas le soir."
+    - "Maintenant, seule une vraie main compte. Celui qui utilise lui-même un rideau ou une lampe passe toujours en premier."
+    - "Tester la maison montre sous Maintenant la température de la pièce elle-même, pas celle d'un appareil comme le four."
+    - "Sous Faire comme si, le manuel dit aussi comment le faire pour de vrai : avec Essayer maintenant sous une ligne."
+"0.3.1":
+  one: "Quand une règle est sur Autonome, HouseMind le fait simplement, sans message sur ton écran."
+  list:
+    - "Le court message avec Pourquoi ?, Annuler et les pouces ne vient plus après tout ce que fait HouseMind."
+    - "Tu ne le vois plus que quand HouseMind essaie quelque chose de lui-même alors que la règle est encore sur Proposer. Si tu remets une règle sur Proposer, le message revient donc aussi."
+    - "Ce que HouseMind fait sur Autonome est dans le Journal, avec Pourquoi ? et Annuler."
+    - "Pas de message non plus après une règle de la maison à toi ou après une chose à laquelle tu as dit oui."
+"0.3.0":
+  one: "Une mise à jour plus grande : chaque appareil et chaque pièce a maintenant une icône, sur tous les écrans."
+  list:
+    - "Sur Maison, les cartes, le plan et le réseau montrent l'icône de chaque pièce et de chaque appareil. Une lampe montre sa luminosité, avec son pourcentage dedans ou à côté."
+    - "Appareils, Cerveau, le Journal, les questions et messages de Vesta et Niveaux montrent aussi chaque appareil avec son icône."
+    - "De même dans Énergie, le Check-up et Tester la maison. La batterie domestique montre par des traits à quel point elle est pleine."
+    - "HouseMind choisit l'icône lui-même, à partir de ce qu'il sait déjà ; une prise avec un frigo derrière est un frigo. S'il ne sait pas ce qu'est quelque chose, il reçoit un carré avec un point. Tu choisis une autre icône dans Home Assistant, sous Icône."
+"0.2.59":
+  one: "Cerveau › Rythme montre maintenant le rythme de la maison en barre, dès la première nuit."
+  list:
+    - "Pour chaque type de jour une barre de 24 heures, comme dans le manuel : Sommeil, Matin, Absent et À la maison, avec les heures en dessous et une légende avec des icônes."
+    - "Si HouseMind n'est pas encore sûr d'une heure, la barre est quand même là : cette partie est hachurée, avec « apprend encore » à côté. Avant, HouseMind devait d'abord connaître le lever et le coucher."
+    - "Sur la barre d'aujourd'hui, un trait « maintenant » montre où tu en es."
+    - "Un type de jour avec encore trop peu de nuits a une barre vide qui le dit."
+"0.2.58":
+  one: "Le manuel est environ un tiers plus court, avec de vraies captures d'écran."
+  list:
+    - "Le manuel est réécrit dans les quatre langues : plus court, en mots simples, et vérifié par rapport à ce que fait vraiment l'application."
+    - "Il a de nouveaux schémas, et 18 captures d'écran de la maison de démo dans chaque langue."
+    - "La partie sur l'Aide correspond à la nouvelle Aide : le point d'interrogation ouvre le manuel, la boussole lance la visite."
+    - "‘En savoir plus’ sous la réponse de Vesta mène toujours à la même partie : chaque partie a gardé sa place."
+"0.2.57":
+  one: "Le point d'interrogation ouvre maintenant tout de suite le manuel. La visite a son propre bouton : la boussole à côté."
+  list:
+    - "Touche le point d'interrogation en haut à droite et le manuel est ouvert tout de suite. En haut, tu peux poser une question à Vesta, en l'écrivant ou en la disant."
+    - "L'ancienne Aide avec de courtes questions par niveau a disparu. Vesta connaît encore ces questions et y répond, avec ‘En savoir plus’ vers la bonne partie du manuel."
+    - "À côté du point d'interrogation se trouve une boussole : elle relance la visite. Pendant la visite, les deux s'éclairent ensemble."
+"0.2.56":
+  one: "Dans ‘Prêt pour l’autonomie ?’, les boutons Colonnes et Exporter ont disparu."
+  list:
+    - "Au-dessus des listes Compétences et Automatisations de ‘Prêt pour l’autonomie ?’, il n’y a plus Colonnes ni Exporter : une ligne et le détail à côté disent tout."
+    - "Tu vois toujours combien il y en a dans la liste."
+    - "Appareils, Journal et Paramètres de la maison gardent les deux boutons."
+"0.2.55":
+  one: "Des toilettes avec seulement un capteur de porte : HouseMind voit maintenant à la porte si quelqu’un est dedans."
+  list:
+    - "Pour des toilettes ou une salle de bain avec une porte et aucun autre capteur, HouseMind demande une fois si c’est une petite pièce avec une porte. La question se trouve sous Paramètres de la maison › Apprentissage et étapes › Ce que HouseMind sait de ta maison."
+    - "Si tu dis C’est juste, fermée après être entré veut dire ‘quelqu’un dedans’ : la lumière reste allumée, aussi longtemps qu’il faut. Rouverte et refermée veut dire ‘parti’ : la lumière baisse d’abord puis s’éteint. Si la porte reste ouverte, HouseMind ne fait rien."
+    - "Si quelqu’un allume la lumière pendant que la porte est fermée, quelqu’un est dedans. Cela marche dans chaque maison : cela vient du type de pièce et de ses capteurs, pas des noms."
+"0.2.54":
+  one: "Le Journal restait parfois vide ; c’est corrigé."
+  list:
+    - "Quand deux choses que HouseMind ne faisait qu’observer arrivaient dans la même seconde, le Journal n’affichait plus aucune ligne, seulement le nombre."
+    - "Maintenant chaque ligne a sa propre place, et toutes les lignes sont de retour."
+    - "Un test le vérifie maintenant dans un vrai navigateur."
+"0.2.53":
+  one: "Pour une pièce sans détecteur de mouvement ou de présence, le cerveau dit maintenant plus clairement pourquoi HouseMind n’y éteint pas la lumière lui-même."
+  list:
+    - "Dans une telle pièce, HouseMind ne peut pas voir s’il reste quelqu’un : une porte ou un interrupteur dit seulement que quelqu’un est passé. Il ne fait donc qu’observer pour ‘lumière éteinte en sortant’."
+    - "Si tu as mis cette règle sur Autonome toi-même, il est maintenant écrit aussi que ton choix reste enregistré et compte dès qu’il y a un tel détecteur."
+    - "Le manuel le dit aussi, sous ‘Qui est là’."
+"0.2.52":
+  one: "La liste Automatisations est plus calme elle aussi : une ligne par automatisation, tout ce qui la concerne au même endroit."
+  list:
+    - "Sous ‘Prêt pour l’autonomie ?’ › Automatisations, chaque automatisation est une ligne : un anneau avec le nombre de pièces prêtes, le nom, les pièces, une phrase et où elle en est."
+    - "Une étiquette dit où elle en est : ‘HouseMind peut reprendre’, ‘Reprises par HouseMind’, ‘HouseMind en apprend’ ou ‘Reste comme c’est’."
+    - "Touche une ligne : sur un ordinateur, tout ce qui concerne cette automatisation est à droite, sur un téléphone dans une fenêtre. La technique est sous ‘Détails’."
+"0.2.51":
+  one: "Le cerveau est plus calme : chaque règle est une ligne, et tout ce qui la concerne est au même endroit."
+  list:
+    - "Sous ‘Prêt pour l’autonomie ?’, chaque règle est une ligne : un anneau avec la fréquence de réussite, le nom, la pièce, une phrase et l’étape. Ce qu’une règle attend est dit en bref."
+    - "Touche une ligne : sur un ordinateur, tout sur cette règle est à droite, sur un téléphone dans une fenêtre. Les compteurs sont des coches, la technique est sous ‘Détails’."
+    - "Avec ‘Attend quelque chose’ et ‘Prêt’, tu filtres vite."
+    - "Ce que je ferais maintenant, Fil des décisions et Flux de pensées sont sous ‘Plus’ en Expert."
+"0.2.50":
+  one: "La croix et le haut-parleur de la fenêtre de Vesta sont plus grands."
+  list:
+    - "La croix qui ferme la fenêtre de Vesta et le haut-parleur qui active ou coupe sa voix sont maintenant des boutons ronds, plus grands qu'avant."
+    - "Le signe à l'intérieur est aussi plus grand et plus net, même avec Profond."
+    - "Sur un téléphone, tu les touches plus facilement avec le pouce."
+"0.2.49":
+  one: "Une question sur un niveau concerne maintenant toute la pièce, et pour chaque lampe tu vois ce qui s’est passé aujourd’hui."
+  list:
+    - "Quand HouseMind demande s’il peut mettre un niveau, il y a une seule carte : ‘Puis-je mettre la salle à manger sur Tamisé ?’, avec la raison, et par lampe ce qu’elle reçoit ou qu’elle reste comme elle est."
+    - "Une réponse vaut pour toutes les lampes de cette question. Sur le téléphone et avec Vesta, c’est la même question."
+    - "En bas de la fenêtre ‘Niveaux’ se trouve ‘Aujourd’hui avec cette lampe’ : quand quelque chose a changé, quoi, qui est passé d’abord (le rythme du jour, toi à la main, une règle, la sécurité) et quelle luminosité et quelle couleur."
+"0.2.48":
+  one: "Sur Autonome, HouseMind ne demande plus rien : il le fait, tout simplement, et ne demande plus après si c'était bien."
+  list:
+    - "Une règle sur Autonome le fait elle-même, sans question avant et sans ‘C'était bien ?’ après. Les questions vont avec Proposer."
+    - "‘C'était bien ?’ ne vient plus que si HouseMind a essayé quelque chose lui-même alors que c'était encore sur Proposer, parce que personne ne pouvait voir la question. Au plus une fois par jour par personne."
+    - "Cette fois par jour vaut maintenant aussi quand l'App redémarre, par exemple après une mise à jour. Avant, la question pouvait alors venir plus souvent le même jour."
+    - "Tu veux dire toi-même quelque chose sur ce que HouseMind a fait ? Les pouces sous le message après une action et à ‘Pourquoi ?’ restent."
+"0.2.47":
+  one: "Chaque lampe a maintenant quatre niveaux : Tamisé, Normal, Vif et Maximal, avec la luminosité et la couleur qui conviennent à cette lampe."
+  list:
+    - "Dans Cerveau › Appareils et entités, en tant qu’administrateur, touche ‘Niveaux’ à côté d’une lampe. Pour chaque niveau tu choisis la luminosité, et la couleur : elle suit le rythme du jour, ou tu la fixes, du chaud au blanc. Une lampe qui fait des couleurs peut aussi recevoir une couleur."
+    - "Avec ‘Essayer’, la lampe elle-même passe à ce niveau ; après une minute, elle est de nouveau comme elle était. Avec ‘Essayer un niveau’ à côté d’une pièce, tu vois si toutes les lampes y vont ensemble."
+    - "HouseMind parle maintenant en niveaux : ‘Puis-je mettre la salle à manger sur Tamisé ?’ Chaque lampe reçoit alors son propre pourcentage. La soirée calme, la veilleuse et la petite baisse avant d’éteindre utilisent Tamisé ; la lumière en entrant utilise aussi les niveaux, tant que HouseMind n’y a encore rien appris."
+    - "Une lampe qui ne fait qu’allumer et éteindre reste comme elle est à Tamisé, ou s’éteint si tu le choisis et qu’une autre lampe reste allumée. Une nouvelle lampe reçoit les niveaux d’une lampe du même type."
+    - "En cas de fumée, de monoxyde de carbone ou d’effraction, les lampes s’allument à fond, et maintenant aussi en blanc."
+"0.2.46":
+  one: "Une lampe que HouseMind laisse tranquille exprès garde ses règles dans le Cerveau."
+  list:
+    - "Quand vous commandez une lampe avec votre propre bouton, HouseMind n'y touche pas. Une règle que tu as choisie là toi-même reste maintenant simplement dans le Cerveau."
+    - "Seul un appareil retiré de Home Assistant, ou désactivé là, compte comme retiré. Seulement alors HouseMind garde ce qu'il a appris 30 jours, puis l'oublie."
+    - "Une nouvelle règle ne vient toujours que pour un appareil que HouseMind peut commander lui-même."
+"0.2.45":
+  one: "Un nouvel appareil reçoit maintenant tout de suite ses règles dans le Cerveau, et une règle part quand son appareil n'est plus là."
+  list:
+    - "Quand tu poses de nouveaux rideaux ou ajoutes une lampe, les règles qui vont avec sont tout de suite dans ‘Prêt pour l'autonomie ?’, avec ‘Pas encore vu’."
+    - "Si HouseMind ne connaît pas le type d'une pièce, comme une salle de musique, il demande une fois à un administrateur quel type de pièce c'est. D'ici là, la pièce reçoit les règles qui vont partout, comme fermer les rideaux quand il fait nuit."
+    - "Quand tu retires un appareil, sa règle quitte le Cerveau. Ce que HouseMind a appris pour elle, il le garde 30 jours, au cas où un appareil revient."
+    - "Une règle pour l'humidité ou le CO₂ ne vient que si la pièce a aussi ce capteur."
+"0.2.44":
+  one: "Une caméra qui sait aussi détecter la fumée ne donne plus de fausse alerte. Et Vesta se tait sur ce qui est mis sur ‘Ne plus afficher’."
+  list:
+    - "Certaines caméras savent aussi détecter la fumée ou le monoxyde de carbone. Quand c'était coupé dans la caméra, HouseMind disait après un jour qu'un capteur de sécurité ne répondait plus. Ce n'est plus le cas."
+    - "Un détecteur de fumée, de CO, de gaz ou de fuite ne compte plus comme silencieux que si tout l'appareil ne répond plus. Si un vrai détecteur se tait, tu reçois toujours le message."
+    - "Quand un message est sur ‘Ne plus afficher’, Vesta ne le dit plus d'elle-même non plus : ni dans la pièce, ni sur le téléphone."
+    - "Quand tu reportes un message avec ‘Plus tard’, Vesta ne le met pas non plus sur ton téléphone d'ici là."
+"0.2.43":
+  one: "Les rideaux de la chambre s’ouvrent maintenant quand vous êtes levés."
+  list:
+    - "Dans une chambre, les rideaux s’ouvrent le matin quand tu es levé, que plus personne ne dort dans cette pièce et qu’il fait jour dehors. Qui dort encore n’est pas réveillé."
+    - "HouseMind regarde avec ce que la pièce a : un capteur qui voit le lit, un capteur de présence dans la pièce, ou rien. Sans capteur, il ne les ouvre que quand tout le monde est sorti, ou à un moment appris de vous."
+    - "HouseMind apprend maintenant aussi d’une automatisation qui ouvre les rideaux d’une chambre. Dans Cerveau, « ouvrir les rideaux quand tu te lèves » est une règle à part par pièce."
+    - "Dans « Tester la maison », tu peux choisir « Quelqu’un est au lit » et « Levé » pour une chambre."
+"0.2.42":
+  one: "Regarder ne change plus rien : l'écran ne met plus à jour l'état de la maison."
+  list:
+    - "L'écran Maison, la carte du matin, une tablette murale et le nombre de pièces où il se passe quelque chose ne font plus que regarder la maison."
+    - "Seul HouseMind lui-même, toutes les demi-minutes, décide si la maison est là, absente ou endormie. Un écran ouvert ne change plus rien."
+    - "Ainsi, la maison se comporte de la même façon, qu'un écran soit ouvert ou non."
+"0.2.41":
+  one: "Avec un quart d'heure de test, tu te promènes toi-même dans ta maison, pendant qu'un domaine passe un moment en Autonome."
+  list:
+    - "Dans Tester la maison, choisis une pièce, la durée (5, 15 ou 60 minutes) et ‘Démarrer’ à côté d'un domaine. Ce domaine passe alors en Autonome, avec les vrais capteurs."
+    - "Pendant ce temps, chaque écran affiche en haut ‘Test en cours jusqu'à …’, avec ‘Arrêter’. Ensuite, l'étape revient, et HouseMind remet ce qu'il a fait, sauf ce que quelqu'un a changé lui-même."
+    - "Un quart d'heure de test n'éteint aucune automatisation ni Adaptive Lighting, ne compte pas pour l'apprentissage, et s'arrête tout de suite en cas d'urgence."
+    - "‘Arrêter le test et tout remettre’ termine chaque test d'un coup."
+"0.2.40":
+  one: "Dans Tester la maison, tu peux maintenant aussi essayer pour de vrai : une fois, puis retour après une minute."
+  list:
+    - "À côté d'une règle qui peut vraiment être essayée, il y a ‘Essayer maintenant’. HouseMind le fait alors une fois, comme il le ferait lui-même."
+    - "Après une minute, HouseMind remet tout tout seul. Avec ‘Laisser ainsi’, cela reste ; avec ‘Remettre’, cela revient tout de suite."
+    - "Si quelqu'un le change lui-même pendant cette minute, cela reste ainsi. Les serrures, l'alarme et ce qu'une automatisation commande ne sont jamais essayés pour de vrai."
+    - "Sans situation, tu vois ce que HouseMind ferait maintenant. Un test ne compte pas pour l'apprentissage, et après un redémarrage HouseMind remet quand même ce qu'un test a fait."
+"0.2.39":
+  one: "En Expert, tu testes maintenant HouseMind dans ta propre maison, sans que rien ne soit commandé."
+  list:
+    - "En tant qu'administrateur, choisis ‘Tester la maison’ dans le menu. Sur un écran large, le panneau est à droite, à côté de la maison."
+    - "Sous ‘Faire comme si’, tu choisis ce qui se passe, par exemple quelqu'un qui entre dans le noir. HouseMind dit ce qu'il ferait, si c'est permis maintenant, et ce qu'il ferait en Autonome."
+    - "Sous ‘Ce qui vient de se passer’, tu vois par pièce ce que HouseMind a décidé, quel contrôle a dit non, et à quelle vitesse. Un test ne compte pas pour l'apprentissage."
+    - "L'aide en Expert montre de nouveau toutes les questions : une partie manquait depuis une version précédente."
+"0.2.38":
+  one: "Ce que tu fais, tu le vois maintenant tout de suite : dans la liste des appareils et dans la maison de démo."
+  list:
+    - "Sous Cerveau › Appareils, le statut suit tout seul. Quand une lampe ou un capteur s’allume ou s’éteint, tu le vois tout de suite, sans rouvrir l’onglet."
+    - "Dans la maison de démo, les boutons sous Jouer soi-même marchent aussi pendant que le temps avance. Tu vois par exemple une pièce se vider toute seule après ‘Pas de mouvement’."
+    - "Tu choisis toujours les histoires et les sauts dans le temps après Stop."
+"0.2.37":
+  one: "Le rythme du jour de la lumière suit maintenant tous les réglages d’Adaptive Lighting."
+  list:
+    - "HouseMind ne lisait pas une partie des réglages : le mode de luminosité et les heures autour du coucher et du lever du soleil. Maintenant si."
+    - "Le soir, la lumière est donc aussi douce que tu l’as réglée, et non quelques pour cent plus vive."
+    - "La transition à l’allumage, et le fait qu’une lampe ne soit ajustée qu’à l’allumage, suivent maintenant aussi les réglages."
+"0.2.36":
+  one: "La lumière suit maintenant la journée : plus vive et plus blanche le jour, plus douce et plus chaude le soir."
+  list:
+    - "Si tu as Adaptive Lighting, HouseMind lit ses réglages, par groupe de lampes, et les reprend en Autonome. Tu continues à les faire là, et après un pas en arrière cette intégration se rallume tout de suite."
+    - "Si tu n’as pas cette intégration, HouseMind fait lui-même une telle ligne pour les lampes qui le peuvent, d’après ce qu’il a appris dans cette pièce pour le soir et le jour."
+    - "Une lampe allumée suit la soirée. Si tu choisis une autre couleur ou luminosité, cela reste ainsi jusqu’à ce que la lampe s’éteigne, et si tu le fais souvent, HouseMind s’en souvient."
+    - "Si HouseMind sait peu de choses sur une demi-heure, il prend maintenant ce qui convient à ce moment de la journée, pas la moyenne de toute la journée. Le Check-up signale un groupe qui désigne une lampe qui n’existe plus."
+"0.2.35":
+  one: "Dans le réseau, tu vois maintenant plus longtemps ce que HouseMind vient de faire."
+  list:
+    - "La ligne de la pièce à l'appareil, en passant par Vesta, circule maintenant vingt secondes au lieu de cinq. Tu la vois donc aussi si tu regardes un peu plus tard."
+    - "Si HouseMind fait autre chose entre-temps, la ligne va là-bas."
+    - "Sous le réseau reste la ligne avec ce que HouseMind a fait en dernier, l'heure et ‘Pourquoi ?’."
+"0.2.34":
+  one: "Vesta pose maintenant une question à la fois, avec ses boutons, et n'écoute que quand tu la touches."
+  list:
+    - "Une question de Vesta reste affichée jusqu'à ce que tu répondes ou fermes sa fenêtre. Aucune autre question ne vient entre-temps, même quand quelque chose change dans la maison."
+    - "Les boutons sont toujours là, aussi pendant qu'elle écoute, et aussi pour une question qu'elle cite quand tu la touches."
+    - "Après sa réponse, elle ne continue plus à écouter d'elle-même. Pour demander autre chose, touche Vesta, aussi dans sa fenêtre."
+    - "Sa fenêtre reste plus longtemps après une réponse, pour que tu puisses la lire tranquillement."
+"0.2.33":
+  one: "Dans les maisons de démo, vous pouvez maintenant imiter quelqu'un dans chaque pièce."
+  list:
+    - "Chaque pièce des trois maisons de démo a maintenant un capteur de mouvement ou de présence, aussi la cuisine, la chambre, le garage et le jardin."
+    - "Ainsi, Jouer la maison affiche toutes les pièces sous Personnes et mouvement, et HouseMind réagit comme dans une vraie maison."
+    - "La maison de démo simple a maintenant douze appareils et la moyenne près de quarante."
+    - "L'histoire Se réveiller passe maintenant par la chambre, la salle de bain, le couloir et la cuisine."
+"0.2.32":
+  one: "Si tu as commandé une lampe à la main, celui qui entre plus tard a simplement de nouveau de la lumière."
+  list:
+    - "Tant que quelqu'un est dans la pièce, ton choix tient. Si la pièce a été vide et que quelqu'un entre, c'est un nouveau moment et la lumière se rallume comme d'habitude quand il fait sombre."
+    - "Si tu appuies sur un bouton qui éteint tout, les pièces où personne n'était n'en souffrent pas : celui qui y entre plus tard a de la lumière."
+    - "Si tu allumes une lampe à distance alors que personne n'y est, elle reste allumée, comme avant."
+    - "Dans une pièce sans capteur de présence ou de mouvement, HouseMind n'éteint plus la lumière parce qu'il croit qu'il n'y a personne. Il ne peut pas le voir là. Il ne le demande plus non plus."
+"0.2.31":
+  one: "La lumière de l'alarme ou de la sonnette ne bloque plus une pièce."
+  list:
+    - "Une automatisation qui ne donne qu'un signal avec une lampe, comme une couleur pour l'alarme ou un clignotement pour la sonnette, ne bloque plus rien. Elle reste simplement active, et HouseMind n'en apprend rien."
+    - "Tant qu'un tel signal dure, HouseMind ne touche pas à la lampe. Si la lampe reste allumée, comme quand une alarme se déclenche, HouseMind n'y touche pas jusqu'à ce que cette lampe change."
+    - "Une automatisation qui ne commande que des lampes suit dans la question unique dès que les règles de ces lampes sont prouvées. Elle y est nommée."
+    - "Une automatisation fait plus, par exemple aussi une prise ? Alors elle reste active et ne garde que sa propre lampe. Le reste de la pièce continue."
+    - "HouseMind comprend maintenant aussi la nouvelle façon dont Home Assistant écrit la présence et les portes comme début d'une automatisation, et en apprend donc aussi."
+"0.2.30":
+  one: "Ce qui marche assez souvent, HouseMind le fait lui-même après un seul oui."
+  list:
+    - "Quand HouseMind voit quelque chose marcher assez souvent, il demande une fois s'il peut le faire lui-même désormais. La question se trouve dans Attend ta réponse et n'expire pas. Un oui suffit."
+    - "Si une automatisation le gère, la question porte sur toute l'automatisation, et seul un administrateur la reçoit. Après un oui, HouseMind le fait lui-même et elle se désactive. Remis comme avant deux fois en une semaine : elle se réactive d'elle-même."
+    - "La barre et l'anneau de Prêt pour l'autonomie ? montrent maintenant à quelle fréquence cela a bien marché, et en dessous ce qu'il faut encore. Si HouseMind ne fait qu'observer, c'est indiqué aussi, avec la raison."
+    - "Si tu fais toi-même ce que HouseMind demande, cela compte comme un oui. Si tu éteins la lumière et que tu pars, cela compte aussi."
+    - "Une question propose maintenant « Moi-même désormais » au lieu de « Toujours ». Une lampe ne bloque plus tout un groupe."
+"0.2.29":
+  one: "Une prise ne devient plus une lampe parce qu'elle est revenue après un redémarrage en même temps qu'une lampe."
+  list:
+    - "HouseMind ne déduit plus qu'un interrupteur appartient à une lampe que s'il s'allume et s'éteint vraiment. Un redémarrage de Home Assistant ne compte plus."
+    - "Ce que HouseMind avait déduit ainsi comme lampe, il le regarde à nouveau juste après la mise à jour. Ce que tu as répondu avec C'est juste ou Pas juste reste."
+    - "Si une étiquette dans Home Assistant dit qu'un appareil est autre chose, comme un chauffage, HouseMind n'en fait pas une lampe."
+    - "Ainsi, une couverture chauffante ou l'interrupteur de mise à jour d'un compteur ne figure plus parmi les lampes d'une pièce."
+"0.2.28":
+  one: "Si des lampes sont dans un groupe, HouseMind utilise et montre le groupe, pas chaque lampe à part."
+  list:
+    - "Le Journal, Ce que j'ai pensé, le Fil des décisions et Prêt pour l'autonomie ? montrent une ligne pour le groupe, pas une par lampe."
+    - "Laisser tranquille veut dire laisser tranquille : un tel appareil n'apparaît plus que dans Appareils, où tu enlèves la coche."
+    - "Si une lampe d'un groupe est sur Laisser tranquille, le groupe l'emmène. Mets le groupe lui-même sur Laisser tranquille et tout ce qu'il contient reste immobile."
+    - "Un interrupteur en plus d'une prise, comme une protection de charge, n'est plus parmi les lampes."
+    - "La maison de démo extended a maintenant chaque type de groupe de lampes, et Appareils dit pourquoi un groupe ne fait que rassembler."
+"0.2.27":
+  one: "‘Home Assistant en ordre’ s'appelle maintenant Check-up."
+  list:
+    - "Dans le menu et sur le téléphone, la page qui vérifie Home Assistant s'appelle maintenant Check-up."
+    - "La fenêtre qu'ouvre ‘Voir’ s'appelle Check-up de Home Assistant."
+    - "L'aide et le guide utilisent le nouveau nom, dans les quatre langues."
+    - "Demande le check-up à Vesta, elle sait ce que tu veux dire ; elle connaît aussi encore l'ancien nom."
+"0.2.26":
+  one: "L'écran se reconnecte aussitôt quand tu reviens."
+  list:
+    - "L'écran a perdu le contact un moment, par exemple après une mise à jour ou quand le réseau était coupé ? Quand tu reviens à l'écran, il se reconnecte aussitôt."
+    - "Quand le réseau revient, l'écran essaie aussi aussitôt."
+    - "Tant que tu regardes l'écran, il n'attend jamais plus de dix secondes entre deux essais."
+    - "L'aide et le guide disent ce que veut dire ‘Pas de connexion – nouvel essai…’."
+"0.2.25":
+  one: "HouseMind connaît maintenant la partie de la journée d'après votre propre rythme : nuit, matin, journée et soir."
+  list:
+    - "C'est la nuit dès que la maison dort. Si quelqu'un est encore debout, deux heures après votre heure de coucher habituelle."
+    - "Le matin commence quand la maison se réveille, le soir quand vous rentrez d'habitude. Si HouseMind ne connaît pas encore une heure, l'horloge compte."
+    - "La lumière en entrant et le salut de Vesta s'y adaptent. Dans une chambre, aucune lampe ne s'allume d'elle-même à partir de l'heure de coucher habituelle."
+    - "Dans Cerveau › Rythme, la première ligne dit ce que c'est maintenant, depuis quand et pourquoi."
+"0.2.24":
+  one: "Dans le réseau, la ligne ne circule plus que pendant que HouseMind fait quelque chose, et tu peux répondre à une question sur place."
+  list:
+    - "Quand HouseMind fait quelque chose, la ligne circule quelques secondes puis s'éteint d'elle-même, au lieu de dix minutes."
+    - "Sous le dessin reste ce qu'il a fait en dernier aujourd'hui, avec l'heure et Pourquoi ?."
+    - "Une question reste une ligne pointillée tant qu'elle est ouverte, avec en dessous Fais-le et Pas maintenant : pas besoin du Journal pour ça."
+"0.2.23":
+  one: "Sur les tuiles de Prêt pour l'autonomie ?, l'anneau est maintenant en bas à droite."
+  list:
+    - "L'anneau est à côté du nombre de pièces, et ne recouvre jamais les étapes."
+    - "Le nom a toute la largeur, donc un mot long reste entier."
+    - "Les anneaux sont alignés en bas des tuiles, aussi sur un téléphone."
+"0.2.22":
+  one: "Les tuiles de Prêt pour l'autonomie ? sont plus calmes : l'anneau est maintenant en haut à droite."
+  list:
+    - "L'anneau avec le score est à côté du nom, et ne recouvre plus jamais les étapes."
+    - "Ensemble, les tuiles remplissent toute la ligne, aussi sur un grand écran."
+    - "Sur un téléphone, il y en a toujours deux côte à côte."
+"0.2.21":
+  one: "Prêt pour l'autonomie ? est plus petit : les domaines sont maintenant des tuiles côte à côte."
+  list:
+    - "Chaque tuile montre le nom, les étapes, l'anneau et le nombre de pièces. Sur un ordinateur, elles tiennent sur une ligne ; sur un téléphone, deux côte à côte."
+    - "Touche une tuile : en dessous vient une carte avec l'explication et les boutons de ce domaine, et la liste est juste en dessous, avec seulement ce domaine."
+    - "L'aperçu par sorte au-dessus d'une longue liste est aussi en tuiles, dans le Journal, les Appareils, les Automatisations existantes, les Scènes et Home Assistant en ordre."
+"0.2.20":
+  one: "Dans Énergie, un lecteur d'écran dit maintenant où en est la mesure et atteint les blocs du plan."
+  list:
+    - "Les premières semaines, Énergie montre une barre avec les jours que HouseMind a mesurés. Un lecteur d'écran la lit maintenant avec les mêmes mots qu'au-dessus, comme ‘Jour 3 sur 14’."
+    - "Dans le plan (Impliqué et Expert), un lecteur d'écran atteint maintenant aussi les blocs de la chronologie. Choisis-en un et il dit ce que fait HouseMind à ce moment, et pourquoi."
+    - "Chaque barre de l'app qui montre où en est quelque chose a maintenant un nom : dans Énergie, pendant l'apprentissage de l'historique, pendant que Vesta écoute et dans la maison de démo."
+    - "Le contrôle qui ouvre chaque écran à chaque niveau, sur un téléphone et un grand écran, en clair et en sombre, ne trouve de nouveau rien à améliorer."
+"0.2.19":
+  one: "Le Journal commence maintenant par ‘Attend ta réponse’, et une réponse de l'IA se perd moins souvent."
+  list:
+    - "Le chiffre à côté de Journal compte les notifications qui t'attendent encore. Elles sont maintenant en haut du Journal, avec leurs boutons ; une fois traitées, elles sont dans la chronologie."
+    - "Chaque question à l'IA reçoit la forme de sa réponse. Si le service le permet, l'IA ne peut pas répondre autrement."
+    - "Si une réponse ne tient pas, ce qui était complet compte. Si l'IA ne donne pas de réponse après avoir cherché, HouseMind redemande une fois."
+    - "Le nom qu'une intégration donne elle-même à un appareil, comme ‘Lumières’, reste un mot ordinaire dans ta question à Vesta."
+"0.2.18":
+  one: "Dans Home Assistant en ordre, Système est maintenant en haut, avec un anneau comme l’horloge d’Énergie."
+  list:
+    - "L’anneau extérieur montre ce qu’il y a sur le disque : la base de données, les sauvegardes, les anciennes sauvegardes isolées, le reste et ce qui est libre."
+    - "Des traits à 85 % et 95 % montrent quand HouseMind le signale. L’anneau intérieur compte les jours depuis la sauvegarde la plus récente."
+    - "Pointe une partie de l’anneau et HouseMind le dit en mots. Les tuiles de la sauvegarde, de la base de données et du disque sont en dessous."
+"0.2.17":
+  one: "Le réseau sous Maison › Pièces ressemble maintenant à la maquette : avec Vesta en grand au milieu."
+  list:
+    - "Vesta respire au milieu dans sa couleur, avec son mot en dessous. Si l’IA est activée, un anneau en pointillés l’entoure."
+    - "Les pièces sont des blocs avec leur nom, et leurs appareils en petits points. Sur un téléphone, le réseau est à la verticale."
+    - "Quand HouseMind vient de faire ou de demander quelque chose, une ligne circule pendant dix minutes de la pièce à l’appareil, en passant par Vesta. En dessous, ce qui s’est passé, avec ‘Pourquoi ?’."
+    - "Quand tout est calme, une ligne dit quand une ligne circulera. Une légende dit ce que signifient les lignes."
+"0.2.16":
+  one: "Que Vesta ouvre elle-même sa fenêtre avec une question est maintenant un seul choix pour toute la maison."
+  list:
+    - "Un administrateur en Expert trouve le choix dans Paramètres de la maison, dans le groupe Vesta. Désactivé vaut pour tout le monde à la maison."
+    - "Quand c’est désactivé, sa question ne s’ouvre plus pour personne et attend dans le Journal. Touche Vesta et elle la pose quand même."
+    - "Le choix n’est plus dans Mes préférences ; un choix personnel d’avant ne compte plus."
+"0.2.15":
+  one: "Énergie « Maintenant et aujourd'hui » montre maintenant aussi le soleil, le réseau et la maison quand un compteur a un capteur vide."
+  list:
+    - "Un appareil peut avoir plusieurs capteurs de puissance. HouseMind prenait le premier, même sans valeur ou s’il mesurait autre chose, comme le réseau sur les panneaux solaires."
+    - "Maintenant il choisit le capteur qui dit ce qu’il mesure et qui a une valeur. Si celui-ci disparaît, il lit le suivant."
+    - "Quand le réseau n’est mesuré que par phase, HouseMind additionne les phases. Quand la batterie domestique elle-même ne donne rien, il lit la batterie du système dont elle fait partie."
+    - "Ainsi « Aujourd’hui » se remplit à nouveau, et Vesta sait ce que la maison consomme maintenant."
+"0.2.14":
+  one: "Home Assistant en ordre est maintenant une page à part dans le menu, seulement pour un administrateur en Expert."
+  list:
+    - "C’était un groupe dans Paramètres de la maison, dans une petite fenêtre. Maintenant il a toute la largeur de l’écran."
+    - "Sur un ordinateur il est dans le menu à gauche, sur un téléphone c’est un cinquième bouton en bas."
+    - "Aux autres niveaux, il n’est plus dans Paramètres de la maison. ‘Voir’ sur un message à ce sujet le montre toujours."
+"0.2.13":
+  one: "Si tu dis « Fais-le » quand HouseMind demande de mettre le chauffage en absence, le réglage d’avant revient quand quelqu’un rentre."
+  list:
+    - "Quand personne n’est à la maison depuis un jour, HouseMind peut demander de mettre une pompe à chaleur en absence. Après « Fais-le », il oubliait son réglage d’avant."
+    - "Au retour, il remettait donc la pompe à chaleur sur son réglage normal, même si elle était par exemple sur éco avant."
+    - "Désormais, HouseMind retient le réglage d’avant et remet exactement celui-là."
+"0.2.12":
+  one: "Quand Vesta pose une question, elle donne maintenant la même raison que l’écran."
+  list:
+    - "Pour certaines questions, Vesta donnait une autre raison que l’écran. Elle disait par exemple « parce que quelqu’un est rentré dans le noir », alors que l’écran disait « parce que quelqu’un est rentré il y a 5 min et il n’y a plus personne dehors »."
+    - "Désormais, HouseMind garde la raison entière avec chaque question, donc Vesta donne la même."
+    - "Cela vaut aussi pour « Pourquoi ? » sous sa question, et pour les questions sur la lumière du soir ou le chauffage."
+"0.2.11":
+  one: "Un interrupteur mural d'une automatisation à bouton ne compte plus comme une lampe pour l'éclairage."
+  list:
+    - "HouseMind prenait certains interrupteurs muraux pour une lampe, parce qu'ils s'allument et s'éteignent avec elle."
+    - "Désormais, l'éclairage laisse complètement de côté les interrupteurs d'une automatisation à bouton. Vous les commandez vous-mêmes."
+    - "Ainsi, aucun « pas fait » n'apparaît plus dans le Journal pour un tel interrupteur."
+"0.2.10":
+  one: "Un bouton ou un interrupteur mural qui commande une lampe n'empêche plus HouseMind de s'occuper de cette lampe."
+  list:
+    - "Une automatisation qui ne fait que transmettre ce que vous faites vous-mêmes, comme un interrupteur mural, une télécommande ou un bouton dans l'app, est votre propre main. HouseMind commande maintenant aussi ces lampes, également en Autonome."
+    - "HouseMind ne demande jamais à désactiver une telle automatisation ; le bouton continue de marcher. Ce qu'elle fait compte comme ce que vous avez fait, donc HouseMind laisse ensuite la lampe tranquille un moment."
+    - "HouseMind ne bascule jamais l'interrupteur lui-même. Si HouseMind a éteint la lampe alors que l'interrupteur est encore sur marche, bascule-le une fois de plus."
+"0.2.9":
+  one: "Quand tu rentres dans le noir, la lumière de l’entrée s’allume, et s’éteint quelques minutes plus tard."
+  list:
+    - "Ce sont les lampes de l’allée, de la porte d’entrée ou du carport. Un jardin ou une terrasse à l’arrière reste dans le noir."
+    - "Elles s’éteignent après 5 minutes, plus tard s’il y a encore quelqu’un dehors. Si la lumière est déjà allumée, comme la lumière du soir, elle reste comme elle est."
+    - "Une automatisation qui allume l’allée quand tu rentres et l’éteint quand tu pars apprend maintenant à HouseMind. En Autonome, HouseMind peut la reprendre."
+"0.2.8":
+  one: "Si tu mets quelque chose en Autonome, HouseMind désactive aussitôt l’automatisation qui le faisait. Si cela redescend, elle se réactive aussitôt."
+  list:
+    - "Si tu mets une ligne ou un domaine en Autonome dans ‘Prêt pour l’autonomie ?’, HouseMind désactive aussitôt l’automatisation de Home Assistant qui le faisait et le fait lui-même. Si cette automatisation fait plus, comme envoyer un message, il demande d’abord."
+    - "Si cela redescend sur Proposer ou Observer, si tu désactives un domaine, ou si HouseMind recule lui-même d’une étape, l’automatisation se réactive aussitôt. Ainsi rien n’est laissé de côté ; tu le lis dans une notification et dans le Journal."
+    - "Réapprendre, les réglages d’usine et la suppression de HouseMind les réactivent d’abord, comme toujours."
+"0.2.7":
+  one: "La lumière extérieure s'allume à la tombée de la nuit, même quand personne n'est à la maison."
+  list:
+    - "La maison paraît habitée et les cambrioleurs restent à distance. Elle s'éteint quand la maison va dormir, et au plus tard à l'heure qui convient à votre maison ; tant que HouseMind ne le sait pas, à 23:30."
+    - "Quand personne n'est à la maison, elle s'éteint vers l'heure de coucher habituelle, quelques minutes différemment chaque soir, pour ne pas ressembler à une minuterie."
+    - "Une automatisation qui allume la lumière extérieure apprend maintenant à HouseMind sa luminosité et son heure. En Autonome, HouseMind demande s'il peut la reprendre."
+"0.2.6":
+  one: "Dans le manuel, ‘Les suggestions de l’IA’ se trouvent maintenant dans Règles de la maison."
+  list:
+    - "La partie sur les règles de la maison qu’une IA peut suggérer se trouvait par erreur dans Matin et soir."
+    - "Elle est maintenant à la fin de Règles de la maison, dans les quatre langues, et de même dans le manuel en ligne."
+    - "Un lien vers cette partie mène toujours au bon endroit."
+"0.2.5":
+  one: "Le journal des modifications est court et lisible, et la Documentation dans Home Assistant explique comment fonctionne HouseMind."
+  list:
+    - "Dans Home Assistant, le journal des modifications ne montre plus, par version, que ce qui est nouveau, en mots simples, à partir de 0.2.0."
+    - "La Documentation explique les trois étapes Observer, Proposer et Autonome, les parties de la maison, ainsi que les appareils et les entités."
+    - "Deux dessins montrent ce qui fait passer HouseMind à l'étape suivante, et comment il apprend avec le temps pendant que les anciennes habitudes comptent moins."
+"0.2.4":
+  one: "Dans Cerveau › Appareils, les lampes d'un groupe sont maintenant en retrait sous le groupe."
+  list:
+    - "Le groupe vient en premier ; ses lampes sont en retrait en dessous, le long d'une ligne."
+    - "Tu vois ainsi tout de suite quelles lampes appartiennent à un groupe, comme « Garage - Lampe 1 » sous « Garage »."
+    - "Un groupe plus petit dans un plus grand est aussi en retrait, avec ses propres lampes en dessous."
+"0.2.3":
+  one: "La lumière s'allume dès que tu entres, et s'éteint après le temps qui convient à ta maison."
+  list:
+    - "Si tu entres dans le noir, la lumière s'allume tout de suite. Dans une pièce que l'on traverse souvent après 10 secondes, et non plus après une demi-minute ou davantage."
+    - "Un détecteur de mouvement plus rapide que le détecteur de présence compte de nouveau tout de suite. S'il fait nuit pendant que tu es dans une pièce, la lumière s'allume sans attendre."
+    - "Combien de temps la lumière reste allumée quand il n'y a plus personne, HouseMind l'apprend pour chaque pièce de ta maison. En attendant, c'est court dans des toilettes, une salle de bain, un débarras ou une cave, et plus long dans un couloir."
+    - "Si tu reviens pendant que la lumière baisse, ou si tu rallumes tout de suite, HouseMind attend plus longtemps dans cette pièce à l'avenir. L'attente compte à partir du moment où le détecteur ne voit plus personne."
+"0.2.2":
+  one: "L'allemand et le français apparaissent maintenant sans « pas encore relu » dans la liste des langues."
+  list:
+    - "Dans Mes préférences › Langue, l'allemand et le français n'affichent plus « pas encore relu »."
+    - "C'est aussi le cas dans Paramètres de la maison › Vesta › Langue de la maison."
+    - "Le manuel n'en parle plus, dans les quatre langues."
+"0.2.1":
+  one: "Le comptage anonyme par semaine a disparu : une sortie de moins hors de la maison."
+  list:
+    - "Dans Entretien et vie privée, la case à cocher et l'aperçu ont disparu. Il n'a jamais rien envoyé, et cela reste ainsi."
+    - "La déclaration de confidentialité, l'aide, le manuel et le site n'en parlent plus."
+    - "Si un administrateur avait dit oui, c'est effacé après la mise à jour ; HouseMind n'en garde rien."
+"0.2.0":
+  one: "Tu vois maintenant en images comment HouseMind décide, et HouseMind sait mieux ce qu'est chaque appareil."
+  list:
+    - "Tu vois maintenant comment HouseMind décide, comme un flux : ce qu'il a vu, ce qu'il a pensé et ce qu'il a fait. Une ligne qui coule est faite, des points t'attendent, une ligne qui s'arrête n'a pas été faite."
+    - "En mode Sans souci, un fin anneau autour de Vesta a un point pour tout ce que HouseMind a fait aujourd'hui. À partir d'Informé, « Aujourd'hui » sous Ce que j'ai pensé montre par pièce ce qu'il a fait, demandé ou laissé."
+    - "Sous Énergie, tu vois le courant circuler : du soleil et du réseau vers la maison, la batterie et la voiture."
+    - "En mode Expert, Cerveau › Fil des décisions montre chaque décision comme un pipeline avec les six étapes de la porte, le cœur et l'IA à part, et aujourd'hui de la source au résultat. Dans le réseau, le chemin de ce que HouseMind vient de faire s'allume."
+    - "HouseMind sait maintenant ce qu'est chaque entité : une lampe, le thermostat d'une pièce, quelque chose qui mesure l'air ou l'appareil lui-même, une LED d'état ou un réglage. Il agit partout en conséquence et ne touche jamais un réglage."
+    - "Une pièce montre maintenant ses entités par appareil, avec ce qu'est chaque entité. Sous Ce que HouseMind sait de ta maison, tu confirmes par appareil en une fois."
+    - "Le voyant propre d'un capteur ou d'un assistant vocal ne compte plus comme lumière dans la pièce."
+    - "Une pièce avec un capteur de présence est vide dès que ce capteur ne voit plus personne."
+    - "Avec l'IA, HouseMind comprend mieux ta maison et Vesta est plus maligne : elle cherche des choses et continue la conversation. Ce qui est important, elle le dit toujours avec ses propres mots, et le cœur n'attend jamais l'IA."
+    - "Avec l'IA, tu vois tes habitudes et le bilan de la semaine en mots simples, tu reçois une question sur quelque chose d'inhabituel, comme une lampe allumée depuis des heures dans une pièce vide, et l'IA propose des règles de la maison."
+    - "Tu peux choisir l'IA de Home Assistant elle-même. Si elle fonctionne dans la maison, un administrateur peut faire décrire les images des caméras ; elles ne vont jamais dans le cloud."
+    - "Pour chaque question à l'IA, tu vois la consigne : pourquoi HouseMind demande et quelle réponse il veut."
+    - "Une plaque ou un four allumé alors que personne n'est à la maison devient une question pour l'éteindre."
+    - "Cerveau a des onglets, tu actives et désactives des domaines dans les Paramètres de la maison, et Ne plus afficher est le choix de l'administrateur."
+    - "À propos de HouseMind a « Bon à savoir ». Le manuel est plus court et existe maintenant aussi en allemand et en français."
+"0.1.0":
+  one: "Vesta ne dit plus que ce qui s'est vraiment passé, et HouseMind fonctionne mieux au clavier, sur un téléphone et avec un grand texte."
+  list:
+    - "Home Assistant en ordre dit maintenant combien de sauvegardes tiennent encore sur le disque, et ce que Home Assistant garde lui-même. Les anciennes sauvegardes isolées, que Home Assistant ne supprime pas lui-même, sont sur une seule carte. HouseMind ne supprime rien."
+    - "L'eau chaude en plus et le préchauffage n'ont plus lieu que s'ils rapportent vraiment : HouseMind compte la chaleur perdue, l'apprend lui-même et mesure par partie ce que cela a rapporté. Si quelque chose coûte de l'argent pendant trois semaines, il arrête."
+    - "Les administrateurs apprennent maintenant tout de suite quand quelque chose d’important ne va pas dans Home Assistant, comme une vieille sauvegarde, avec Voir. Vesta le sait aussi : ‘Quelque chose de cassé dans Home Assistant ?’"
+    - "Home Assistant en ordre montre maintenant aussi les automatisations qui ne s’exécutent plus depuis longtemps, la sauvegarde, la base de données et le disque, et ce qui ne marche plus après une mise à jour."
+    - "Dans Home Assistant en ordre, tu peux maintenant désactiver quelque chose après un oui, par exemple une entité en double. HouseMind n’efface rien, et Réactiver marche toujours. Avec Éteint exprès, Laisser ainsi et Pas un doublon, ce que tu as décidé reste."
+    - "Home Assistant en ordre voit maintenant aussi les compteurs des paramètres d’énergie à l’arrêt, une intégration qui ne mesure plus rien depuis un jour, et un compteur réseau absent des paramètres d’énergie."
+    - "Les administrateurs voient dans Paramètres de la maison › Home Assistant en ordre ce qui est cassé dans Home Assistant : une intégration qui ne démarre pas, un appareil qui ne répond pas, une entité en double, ou une automatisation qui renvoie à quelque chose qui n’existe plus. Chaque carte ouvre le bon endroit dans Home Assistant."
+    - "Les messages d'urgence disent exactement ce qui s'est passé, par exemple combien de lampes se sont allumées."
+    - "Demande « Pourquoi le chauffage n'est pas allumé ? » : Vesta dit pourquoi et quand, ou qu'elle ne sait pas."
+    - "Dans « Prêt pour l'autonomie ? », tu vois par domaine combien de fois quelqu'un est intervenu, sur quatre semaines."
+    - "Les fenêtres fonctionnent bien au clavier, et Grande n'agrandit que les lettres."
+    - "Supprimer une règle de la maison ou un moment demande d'abord oui ou non."
+    - "HouseMind démarre de façon plus fiable et se rétablit tout seul après un problème."
+    - "HouseMind réagit beaucoup plus vite, même dans une grande maison : après un changement, il ne calcule que la pièce concernée."
+    - "Les écrans se mettent à jour plus légèrement : après la première fois, seul ce qui a changé est envoyé, les téléphones et la tablette murale sont plus rapides."
+    - "Le manuel dans l'appli ressemble maintenant à celui en ligne, avec des chapitres numérotés, et peut occuper tout l'écran ou s'ouvrir dans sa propre fenêtre."
+    - "Les longues listes indiquent combien il y en a et ont des pages, des colonnes au choix, des lignes compactes, un aperçu par type et, sur un ordinateur, l'export en CSV, Markdown ou JSON."
+    - "Ce que HouseMind a réglé lui-même sur le chauffe-eau, la pompe à chaleur ou l'injection, il le remet quand ce n'est plus utile, en pause et quand il s'arrête. Si HouseMind ne répond pas, la liaison dans Home Assistant s'en charge."
+    - "Dans Énergie, tu vois maintenant et aujourd'hui : le soleil, le réseau, la maison, chaque batterie domestique et la voiture, ce que coûte l'électricité aujourd'hui et ce mois-ci, des conseils et les plus gros consommateurs. HouseMind ne pilote pas la batterie domestique ni la voiture ; Vesta te dit quand même quand la recharge coûte le moins cher."
+    - "HouseMind apprend aussi des étiquettes et catégories de Home Assistant, comme indice : il demande d'abord avant de commander quoi que ce soit à cause d'elles, et tu peux filtrer dessus dans les listes. Une étiquette comme Home Assistant ou Réseau ne laisse tranquille que ce que HouseMind ne connaît pas lui-même."
+    - "Dans Énergie, les prochaines 24 heures apparaissent en horloge, et le plan en un seul graphique : le prix (bleu quand il est négatif), ce qui entre et où cela va, avant maintenant ce qui a été mesuré, et ce que HouseMind fait par appareil. L'Énergie figure maintenant aussi dans ‘Prêt pour l'autonomie ?’."
+    - "En Expert, Mes préférences te laissent choisir si Vesta ouvre elle-même sa fenêtre avec une question. ‘Jusqu'à demain’ met en pause jusqu'au prochain 06:00, aussi après minuit."
+    - "Vesta écoute : une réponse va avec sa question, écrite ou dite. Sans IA, elle propose des choix sous forme de boutons, aussi Pourquoi ?, et dit honnêtement ce qu'elle ne sait pas au lieu de deviner. Avec une IA, tu lui parles librement, avec la conversation ; une action n'a lieu qu'après ton oui."
+    - "Quand Vesta est rouge, orange ou ambre, la ligne sous son mot dit pourquoi, sur chaque onglet, avec ‘+2’ si d'autres choses attendent. Touche-la et le Journal s'ouvre à ce message."
+    - "Sur Supervised, HouseMind fonctionne normalement. Home Assistant ne prend plus en charge ce mode d'installation depuis 2025.12 ; si Home Assistant est en mode Supervised, ou si le Supervisor indique que l'installation n'est pas prise en charge ou pas saine, les administrateurs reçoivent un seul message calme."
+    - "Dans Cerveau, sur ‘Prêt pour l'autonomie ?’, chaque compétence dans une pièce dit en une phrase quand HouseMind le fait, avec ce qu'il a appris, comme ‘J’allume la lampe de l’entrée dès que quelqu’un entre et qu’il fait sombre’. En Expert, une ligne en dessous dit exactement pourquoi."

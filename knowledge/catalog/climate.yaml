@@ -1,0 +1,61 @@
+# Climate, ventilation and hot water (catalogue domains 3–5).
+schema: 1
+kinds:
+  - key: climate.thermostat
+    match: {domain: climate}
+    safety_class: careful
+    initiative: house
+    max_step: autonomous
+    actions:
+      - action: climate.set_temperature
+        values: {temperature: [5, 30]}
+      - action: climate.set_preset_mode
+        values: {preset_mode: {one_of: [eco, comfort, home, away, sleep, none]}}
+      - action: climate.set_hvac_mode
+        values: {hvac_mode: {one_of: [heat, cool, heat_cool, auto, "off"]}}
+        max_step: propose
+    min_interval_s: 2700
+    max_changes_per_day: 10
+    people_win: until_house_mode_changes
+    people_win_max_hours: 4
+    skills: [heat_on_presence, cool_on_presence, keep_temperature, setback_away, preheat_arrival, window_open_setback, frost_protection]
+
+  - key: fan.ventilation
+    match: {domain: fan}
+    safety_class: free
+    initiative: house
+    max_step: autonomous
+    actions:
+      - action: fan.turn_on
+      - action: fan.turn_off
+      - action: fan.set_percentage
+        values: {percentage: [0, 100]}
+    min_interval_s: 120
+    people_win: until_situation_changes
+    people_win_max_hours: 2
+    skills: [ventilate_co2, ventilate_humidity, kitchen_hood]
+
+  - key: humidifier.any
+    match: {domain: humidifier}
+    safety_class: careful
+    initiative: house
+    max_step: autonomous
+    actions:
+      - action: humidifier.turn_on
+      - action: humidifier.turn_off
+      - action: humidifier.set_humidity
+        values: {humidity: [30, 70]}
+    min_interval_s: 600
+    skills: [keep_humidity]
+
+  - key: water_heater.any
+    match: {domain: water_heater}
+    safety_class: careful
+    initiative: house
+    max_step: autonomous
+    actions:
+      - action: water_heater.set_temperature
+        values: {temperature: [45, 70]}
+    min_interval_s: 1800
+    max_changes_per_day: 8
+    skills: [hot_water_ready, boost_on_surplus]

@@ -1,0 +1,165 @@
+# Noms simples pour les appareils (E-248, B-93) : comment Vesta nomme un appareil, comme une
+# personne. Aucun nom d'une maison : seulement des mots ordinaires. Une nouvelle langue est un
+# nouveau fichier.
+grammar: fr
+and: "et"
+one_of: ""  # "l'un"/"l'une" dépend du genre : alors simplement le nom
+of: "de"  # a person in a room's name, only when two rooms would sound the same
+numbers: [un, une, deux, trois, quatre, cinq, six, sept, huit, neuf, dix, premier, première, deuxième, troisième]
+fillers: [de, du, des, le, la, les, l, un, une, et, avec, pour, au, à, groupe, nouveau, nouvelle, ancien, principal]
+# mot : [genre, pluriel] – m ou f. Un nom suivi de "de …" le garde : "détecteur de fumée".
+nouns:
+  lampe: [f, lampes]
+  lumière: [f, lumières]
+  éclairage: [m, éclairages]
+  plafonnier: [m, plafonniers]
+  applique: [f, appliques]
+  spot: [m, spots]
+  ruban: [m, rubans]
+  fenêtre: [f, fenêtres]
+  porte: [f, portes]
+  portail: [m, portails]
+  volet: [m, volets]
+  volets: [m, volets]
+  store: [m, stores]
+  rideau: [m, rideaux]
+  rideaux: [m, rideaux]
+  thermostat: [m, thermostats]
+  radiateur: [m, radiateurs]
+  chauffage: [m, chauffages]
+  climatiseur: [m, climatiseurs]
+  ventilateur: [m, ventilateurs]
+  hotte: [f, hottes]
+  caméra: [f, caméras]
+  camera: [f, caméras]
+  sonnette: [f, sonnettes]
+  serrure: [f, serrures]
+  alarme: [f, alarmes]
+  sirène: [f, sirènes]
+  détecteur: [m, détecteurs]
+  capteur: [m, capteurs]
+  prise: [f, prises]
+  interrupteur: [m, interrupteurs]
+  lave-linge: [m, lave-linge]
+  sèche-linge: [m, sèche-linge]
+  lave-vaisselle: [m, lave-vaisselle]
+  machine: [f, machines]
+  réfrigérateur: [m, réfrigérateurs]
+  frigo: [m, frigos]
+  congélateur: [m, congélateurs]
+  four: [m, fours]
+  plaque: [f, plaques]
+  micro-ondes: [m, micro-ondes]
+  chauffe-eau: [m, chauffe-eau]
+  ballon: [m, ballons]
+  pompe: [f, pompes]
+  télévision: [f, télévisions]
+  télé: [f, télés]
+  tv: [f, télés]
+  enceinte: [f, enceintes]
+  haut-parleur: [m, haut-parleurs]
+  ampli: [m, amplis]
+  amplificateur: [m, amplificateurs]
+  aspirateur: [m, aspirateurs]
+  robot: [m, robots]
+  tondeuse: [f, tondeuses]
+  vanne: [f, vannes]
+  robinet: [m, robinets]
+  borne: [f, bornes]
+  chargeur: [m, chargeurs]
+  batterie: [f, batteries]
+  humidificateur: [m, humidificateurs]
+  déshumidificateur: [m, déshumidificateurs]
+  thermomètre: [m, thermomètres]
+  routeur: [m, routeurs]
+  imprimante: [f, imprimantes]
+  ordinateur: [m, ordinateurs]
+  bouilloire: [f, bouilloires]
+defaults:
+  light: lampe
+  switch: interrupteur
+  switch.outlet: prise
+  cover: store
+  cover.curtain: rideau
+  cover.shutter: volet
+  cover.garage: porte de garage
+  cover.gate: portail
+  cover.door: porte
+  cover.window: fenêtre
+  binary_sensor: capteur
+  binary_sensor.door: porte
+  binary_sensor.window: fenêtre
+  binary_sensor.garage_door: porte de garage
+  binary_sensor.opening: porte
+  binary_sensor.smoke: détecteur de fumée
+  binary_sensor.carbon_monoxide: détecteur
+  binary_sensor.gas: détecteur
+  sensor: capteur
+  sensor.temperature: thermomètre
+  climate: thermostat
+  fan: ventilateur
+  camera: caméra
+  lock: serrure
+  alarm_control_panel: alarme
+  siren: sirène
+  media_player: enceinte
+  media_player.tv: télé
+  media_player.receiver: ampli
+  vacuum: robot aspirateur
+  lawn_mower: tondeuse
+  valve: vanne
+  water_heater: chauffe-eau
+  humidifier: humidificateur
+  écran: [m, écrans]
+  compteur: [m, compteurs]
+  binary_sensor.motion: détecteur de mouvement
+  binary_sensor.occupancy: détecteur de présence
+  binary_sensor.presence: détecteur de présence
+  binary_sensor.moisture: détecteur de fuite
+  sensor.humidity: capteur d'humidité
+  sensor.illuminance: capteur de lumière
+# mot : [genre, préposition] – "dans la cuisine", "sur le toit".
+places:
+  cuisine: [f, dans]
+  salon: [m, dans]
+  séjour: [m, dans]
+  chambre: [f, dans]
+  salle: [f, dans]
+  bureau: [m, dans]
+  entrée: [f, dans]
+  couloir: [m, dans]
+  cave: [f, dans]
+  grenier: [m, dans]
+  garage: [m, dans]
+  jardin: [m, dans]
+  terrasse: [f, sur]
+  balcon: [m, sur]
+  toit: [m, sur]
+  allée: [f, dans]
+  abri: [m, sous]
+  cellier: [m, dans]
+  buanderie: [f, dans]
+  toilettes: [f, dans]
+  wc: [m, dans]
+  maison: [f, dans]
+  escalier: [m, dans]
+  véranda: [f, dans]
+  atelier: [m, dans]
+  cour: [f, dans]
+  lit: [m, près de]
+  plafond: [m, à]
+  mur: [m, sur]
+  rue: [f, côté]
+  canapé: [m, près de]
+  table: [f, au-dessus de]
+  miroir: [m, près de]
+alone: [dehors, dedans, "en haut", "en bas"]
+sides: [gauche, droite, milieu, avant, arrière, haut, bas, grand, petit]
+# How a state is said (E-243). French agrees: masculine, feminine, and both plurals.
+states:
+  "on": ["allumé", "allumée", "allumés", "allumées"]
+  "off": ["éteint", "éteinte", "éteints", "éteintes"]
+  open: ["ouvert", "ouverte", "ouverts", "ouvertes"]
+  closed: ["fermé", "fermée", "fermés", "fermées"]
+  locked: ["verrouillé", "verrouillée", "verrouillés", "verrouillées"]
+  unlocked: ["déverrouillé", "déverrouillée", "déverrouillés", "déverrouillées"]

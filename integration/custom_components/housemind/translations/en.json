@@ -1,0 +1,140 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "description": "HouseMind is installed as an App. Set up the connection to it?"
+      },
+      "hassio_confirm": {
+        "description": "The HouseMind App was found. Set it up?"
+      }
+    },
+    "abort": {
+      "no_app": "The HouseMind App was not found. Place the integration again from HouseMind's house settings.",
+      "cannot_connect": "HouseMind cannot be reached. Is the App running?",
+      "already_configured": "HouseMind is already set up."
+    },
+    "error": {
+      "cannot_connect": "HouseMind cannot be reached. Is the App running?"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "state": {
+        "name": "State"
+      },
+      "house_mode": {
+        "name": "House mode",
+        "state": {
+          "home": "Home",
+          "away": "Away",
+          "sleep": "Sleep",
+          "vacation": "Vacation",
+          "guests": "Guests"
+        }
+      },
+      "health": {
+        "name": "Health",
+        "state": {
+          "ok": "OK",
+          "paused": "Paused",
+          "emergency": "Emergency"
+        }
+      },
+      "saving": {
+        "name": "Saving"
+      }
+    },
+    "switch": {
+      "pause": {
+        "name": "Pause"
+      }
+    },
+    "select": {
+      "house_mode_choice": {
+        "name": "House mode choice",
+        "state": {
+          "home": "Home",
+          "away": "Away",
+          "sleep": "Sleep",
+          "vacation": "Vacation",
+          "guests": "Guests"
+        }
+      }
+    }
+  },
+  "selector": {
+    "mode": {
+      "options": {
+        "home": "Home",
+        "away": "Away",
+        "sleep": "Sleep",
+        "vacation": "Vacation",
+        "guests": "Guests"
+      }
+    }
+  },
+  "services": {
+    "pause": {
+      "name": "Pause",
+      "description": "Pause HouseMind. Emergency reactions keep working.",
+      "fields": {
+        "minutes": {
+          "name": "Minutes",
+          "description": "How long; empty means until resumed."
+        }
+      }
+    },
+    "resume": {
+      "name": "Resume",
+      "description": "HouseMind takes part again."
+    },
+    "house_mode": {
+      "name": "Set house mode",
+      "description": "Set the house mode by hand; it holds until who is home changes.",
+      "fields": {
+        "mode": {
+          "name": "Mode",
+          "description": "The house mode."
+        }
+      }
+    },
+    "feedback": {
+      "name": "Feedback",
+      "description": "Thumbs up or down on HouseMind's last action – it learns from it.",
+      "fields": {
+        "good": {
+          "name": "Good",
+          "description": "On: thumbs up. Off: thumbs down."
+        },
+        "decision": {
+          "name": "Decision",
+          "description": "The number of one decision of HouseMind. Without it, the last action."
+        }
+      }
+    },
+    "house_rule": {
+      "name": "House rule",
+      "description": "A house rule in plain words. First read back; set Confirm to save it.",
+      "fields": {
+        "text": {
+          "name": "Rule",
+          "description": "For example: never the hall light on after 23:00."
+        },
+        "confirm": {
+          "name": "Confirm",
+          "description": "Save the rule."
+        }
+      }
+    },
+    "ask": {
+      "name": "Ask",
+      "description": "Ask HouseMind a question about the house.",
+      "fields": {
+        "question": {
+          "name": "Question",
+          "description": "Your question."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,58 @@
+name: Release images
+
+# Builds and signs the App images for amd64 and aarch64 when a version tag is pushed
+# (E-137, E-143, B-10). Tags vX.Y.Z-beta.N go to Beta, vX.Y.Z to Stable (E-148).
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+
+jobs:
+  # Nothing is built or signed before every check is green and the tag is the App's version
+  # (QA 3, gat 8): a tag on a broken or other commit makes no image.
+  checks:
+    uses: ./.github/workflows/ci.yml
+
+  version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: The tag is the version in the App's config
+        run: |
+          app=$(grep -E '^version:' ha_app_stable/config.yaml | sed -E 's/^version: *"?([^"]*)"?.*/\1/')
+          test "${GITHUB_REF_NAME#v}" = "$app" || { echo "tag $GITHUB_REF_NAME is not version $app"; exit 1; }
+
+  image:
+    needs: [checks, version]
+    runs-on: ubuntu-latest
+    environment: release # a protected environment: an administrator's go on GitHub
+    strategy:
+      matrix:
+        arch: [amd64, aarch64]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: docker/setup-qemu-action@c7c53464625b32c7a7e944ae62b3e17d2b600130 # v3
+      - uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
+      - uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - id: meta
+        run: |
+          echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+          if [ "${{ matrix.arch }}" = "amd64" ]; then echo "platform=linux/amd64" >> "$GITHUB_OUTPUT"; else echo "platform=linux/arm64" >> "$GITHUB_OUTPUT"; fi
+      - id: build
+        uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
+        with:
+          context: .
+          platforms: ${{ steps.meta.outputs.platform }}
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/housemind-${{ matrix.arch }}:${{ steps.meta.outputs.version }}
+      - uses: sigstore/cosign-installer@398d4b0eeef1380460a10c8013a76f728fb906ac # v3
+      - name: Sign image
+        run: cosign sign --yes ghcr.io/${{ github.repository_owner }}/housemind-${{ matrix.arch }}@${{ steps.build.outputs.digest }}

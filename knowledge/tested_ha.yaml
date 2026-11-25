@@ -1,0 +1,7 @@
+# The Home Assistant versions this HouseMind version was tested with, by year.month
+# (E-142, E-155). The release check fills this list (tests/test_real_ha.py against the real
+# Home Assistant containers); a knowledge update can add a newer version without a new App.
+# Older than "oldest" is not supported: the App's config.yaml asks for the same lowest version.
+schema: 1
+oldest: "2026.4"
+tested: ["2026.4", "2026.10"]

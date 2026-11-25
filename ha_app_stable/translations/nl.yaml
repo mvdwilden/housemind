@@ -1,0 +1,10 @@
+configuration:
+  demo_mode:
+    name: Demomodus
+    description: Probeer HouseMind met een verzonnen huis. Je echte huis en het geheugen ervan worden nooit aangeraakt.
+  demo_home:
+    name: Demohuis
+    description: "Welk verzonnen huis je wilt zien: simple – eenvoudig (twaalf apparaten), average – gemiddeld (bijna veertig) of extended – uitgebreid (elk soort apparaat dat HouseMind kent)."
+  log_level:
+    name: Logniveau
+    description: Hoeveel detail er in het logboek komt.

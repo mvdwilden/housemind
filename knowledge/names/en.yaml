@@ -1,0 +1,175 @@
+# Plain names for devices (E-248, B-93): how Vesta names a device, the way a person does.
+# No names from one house: only ordinary words. A new language is a new file.
+grammar: en
+and: "and"
+one_of: "one of {np}"
+of: "of"  # a person in a room's name, only when two rooms would sound the same
+numbers: [one, two, three, four, five, six, seven, eight, nine, ten, first, second, third, fourth]
+fillers: [of, the, a, an, and, with, for, at, on, in, group, new, old, main]
+# word: [gender, plural] – English has no gender; "n" keeps the form simple.
+nouns:
+  lamp: [n, lamps]
+  light: [n, lights]
+  lights: [n, lights]
+  lighting: [n, lighting]
+  spot: [n, spots]
+  spotlight: [n, spotlights]
+  strip: [n, strips]
+  window: [n, windows]
+  door: [n, doors]
+  gate: [n, gates]
+  curtain: [n, curtains]
+  curtains: [n, curtains]
+  shutter: [n, shutters]
+  shutters: [n, shutters]
+  blind: [n, blinds]
+  blinds: [n, blinds]
+  shade: [n, shades]
+  awning: [n, awnings]
+  thermostat: [n, thermostats]
+  radiator: [n, radiators]
+  heating: [n, heating]
+  heater: [n, heaters]
+  aircon: [n, aircons]
+  fan: [n, fans]
+  hood: [n, hoods]
+  camera: [n, cameras]
+  doorbell: [n, doorbells]
+  lock: [n, locks]
+  alarm: [n, alarms]
+  siren: [n, sirens]
+  detector: [n, detectors]
+  sensor: [n, sensors]
+  socket: [n, sockets]
+  outlet: [n, outlets]
+  plug: [n, plugs]
+  switch: [n, switches]
+  washer: [n, washers]
+  dryer: [n, dryers]
+  dishwasher: [n, dishwashers]
+  machine: [n, machines]
+  fridge: [n, fridges]
+  refrigerator: [n, refrigerators]
+  freezer: [n, freezers]
+  oven: [n, ovens]
+  hob: [n, hobs]
+  stove: [n, stoves]
+  microwave: [n, microwaves]
+  boiler: [n, boilers]
+  tv: [n, TVs]
+  television: [n, televisions]
+  speaker: [n, speakers]
+  receiver: [n, receivers]
+  amplifier: [n, amplifiers]
+  vacuum: [n, vacuums]
+  robot: [n, robots]
+  mower: [n, mowers]
+  valve: [n, valves]
+  tap: [n, taps]
+  charger: [n, chargers]
+  battery: [n, batteries]
+  pump: [n, pumps]
+  humidifier: [n, humidifiers]
+  dehumidifier: [n, dehumidifiers]
+  thermometer: [n, thermometers]
+  router: [n, routers]
+  printer: [n, printers]
+  computer: [n, computers]
+  kettle: [n, kettles]
+defaults:
+  light: light
+  switch: switch
+  switch.outlet: socket
+  cover: blind
+  cover.curtain: curtain
+  cover.shutter: shutter
+  cover.garage: garage door
+  cover.gate: gate
+  cover.door: door
+  cover.window: window
+  binary_sensor: sensor
+  binary_sensor.door: door
+  binary_sensor.window: window
+  binary_sensor.garage_door: garage door
+  binary_sensor.opening: door
+  binary_sensor.smoke: smoke detector
+  binary_sensor.carbon_monoxide: detector
+  binary_sensor.gas: detector
+  sensor: sensor
+  sensor.temperature: thermometer
+  climate: thermostat
+  fan: fan
+  camera: camera
+  lock: lock
+  alarm_control_panel: alarm
+  siren: siren
+  media_player: speaker
+  media_player.tv: TV
+  media_player.receiver: receiver
+  vacuum: robot vacuum
+  lawn_mower: mower
+  valve: valve
+  water_heater: boiler
+  humidifier: humidifier
+  screen: [n, screens]
+  meter: [n, meters]
+  binary_sensor.motion: motion sensor
+  binary_sensor.occupancy: presence sensor
+  binary_sensor.presence: presence sensor
+  binary_sensor.moisture: leak sensor
+  sensor.humidity: humidity sensor
+  sensor.illuminance: light sensor
+# word: [gender, preposition]
+places:
+  kitchen: [n, in]
+  room: [n, in]
+  bedroom: [n, in]
+  bathroom: [n, in]
+  hall: [n, in]
+  hallway: [n, in]
+  landing: [n, "on"]
+  attic: [n, in]
+  loft: [n, in]
+  cellar: [n, in]
+  basement: [n, in]
+  garage: [n, in]
+  garden: [n, in]
+  yard: [n, in]
+  terrace: [n, "on"]
+  patio: [n, "on"]
+  deck: [n, "on"]
+  porch: [n, "on"]
+  balcony: [n, "on"]
+  roof: [n, "on"]
+  driveway: [n, "on"]
+  carport: [n, under]
+  shed: [n, in]
+  office: [n, in]
+  study: [n, in]
+  toilet: [n, in]
+  laundry: [n, in]
+  utility: [n, in]
+  house: [n, in]
+  entrance: [n, at]
+  stairs: [n, "on"]
+  conservatory: [n, in]
+  workshop: [n, in]
+  bed: [n, by]
+  ceiling: [n, "on"]
+  wall: [n, "on"]
+  street: [n, "on"]
+  sofa: [n, by]
+  couch: [n, by]
+  table: [n, above]
+  desk: [n, "on"]
+  mirror: [n, by]
+alone: [outside, inside, upstairs, downstairs]
+sides: [left, right, middle, front, back, top, bottom, big, small]
+# How a state is said (E-243). French agrees: masculine, feminine, and both plurals.
+states:
+  "on": ["on"]
+  "off": ["off"]
+  open: ["open"]
+  closed: ["closed"]
+  locked: ["locked"]
+  unlocked: ["unlocked"]

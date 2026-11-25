@@ -1,0 +1,41 @@
+# Labels and categories from Home Assistant as a hint (E-345, B-219): which part of the house a
+# label or category points to. HouseMind looks at the name (any of these words in it, in any
+# language) and at the pictogram. A label that fits two parts gives no hint. "system" points to
+# what is no house device (Home Assistant itself, the network, a tablet): HouseMind asks once
+# whether to leave those alone. A hint never leads: HouseMind's own recognition and Home
+# Assistant's device class come first, and operating something waits for an administrator's yes.
+# Parts are those of the filters (brain/filters.py PARTS); a house may add words in its own file.
+parts:
+  lighting:
+    words: [light, lights, lamp, lamps, licht, lichten, lampen, verlichting, leuchte, beleuchtung, lumiere, lumieres, eclairage]
+    icons: [mdi:lightbulb, mdi:lightbulb-group, mdi:lamp, mdi:ceiling-light, mdi:led-strip]
+  covers:
+    words: [curtain, curtains, blind, blinds, shutter, shutters, cover, covers, gordijn, gordijnen, rolluik, rolluiken, zonwering, vorhang, rollladen, jalousie, rideau, rideaux, volet, volets, store]
+    icons: [mdi:curtains, mdi:blinds, mdi:window-shutter, mdi:roller-shade]
+  climate:
+    words: [heating, heat, climate, thermostat, temperature, verwarming, klimaat, temperatuur, heizung, klima, temperatur, chauffage, climat, temperature]
+    icons: [mdi:home-thermometer, mdi:thermometer, mdi:thermostat, mdi:radiator, mdi:heat-wave, mdi:fire]
+  air:
+    words: [humidity, co2, air, ventilation, luchtvochtigheid, vocht, lucht, ventilatie, luftfeuchtigkeit, luft, luftung, humidite, air, ventilation]
+    icons: [mdi:water-percent, mdi:molecule-co2, mdi:air-filter, mdi:fan]
+  media:
+    words: [media, speaker, speakers, music, tv, audio, luidspreker, muziek, lautsprecher, musik, fernseher, enceinte, musique, tele]
+    icons: [mdi:speaker, mdi:music, mdi:television]
+  cleaning:
+    words: [vacuum, cleaning, stofzuiger, schoonmaken, staubsauger, reinigung, aspirateur, menage]
+    icons: [mdi:robot-vacuum]
+  garden:
+    words: [garden, lawn, tuin, gazon, garten, rasen, jardin, pelouse]
+    icons: [mdi:flower, mdi:sprinkler, mdi:robot-mower]
+  water:
+    words: [water, leak, boiler, wasser, leck, eau, fuite]
+    icons: [mdi:water, mdi:water-pump, mdi:water-boiler]
+  security:
+    words: [alarm, alert, security, beveiliging, sicherheit, securite, alerte]
+    icons: [mdi:alarm-light, mdi:alert, mdi:alert-outline, mdi:shield-home, mdi:cctv]
+  messages:
+    words: [notification, notifications, notify, melding, meldingen, benachrichtigung, notification]
+    icons: [mdi:message, mdi:bell]
+system:
+  words: [home assistant, network, netwerk, netzwerk, reseau, tablet, server, router, system, systeem]
+  icons: [mdi:network, mdi:home-assistant, hacs:hacs, mdi:server, mdi:router-wireless]

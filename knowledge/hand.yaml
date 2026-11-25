@@ -1,0 +1,19 @@
+# The hand of the resident (E-448): an automation that only starts when a person presses a
+# button or flips a switch, and only switches or dims lamps and switches, is no other system.
+# Its lamps are not only watched, HouseMind never asks to switch it off, and what it does counts
+# as a person (people win). These are Home Assistant's own words, not a house's; a house may add
+# its own in its own knowledge folder.
+#
+# events: event triggers that are a person's act. "app" – an action in the phone app (counts as
+#   a person); "button" – a button or remote of an integration (counts as a wall switch).
+# device_words: a device trigger without an entity (a remote, a button) is a press when its type
+#   or subtype holds one of these words – and none of not_words (a sensor that also reports an
+#   "action", such as a vibration sensor, is no person).
+# domains: a state or device trigger on an entity of these domains is a switch or button in Home
+#   Assistant (a wall switch, a helper, a button on a dashboard).
+events:
+  app: [ios.action_fired, mobile_app_notification_action]
+  button: [zha_event, hue_event, deconz_event, shelly.click, lutron_caseta_button_event, homematic.keypress]
+device_words: [action, button, press, release, click, single, double, triple, long, hold, short, rotate, remote, tap, flip, slide, shake]
+not_words: [vibration, tilt, drop, fall, motion, occupancy, presence, door, window, contact, water, leak, smoke]
+domains: [switch, input_boolean, input_button, button, event]

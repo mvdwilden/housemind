@@ -1,0 +1,26 @@
+# Een kleurenschema van HouseMind (E-266, E-267); uitleg staat in diep.yaml.
+id: contrast
+volgorde: 3
+naam: { nl: Hoog contrast, en: High contrast, de: Hoher Kontrast, fr: Contraste élevé }
+uitleg:
+  nl: "Zo duidelijk mogelijk: wit op zwart, met duidelijke randen."
+  en: "As clear as possible: white on black, with clear edges."
+  de: "So deutlich wie möglich: Weiß auf Schwarz, mit klaren Rändern."
+  fr: "Le plus net possible : blanc sur noir, avec des bords nets."
+basis: donker
+niveau: AAA            # tekst minstens 7:1
+kleuren:
+  inkt: "#000000"
+  vlak: "#0B0F1A"
+  verhoogd: "#161D30"
+  lijn: "#8A96B8"
+  rand: "#C4CCE0"
+  tekst: "#FFFFFF"
+  gedempt: "#D9DFEE"
+  accent: "#7FF0E0"
+  op-accent: "#00201C"
+  nood: "#FF9AA5"
+  belangrijk: "#FFB98C"
+  leren: "#FFD98A"
+vesta:
+  gloed: 1

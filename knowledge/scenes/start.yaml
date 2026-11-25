@@ -1,0 +1,25 @@
+# Start scenes (E-106): recognisable moments with light and atmosphere, per room role. HouseMind
+# offers each one in every room with that role and the lights to make it; people add their own
+# ("remember this"). Values are what HA itself uses (brightness_pct, color_temp_kelvin); a light
+# that cannot dim simply goes on. Covers: only window coverings, never a garage door or gate.
+schema: 1
+scenes:
+  cooking:
+    in: [kitchen]
+    light: {brightness_pct: 100, color_temp_kelvin: 4000}
+  dinner:
+    in: [dining, kitchen]
+    light: {brightness_pct: 60, color_temp_kelvin: 2700}
+  movie:
+    in: [living]
+    light: {brightness_pct: 10, color_temp_kelvin: 2200}
+    covers: close
+  cosy:
+    in: [living, dining]
+    light: {brightness_pct: 40, color_temp_kelvin: 2700}
+  work:
+    in: [office]
+    light: {brightness_pct: 100, color_temp_kelvin: 4000}
+  reading:
+    in: [living, bedroom, child_bedroom, guest_room]
+    light: {brightness_pct: 70, color_temp_kelvin: 3000}

@@ -1,0 +1,9 @@
+# Integrations that steer energy devices themselves (E-68). HouseMind never uses their own
+# controls, and only watches the charger or home battery they steer – it plans around them.
+# These are Home Assistant integration names (technical data), never shown in the app or help.
+schema: 1
+platforms:
+  - evcc
+  - evcc_intg
+  - emhass
+  - predbat

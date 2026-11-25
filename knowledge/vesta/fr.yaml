@@ -1,0 +1,1080 @@
+# Les mots de Vesta (E-220, E-222, E-228, E-229, B-79).
+# Elle parle comme une personne dans une conversation : des phrases entières et fluides,
+# courtes mais jamais sèches. Aucune phrase d'un, deux ou trois mots (un test y veille). Au
+# moins cinq variantes par sorte de message, avec « tu » (« je ») et « vous » (« u »). La
+# première phrase est l'essentiel : au niveau 1, Vesta ne dit que celle-là. Les {mots}
+# viennent des faits ; {moment} est le moment de la journée (« ce matin », « ce soir » …).
+# Une pointe d'humour seulement dans « calm_light » et « greeting » : jamais en cas d'urgence.
+name: Vesta
+
+moments:
+  morning: ce matin
+  afternoon: cet après-midi
+  evening: ce soir
+  night: cette nuit
+
+salutes:
+  morning: "Bonjour"
+  afternoon: "Bonjour"
+  evening: "Bonsoir"
+  night: "Bonsoir"
+
+# Her opening after a tap (E-225): like a butler, what can she do for you.
+offer:
+  je:
+    - "{salute}, que puis-je faire pour toi ?"
+    - "Oui, dis-moi, comment puis-je t'aider ?"
+    - "Je suis là, que puis-je faire pour toi ?"
+    - "{salute}, en quoi puis-je t'aider ?"
+    - "Dis-moi ce que je peux faire pour toi."
+    - "Comment est-ce que je peux t'aider ?"
+  u:
+    - "{salute}, que puis-je faire pour vous ?"
+    - "Oui, dites-moi, comment puis-je vous aider ?"
+    - "Je suis là, que puis-je faire pour vous ?"
+    - "{salute}, en quoi puis-je vous aider ?"
+    - "Dites-moi ce que je peux faire pour vous."
+    - "Comment est-ce que je peux vous aider ?"
+
+greeting:
+  je:
+    - "Bienvenue à la maison, ça fait plaisir de te revoir."
+    - "Hé, te revoilà. Bienvenue à la maison."
+    - "Bon retour, la maison est prête pour toi."
+    - "Contente de te voir, bienvenue à la maison."
+    - "Te voilà. La maison t'a manqué, et à moi aussi, pour tout dire."
+    - "Bienvenue à la maison. Ça fait plaisir de te revoir {moment}."
+  u:
+    - "Bienvenue à la maison, ça fait plaisir de vous revoir."
+    - "Vous revoilà. Bienvenue à la maison."
+    - "Bon retour, la maison est prête pour vous."
+    - "Contente de vous voir, bienvenue à la maison."
+    - "Bienvenue à la maison. La maison vous attendait."
+    - "Bienvenue à la maison. Ça fait plaisir de vous revoir {moment}."
+
+calm:
+  je:
+    - "C'est calme à la maison, tu n'as besoin de rien pour l'instant."
+    - "Tout se passe comme prévu, je garde un œil sur tout pour toi."
+    - "C'est calme à la maison {moment}, rien de spécial à signaler."
+    - "Il ne se passe rien en ce moment, alors profites-en."
+    - "Tout va bien, je veille pour que tu n'aies pas à le faire."
+    - "La maison est bien tranquille {moment}, tout est en ordre."
+  u:
+    - "C'est calme à la maison, vous n'avez besoin de rien pour l'instant."
+    - "Tout se passe comme prévu, je garde un œil sur tout pour vous."
+    - "C'est calme à la maison {moment}, rien de spécial à signaler."
+    - "Il ne se passe rien en ce moment, alors profitez-en."
+    - "Tout va bien, je veille pour que vous n'ayez pas à le faire."
+    - "La maison est bien tranquille {moment}, tout est en ordre."
+
+calm_light:
+  je:
+    - "C'est si calme que même la machine à laver n'a rien à redire."
+    - "Il n'y a rien à signaler, une journée ennuyeuse, et c'est très bien comme ça."
+    - "Tout roule si bien que je m'ennuierais presque."
+    - "La maison se tient parfaitement {moment}, je n'ai rien à redire."
+    - "C'est calme, et s'il se passe quelque chose, tu seras le premier informé."
+  u:
+    - "C'est si calme que même la machine à laver n'a rien à redire."
+    - "Il n'y a rien à signaler, une journée ennuyeuse, et c'est très bien comme ça."
+    - "Tout roule si bien que je m'ennuierais presque."
+    - "La maison se tient parfaitement {moment}, je n'ai rien à redire."
+    - "C'est calme, et s'il se passe quelque chose, vous serez le premier informé."
+
+sleeping:
+  je:
+    - "La maison dort et tout est calme, rendors-toi bien."
+    - "Il fait nuit et tout va bien, je veille."
+    - "Il n'y a rien de grave, tu peux te rendormir tranquille."
+    - "Tout est silencieux à la maison, je monte la garde pour toi."
+    - "C'est calme à la maison {moment}, il n'y a aucune raison de t'inquiéter."
+  u:
+    - "La maison dort et tout est calme, rendormez-vous bien."
+    - "Il fait nuit et tout va bien, je veille."
+    - "Il n'y a rien de grave, vous pouvez vous rendormir tranquille."
+    - "Tout est silencieux à la maison, je monte la garde pour vous."
+    - "C'est calme à la maison {moment}, il n'y a aucune raison de vous inquiéter."
+
+paused:
+  je:
+    - "Je suis en pause et je ne fais rien moi-même, je regarde seulement."
+    - "Je suis en pause pour l'instant, mais en cas d'urgence j'interviens toujours."
+    - "Je ne fais rien moi-même pour le moment ; dis-moi quand je peux reprendre."
+    - "Je reste immobile comme demandé, mais une urgence passe toujours avant."
+    - "Je me contente de regarder jusqu'à la fin de la pause."
+  u:
+    - "Je suis en pause et je ne fais rien moi-même, je regarde seulement."
+    - "Je suis en pause pour l'instant, mais en cas d'urgence j'interviens toujours."
+    - "Je ne fais rien moi-même pour le moment ; dites-moi quand je peux reprendre."
+    - "Je reste immobile comme demandé, mais une urgence passe toujours avant."
+    - "Je me contente de regarder jusqu'à la fin de la pause."
+
+listen:
+  je:
+    - "Vas-y, dis-moi, je t'écoute."
+    - "Que puis-je faire pour toi ?"
+    - "Tu veux savoir ou régler autre chose ?"
+    - "Raconte-moi tout, je t'écoute."
+    - "Y a-t-il autre chose que je puisse faire pour toi ?"
+  u:
+    - "Allez-y, je vous écoute."
+    - "Que puis-je faire pour vous ?"
+    - "Voulez-vous savoir ou régler autre chose ?"
+    - "Dites-moi, je vous écoute."
+    - "Y a-t-il autre chose que je puisse faire pour vous ?"
+
+more:
+  je:
+    - "Et aussi :"
+    - "Ah oui,"
+    - "Encore une chose :"
+    - "Par ailleurs :"
+    - "Et puis ceci :"
+  u:
+    - "Et aussi :"
+    - "Ah oui,"
+    - "Encore une chose :"
+    - "Par ailleurs :"
+    - "Et puis ceci :"
+
+did:
+  je:
+    - "{text}"
+    - "Pour info : {text}"
+    - "Ce que je viens de faire : {text}"
+    - "Pour que ce soit clair : {text}"
+    - "Pour que tu sois au courant : {text}"
+  u:
+    - "{text}"
+    - "Pour information : {text}"
+    - "Ce que je viens de faire : {text}"
+    - "Pour que ce soit clair : {text}"
+    - "Pour que vous soyez au courant : {text}"
+
+considered:
+  je:
+    - "J'ai aussi envisagé quelque chose : {text}"
+    - "Ce que j'ai choisi de laisser : {text}"
+    - "J'ai aussi réfléchi à autre chose : {text}"
+    - "J'ai failli faire encore autre chose : {text}"
+    - "Ce que j'ai volontairement évité : {text}"
+  u:
+    - "J'ai aussi envisagé quelque chose : {text}"
+    - "Ce que j'ai choisi de laisser : {text}"
+    - "J'ai aussi réfléchi à autre chose : {text}"
+    - "J'ai failli faire encore autre chose : {text}"
+    - "Ce que j'ai volontairement évité : {text}"
+
+question:
+  je:
+    - "Je peux te poser une question ? {question}"
+    - "{question}"
+    - "Je me demandais quelque chose : {question}"
+    - "J'ai une petite question pour toi : {question}"
+    - "Qu'est-ce que tu en penses : {question}"
+  u:
+    - "Puis-je vous poser une question ? {question}"
+    - "{question}"
+    - "Je me demandais quelque chose : {question}"
+    - "J'ai une petite question pour vous : {question}"
+    - "Qu'en pensez-vous : {question}"
+
+emergency:
+  je:
+    - "Fais bien attention, c'est une urgence. {text}"
+    - "C'est important, écoute-moi un instant. {text}"
+    - "Écoute un instant, quelque chose ne va pas. {text}"
+    - "Attention, une alarme se déclenche. {text}"
+    - "Il y a une urgence à la maison, fais bien attention. {text}"
+  u:
+    - "Faites bien attention, c'est une urgence. {text}"
+    - "C'est important, écoutez-moi un instant. {text}"
+    - "Écoutez un instant, quelque chose ne va pas. {text}"
+    - "Attention, une alarme se déclenche. {text}"
+    - "Il y a une urgence à la maison, faites bien attention. {text}"
+
+outside_alarm:
+  je:
+    - "Dehors, près de {area}, une alarme sonne pour {what}. C'est peut-être chez les voisins, mais jette un œil."
+    - "Un capteur dehors, près de {area}, entend {what}, tu peux vérifier que tout va bien ?"
+    - "Quelque chose sonne dehors près de {area} : {what}. Sans doute pas chez nous, mais vérifie par prudence."
+    - "J'entends {what} dehors près de {area}. Je ne fais rien moi-même, mais tu peux regarder ?"
+    - "Une alarme pour {what} sonne dehors près de {area}, un coup d'œil serait sage."
+  u:
+    - "Dehors, près de {area}, une alarme sonne pour {what}. C'est peut-être chez les voisins, mais jetez un œil."
+    - "Un capteur dehors, près de {area}, entend {what}, pouvez-vous vérifier que tout va bien ?"
+    - "Quelque chose sonne dehors près de {area} : {what}. Sans doute pas chez nous, mais vérifiez par prudence."
+    - "J'entends {what} dehors près de {area}. Je ne fais rien moi-même, mais pouvez-vous regarder ?"
+    - "Une alarme pour {what} sonne dehors près de {area}, un coup d'œil serait sage."
+
+appliance_done:
+  je:
+    - "{device} a terminé, quand tu auras envie de le vider."
+    - "Bonne nouvelle : {device} vient de terminer."
+    - "{device} a terminé, rien ne presse mais c'est bon à savoir."
+    - "Je te préviens juste que {device} a terminé."
+    - "{device} vient de finir son travail."
+  u:
+    - "{device} a terminé, quand vous voudrez le vider."
+    - "Bonne nouvelle : {device} vient de terminer."
+    - "{device} a terminé, rien ne presse mais c'est bon à savoir."
+    - "Je vous préviens juste que {device} a terminé."
+    - "{device} vient de finir son travail."
+
+cooking_away:
+  je:
+    - "{device} est encore allumé alors que personne n'est là, éteins-le si tu peux."
+    - "Attention : {device} est encore allumé, et tout le monde est sorti."
+    - "{device} est allumé et la maison est vide, tu veux l'éteindre ?"
+    - "Personne n'est à la maison, mais {device} est encore allumé. Tu peux vérifier ?"
+    - "{device} est encore allumé alors que personne n'est là, tu voudras le savoir."
+  u:
+    - "{device} est encore allumé alors que personne n'est là, éteignez-le si vous pouvez."
+    - "Attention : {device} est encore allumé, et tout le monde est sorti."
+    - "{device} est allumé et la maison est vide, voulez-vous l'éteindre ?"
+    - "Personne n'est à la maison, mais {device} est encore allumé. Pouvez-vous vérifier ?"
+    - "{device} est encore allumé alors que personne n'est là, vous voudrez le savoir."
+
+fridge_open:
+  je:
+    - "La porte de {device} est ouverte depuis un moment."
+    - "{device} est ouvert depuis un bon moment, tu le fermes ?"
+    - "Juste un petit signal : la porte de {device} n'est pas bien fermée."
+    - "La porte de {device} est encore ouverte, dommage pour le froid."
+    - "Tu peux fermer la porte de {device} un instant ?"
+  u:
+    - "La porte de {device} est ouverte depuis un moment."
+    - "{device} est ouvert depuis un bon moment, vous le fermez ?"
+    - "Juste un petit signal : la porte de {device} n'est pas bien fermée."
+    - "La porte de {device} est encore ouverte, dommage pour le froid."
+    - "Pouvez-vous fermer la porte de {device} un instant ?"
+
+open_when_away:
+  je:
+    - "{device} est ouvert alors que personne n'est à la maison."
+    - "Attention : {device} est ouvert alors que tout le monde est sorti."
+    - "{device} est encore ouvert, et la maison est vide."
+    - "Personne n'est à la maison, mais {device} est ouvert. Tu le savais ?"
+    - "{device} est resté ouvert alors que personne n'est là."
+  u:
+    - "{device} est ouvert alors que personne n'est à la maison."
+    - "Attention : {device} est ouvert alors que tout le monde est sorti."
+    - "{device} est encore ouvert, et la maison est vide."
+    - "Personne n'est à la maison, mais {device} est ouvert. Le saviez-vous ?"
+    - "{device} est resté ouvert alors que personne n'est là."
+
+water_running:
+  je:
+    - "L'eau coule depuis {minutes} minutes alors que personne ne l'utilise. Vérifie s'il y a une fuite."
+    - "L'eau coule depuis {minutes} minutes sans que personne ne l'utilise, c'est peut-être une fuite."
+    - "L'eau coule depuis {minutes} minutes, mais je ne vois personne l'utiliser."
+    - "L'eau s'écoule depuis {minutes} minutes et personne ne semble l'utiliser. Tu peux regarder ?"
+    - "De l'eau que personne n'utilise coule depuis {minutes} minutes. Tu peux vérifier ?"
+  u:
+    - "L'eau coule depuis {minutes} minutes alors que personne ne l'utilise. Vérifiez s'il y a une fuite."
+    - "L'eau coule depuis {minutes} minutes sans que personne ne l'utilise, c'est peut-être une fuite."
+    - "L'eau coule depuis {minutes} minutes, mais je ne vois personne l'utiliser."
+    - "L'eau s'écoule depuis {minutes} minutes et personne ne semble l'utiliser. Pouvez-vous regarder ?"
+    - "De l'eau que personne n'utilise coule depuis {minutes} minutes. Pouvez-vous vérifier ?"
+
+water_valve_closed:
+  je:
+    - "J'ai fermé {device}, car l'eau coulait depuis {minutes} minutes sans que personne ne l'utilise."
+    - "{device} est fermé : l'eau a coulé trop longtemps, {minutes} minutes. Vérifie s'il y a une fuite."
+    - "Par prudence, j'ai fermé {device}, l'eau a coulé pendant {minutes} minutes."
+    - "L'eau est coupée par {device}, car elle a coulé {minutes} minutes alors que personne ne l'utilisait."
+    - "J'ai coupé l'eau avec {device}. Tu peux vérifier s'il y a une fuite quelque part ?"
+  u:
+    - "J'ai fermé {device}, car l'eau coulait depuis {minutes} minutes sans que personne ne l'utilise."
+    - "{device} est fermé : l'eau a coulé trop longtemps, {minutes} minutes. Vérifiez s'il y a une fuite."
+    - "Par prudence, j'ai fermé {device}, l'eau a coulé pendant {minutes} minutes."
+    - "L'eau est coupée par {device}, car elle a coulé {minutes} minutes alors que personne ne l'utilisait."
+    - "J'ai coupé l'eau avec {device}. Pouvez-vous vérifier s'il y a une fuite quelque part ?"
+
+waste:
+  je:
+    - "Demain, on ramasse {what}, tu sors la poubelle ?"
+    - "Tu penses à la poubelle ? Demain, c'est {what}."
+    - "Demain, c'est le tour des déchets : {what}."
+    - "{what} est ramassé demain, la poubelle peut donc aller au bord de la rue."
+    - "Demain, c'est jour de collecte pour {what}, n'oublie pas la poubelle."
+  u:
+    - "Demain, on ramasse {what}, vous sortez la poubelle ?"
+    - "Vous pensez à la poubelle ? Demain, c'est {what}."
+    - "Demain, c'est le tour des déchets : {what}."
+    - "{what} est ramassé demain, la poubelle peut donc aller au bord de la rue."
+    - "Demain, c'est jour de collecte pour {what}, n'oubliez pas la poubelle."
+
+battery:
+  je:
+    - "La pile de {device} est presque vide."
+    - "{device} aura bientôt besoin d'une nouvelle pile."
+    - "Une tâche pour plus tard : la pile de {device} s'épuise."
+    - "{device} est presque à plat, il lui faut donc une nouvelle pile."
+    - "La pile de {device} est presque vide, rien ne presse mais n'oublie pas."
+  u:
+    - "La pile de {device} est presque vide."
+    - "{device} aura bientôt besoin d'une nouvelle pile."
+    - "Une tâche pour plus tard : la pile de {device} s'épuise."
+    - "{device} est presque à plat, il lui faut donc une nouvelle pile."
+    - "La pile de {device} est presque vide, rien ne presse mais n'oubliez pas."
+
+ha_lost:
+  je:
+    - "Je n'ai pas de connexion avec Home Assistant en ce moment, alors je ne fais rien de nouveau."
+    - "La connexion avec Home Assistant est coupée ; je réessaie sans cesse."
+    - "Je n'arrive pas à joindre Home Assistant pour l'instant. Dès que ça marche, je vérifie que tout fonctionne."
+    - "Home Assistant ne répond pas ; tant qu'il n'est pas revenu, je ne commande rien moi-même."
+    - "Home Assistant me manque en ce moment, mais je me reconnecte toute seule."
+  u:
+    - "Je n'ai pas de connexion avec Home Assistant en ce moment, alors je ne fais rien de nouveau."
+    - "La connexion avec Home Assistant est coupée ; je réessaie sans cesse."
+    - "Je n'arrive pas à joindre Home Assistant pour l'instant. Dès que ça marche, je vérifie que tout fonctionne."
+    - "Home Assistant ne répond pas ; tant qu'il n'est pas revenu, je ne commande rien moi-même."
+    - "Home Assistant me manque en ce moment, mais je me reconnecte toute seule."
+
+offline:
+  je:
+    - "{device} ne répond plus, vérifie qu'il a du courant ou une connexion."
+    - "Je n'entends plus rien de {device}, il est toujours branché ?"
+    - "{device} ne répond plus, la connexion est peut-être coupée."
+    - "{device} est devenu silencieux, tu peux vérifier qu'il est encore allumé ?"
+    - "{device} me manque, car il ne répond plus. Tu peux jeter un œil ?"
+  u:
+    - "{device} ne répond plus, vérifiez qu'il a du courant ou une connexion."
+    - "Je n'entends plus rien de {device}, il est toujours branché ?"
+    - "{device} ne répond plus, la connexion est peut-être coupée."
+    - "{device} est devenu silencieux, pouvez-vous vérifier qu'il est encore allumé ?"
+    - "{device} me manque, car il ne répond plus. Pouvez-vous jeter un œil ?"
+
+offline_safety:
+  je:
+    - "{device} ne répond plus. C'est un capteur de sécurité, vérifie-le dès que possible."
+    - "Je n'entends plus rien de {device}, et c'est un capteur de sécurité. Vérifie-le dès que possible."
+    - "{device} est devenu silencieux. Comme c'est un capteur de sécurité : tu peux le vérifier dès que possible ?"
+    - "Attention : {device} ne répond plus. C'est un capteur de sécurité, vérifie-le dès que possible."
+    - "{device} me manque, et c'est un capteur de sécurité. Tu peux regarder ce qui se passe dès que possible ?"
+  u:
+    - "{device} ne répond plus. C'est un capteur de sécurité, vérifiez-le dès que possible."
+    - "Je n'entends plus rien de {device}, et c'est un capteur de sécurité. Vérifiez-le dès que possible."
+    - "{device} est devenu silencieux. Comme c'est un capteur de sécurité : pouvez-vous le vérifier dès que possible ?"
+    - "Attention : {device} ne répond plus. C'est un capteur de sécurité, vérifiez-le dès que possible."
+    - "{device} me manque, et c'est un capteur de sécurité. Pouvez-vous regarder ce qui se passe dès que possible ?"
+
+filter:
+  je:
+    - "Le filtre de {device} doit bientôt être remplacé."
+    - "{device} aura bientôt besoin d'un nouveau filtre."
+    - "Une tâche pour bientôt : le filtre de {device} est presque usé."
+    - "Le filtre de {device} arrive au bout, note-le sur ta liste."
+    - "{device} demandera bientôt un filtre propre."
+  u:
+    - "Le filtre de {device} doit bientôt être remplacé."
+    - "{device} aura bientôt besoin d'un nouveau filtre."
+    - "Une tâche pour bientôt : le filtre de {device} est presque usé."
+    - "Le filtre de {device} arrive au bout, notez-le sur votre liste."
+    - "{device} demandera bientôt un filtre propre."
+
+device_hot:
+  je:
+    - "{device} chauffe beaucoup, {temperature} °C. Regarde ce qui est branché, car il y a un risque d'incendie."
+    - "Attention : {device} est à {temperature} °C, c'est trop chaud. Jette un œil."
+    - "{device} est devenu chaud, {temperature} °C. Débranche-le si c'est sans danger."
+    - "{device} mesure {temperature} °C, c'est trop chaud et un coup d'œil serait sage."
+    - "{device} monte jusqu'à {temperature} °C et je n'aime pas ça. Tu peux vérifier ?"
+  u:
+    - "{device} chauffe beaucoup, {temperature} °C. Regardez ce qui est branché, car il y a un risque d'incendie."
+    - "Attention : {device} est à {temperature} °C, c'est trop chaud. Jetez un œil."
+    - "{device} est devenu chaud, {temperature} °C. Débranchez-le si c'est sans danger."
+    - "{device} mesure {temperature} °C, c'est trop chaud et un coup d'œil serait sage."
+    - "{device} monte jusqu'à {temperature} °C et je n'aime pas ça. Pouvez-vous vérifier ?"
+
+guests_unconfirmed:
+  je:
+    - "Il y a quelqu'un à la maison, mais aucun habitant n'est là. Ce sont des invités ?"
+    - "Je vois quelqu'un à la maison alors qu'aucun de vous n'est là. Tu es au courant ?"
+    - "Quelqu'un bouge à la maison pendant que les habitants sont sortis. Baby-sitter, visite ou autre chose ?"
+    - "Quelqu'un est à la maison sans qu'un habitant soit là, c'est normal ?"
+    - "On dirait qu'il y a de la visite pendant votre absence, c'est normal ?"
+  u:
+    - "Il y a quelqu'un à la maison, mais aucun habitant n'est là. Ce sont des invités ?"
+    - "Je vois quelqu'un à la maison alors qu'aucun habitant n'est là. Êtes-vous au courant ?"
+    - "Quelqu'un bouge à la maison pendant que les habitants sont sortis. Baby-sitter, visite ou autre chose ?"
+    - "Quelqu'un est à la maison sans qu'un habitant soit là, c'est normal ?"
+    - "On dirait qu'il y a de la visite pendant votre absence, c'est normal ?"
+
+learned:
+  je:
+    - "J'ai appris quelque chose de nouveau grâce à vous : {what}."
+    - "Je suis encore un peu plus sage : {what}."
+    - "Voilà ce que je sais maintenant de votre maison : {what}."
+    - "Quelque chose que je viens d'apprendre : {what}."
+    - "Nouveau pour moi, et bon à savoir : {what}."
+  u:
+    - "J'ai appris quelque chose de nouveau grâce à vous : {what}."
+    - "Je suis encore un peu plus sage : {what}."
+    - "Voilà ce que je sais maintenant de votre maison : {what}."
+    - "Quelque chose que je viens d'apprendre : {what}."
+    - "Nouveau pour moi, et bon à savoir : {what}."
+
+other:
+  je:
+    - "Juste ceci, pour que tu le saches : {text}"
+    - "Quelque chose que tu voudras savoir : {text}"
+    - "Je voudrais te dire encore une chose : {text}"
+    - "Pour ton information : {text}"
+    - "C'est bon à savoir : {text}"
+  u:
+    - "Juste ceci, pour que vous le sachiez : {text}"
+    - "Quelque chose que vous voudrez savoir : {text}"
+    - "Je voudrais vous dire encore une chose : {text}"
+    - "Pour votre information : {text}"
+    - "C'est bon à savoir : {text}"
+
+not_heard:
+  je:
+    - "Je n'ai pas bien compris, tu peux le redire ?"
+    - "Pardon, je n'ai pas saisi. Réessaie sans problème."
+    - "Je n'ai pas bien entendu, tu peux répéter ?"
+    - "Ça n'est pas bien passé, réessaie s'il te plaît."
+    - "Qu'est-ce que tu as dit ? Je n'ai malheureusement pas compris."
+  u:
+    - "Je n'ai pas bien compris, pouvez-vous le redire ?"
+    - "Pardon, je n'ai pas saisi. Réessayez sans problème."
+    - "Je n'ai pas bien entendu, pouvez-vous répéter ?"
+    - "Ça n'est pas bien passé, réessayez s'il vous plaît."
+    - "Qu'avez-vous dit ? Je n'ai malheureusement pas compris."
+
+answer_yes:
+  je:
+    - "Je m'en occupe tout de suite."
+    - "Très bien, je le fais maintenant pour toi."
+    - "D'accord, je m'en charge."
+    - "Aussitôt dit, aussitôt fait, c'est réglé."
+    - "C'est parti, tu n'as plus rien à faire."
+  u:
+    - "Je m'en occupe tout de suite."
+    - "Très bien, je le fais maintenant pour vous."
+    - "D'accord, je m'en charge."
+    - "Aussitôt dit, aussitôt fait, c'est réglé."
+    - "C'est parti, vous n'avez plus rien à faire."
+
+answer_no:
+  je:
+    - "Bien, alors je laisse comme c'est."
+    - "D'accord, alors je ne le fais pas."
+    - "D'accord, je redemanderai peut-être plus tard."
+    - "Compris, je laisse comme ça."
+    - "Pas de souci, tout reste comme avant."
+  u:
+    - "Bien, alors je laisse comme c'est."
+    - "D'accord, alors je ne le fais pas."
+    - "D'accord, je redemanderai peut-être plus tard."
+    - "Compris, je laisse comme ça."
+    - "Pas de souci, tout reste comme avant."
+
+morning:
+  je:
+    - "Bonjour, j'espère que tu as bien dormi. {text}"
+    - "Bonjour ! Voici ce que tu voudras savoir aujourd'hui. {text}"
+    - "Bonjour, voici ta journée en bref. {text}"
+    - "Bonjour, voici l'essentiel pour aujourd'hui. {text}"
+    - "Je te souhaite une très bonne journée, voici le programme. {text}"
+  u:
+    - "Bonjour, j'espère que vous avez bien dormi. {text}"
+    - "Bonjour ! Voici ce que vous voudrez savoir aujourd'hui. {text}"
+    - "Bonjour, voici votre journée en bref. {text}"
+    - "Bonjour, voici l'essentiel pour aujourd'hui. {text}"
+    - "Je vous souhaite une très bonne journée, voici le programme. {text}"
+
+bedtime_ok:
+  je:
+    - "Tout est fermé et éteint, dors bien."
+    - "La maison est prête pour la nuit, bonne nuit."
+    - "Fenêtres et portes sont fermées, tu peux aller dormir tranquille."
+    - "Tout est en ordre pour la nuit, dors bien."
+    - "Il n'y a plus rien à faire, bonne nuit et à demain."
+  u:
+    - "Tout est fermé et éteint, dormez bien."
+    - "La maison est prête pour la nuit, bonne nuit."
+    - "Fenêtres et portes sont fermées, vous pouvez aller dormir tranquille."
+    - "Tout est en ordre pour la nuit, dormez bien."
+    - "Il n'y a plus rien à faire, bonne nuit et à demain."
+
+bedtime_found:
+  je:
+    - "Avant d'aller dormir, juste ceci : {text}"
+    - "Encore une chose pour la nuit : {text}"
+    - "La maison est presque prête pour la nuit. {text}"
+    - "Avant de te coucher, tu voudras peut-être savoir ceci : {text}"
+    - "J'ai fait un petit tour pour la nuit. {text}"
+  u:
+    - "Avant d'aller dormir, juste ceci : {text}"
+    - "Encore une chose pour la nuit : {text}"
+    - "La maison est presque prête pour la nuit. {text}"
+    - "Avant de vous coucher, vous voudrez peut-être savoir ceci : {text}"
+    - "J'ai fait un petit tour pour la nuit. {text}"
+
+# Sur elle-même, quand on lui demande son nom ou qui elle est (E-242).
+about_me:
+  je:
+    - "Je suis {name}, la voix de cette maison. Je veille sur ce qui se passe ici et je t'aide dès que je peux."
+    - "Je m'appelle {name}, et je garde un œil sur la maison pour toi et je te préviens quand quelque chose compte."
+    - "Mon nom est {name}, enchantée. N'hésite pas à me demander tout ce que tu veux savoir sur la maison."
+    - "{name}, la voix de ta maison. Je veille à ce que la maison fasse ce qu'il faut, pour que tu n'aies pas à y penser."
+    - "Je suis {name}, j'habite ici avec toi et je veille sur la maison, même quand tu n'es pas là."
+  u:
+    - "Je suis {name}, la voix de cette maison. Je veille sur ce qui se passe ici et je vous aide dès que je peux."
+    - "Je m'appelle {name}, et je garde un œil sur la maison pour vous et je vous préviens quand quelque chose compte."
+    - "Mon nom est {name}, enchantée. N'hésitez pas à me demander tout ce que vous voulez savoir sur la maison."
+    - "{name}, la voix de votre maison. Je veille à ce que la maison fasse ce qu'il faut, pour que vous n'ayez pas à y penser."
+    - "Je suis {name}, j'habite ici avec vous et je veille sur la maison, même quand vous n'êtes pas là."
+
+# Encore une question après sa réponse (E-252) : une à la fois.
+next_question:
+  je:
+    - "J'ai encore une question pour toi, si tu as un moment."
+    - "Il y a encore une chose que j'aimerais te demander."
+    - "Encore une chose, et ensuite je te laisse tranquille."
+    - "J'aimerais te demander autre chose, si tu veux bien."
+    - "Alors j'ai encore une question pour toi."
+  u:
+    - "J'ai encore une question pour vous, si vous avez un moment."
+    - "Il y a encore une chose que j'aimerais vous demander."
+    - "Encore une chose, et ensuite je vous laisse tranquille."
+    - "J'aimerais vous demander autre chose, si vous voulez bien."
+    - "Alors j'ai encore une question pour vous."
+
+# Après « Plus tard » sur sa question (E-252) : elle reste dans les Notifications.
+ask_later:
+  je:
+    - "Très bien, je te le redemanderai plus tard."
+    - "Pas de souci, j'y reviendrai plus tard."
+    - "D'accord, cela reste dans les Notifications jusqu'à ce que tu aies le temps."
+    - "C'est bien, je redemanderai tout à l'heure."
+    - "Plus tard, c'est très bien, je m'en souviens pour toi."
+  u:
+    - "Très bien, je vous le redemanderai plus tard."
+    - "Pas de souci, j'y reviendrai plus tard."
+    - "D'accord, cela reste dans les Notifications jusqu'à ce que vous ayez le temps."
+    - "C'est bien, je redemanderai tout à l'heure."
+    - "Plus tard, c'est très bien, je m'en souviens pour vous."
+
+# Après « Je m'en occupe » sur un message qu'elle a cité (E-381).
+ask_seen:
+  je:
+    - "Très bien, je laisse cela de côté pour l'instant."
+    - "D'accord, je n'en reparle plus tant que rien ne change."
+    - "Merci d'y jeter un œil. Je ne dirai rien avant que ça change."
+    - "Bien, je ne dis plus rien pour le moment."
+    - "Merci, je laisse cela tranquille pour l'instant."
+  u:
+    - "Très bien, je laisse cela de côté pour l'instant."
+    - "D'accord, je n'en reparle plus tant que rien ne change."
+    - "Merci d'y jeter un œil. Je ne dirai rien avant que ça change."
+    - "Bien, je ne dis plus rien pour le moment."
+    - "Merci, je laisse cela tranquille pour l'instant."
+# Après « Ne plus afficher » ou « ignore » (E-382) : plus jamais, à annuler dans le Journal.
+ask_muted:
+  je:
+    - "D'accord, je n'en parlerai plus à personne à la maison. Tu peux l'annuler dans le Journal."
+    - "Entendu, personne à la maison n'en entendra plus parler par moi. Le Journal le remet."
+    - "Compris, je ne montrerai plus ce message à personne. Le Journal permet de le remettre."
+    - "Très bien, je le laisse de côté pour toute la maison désormais. Tu peux l'annuler dans le Journal."
+    - "C'est noté, personne à la maison n'en entendra plus parler. Le Journal permet de revenir en arrière."
+  u:
+    - "D'accord, je n'en parlerai plus à personne à la maison. Vous pouvez l'annuler dans le Journal."
+    - "Entendu, personne à la maison n'en entendra plus parler par moi. Le Journal le remet."
+    - "Compris, je ne montrerai plus ce message à personne. Le Journal permet de le remettre."
+    - "Très bien, je le laisse de côté pour toute la maison désormais. Vous pouvez l'annuler dans le Journal."
+    - "C'est noté, personne à la maison n'en entendra plus parler. Le Journal permet de revenir en arrière."
+# Après « Terminé » sur une notification avec une tâche (E-252).
+ask_done:
+  je:
+    - "Parfait, je le raye de la liste."
+    - "Très bien, c'est réglé alors."
+    - "Merci, je l'enlève de la liste maintenant."
+    - "Super, je n'aurai plus besoin de te le rappeler."
+    - "Bien, c'est fait et rayé de la liste."
+  u:
+    - "Parfait, je le raye de la liste."
+    - "Très bien, c'est réglé alors."
+    - "Merci, je l'enlève de la liste maintenant."
+    - "Super, je n'aurai plus besoin de vous le rappeler."
+    - "Bien, c'est fait et rayé de la liste."
+
+# Na 👍 of 👎 op ‘Was dat goed?’ in haar venster (E-298).
+answer_thumbs:
+  je:
+    - "Merci, cela m'aide à mieux faire."
+    - "Merci de me le dire, je m'en souviens."
+    - "Bon à savoir, j'en tire une leçon."
+    - "Merci beaucoup, j'en tiens compte."
+    - "C'est clair, c'est comme ça que j'apprends ce qui te convient."
+  u:
+    - "Merci, cela m'aide à mieux faire."
+    - "Merci de me le dire, je m'en souviens."
+    - "Bon à savoir, j'en tire une leçon."
+    - "Merci beaucoup, j'en tiens compte."
+    - "C'est clair, c'est comme ça que j'apprends ce qui vous convient."
+
+# Antwoorden over het huis, de instellingen en de huisregels (E-243 – E-245, 18.3 – 18.5).
+# Feiten in haar eigen woorden: minstens drie varianten; een u-vorm alleen waar een je of u in staat.
+know_state_yes:
+  je:
+    - "Oui, {thing} est {state}."
+    - "Oui, {thing} est bien {state}."
+    - "C'est ça, {thing} est {state}."
+know_state_no:
+  je:
+    - "Non, {thing} est {state}."
+    - "Pas tout à fait, {thing} est {state}."
+    - "Non, {thing} est {state} en ce moment."
+know_state_is:
+  je:
+    - "{thing} est {state} en ce moment."
+    - "Pour l'instant, {thing} est {state}."
+    - "{thing} est {state}, je viens de vérifier."
+know_state_unknown:
+  je:
+    - "Je ne reçois rien de {thing} en ce moment, je ne peux donc pas le dire avec certitude."
+    - "Je ne sais pas avec certitude, {thing} ne répond pas pour l'instant."
+    - "{thing} ne répond pas en ce moment, je ne peux donc pas l'affirmer."
+know_many:
+  je:
+    - "{things} sont encore {state}."
+    - "En ce moment, {things} sont {state}."
+    - "Ils sont encore {state} : {things}."
+know_none:
+  je:
+    - "Plus rien n'est {state}, tout va bien."
+    - "Je ne vois rien qui soit encore {state}."
+    - "Tout va bien, rien n'est {state}."
+know_climate:
+  je:
+    - "Il fait {temperature} {where} en ce moment."
+    - "{where}, il fait {temperature}."
+    - "Je mesure {temperature} {where} pour l'instant."
+know_climate_house:
+  je:
+    - "À l'intérieur, il fait {temperature} en moyenne."
+    - "Dans la maison, il fait {temperature} en ce moment."
+    - "Il fait en moyenne {temperature} à l'intérieur."
+know_climate_unknown:
+  je:
+    - "Je n'ai pas de thermomètre que je peux lire {where}."
+    - "Je ne sais pas quelle température il fait {where}, je n'y mesure rien."
+    - "Je ne mesure aucune température {where}, je ne sais donc pas."
+know_humidity:
+  je:
+    - "L'humidité {where} est de {humidity} pour cent."
+    - "{where}, l'air est humide à {humidity} pour cent."
+    - "Je mesure une humidité de {humidity} pour cent {where}."
+know_someone_yes:
+  je:
+    - "Oui, il y a quelqu'un {where} en ce moment."
+    - "Oui, quelqu'un est {where}."
+    - "Je vois quelqu'un {where} en ce moment."
+know_someone_no:
+  je:
+    - "Non, il n'y a personne {where} en ce moment."
+    - "Non, personne n'est {where}."
+    - "Je ne vois personne {where} pour l'instant."
+know_me_here:
+  je:
+    - "Tu es {where} en ce moment."
+    - "D'après ton téléphone, tu es {where}."
+    - "Je te vois {where}."
+  u:
+    - "Vous êtes {where} en ce moment."
+    - "D'après votre téléphone, vous êtes {where}."
+    - "Je vous vois {where}."
+know_me_maybe:
+  je:
+    - "Je ne vois quelqu'un que {where}, c'est donc sans doute toi."
+    - "Il n'y a quelqu'un que {where} en ce moment ; je pense que c'est toi."
+    - "Je vois quelqu'un {where} et nulle part ailleurs : ce doit être toi."
+  u:
+    - "Je ne vois quelqu'un que {where}, c'est donc sans doute vous."
+    - "Il n'y a quelqu'un que {where} en ce moment ; je pense que c'est vous."
+    - "Je vois quelqu'un {where} et nulle part ailleurs : ce doit être vous."
+know_me_unsure:
+  je:
+    - "Je vois quelqu'un {rooms}, mais je ne sais pas qui est qui."
+    - "Il y a quelqu'un {rooms} ; lequel est toi, je ne sais pas."
+    - "Je vois des gens {rooms}, mais pas qui est où."
+  u:
+    - "Je vois quelqu'un {rooms}, mais je ne sais pas qui est qui."
+    - "Il y a quelqu'un {rooms} ; lequel est vous, je ne sais pas."
+    - "Je vois des gens {rooms}, mais pas qui est où."
+know_me_none:
+  je:
+    - "Je ne vois personne dans aucune pièce en ce moment, je ne sais donc pas où tu es."
+    - "Mes capteurs ne voient personne en ce moment ; je ne sais donc pas où tu es."
+    - "Je ne vois personne nulle part en ce moment, désolée."
+  u:
+    - "Je ne vois personne dans aucune pièce en ce moment, je ne sais donc pas où vous êtes."
+    - "Mes capteurs ne voient personne en ce moment ; je ne sais donc pas où vous êtes."
+    - "Je ne vois personne nulle part en ce moment, désolée."
+know_home_count:
+  je:
+    - "Il y a {count} personnes à la maison en ce moment."
+    - "En ce moment, {count} personnes sont à la maison."
+    - "Je vois que {count} personnes sont à la maison."
+know_home_one:
+  je:
+    - "Il y a une personne à la maison en ce moment."
+    - "En ce moment, une personne est à la maison."
+    - "Je vois qu'une personne est à la maison."
+know_home_none:
+  je:
+    - "Il n'y a personne à la maison en ce moment."
+    - "La maison est vide pour l'instant."
+    - "Je ne vois personne à la maison, elle est vide."
+know_did:
+  je:
+    - "Aujourd'hui, j'ai {text}."
+    - "J'ai {text} aujourd'hui."
+    - "Jusqu'ici, aujourd'hui, j'ai {text}."
+know_did_none:
+  je:
+    - "Je n'ai encore rien eu à faire aujourd'hui."
+    - "Il n'y avait encore rien à faire pour moi aujourd'hui."
+    - "Jusqu'ici, je n'ai rien eu à faire aujourd'hui."
+know_energy_use:
+  je:
+    - "La maison consomme {power} en ce moment."
+    - "Pour l'instant, la maison utilise {power}."
+    - "La consommation est de {power} en ce moment."
+know_energy_sun:
+  je:
+    - "Les panneaux solaires fournissent {power} en ce moment."
+    - "Le soleil donne {power} pour l'instant."
+    - "Il vient {power} du soleil en ce moment."
+know_energy_none:
+  je:
+    - "Je n'ai pas de compteur d'énergie que je peux lire."
+    - "Je ne peux lire nulle part combien la maison consomme."
+    - "Je n'ai pas de compteur pour cela, je ne sais donc pas."
+know_setting_where:
+  je:
+    - "Tu trouves cela dans {sheet}, sous ‘{section}’. Je l'ouvre pour toi ?"
+    - "C'est dans {sheet}, sous ‘{section}’. Je l'ouvre ?"
+    - "Regarde dans {sheet}, sous ‘{section}’. Tu veux que je l'ouvre ?"
+  u:
+    - "Vous trouvez cela dans {sheet}, sous ‘{section}’. Je l'ouvre pour vous ?"
+    - "C'est dans {sheet}, sous ‘{section}’. Je l'ouvre ?"
+    - "Regardez dans {sheet}, sous ‘{section}’. Voulez-vous que je l'ouvre ?"
+know_setting_spoken:
+  je:
+    - "Tu trouves cela dans l'appli, dans {sheet}, sous ‘{section}’."
+    - "Dans l'appli, c'est dans {sheet}, sous ‘{section}’."
+    - "Regarde dans l'appli, dans {sheet}, sous ‘{section}’."
+  u:
+    - "Vous trouvez cela dans l'appli, dans {sheet}, sous ‘{section}’."
+    - "Dans l'appli, c'est dans {sheet}, sous ‘{section}’."
+    - "Regardez dans l'appli, dans {sheet}, sous ‘{section}’."
+know_setting_admin:
+  je:
+    - "C'est l'administrateur qui s'en occupe, dans {sheet} sous ‘{section}’."
+    - "C'est une affaire pour l'administrateur de la maison, sous ‘{section}’ dans {sheet}."
+    - "Seul l'administrateur peut changer cela, dans {sheet} sous ‘{section}’."
+know_setting_now:
+  je:
+    - "En ce moment, c'est réglé sur {value}."
+    - "Pour l'instant, c'est sur {value}."
+    - "C'est actuellement réglé sur {value}."
+know_todo_none:
+  je:
+    - "Rien ne t'attend, tout va bien."
+    - "Tu n'as rien à faire pour l'instant."
+    - "Non, rien ne t'attend en ce moment."
+  u:
+    - "Rien ne vous attend, tout va bien."
+    - "Vous n'avez rien à faire pour l'instant."
+    - "Non, rien ne vous attend en ce moment."
+know_todo_one:
+  je:
+    - "Oui, une chose t'attend encore."
+    - "Il reste une chose pour toi."
+    - "Encore une chose, et tout sera fait."
+  u:
+    - "Oui, une chose vous attend encore."
+    - "Il reste une chose pour vous."
+    - "Encore une chose, et tout sera fait."
+know_todo_some:
+  je:
+    - "Oui, {count} choses t'attendent."
+    - "Il y a {count} choses pour toi."
+    - "Il reste {count} choses ouvertes pour toi."
+  u:
+    - "Oui, {count} choses vous attendent."
+    - "Il y a {count} choses pour vous."
+    - "Il reste {count} choses ouvertes pour vous."
+know_todo_more:
+  je:
+    - "Tu trouves les {count} autres dans les Notifications."
+    - "Il y en a encore {count} dans les Notifications."
+    - "Encore {count} autres sont dans les Notifications."
+  u:
+    - "Vous trouvez les {count} autres dans les Notifications."
+    - "Il y en a encore {count} dans les Notifications."
+    - "Encore {count} autres sont dans les Notifications."
+know_rules_none:
+  je:
+    - "Il n'y a pas encore de règles de la maison."
+    - "Tu n'as pas encore créé de règles de la maison."
+    - "Aucune règle de la maison ne s'applique encore."
+  u:
+    - "Il n'y a pas encore de règles de la maison."
+    - "Vous n'avez pas encore créé de règles de la maison."
+    - "Aucune règle de la maison ne s'applique encore."
+know_rules_one:
+  je:
+    - "Il y a une règle de la maison."
+    - "Une règle de la maison s'applique."
+    - "La maison a une seule règle."
+know_rules_some:
+  je:
+    - "Il y a {count} règles de la maison."
+    - "La maison a {count} règles."
+    - "{count} règles de la maison s'appliquent."
+know_rules_more:
+  je:
+    - "Tu trouves les {count} autres dans les Règles de la maison."
+    - "Il y en a encore {count} dans les Règles de la maison."
+    - "Encore {count} autres sont dans les Règles de la maison."
+  u:
+    - "Vous trouvez les {count} autres dans les Règles de la maison."
+    - "Il y en a encore {count} dans les Règles de la maison."
+    - "Encore {count} autres sont dans les Règles de la maison."
+
+# Uit de Help en de handleiding, of nagevraagd bij de AI (E-246, E-247, 18.7, 18.8).
+know_manual:
+  je:
+    - "Voilà comment ça marche : {text}"
+    - "Bonne question. {text}"
+    - "En bref : {text}"
+know_unsure:
+  je:
+    - "Je n'en suis pas sûre, mais l'Aide parle de ‘{title}’."
+    - "Je ne sais pas exactement, mais regarde ‘{title}’ dans l'Aide."
+    - "Je n'ai pas de bonne réponse, mais ‘{title}’ dans l'Aide pourra t'aider."
+  u:
+    - "Je n'en suis pas sûre, mais l'Aide parle de ‘{title}’."
+    - "Je ne sais pas exactement, mais regardez ‘{title}’ dans l'Aide."
+    - "Je n'ai pas de bonne réponse, mais ‘{title}’ dans l'Aide pourra vous aider."
+know_unknown:
+  je:
+    - "Je ne le sais pas, et l'Aide n'en parle pas non plus."
+    - "Je n'ai pas de réponse à cela, ni dans l'Aide ni dans le manuel."
+    - "Désolée, je ne le sais pas, et je ne trouve rien à ce sujet dans l'Aide."
+know_via_ai:
+  je:
+    - "J'ai demandé pour toi. {text}"
+    - "J'ai cherché pour toi. {text}"
+    - "Voici ce qu'on m'a répondu quand j'ai demandé. {text}"
+  u:
+    - "J'ai demandé pour vous. {text}"
+    - "J'ai cherché pour vous. {text}"
+    - "Voici ce qu'on m'a répondu quand j'ai demandé. {text}"
+know_where_help:
+  je:
+    - "Il y en a plus dans l'Aide, sous ‘{title}’."
+    - "Tu trouveras plus dans l'Aide, sous ‘{title}’."
+    - "Pour en savoir plus, regarde dans l'Aide sous ‘{title}’."
+  u:
+    - "Il y en a plus dans l'Aide, sous ‘{title}’."
+    - "Vous trouverez plus dans l'Aide, sous ‘{title}’."
+    - "Pour en savoir plus, regardez dans l'Aide sous ‘{title}’."
+know_ready:
+  je:
+    - "{part} : {text} Je te montre ?"
+    - "Voilà où en est {part}. {text} Tu veux voir ?"
+    - "Pour {part} : {text} J'ouvre la carte ?"
+  u:
+    - "{part} : {text} Je vous montre ?"
+    - "Voilà où en est {part}. {text} Voulez-vous voir ?"
+    - "Pour {part} : {text} J'ouvre la carte ?"
+know_ready_spoken:
+  je:
+    - "{part} : {text} Dans l'appli, c'est sous ‘Prêt pour l'autonomie ?’."
+    - "Voilà où en est {part}. {text}"
+    - "Pour {part} : {text} Tu en verras plus dans l'appli."
+  u:
+    - "{part} : {text} Dans l'appli, c'est sous ‘Prêt pour l'autonomie ?’."
+    - "Voilà où en est {part}. {text}"
+    - "Pour {part} : {text} Vous en verrez plus dans l'appli."
+know_ready_all:
+  je:
+    - "{text} Je te montre la carte ?"
+    - "Voilà où j'en suis. {text} Tu veux voir ?"
+    - "{text} La carte le montre par pièce. Je l'ouvre ?"
+  u:
+    - "{text} Je vous montre la carte ?"
+    - "Voilà où j'en suis. {text} Voulez-vous voir ?"
+    - "{text} La carte le montre par pièce. Je l'ouvre ?"
+know_ready_all_spoken:
+  je:
+    - "{text} Dans l'appli, tu le vois par pièce."
+    - "Voilà où j'en suis. {text}"
+    - "{text} Tu en verras plus dans l'appli, sous ‘Prêt pour l'autonomie ?’."
+  u:
+    - "{text} Dans l'appli, vous le voyez par pièce."
+    - "Voilà où j'en suis. {text}"
+    - "{text} Vous en verrez plus dans l'appli, sous ‘Prêt pour l'autonomie ?’."
+# Vesta écoute (E-349) : sans IA, elle propose des choix et ne devine jamais.
+offer_choices:
+  je:
+    - "{salute}, choisis comment je peux t'aider."
+    - "{salute}, voici en dessous comment je peux t'aider."
+    - "Je suis là, choisis ce que tu veux savoir ou faire."
+    - "{salute}, comment puis-je t'aider ? Choisis simplement."
+    - "Vas-y : choisis en dessous comment je t'aide."
+  u:
+    - "{salute}, choisissez comment je peux vous aider."
+    - "{salute}, voici en dessous comment je peux vous aider."
+    - "Je suis là, choisissez ce que vous voulez savoir ou faire."
+    - "{salute}, comment puis-je vous aider ? Choisissez simplement."
+    - "Allez-y : choisissez en dessous comment je vous aide."
+listen_choices:
+  je:
+    - "Choisis en dessous si je peux encore faire quelque chose pour toi."
+    - "Tu veux savoir autre chose ? Choisis en dessous."
+    - "Voici en dessous comment je peux encore t'aider."
+    - "Choisis simplement, si tu veux encore savoir ou faire quelque chose."
+    - "Y a-t-il autre chose ? Choisis-le en dessous."
+  u:
+    - "Choisissez en dessous si je peux encore faire quelque chose pour vous."
+    - "Vous voulez savoir autre chose ? Choisissez en dessous."
+    - "Voici en dessous comment je peux encore vous aider."
+    - "Choisissez simplement, si vous voulez encore savoir ou faire quelque chose."
+    - "Y a-t-il autre chose ? Choisissez-le en dessous."
+ask_choices:
+  je:
+    - "Je peux choisir entre : {choices}."
+    - "Ce n'est pas un de mes choix. Tu peux choisir entre : {choices}."
+    - "Je ne comprends pas cela comme réponse. Choisis entre : {choices}."
+    - "Désolée, je ne peux pas choisir ça. Dis {choices}, ou touche un bouton."
+    - "Je ne sais pas. Mes choix sont : {choices}."
+  u:
+    - "Je peux choisir entre : {choices}."
+    - "Ce n'est pas un de mes choix. Vous pouvez choisir entre : {choices}."
+    - "Je ne comprends pas cela comme réponse. Choisissez entre : {choices}."
+    - "Désolée, je ne peux pas choisir ça. Dites {choices}, ou touchez un bouton."
+    - "Je ne sais pas. Mes choix sont : {choices}."
+ask_why:
+  je:
+    - "{Reason} C'est pour ça que je demande."
+    - "{Reason} Voilà pourquoi je pose la question."
+    - "Tout simplement : {reason}."
+    - "{Reason} C'est la raison de ma question."
+    - "{Reason} D'où ma question."
+  u:
+    - "{Reason} C'est pour ça que je demande."
+    - "{Reason} Voilà pourquoi je pose la question."
+    - "Tout simplement : {reason}."
+    - "{Reason} C'est la raison de ma question."
+    - "{Reason} D'où ma question."
+
+# Check-up, before 'Home Assistant netjes' (E-361, B-246): 'Is er iets stuk in Home Assistant?', without an AI.
+know_tidy_some:
+  je:
+    - "Il y a {count} choses à regarder dans Home Assistant. La plus importante : {text}"
+    - "Je vois {count} choses dans Home Assistant qui demandent de l'attention. La plus importante : {text}"
+    - "Home Assistant a {count} choses à regarder. En tête, il y a ceci : {text}"
+  u:
+    - "Il y a {count} choses à regarder dans Home Assistant. La plus importante : {text}"
+    - "Je vois {count} choses dans Home Assistant qui demandent de l'attention. La plus importante : {text}"
+    - "Home Assistant a {count} choses à regarder. En tête, il y a ceci : {text}"
+know_tidy_one:
+  je:
+    - "Il y a une chose à regarder dans Home Assistant. {text}"
+    - "Une chose dans Home Assistant demande de l'attention. {text}"
+    - "Je vois une chose dans Home Assistant qui ne va pas. {text}"
+  u:
+    - "Il y a une chose à regarder dans Home Assistant. {text}"
+    - "Une chose dans Home Assistant demande de l'attention. {text}"
+    - "Je vois une chose dans Home Assistant qui ne va pas. {text}"
+know_tidy_open:
+  je:
+    - "Je te l'ouvre tout de suite ?"
+    - "Tu veux que j'ouvre la page ?"
+    - "Je te montre où c'est ?"
+  u:
+    - "Je vous l'ouvre tout de suite ?"
+    - "Voulez-vous que j'ouvre la page ?"
+    - "Je vous montre où c'est ?"
+know_tidy_none:
+  je:
+    - "Rien n'est cassé dans Home Assistant en ce moment. Je regarde à nouveau chaque heure."
+    - "Je ne vois rien de cassé dans Home Assistant. Tout marche comme il faut."
+    - "Home Assistant est bien en ordre : rien n'est cassé."
+  u:
+    - "Rien n'est cassé dans Home Assistant en ce moment. Je regarde à nouveau chaque heure."
+    - "Je ne vois rien de cassé dans Home Assistant. Tout marche comme il faut."
+    - "Home Assistant est bien en ordre : rien n'est cassé."
+know_tidy_member_some:
+  je:
+    - "Il y a quelque chose dans Home Assistant qu'un administrateur doit regarder. Les administrateurs le savent déjà."
+    - "Quelque chose d'important ne va pas dans Home Assistant. Un administrateur s'en occupe."
+    - "Un administrateur doit regarder quelque chose dans Home Assistant. Je l'ai dit aux administrateurs."
+  u:
+    - "Il y a quelque chose dans Home Assistant qu'un administrateur doit regarder. Les administrateurs le savent déjà."
+    - "Quelque chose d'important ne va pas dans Home Assistant. Un administrateur s'en occupe."
+    - "Un administrateur doit regarder quelque chose dans Home Assistant. Je l'ai dit aux administrateurs."
+know_tidy_member_none:
+  je:
+    - "Rien d'important n'est cassé dans Home Assistant. Tout marche comme il faut."
+    - "Je ne vois rien d'important de cassé dans Home Assistant."
+    - "Il ne se passe rien d'important dans Home Assistant."
+  u:
+    - "Rien d'important n'est cassé dans Home Assistant. Tout marche comme il faut."
+    - "Je ne vois rien d'important de cassé dans Home Assistant."
+    - "Il ne se passe rien d'important dans Home Assistant."
+know_tidy_not_yet:
+  je:
+    - "Je n'ai pas encore vérifié Home Assistant. Je le fais peu après le démarrage."
+    - "Je ne le sais pas encore : je vérifie Home Assistant dans un instant."
+    - "Je n'ai pas encore fini de vérifier. Redemande-moi dans quelques minutes."
+  u:
+    - "Je n'ai pas encore vérifié Home Assistant. Je le fais peu après le démarrage."
+    - "Je ne le sais pas encore : je vérifie Home Assistant dans un instant."
+    - "Je n'ai pas encore fini de vérifier. Redemandez-moi dans quelques minutes."
+know_tidy_backup:
+  je:
+    - "La dernière sauvegarde de Home Assistant date de {count} jours."
+    - "Home Assistant a fait sa dernière sauvegarde il y a {count} jours."
+    - "La sauvegarde la plus récente de Home Assistant a {count} jours."
+  u:
+    - "La dernière sauvegarde de Home Assistant date de {count} jours."
+    - "Home Assistant a fait sa dernière sauvegarde il y a {count} jours."
+    - "La sauvegarde la plus récente de Home Assistant a {count} jours."
+know_tidy_backup_today:
+  je:
+    - "Home Assistant a fait une sauvegarde aujourd'hui."
+    - "La dernière sauvegarde de Home Assistant date d'aujourd'hui."
+    - "Une nouvelle sauvegarde de Home Assistant a été faite aujourd'hui."
+  u:
+    - "Home Assistant a fait une sauvegarde aujourd'hui."
+    - "La dernière sauvegarde de Home Assistant date d'aujourd'hui."
+    - "Une nouvelle sauvegarde de Home Assistant a été faite aujourd'hui."
+know_tidy_backup_none:
+  je:
+    - "Je ne vois aucune sauvegarde de Home Assistant. C'est important à régler."
+    - "On ne voit aucune sauvegarde de Home Assistant."
+    - "Je ne trouve pas une seule sauvegarde de Home Assistant."
+  u:
+    - "Je ne vois aucune sauvegarde de Home Assistant. C'est important à régler."
+    - "On ne voit aucune sauvegarde de Home Assistant."
+    - "Je ne trouve pas une seule sauvegarde de Home Assistant."
+know_tidy_backup_unknown:
+  je:
+    - "Je ne peux pas voir les sauvegardes pour le moment."
+    - "Je ne vois pas les sauvegardes de Home Assistant en ce moment."
+    - "Je ne sais rien de la sauvegarde pour l'instant : je ne la vois pas."
+  u:
+    - "Je ne peux pas voir les sauvegardes pour le moment."
+    - "Je ne vois pas les sauvegardes de Home Assistant en ce moment."
+    - "Je ne sais rien de la sauvegarde pour l'instant : je ne la vois pas."

@@ -1,0 +1,28 @@
+# Which AI tasks of Home Assistant work in the house and which in the cloud (E-422, E-423).
+# HouseMind matches these words in the integration that provides the AI task and in its id
+# (ai_task.…). An AI in the house has no budget and may read the house more often; one in the
+# cloud gets a number of questions a day. An AI task on neither list counts as the cloud.
+schema: 1
+local:
+  - ollama
+  - llama
+  - localai
+  - local_llm
+  - lm_studio
+  - lmstudio
+  - vllm
+  - llamafile
+cloud:
+  - openai
+  - google
+  - gemini
+  - anthropic
+  - claude
+  - openrouter
+  - mistral
+  - groq
+  - azure
+  - cloud
+  - perplexity
+  - deepseek
+  - xai

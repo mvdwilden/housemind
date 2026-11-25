@@ -1,0 +1,132 @@
+# Every help topic and what in HouseMind it is about (E-119, release check 5).
+# tests/test_help_map.py checks, for every topic in every language:
+#   about  – what the topic explains exists: a Python name (module.Class.method) or a file
+#            of the app (frontend/…). Removing or renaming it makes the test fail.
+#   labels – the app's own words for the buttons and places the answer names (text keys).
+#            The answer must use exactly these words in every language, so a renamed button
+#            shows up as help that is out of date.
+schema: 1
+l1:
+  q1: {about: [housemind.brain.skills.SkillEngine, housemind.safety.emergency.EmergencyReactions]}
+  q2: {about: [frontend/src/lib/Orb.svelte, housemind.runtime.HouseMind._refresh_orb, housemind.runtime.HouseMind.vesta_why]}
+  q3: {about: [housemind.server.web.Session.on_orb_tap], labels: [ui.ask]}
+  q4: {about: [housemind.runtime.HouseMind.pause], labels: [ui.pause]}
+  q5: {about: [housemind.safety.gate.GateState, housemind.brain.learning.Learning]}
+  q6: {about: [housemind.server.web.Session.on_set_level]}
+  q7: {about: [housemind.brain.rhythm.next_alarm, housemind.runtime.HouseMind._wake_at]}
+  q8: {about: [housemind.server.bridge, housemind.runtime.HouseMind.assist]}
+  q9: {about: [housemind.brain.water.WaterWatch]}
+  q10: {about: [housemind.safety.emergency.EmergencyReactions, frontend/src/sheets/About.svelte]}
+  q11: {about: [housemind.brain.voice.choose, housemind.runtime.HouseMind.vesta_line, frontend/src/lib/voice.ts], labels: [ui.my_preferences]}
+  q12: {about: [frontend/src/lib/tour.ts, frontend/src/components/Tour.svelte], labels: [ui.tour.start, ui.tour.skip]}
+  q13: {about: [housemind.brain.knowing.Knowing._ready, housemind.brain.readiness.Readiness]}
+  q14: {about: [housemind.knowledge.themes.load_schemes, frontend/src/lib/schemes.ts, frontend/src/sheets/Preferences.svelte], labels: [ui.my_preferences, ui.prefs.group.device, ui.prefs.scheme]}
+  q15: {about: [housemind.brain.notify.NotificationRouter._wants, housemind.brain.notify.NotificationRouter.people, frontend/src/sheets/Preferences.svelte], labels: [ui.my_preferences]}
+  q16: {about: [housemind.runtime.HouseMind.my_data, housemind.runtime.HouseMind.forget_me, frontend/src/sheets/Preferences.svelte], labels: [ui.my_preferences, ui.prefs.group.about_me, ui.my_data.title, ui.my_data.file, ui.my_data.forget]}
+  q17: {about: [frontend/src/lib/timing.ts, frontend/src/sheets/Preferences.svelte], labels: [ui.my_preferences, ui.prefs.group.about_me, ui.prefs.timing, ui.prefs.timing_long, ui.vesta.more_time]}
+  q18: {about: [housemind.demo.play.Play, housemind.core.clock.DemoClock, housemind.server.web.Session.on_play, frontend/src/sheets/Play.svelte], labels: [play.open, play.run, play.stop, play.stories.title, play.free.title, play.time.title, play.happened.title, tabs.logbook]}
+  q19: {about: [frontend/src/lib/connection.svelte.ts], labels: [ui.offline]}
+l2:
+  q1: {about: [housemind.server.views.snapshot, frontend/src/views/Home.svelte], labels: [tabs.logbook]}
+  q2: {about: [housemind.runtime.HouseMind.undo, housemind.runtime.HouseMind.explain], labels: [ui.why, ui.undo]}
+  q3: {about: [housemind.brain.notify.BUDGET, housemind.brain.notify.in_quiet, housemind.brain.notify.bundle_time], labels: [ui.my_preferences]}
+  q4: {about: [housemind.runtime.HouseMind.talk, frontend/src/App.svelte, housemind.ai.lookups.HouseLookups, housemind.brain.conversation.Topic, housemind.ai.service.partial_answer], labels: [ui.ask_vesta, tabs.logbook]}
+  q5: {about: [housemind.runtime.HouseMind.why_not, frontend/src/sheets/RoomSheet.svelte]}
+  q6: {about: [housemind.ai.privacy.Labels]}
+  q7: {about: [housemind.energy.manager.EnergyManager, frontend/src/components/EnergyClock.svelte], labels: [ui.energy.clock.title]}
+  q8: {about: [housemind.runtime.HouseMind.briefing, housemind.server.logbook.logbook], labels: [tabs.logbook]}
+  q9: {about: [housemind.runtime.HouseMind._going_to_bed]}
+  q10: {about: [housemind.runtime.HouseMind.note_day, frontend/src/views/Logbook.svelte], labels: [ui.days.change, tabs.logbook]}
+  q11: {about: [housemind.runtime.HouseMind._weekly_report, housemind.server.logbook.logbook], labels: [ui.my_preferences, tabs.logbook]}
+  q12: {about: [housemind.brain.maintenance.batteries, housemind.brain.maintenance.waste_from_sensors]}
+  q13: {about: [housemind.brain.household.Household.cooking_on_while_away]}
+  q14: {about: [housemind.safety.emergency.EmergencyEvent]}
+  q15: {about: [housemind.world.zones.sort_zones, frontend/src/sheets/RoomSheet.svelte], labels: [ui.room.zones_title]}
+  q16: {about: [housemind.world.occupancy.OccupancyModel.robot_driving]}
+  q17: {about: [housemind.server.views.mind, frontend/src/components/Mind.svelte, frontend/src/views/Logbook.svelte], labels: [ui.mind.title, ui.mind.saw, ui.mind.thought, ui.mind.did, ui.mind.in_logbook, ui.why, ui.undo, levels.carefree, levels.informed, levels.involved, levels.expert]}
+  q18: {about: [housemind.server.web.Session.on_listen_end, housemind.brain.conversation.choice, frontend/src/lib/listen.ts, frontend/src/components/VestaWindow.svelte], labels: [orb.listening, ui.vesta.choice.status, ui.vesta.choice.help]}
+  q19: {about: [housemind.runtime.HouseMind.vesta_asks, housemind.runtime.HouseMind.vesta_ask_open, housemind.server.web.Session._offer_ask, housemind.runtime.HouseMind.vesta_why_asked, frontend/src/lib/vesta.ts], labels: [ui.notifications.snooze, ui.notifications.dismiss, tabs.logbook, ui.vesta.why_ask]}
+  q20: {about: [housemind.brain.readiness.Readiness, frontend/src/components/Readiness.svelte, frontend/src/views/Home.svelte], labels: [ui.ready.title]}
+  q21: {about: [frontend/src/App.svelte, frontend/src/lib/layers.ts, frontend/src/components/Sheet.svelte], labels: [ui.help, ui.house_settings, ui.my_preferences]}
+  q22: {about: [housemind.brain.history.Replay, housemind.brain.history.run, frontend/src/components/HistoryProgress.svelte], labels: [ui.history.switch, ui.history.again]}
+  q23: {about: [housemind.server.logbook.logbook, frontend/src/views/Logbook.svelte, frontend/src/lib/logbook.ts], labels: [tabs.logbook, ui.logbook.done, ui.logbook.watched, ui.logbook.notices, ui.logbook.talks, ui.logbook.period, ui.filter.button, ui.why, ui.undo, ui.today, ui.logbook.ai, ui.logbook.ai_show]}
+  q24: {about: [housemind.brain.setting_up.begin, housemind.brain.start_over.intro_again, housemind.brain.start_over.relearn, housemind.brain.start_over.factory_reset, frontend/src/sheets/HouseSettings.svelte], labels: [ui.house_settings, ui.settings.group.restart, ui.restart.intro.title, ui.restart.learn.title, ui.restart.factory.title, ui.setup.start]}
+  q25: {about: [housemind.runtime.HouseMind.set_house_mode, housemind.brain.vacation.evening_plan, frontend/src/components/VestaWindow.svelte], labels: [ui.vesta.mode.vacation, ui.vesta.mode.guests, ui.vesta.mode.home]}
+  q26: {about: [housemind.runtime.HouseMind.feedback, housemind.runtime.HouseMind._ask_was_it_good, housemind.server.logbook._answer, frontend/src/components/Notices.svelte, frontend/src/views/Logbook.svelte], labels: [ui.why, notify.answer.good, notify.answer.bad, ui.ready.title, tabs.logbook, levels.informed, levels.involved]}
+  q27: {about: [housemind.brain.setting_up.make_pipeline, frontend/src/sheets/IntegrationSettings.svelte], labels: [ui.house_settings]}
+  q28: {about: [housemind.brain.cameras.CameraIndex, housemind.brain.security.on_detection, frontend/src/views/Tablet.svelte]}
+  q29: {about: [housemind.brain.security.answer, housemind.brain.security.tick, frontend/src/sheets/HouseSettings.svelte], labels: [ui.house_settings, ui.settings.group.house, ui.settings.security.title]}
+  q30: {about: [housemind.brain.skills.SkillEngine._climate, housemind.brain.skills.SkillEngine._long_away, housemind.brain.skills.SkillEngine._reach_wish, housemind.brain.skills.SkillEngine._heat_cool, housemind.runtime.HouseMind._heat_cool_change, housemind.world.climate.Temperatures.of_air]}
+  q31: {about: [housemind.brain.notify.NotificationRouter.hidden, housemind.brain.notify.later_until, housemind.brain.security._camera_bundle, frontend/src/components/NoticeCard.svelte, frontend/src/sheets/HouseSettings.svelte], labels: [ui.notifications.snooze, ui.notice.mute, ui.notice.show_again, ui.notice.not_shown, tabs.logbook, ui.house_settings]}
+  q32: {about: [housemind.world.occupancy.OccupancyModel.evaluate, frontend/src/components/FloorPlan.svelte], labels: [ui.room.occupied]}
+  q33: {about: [housemind.server.views._by_device, housemind.world.world.World.index_status_leds, frontend/src/sheets/RoomSheet.svelte], labels: [ui.room.status_led]}
+  q34: {about: [housemind.brain.skills.light_off_hold, housemind.brain.learning.Learning.held_too_short, housemind.brain.when.When._say_light_off_leave], labels: [ui.ready.title]}
+  q35: {about: [housemind.brain.skills.SkillEngine._outside_evening, housemind.brain.skills.SkillEngine.evening_off, housemind.brain.when.When._say_light_outside_evening]}
+  q36: {about: [housemind.brain.skills.SkillEngine._outside_arrival, housemind.brain.skills.SkillEngine._arrival_off, housemind.brain.skills.SkillEngine.arrival_place, housemind.brain.when.When._say_light_outside_arrival]}
+  q37: {about: [housemind.parts.proof.ProofPart.answer_ready, housemind.brain.learning.Learning.proven], labels: [ui.logbook.waiting, notify.answer.from_now_yes, notify.answer.later, notify.answer.not_ever]}
+  q38: {about: [housemind.safety.gate.SafetyGate.evaluate, housemind.parts.thinking.ThinkingPart._people_win, housemind.parts.thinking.ThinkingPart._situation_changed]}
+  q39: {about: [housemind.brain.daylight.DaylightBook.on_data, housemind.parts.daylight.DaylightPart._daylight_keep_up, housemind.parts.daylight.DaylightPart._daylight_take]}
+l3:
+  q1: {about: [housemind.runtime.HouseMind.answer], labels: [notify.answer.do, notify.answer.not_now, notify.answer.from_now, notify.answer.never]}
+  q2: {about: [housemind.knowledge.catalog.Step, housemind.brain.learning.Learning.review_steps, frontend/src/components/StepPill.svelte]}
+  q3: {about: [housemind.brain.rules.RuleBook, frontend/src/views/Rules.svelte, frontend/src/views/Brain.svelte, housemind.runtime.HouseMind._rule_change], labels: [tabs.house_rules, tabs.brain]}
+  q4: {about: [frontend/src/components/FloorPlan.svelte], labels: [ui.view.plan]}
+  q5: {about: [housemind.runtime.HouseMind.pause_domain], labels: [ui.domain.lighting, ui.domain.covers, ui.domain.climate]}
+  q6: {about: [housemind.safety.hard_limits.hard_limit_reason]}
+  q7: {about: [housemind.brain.automations, housemind.brain.readiness.steer_view, housemind.brain.stepwish], labels: [tabs.brain, ui.ready.title, steps.autonomous]}
+  q8: {about: [housemind.runtime.HouseMind._charge_wish, housemind.energy.tips.cheapest_block], labels: [tabs.energy]}
+  q9: {about: [housemind.energy.savings.fit]}
+  q10: {about: [housemind.runtime.HouseMind.activate_scene]}
+  q11: {about: [housemind.runtime.HouseMind._wake_question]}
+  q12: {about: [frontend/src/views/Tablet.svelte, frontend/src/lib/kiosk.ts], labels: [ui.my_preferences, ui.prefs.group.device, ui.tablet.title, ui.tablet.fullscreen, ui.tablet.exit]}
+  q13: {about: [housemind.brain.household.EXPERIMENTAL]}
+  q14: {about: [housemind.brain.care.quiet_reason]}
+  q15: {about: [housemind.runtime.HouseMind._on_connection, housemind.runtime.HouseMind._self_check], labels: [orb.attention]}
+  q16: {about: [housemind.runtime.HouseMind.diagnostics, housemind.knowledge.updates.verify, housemind.runtime.HouseMind._ask_calendar], labels: [ui.house_settings, ui.settings.upkeep.title]}
+  q17: {about: [housemind.runtime.HouseMind._index_groups, housemind.runtime.HouseMind._zwave_together, housemind.brain.groups.source_of, housemind.core.model.HouseModel.unit, frontend/src/lib/grouptree.ts], labels: [tabs.brain, tabs.devices, ui.filter.title.room, ui.devices.leave_alone, tabs.logbook]}
+  q18: {about: [housemind.brain.readiness.Readiness, housemind.brain.readiness.Readiness._counter, housemind.brain.when.When.row, frontend/src/views/Brain.svelte, frontend/src/lib/readiness.ts], labels: [ui.ready.title, ui.ready.tab.automations, ui.ready.more]}
+  q19: {about: [housemind.brain.filters, frontend/src/components/Filters.svelte, housemind.server.views.scenes_scripts], labels: [ui.filter.button, ui.filter.clear, ui.ha_scenes.title]}
+  q20: {about: [housemind.brain.history.Replay, housemind.brain.history.run, frontend/src/components/HistoryProgress.svelte], labels: [ui.history.switch, ui.history.again]}
+  q21: {about: [housemind.brain.learning.Learning.dark, housemind.world.zones.open_spaces, housemind.world.sun.elevation]}
+  q22: {about: [housemind.brain.notify.NotificationRouter.question_budget, housemind.brain.proposals.ASK_AGAIN_STEPS, frontend/src/views/Logbook.svelte], labels: [ui.my_preferences, tabs.logbook]}
+  q23: {about: [housemind.world.house_mode.HouseModeMachine, frontend/src/sheets/HouseSettings.svelte], labels: [ui.house_settings, ui.settings.group.house]}
+  q24: {about: [housemind.brain.learning.Learning.review_steps, housemind.runtime.HouseMind._stepped_back, frontend/src/components/Readiness.svelte], labels: [ui.ready.title]}
+  q25: {about: [housemind.runtime.HouseMind.set_admin_step, housemind.runtime.HouseMind.forget_pair, frontend/src/components/Readiness.svelte], labels: [ui.ready.title, ui.ready.own.button, ui.ready.forget.button]}
+  q26: {about: [housemind.runtime.HouseMind.set_house_language, housemind.brain.setting_up.refresh_pipeline, frontend/src/sheets/VestaVoice.svelte], labels: [ui.house_settings, ui.my_preferences, ui.settings.vesta.house_language]}
+  q27: {about: [frontend/src/components/EnergyPlan.svelte, housemind.server.views._blocks], labels: [tabs.energy, ui.energy.plan]}
+  q28: {about: [housemind.parts.tidy.TidyPart.tidy_round, housemind.brain.tidy.find, housemind.parts.tidy.TidyPart.tidy_off, housemind.parts.tidy.TidyPart.tidy_on, housemind.parts.tidy.TidyPart.tidy_mark, housemind.parts.tidy.TidyPart.tidy_choose, housemind.brain.tidy_system.unused, housemind.brain.tidy_system.backup_tile, housemind.brain.tidy_system.disk_tile, housemind.brain.tidy_system.retention, housemind.brain.tidy_system.loose, housemind.brain.tidy_system.compare, housemind.parts.tidy.TidyPart._tidy_tell, housemind.brain.knowing.Knowing._tidy, frontend/src/components/TidyGroup.svelte], labels: [tabs.tidy, notify.answer.view]}
+  q29: {about: [housemind.brain.automations._hand, housemind.ha.source.SourceTracker._by_run, housemind.safety.gate.SafetyGate]}
+  q30: {about: [frontend/src/components/Network.svelte, frontend/src/lib/network.ts, housemind.server.views.live_path], labels: [tabs.home, ui.rooms, ui.view.network, ui.network.flows, ui.network.waits, ui.why]}
+  q31: {about: [housemind.brain.rhythm.Rhythm.part, housemind.server.views._rhythm_now, housemind.brain.skills.SkillEngine._light_data, frontend/src/components/RhythmCard.svelte, housemind.brain.later.later, frontend/src/components/Later.svelte], labels: [tabs.brain, ui.brain.tab.rhythm, later.title]}
+  q32: {about: [housemind.parts.proof.ProofPart._review_proof, housemind.brain.learning.Learning.proven, housemind.parts.proof.ProofPart.take_over_bundle], labels: [ui.logbook.waiting, notify.answer.from_now_yes, notify.answer.later, notify.answer.not_ever]}
+  q33: {about: [housemind.brain.automations.read_automation, housemind.brain.automations.Automations.rest_after, housemind.parts.proof.ProofPart.lamp_rules, housemind.parts.proof.ProofPart.rule_hold]}
+  q34: {about: [housemind.brain.skills.SkillEngine._covers_wake, housemind.world.sleep.SleepWatch, housemind.brain.learning.Learning.wake_open_seen]}
+  q35: {about: [housemind.brain.skills.SkillEngine.can_do, housemind.parts.rules_follow.RulesFollowPart._rules_follow, housemind.parts.rules_follow.RulesFollowPart._room_kinds], labels: [ui.ready.title]}
+l4:
+  q1: {about: [housemind.runtime.HouseMind.explain, frontend/src/lib/braintabs.ts], labels: [ui.brain.trace, ui.brain.more]}
+  q2: {about: [housemind.runtime.Status, frontend/src/lib/braintabs.ts], labels: [ui.brain.thoughts, ui.brain.more]}
+  q3: {about: [housemind.brain.learning.Learning]}
+  q4: {about: [housemind.safety.gate.SafetyGate]}
+  q5: {about: [frontend/src/views/Devices.svelte, frontend/src/views/Brain.svelte], labels: [ui.devices.leave_alone, tabs.brain]}
+  q6: {about: [housemind.ai.privacy.Labels, housemind.ai.service, housemind.parts.understanding.UnderstandingPart.answer_knowledge, housemind.brain.behaviour, housemind.parts.understanding.UnderstandingPart._ask_knowledge, housemind.parts.understanding.UnderstandingPart.reopen_knowledge, frontend/src/components/Knowledge.svelte], labels: [tabs.brain, ui.brain.tab.knowledge, ui.knowledge.yes, ui.knowledge.no, levels.informed]}
+  q7: {about: [housemind.energy.plan]}
+  q8: {about: [housemind.runtime.HouseMind.place_integration], labels: [ui.house_settings]}
+  q9: {about: [housemind.runtime.HouseMind.assist]}
+  q10: {about: [housemind.brain.rhythm.Rhythm]}
+  q11: {about: [housemind.knowledge.updates.verify]}
+  q13: {about: [housemind.support.diagnostics.package], labels: [ui.house_settings]}
+  q14: {about: [housemind.runtime.HouseMind._self_check, housemind.knowledge.compat.Compatibility, housemind.runtime.HouseMind._check_install, housemind.ha.supervisor.installation]}
+  q15: {about: [housemind.brain.readiness.Readiness.pair, housemind.brain.readiness.Readiness._counter, housemind.brain.when.When.row], labels: [ui.ready.title, ui.house_settings]}
+  q16: {about: [housemind.brain.filters, frontend/src/views/Devices.svelte, frontend/src/lib/filters.ts], labels: [ui.filter.button, ui.filter.clear, ui.ha_scenes.title, ui.filter.group]}
+  q17: {about: [housemind.knowledge.themes.check, housemind.runtime.HouseMind.load_schemes, frontend/src/sheets/HouseSettings.svelte], labels: [ui.house_settings, ui.settings.group.upkeep, ui.settings.themes.title, ui.settings.themes.example]}
+  q18: {about: [housemind.brain.history.Replay, housemind.brain.history.run, frontend/src/components/HistoryProgress.svelte], labels: [ui.history.switch, ui.history.again]}
+  q19: {about: [housemind.brain.learning.Learning.dark, housemind.brain.learning.Learning.done_before, housemind.world.sun.elevation]}
+  q20: {about: [housemind.brain.learning.Thresholds, housemind.memory.snapshots.restore, housemind.runtime.HouseMind.test_view, housemind.brain.later.later, frontend/src/sheets/HouseSettings.svelte, frontend/src/components/Readiness.svelte, frontend/src/components/Later.svelte], labels: [ui.house_settings, ui.settings.group.restart, ui.brain.tab.readiness, ui.settings.thresholds.title, ui.settings.thresholds.default, ui.settings.snapshots.title, tabs.brain, tabs.test, later.title]}
+  q21: {about: [housemind.brain.settings_file.make, housemind.brain.settings_file.apply, frontend/src/sheets/HouseSettings.svelte], labels: [ui.house_settings, ui.settings.group.upkeep]}
+  q22: {about: [housemind.runtime.HouseMind.link_ha, housemind.runtime.HouseMind.bridge_contact, housemind.runtime.HouseMind.integration_status, frontend/src/sheets/IntegrationSettings.svelte], labels: [ui.house_settings, ui.settings.group.upkeep, ui.integration.title, ui.integration.link, ui.integration.open_ha]}
+  q23: {about: [housemind.runtime.HouseMind.give_back, housemind.brain.start_over.remove_link, frontend/src/sheets/HouseSettings.svelte], labels: [ui.house_settings, ui.settings.group.restart, ui.settings.remove, ui.settings.remove_button]}
+  q24: {about: [housemind.parts.tidy.TidyPart.tidy_round, housemind.brain.tidy.find, housemind.parts.tidy.TidyPart.tidy_off, housemind.parts.tidy.TidyPart.tidy_on, housemind.parts.tidy.TidyPart.tidy_mark, housemind.parts.tidy.TidyPart.tidy_choose, housemind.brain.tidy_system.unused, housemind.brain.tidy_system.backup_tile, housemind.brain.tidy_system.disk_tile, housemind.brain.tidy_system.retention, housemind.brain.tidy_system.loose, housemind.brain.tidy_system.compare, housemind.parts.tidy.TidyPart._tidy_tell, housemind.brain.knowing.Knowing._tidy, frontend/src/components/TidyGroup.svelte, frontend/src/views/Tidy.svelte], labels: [tabs.tidy, ui.tidy.check_now, ui.tidy.on, ui.tidy.mark.title, ui.tidy.leave, ui.tidy.not_duplicate, ui.tidy.system.keep_backups, notify.answer.view]}
+  q25: {about: [housemind.server.web.Session._offer_ask, housemind.runtime.HouseMind.set_house_setting, frontend/src/sheets/HouseSettings.svelte], labels: [ui.house_settings, ui.ask_vesta]}
+  q26: {about: [frontend/src/components/Network.svelte, frontend/src/lib/network.ts, housemind.server.views.live_path], labels: [tabs.home, ui.rooms, ui.view.network, ui.network.flows, ui.network.waits, ui.why]}
+  q27: {about: [housemind.parts.testing.TestingPart.test_view, housemind.parts.testing.TestingPart.test_play, housemind.parts.testing.TestingPart.test_quarter, housemind.brain.pretend.apply, housemind.world.world.World.outside_dark_at, housemind.server.web.Session.on_test, frontend/src/sheets/TestPanel.svelte], labels: [tabs.test, test.play.title, test.play.button, test.happened.title, test.try.keep, test.try.back, test.quarter.title]}
+  q28: {about: [housemind.brain.levels.LightLevels, housemind.parts.testing.TestingPart.levels_try, housemind.parts.testing.TestingPart.levels_save, frontend/src/components/LightLevels.svelte], labels: [tabs.brain, tabs.devices, ui.stands.button, ui.stands.try, ui.stands.try_all, ui.stands.save, ui.stands.room_try]}
