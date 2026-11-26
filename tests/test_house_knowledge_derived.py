@@ -64,6 +64,10 @@ async def _start(
     )
     await hm._refresh_people()
     await hm.set_house_setting("consent_learning", True)
+    if hm._history_task is not None:
+        # The reading of the history that yes starts, done before the test's own last week:
+        # else it may end in the middle of a test and teach the hall's usual lamp from it.
+        await hm._history_task
     return hm, clock, ha
 
 
@@ -171,14 +175,13 @@ async def test_a_switch_that_goes_with_a_lamp_is_watched_as_a_lamp_and_switched_
     assert row["why"] == "Ging 100% van de 8 keer tegelijk aan en uit met Gang lamp."
     hm.learning.steps[("light_on_entry", "hall")] = Step.AUTONOMOUS
     await clock.advance((START + timedelta(hours=17, minutes=30) - clock.now()).total_seconds())
-    # The round and what it started beside the core, done before someone walks in – on a slow
-    # test machine that work was still running when the motion came.
-    await _derive(hm)
     await ha.simulate("binary_sensor.hall_motion", "on")
     turned = [(action, entity) for action, entity, _ in ha.calls]
     assert ("light.turn_on", "light.hall") in turned and ("switch.turn_on", RELAY) not in turned
-    running = sorted(task.get_name() for task in hm._side if not task.done())
-    assert RELAY in hm.last_not_done, (sorted(hm.last_not_done), hm.gate.state.roles, running)
+    assert RELAY in hm.last_not_done, (
+        sorted(hm.last_not_done),
+        hm.skills and hm.skills.usual_lights("hall"),
+    )
     thought = hm.last_not_done[RELAY]
     assert thought.outcome is Outcome.OBSERVED and thought.reason == "behaviour_unconfirmed"
     assert any(p.entity_id == RELAY for p in hm.learning.pending)  # it learns from it
