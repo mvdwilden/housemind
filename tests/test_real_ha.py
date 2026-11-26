@@ -10,6 +10,7 @@ from __future__ import annotations
 import asyncio
 import json
 import os
+import re
 import time
 import urllib.request
 from pathlib import Path
@@ -94,9 +95,8 @@ async def test_house_mind_on_a_real_home_assistant(tmp_path: Path) -> None:
     )
     print(f"domains without any catalogue entry (only seen): {others}")
 
-    # The self-check finds everything it uses; this version is on the tested list (E-155).
+    # The self-check finds everything it uses.
     assert hm.self_check["broken_actions"] == [], hm.self_check
-    assert hm.gate is not None and not hm.gate.state.untested_ha, VERSION
 
     # Existing automations are read (E-41), never changed.
     assert hm.automations.status, "the test automation was not seen"
@@ -155,6 +155,15 @@ async def test_house_mind_on_a_real_home_assistant(tmp_path: Path) -> None:
     assert (await ha.call_action("light.turn_on", "light.bed_light")).ok
     await _until(lambda: seen("light.bed_light", "on", Source.HOUSEMIND), 10, "listening again")
     await hm.tick()
+
+    # Last, so all of the above was checked on this version too: is it on the tested list
+    # (E-155)? A beta is the coming month: until it is listed, HouseMind is careful there.
+    status = hm.compatibility.status(VERSION)
+    if re.search(r"(b|dev)\d*$", VERSION):
+        assert status in ("tested", "newer"), (VERSION, status)
+    else:
+        month = ".".join(VERSION.split(".")[:2])
+        assert status == "tested", f"{VERSION} passed: put {month} on knowledge/tested_ha.yaml"
     await hm.stop()
 
 
