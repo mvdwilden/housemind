@@ -111,7 +111,7 @@ class NoPreferences:
     def arrived(self, *args: Any) -> None:
         return None
 
-    def done_before(self, *args: Any, **kwargs: Any) -> bool:
+    def done_before(self, *args: Any, **_kwargs: Any) -> bool:
         return False
 
     def passing(self, area_id: str, now: datetime) -> bool:

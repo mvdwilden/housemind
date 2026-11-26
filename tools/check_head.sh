@@ -1,6 +1,6 @@
 #!/bin/zsh
 # The check before HouseMind goes to a real house (QA 2, choice 14): every test on a clean copy
-# of a commit – ruff, mypy, the fast suite, the slow suite (speed and a year in the time
+# of a commit – ruff, mypy, vulture, the fast suite, the slow suite (speed and a year in the time
 # machine) and the frontend. Anything red stops here, so nothing red reaches a house.
 #
 # Usage: tools/check_head.sh [commit]   (default HEAD; the working tree is never used)
@@ -22,6 +22,8 @@ echo "== $SHA: ruff, mypy"
 $BIN/ruff check .
 $BIN/ruff format --check .
 $BIN/mypy
+# No code that is certainly unused, as on GitHub (code QA, C3).
+${UVX:-$HOME/.local/bin/uvx} vulture src --min-confidence 100
 # The fast suite in parallel (code QA, C5: 4 instead of 12 minutes); the slow one alone, as it
 # measures speed.
 echo "== $SHA: fast tests" && $BIN/python -m pytest -q -p no:cacheprovider -n auto
