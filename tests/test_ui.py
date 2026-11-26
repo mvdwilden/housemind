@@ -101,13 +101,18 @@ async def _axe(page: Any) -> list[dict[str, Any]]:
 
 
 async def _timed_click(page: Any, button: Any, settled: str) -> tuple[float, float]:
-    """(ms until the button answered, ms until the new screen stood still)."""
+    """(ms until the button answered, ms until the new screen stood still), both from the
+    moment of the tap itself – not from when the test robot starts to look for the button,
+    which on a slow test machine takes longer than the screen does."""
     await page.evaluate(
-        """() => { window.__hmTap = null; const t0 = performance.now();
-        const obs = new MutationObserver(() => { if (window.__hmTap === null)
-          window.__hmTap = performance.now() - t0; });
+        """() => { window.__hmTap = null; window.__hmT0 = null;
+        document.addEventListener("click", (e) => { window.__hmT0 = e.timeStamp; },
+          {capture: true, once: true});
+        const obs = new MutationObserver(() => {
+          if (window.__hmTap === null && window.__hmT0 !== null)
+            window.__hmTap = performance.now() - window.__hmT0; });
         obs.observe(document.body, {subtree: true, childList: true, attributes: true});
-        window.__hmObs = obs; window.__hmT0 = t0; }"""
+        window.__hmObs = obs; }"""
     )
     await button.click()
     await page.wait_for_function(settled, timeout=5000)
@@ -117,7 +122,7 @@ async def _timed_click(page: Any, button: Any, settled: str) -> tuple[float, flo
     )
     tap, switch = await page.evaluate(
         "() => { window.__hmObs.disconnect(); "
-        "return [window.__hmTap ?? 0, performance.now() - window.__hmT0]; }"
+        "return [window.__hmTap ?? 0, performance.now() - (window.__hmT0 ?? performance.now())]; }"
     )
     return float(tap), float(switch)
 

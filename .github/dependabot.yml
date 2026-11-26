@@ -1,19 +1,30 @@
 # Updates for what HouseMind builds on, every week (QA 2, M-33): Python (uv.lock), the frontend,
 # the GitHub Actions and the base image. Each update runs the tests before anyone merges it.
+# Small updates (minor and patch) come together, one proposal per kind a week; a major version
+# comes on its own, as it may need work.
 version: 2
 updates:
   - package-ecosystem: uv
     directory: /
     schedule:
       interval: weekly
+    groups:
+      small:
+        update-types: [minor, patch]
   - package-ecosystem: npm
     directory: /frontend
     schedule:
       interval: weekly
+    groups:
+      small:
+        update-types: [minor, patch]
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
+    groups:
+      small:
+        update-types: [minor, patch]
   - package-ecosystem: docker
     directory: /
     schedule:

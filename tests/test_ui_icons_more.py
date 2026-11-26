@@ -80,12 +80,12 @@ async def test_energy_check_up_and_test_show_their_devices(
         await page.goto(url)
         await page.wait_for_selector(".orb", timeout=10000)
 
-        # Energie: every box of the flow with its icon, the battery with its streaks.
+        # Energie: every box of the flow with its icon, and the devices that use power now.
         await page.evaluate(CLICK, ["nav button", t("tabs.energy")])
         await page.wait_for_selector(".flow .box", timeout=10000)
         boxes = await page.evaluate(COUNT, ".flow .box")
         assert boxes >= 3 and await page.evaluate(COUNT, ".flow .box .ic svg") == boxes
-        assert await page.evaluate(COUNT, ".things li .ic svg") >= 1
+        assert await page.evaluate(COUNT, ".users li .ic svg") >= 1
         if SHOTS:
             await page.locator(".flow").screenshot(path=f"{SHOTS}/energy-flow.png")
 

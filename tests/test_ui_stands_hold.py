@@ -40,9 +40,7 @@ pytestmark = [
 
 # The Standen button of one lamp, by its entity id in the row.
 OPEN = """async (id) => {
-  const row = [...document.querySelectorAll("main li")]
-    .find((li) => li.querySelector(".mono")?.textContent.startsWith(id));
-  row.querySelector("button.levels").click();
+  document.querySelector(`main li[data-id="${id}"] button.levels`).click();
   await new Promise((r) => setTimeout(r, 800));
 }"""
 TEXT = """() => document.querySelector("div.levels")?.textContent ?? \"\""""

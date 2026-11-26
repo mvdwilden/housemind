@@ -9,6 +9,7 @@ under them, and the list is right below, in sight; the overview per kind above a
 screen: the rings lay over the steps, and the row was not full – the tiles fill the row, and
 the ring is at the bottom right, beside the rooms, never over a step; the name has the whole
 width, so a long word ("Raambekleding") is never broken in two.
+Since 0.3.28 only Check-up keeps that overview; Apparaten says how many devices are not there.
 
 Runs only on request, like tests/test_ui.py: ``uv run pytest -m ui tests/test_ui_tiles.py``
 (needs a built frontend and ``uv run playwright install chromium`` once)."""
@@ -17,6 +18,7 @@ from __future__ import annotations
 
 import os
 from collections.abc import AsyncIterator
+from dataclasses import replace
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -102,26 +104,13 @@ PICK = """async (i) => {
   await new Promise((r) => setTimeout(r, 600));
 }"""
 
-# The overview above a long list on this page: its tiles, and a tap on the first.
-OVERVIEW = """async () => {
-  const box = document.querySelector("main details.overview[open]");
-  const tiles = () => [...box.querySelectorAll(".tiles li")];
-  const pressed = (li) => li.querySelector("button")?.getAttribute("aria-pressed") ?? null;
-  const before = tiles().map(pressed);
-  const rows = new Set(tiles().map((li) => Math.round(li.getBoundingClientRect().top))).size;
-  const table = box.querySelectorAll("table").length;
-  box.querySelector(".tiles button[aria-pressed]").click();
-  await new Promise((r) => setTimeout(r, 600));
-  return {before, rows, table, after: pressed(tiles()[0]),
-          tiles: tiles().length,
-          count: document.querySelector("main .tools .count")?.textContent ?? ""};
-}"""
-
 
 @pytest.fixture
 async def house(tmp_path: Path) -> AsyncIterator[tuple[str, HouseMind]]:
     clock = SimulatedClock(datetime(2026, 11, 3, 10, 0, tzinfo=UTC))
     demo = load_demo_house("extended", clock, "nl")
+    lamp = next(entity for entity in demo.ha.states if entity.startswith("light."))
+    demo.ha.states[lamp] = replace(demo.ha.states[lamp], state="unavailable")  # one not there
     hm = HouseMind(clock, demo.ha, Paths([ROOT / "knowledge"], tmp_path), set(demo.pet_areas))
     await hm.start(autorun=False)
     await hm.db.execute(
@@ -196,15 +185,16 @@ async def test_the_parts_are_tiles_and_the_list_stays_in_sight(
             again = await page.evaluate(READY)
             assert again["card"] is None and "(" not in again["count"], again
 
-            # The overview above a long list – here Apparaten in Brein – is tiles too, side
-            # by side; a tap filters.
+            # Apparaten in Brein has no overview per kind any more (0.3.28): above the list
+            # only what asks something of you – how many are not there –, and a tap filters.
             if width > 800:
                 await page.evaluate(SUBTAB, t("ui.brain.tab.devices"))
-                await page.wait_for_selector("main details.overview .tiles li")
-                seen = await page.evaluate(OVERVIEW)
-                assert seen["table"] == 0 and seen["rows"] < seen["tiles"], seen
-                assert set(seen["before"]) - {None} == {"false"} and seen["after"] == "true", seen
-                assert "(" in seen["count"], seen
+                await page.wait_for_selector("main button.gone")
+                assert await page.locator("main details.overview").count() == 0
+                await page.locator("main button.gone").click()
+                await page.wait_for_timeout(600)
+                count = await page.locator("main .tools .count").first.text_content()
+                assert "(" in (count or ""), count
                 if SHOTS:
                     await page.screenshot(path=f"{SHOTS}/devices-{width}.png", full_page=False)
             await context.close()
