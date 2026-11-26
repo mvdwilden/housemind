@@ -6,6 +6,11 @@ It starts the official Home Assistant container with a small test configuration 
 devices plus one automation), finishes the onboarding with a throwaway test user, waits until the
 devices are there and runs ``tests/test_real_ha.py`` against it – including a restart of Home
 Assistant. Everything happens on this computer; the container is removed afterwards.
+
+On Linux (GitHub's machines) the container shares the computer's network and reaches the
+test's HouseMind as 127.0.0.1. On a Mac, Docker Desktop passes the port on, and the container
+can only call in as ``host.docker.internal`` – a name HouseMind outside Home Assistant does
+not answer (QA 3, gat 10), so the link test is skipped there.
 """
 
 from __future__ import annotations
@@ -28,7 +33,8 @@ import aiohttp
 
 ROOT = Path(__file__).resolve().parents[1]
 PORT = 18123
-CONFIGURATION = """\
+SHARED_NETWORK = sys.platform.startswith("linux")
+CONFIGURATION = f"""\
 homeassistant:
   name: HouseMind test
   latitude: 52.37
@@ -39,6 +45,7 @@ homeassistant:
   country: NL
   currency: EUR
 http:
+  server_port: {PORT}
 api:
 websocket_api:
 config:
@@ -179,12 +186,17 @@ def main() -> int:
     image = f"ghcr.io/home-assistant/home-assistant:{args.tag}"
     name = f"housemind-real-ha-{args.tag.replace('.', '-')}"
     base = f"http://127.0.0.1:{PORT}"
-    with tempfile.TemporaryDirectory(prefix="housemind-real-ha-") as config:
+    # What Home Assistant wrote as root in its folder may not be ours to remove (Linux): the
+    # result of the test counts, not a leftover in the temporary folder.
+    with tempfile.TemporaryDirectory(
+        prefix="housemind-real-ha-", ignore_cleanup_errors=True
+    ) as config:
         Path(config, "configuration.yaml").write_text(CONFIGURATION)
         subprocess.run(["docker", "rm", "-f", name], capture_output=True, check=False)
+        network = ("--network", "host") if SHARED_NETWORK else ("-p", f"127.0.0.1:{PORT}:{PORT}")
         subprocess.run(
             [
-                *("docker", "run", "-d", "--name", name, "-p", f"127.0.0.1:{PORT}:8123"),
+                *("docker", "run", "-d", "--name", name, *network),
                 *("-v", f"{config}:/config", "-e", "TZ=Europe/Amsterdam", image),
             ],
             check=True,
@@ -219,6 +231,10 @@ def main() -> int:
                 "HOUSEMIND_REAL_HA_VERSION": version,
                 "HOUSEMIND_REAL_HA_CONTAINER": name,
                 "HOUSEMIND_REAL_HA_CONFIG": config,
+                # Where Home Assistant finds the test's HouseMind for the link.
+                "HOUSEMIND_REAL_HA_BRIDGE_HOST": (
+                    "127.0.0.1" if SHARED_NETWORK else "host.docker.internal"
+                ),
             }
             result = subprocess.run(
                 [
@@ -231,6 +247,10 @@ def main() -> int:
             )
             return result.returncode
         finally:
+            if hasattr(os, "getuid"):  # hand Home Assistant's files back, so they can go too
+                owner = f"{os.getuid()}:{os.getgid()}"
+                chown = ["docker", "exec", name, "chown", "-R", owner, "/config"]
+                subprocess.run(chown, capture_output=True, check=False)
             subprocess.run(["docker", "rm", "-f", name], capture_output=True, check=False)
 
 

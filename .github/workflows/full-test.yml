@@ -8,6 +8,12 @@ on:
   push:
     tags: ["v*"]
   workflow_dispatch:
+    inputs:
+      part:
+        description: "Which part (by hand only; on schedule and tags always all)"
+        type: choice
+        options: [all, year, speed, real-ha]
+        default: all
 
 permissions:
   contents: read
@@ -15,6 +21,7 @@ permissions:
 jobs:
   year:
     name: A year in the time machine (E-99, E-158)
+    if: github.event_name != 'workflow_dispatch' || contains(fromJSON('["all","year"]'), inputs.part)
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
@@ -25,6 +32,7 @@ jobs:
 
   speed:
     name: Speed like a Raspberry Pi 4 (E-157, B-40)
+    if: github.event_name != 'workflow_dispatch' || contains(fromJSON('["all","speed"]'), inputs.part)
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -33,6 +41,7 @@ jobs:
 
   real-ha:
     name: Real Home Assistant ${{ matrix.tag }} (E-142)
+    if: github.event_name != 'workflow_dispatch' || contains(fromJSON('["all","real-ha"]'), inputs.part)
     runs-on: ubuntu-latest
     timeout-minutes: 30
     strategy:

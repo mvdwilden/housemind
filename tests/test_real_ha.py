@@ -33,6 +33,9 @@ VERSION = os.environ.get("HOUSEMIND_REAL_HA_VERSION", "")
 CONTAINER = os.environ.get("HOUSEMIND_REAL_HA_CONTAINER", "")
 CONFIG = os.environ.get("HOUSEMIND_REAL_HA_CONFIG", "")  # the test HA's /config, on this computer
 BRIDGE_PORT = 18099  # where the test's HouseMind answers the integration
+# How Home Assistant's container reaches this computer (tools/real_ha.py): on Linux it shares
+# the network and calls 127.0.0.1; Docker Desktop on a Mac calls in as host.docker.internal.
+BRIDGE_HOST = os.environ.get("HOUSEMIND_REAL_HA_BRIDGE_HOST", "host.docker.internal")
 CORE_DOMAINS = ("light", "cover", "climate", "valve", "lock", "alarm_control_panel")
 
 pytestmark = [
@@ -143,7 +146,9 @@ async def test_house_mind_on_a_real_home_assistant(tmp_path: Path) -> None:
     lost = time.monotonic()
     await _until(lambda: hm.status.ha_lost is None, 300, "the connection to come back")
     print(f"back after a restart of Home Assistant: {time.monotonic() - lost:.1f} s")
-    assert hm.self_check["at"] != checked_before and hm.self_check["broken_actions"] == []
+    # Back first, then the check: on a quick machine the test looks in between.
+    await _until(lambda: hm.self_check["at"] != checked_before, 60, "the check after coming back")
+    assert hm.self_check["broken_actions"] == [], hm.self_check
     # No more "no connection"; she may still say "let op" for a message that waits (20.7).
     assert hm.vesta_state()[1] != "ha_lost", hm.vesta_state()
     changes.clear()
@@ -160,6 +165,10 @@ async def test_house_mind_finishes_its_own_link_in_a_real_home_assistant(tmp_pat
     the right key. Afterwards the link is taken away again."""
     if not CONFIG:
         pytest.skip("needs the test HA's config folder")
+    if BRIDGE_HOST not in ("127.0.0.1", "localhost"):
+        # Outside Home Assistant, HouseMind only answers what is addressed to this computer
+        # itself (QA 3, gat 10); in the App, HA is known by its own network instead.
+        pytest.skip("HA must call this computer as 127.0.0.1: runs on Linux (GitHub)")
     clock = SystemClock()
     ha = WebSocketHomeAssistant(clock, TOKEN, url=f"{BASE.replace('http', 'ws')}/api/websocket")
     ha.retry_delays = (1.0, 2.0, 5.0)
@@ -172,7 +181,7 @@ async def test_house_mind_finishes_its_own_link_in_a_real_home_assistant(tmp_pat
 
     async def connection() -> dict[str, object]:
         # In the App this is the App's own name in HA's network; here the computer itself.
-        return {"host": "host.docker.internal", "port": BRIDGE_PORT, "secret": secret}
+        return {"host": BRIDGE_HOST, "port": BRIDGE_PORT, "secret": secret}
 
     hm._connection = connection  # type: ignore[method-assign]
     try:
