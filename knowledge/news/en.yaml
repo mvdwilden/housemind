@@ -1,5 +1,11 @@
 # What is new, per version (E-150): one sentence for Informed, a short list for Involved and
 # Expert. Plain language, no brand names.
+"0.4.1":
+  one: "HouseMind 0.4.1 is tested with Home Assistant 2026.11."
+  list:
+    - "On Home Assistant 2026.11, HouseMind is no longer extra careful: it again does what it may by itself, without asking first."
+    - "The tests against a real Home Assistant now run on GitHub for every version: with 2026.4, with this month's version and with next month's beta."
+    - "The manual names the tested versions: 2026.4, 2026.10 and 2026.11."
 "0.4.0":
   one: "HouseMind 0.4.0 is ready to become the first public beta."
   list:

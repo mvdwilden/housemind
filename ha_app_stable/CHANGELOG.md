@@ -3,6 +3,14 @@
 <!-- support:start – made by tools/build_support.py from docs/support.yaml -->
 <!-- support:end -->
 
+## 0.4.1 – 26-11-2026
+
+HouseMind 0.4.1 is tested with Home Assistant 2026.11.
+
+- On Home Assistant 2026.11, HouseMind is no longer extra careful: it again does what it may by itself, without asking first.
+- The tests against a real Home Assistant now run on GitHub for every version: with 2026.4, with this month's version and with next month's beta.
+- The manual names the tested versions: 2026.4, 2026.10 and 2026.11.
+
 ## 0.4.0 – 25-11-2026
 
 HouseMind 0.4.0 is ready to become the first public beta.

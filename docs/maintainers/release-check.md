@@ -49,3 +49,21 @@ Found and fixed in this run:
 
 Not covered yet: item 6 (two weeks on the Beta channel), the Home Assistant beta of the next
 month (the beta channel still carried 2026.10.2), and timings on a real Raspberry Pi.
+
+## Real Home Assistant on GitHub – 26 November 2026
+
+Item 4 now runs on GitHub's Linux machines too (`.github/workflows/full-test.yml`; by hand with
+`part: real-ha`). There the test Home Assistant shares the machine's network
+(`--network host`, HA on port 18123) and calls HouseMind as 127.0.0.1. On a Mac, Docker Desktop
+calls in as `host.docker.internal`, which HouseMind outside Home Assistant does not answer, so
+the link test is skipped there.
+
+| Home Assistant | Result |
+|---|---|
+| 2026.4.4 | passed |
+| 2026.11.3 (stable) | passed; 2026.11 added to `knowledge/tested_ha.yaml` in 0.4.1 |
+| 2026.12.0b1 (beta) | passed; a beta is next month and may be "newer" until it is listed |
+
+Found and fixed in this run: the check after a restart was looked at before HouseMind was back,
+Home Assistant's files could not be cleaned up (owned by root), and the tested-list check ran
+before the rest, so a new month hid every other result.

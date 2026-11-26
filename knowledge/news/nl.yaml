@@ -1,5 +1,11 @@
 # Wat is nieuw, per versie (E-150): één zin voor Geïnformeerd, een korte lijst voor Betrokken
 # en Expert. In eenvoudige taal, zonder merknamen.
+"0.4.1":
+  one: "HouseMind 0.4.1 is getest met Home Assistant 2026.11."
+  list:
+    - "Op Home Assistant 2026.11 is HouseMind niet meer extra voorzichtig: het doet weer zelf wat het mag, zonder eerst te vragen."
+    - "De tests tegen een echte Home Assistant draaien nu bij elke versie op GitHub: met 2026.4, met de versie van deze maand en met de bèta van volgende maand."
+    - "De handleiding noemt de geteste versies: 2026.4, 2026.10 en 2026.11."
 "0.4.0":
   one: "HouseMind 0.4.0 is klaar om de eerste openbare bèta te worden."
   list:

@@ -49,6 +49,7 @@ def test_versions_are_compared_by_year_and_month() -> None:
     assert month_of("dev") is None
     compat = load_compatibility([ROOT / "knowledge"])
     assert compat.status("2026.10.2") == "tested"
+    assert compat.status("2026.11.3") == "tested"  # passed the real Home Assistant on 26-11-2026
     assert compat.status("2026.6.1") == "tested"  # between the oldest and the newest tested
     assert compat.status("2099.1.0") == "newer"
     assert compat.status("2025.12.0") == "older"

@@ -4,4 +4,4 @@
 # Older than "oldest" is not supported: the App's config.yaml asks for the same lowest version.
 schema: 1
 oldest: "2026.4"
-tested: ["2026.4", "2026.10"]
+tested: ["2026.4", "2026.10", "2026.11"]
