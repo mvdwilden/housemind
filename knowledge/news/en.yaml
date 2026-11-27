@@ -1,5 +1,11 @@
 # What is new, per version (E-150): one sentence for Informed, a short list for Involved and
 # Expert. Plain language, no brand names.
+"0.4.3":
+  one: "Updating keeps everything HouseMind knows."
+  list:
+    - "An update through Home Assistant keeps everything: what HouseMind learned, your settings, levels and waiting times. The setup and the introduction do not come back; you only see this message."
+    - "The manual says how to update, and that you never remove HouseMind for it: removing throws everything away."
+    - "A new test checks with every version that an update forgets nothing."
 "0.4.2":
   one: "Choose per lamp after how many minutes it goes off, and levels come first."
   list:

@@ -3,6 +3,14 @@
 <!-- support:start – made by tools/build_support.py from docs/support.yaml -->
 <!-- support:end -->
 
+## 0.4.3 – 27-11-2026
+
+Updating keeps everything HouseMind knows.
+
+- An update through Home Assistant keeps everything: what HouseMind learned, your settings, levels and waiting times. The setup and the introduction do not come back; you only see this message.
+- The manual says how to update, and that you never remove HouseMind for it: removing throws everything away.
+- A new test checks with every version that an update forgets nothing.
+
 ## 0.4.2 – 27-11-2026
 
 Choose per lamp after how many minutes it goes off, and levels come first.

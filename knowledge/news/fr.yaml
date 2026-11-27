@@ -1,5 +1,11 @@
 # Quoi de neuf, par version (E-150) : une phrase pour Informé, une courte liste pour Impliqué et
 # Expert. Langage simple, sans noms de marques.
+"0.4.3":
+  one: "La mise à jour garde tout ce que HouseMind sait."
+  list:
+    - "Une mise à jour par Home Assistant garde tout : ce que HouseMind a appris, tes réglages, niveaux et délais. La configuration et la présentation ne reviennent pas ; tu ne vois que ce message."
+    - "Le manuel explique comment mettre à jour, et qu'il ne faut jamais supprimer HouseMind pour cela : le supprimer efface tout."
+    - "Un nouveau test vérifie à chaque version qu'une mise à jour n'oublie rien."
 "0.4.2":
   one: "Choisis pour chaque lampe au bout de combien de minutes elle s'éteint, et les niveaux passent d'abord."
   list:

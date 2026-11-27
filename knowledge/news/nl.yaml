@@ -1,5 +1,11 @@
 # Wat is nieuw, per versie (E-150): één zin voor Geïnformeerd, een korte lijst voor Betrokken
 # en Expert. In eenvoudige taal, zonder merknamen.
+"0.4.3":
+  one: "Bijwerken houdt alles wat HouseMind weet."
+  list:
+    - "Een update via Home Assistant houdt alles: wat HouseMind leerde, je instellingen, standen en wachttijden. De inrichting en de kennismaking komen niet terug; je ziet alleen dit bericht."
+    - "De handleiding zegt hoe je bijwerkt, en dat je HouseMind daarvoor nooit verwijdert: verwijderen gooit alles weg."
+    - "Een nieuwe test controleert bij elke versie dat een update niets vergeet."
 "0.4.2":
   one: "Per lamp kies je na hoeveel minuten hij uitgaat, en standen gaan voor."
   list:
