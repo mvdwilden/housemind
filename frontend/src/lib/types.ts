@@ -554,6 +554,19 @@ export interface LevelsView {
   edit: boolean;
   rhythm: { by: "ha"; name: string | null } | { by: "own"; on: boolean } | null;
   today?: { events: LampEventView[]; since: string | null }; // vandaag met deze lamp (E-500)
+  offWait?: OffWaitView | null; // uit na … zonder beweging (E-575); null: never by itself (outside)
+}
+
+/** How long a lamp waits once its room is empty (E-575). */
+export interface OffWaitView {
+  minutes: number | null; // its own wait; null: what the room learned counts
+  room: number; // the room's learned or start wait, in minutes
+  roomText: string; // "5 min", "1,5 min"
+  learned: boolean;
+  line: string; // the line in the lamp's row
+  sensed: boolean; // a sensor can tell nobody is there (E-462)
+  motionOnly: boolean; // only motion: someone sitting still is not seen
+  max: number;
 }
 
 export interface LampEventView {

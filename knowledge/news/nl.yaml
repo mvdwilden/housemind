@@ -1,5 +1,12 @@
 # Wat is nieuw, per versie (E-150): één zin voor Geïnformeerd, een korte lijst voor Betrokken
 # en Expert. In eenvoudige taal, zonder merknamen.
+"0.4.2":
+  one: "Per lamp kies je na hoeveel minuten hij uitgaat, en standen gaan voor."
+  list:
+    - "Bij elke lamp kies je met een schuif na hoeveel minuten hij uitgaat als er niemand meer is: van meteen tot 30 minuten. Kies je niets, dan leert HouseMind het zoals altijd."
+    - "Heeft een lamp standen, dan krijgt hij altijd een van zijn vier standen, met de helderheid en de kleur die je bewaarde. Is Gedimd paars, dan is het nachtlicht paars."
+    - "Ook het dagritme kiest bij zo'n lamp alleen een stand, dus hij gaat in stappen."
+    - "Vlak voor uit dimt zo'n lamp even in de kleur van Gedimd. Kom je terug, dan krijgt hij zijn licht en kleur terug."
 "0.4.1":
   one: "HouseMind 0.4.1 is getest met Home Assistant 2026.11."
   list:

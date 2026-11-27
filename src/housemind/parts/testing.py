@@ -19,7 +19,7 @@ from zoneinfo import ZoneInfo
 
 from housemind.brain import security
 from housemind.brain.icons import Icons, area_icon
-from housemind.brain.levels import FELT, STANDS, LightLevels, from_json
+from housemind.brain.levels import FELT, STANDS, WAIT_SETTING, LightLevels, from_json, wait_from
 from housemind.brain.levels import SETTING as LEVELS_SETTING
 from housemind.brain.notify import Kind, Person
 from housemind.brain.pretend import (
@@ -1015,6 +1015,26 @@ class TestingPart(Part):
             return False
         levels.own[lamp] = found
         await self.db.set_setting(LEVELS_SETTING, levels.dump())
+        return True
+
+    async def off_wait_save(self, lamp: str, raw: Any) -> bool:
+        """Uit na … zonder beweging (E-575): this lamp's own wait in whole minutes from 0 to 30,
+        or None to let the room's learned wait count again. A lamp in a group that steers it
+        follows its group."""
+        levels = self.light_levels
+        entity = self.model.entities.get(lamp)
+        steered = self.model.steered_by.get(lamp)
+        if entity is None or entity.domain != "light" or (steered and steered != lamp):
+            return False
+        if raw is None:
+            if levels.waits.pop(lamp, None) is None:
+                return True
+        else:
+            minutes = wait_from(raw)
+            if minutes is None:
+                return False
+            levels.waits[lamp] = minutes
+        await self.db.set_setting(WAIT_SETTING, levels.dump_waits())
         return True
 
     async def levels_reset(self, lamp: str) -> None:

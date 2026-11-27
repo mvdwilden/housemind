@@ -725,6 +725,20 @@ class When:
                 + (f" ({self.t('when.detail.learned')})" if learned else "")
             )
         )
+        # A lamp with a wait of its own goes on its own time (E-575).
+        waits = self.hm.light_levels
+        own = [(e, w) for e in lamps if (w := waits.off_wait(e.entity_id)) is not None]
+        if own:
+            said.note(
+                lambda: self.t(
+                    "when.detail.own_wait",
+                    list=", ".join(
+                        f"{e.name} "
+                        + (self.t("when.detail.own_wait_now") if w == 0 else self._minutes(w))
+                        for e, w in own
+                    ),
+                )
+            )
         said.fill["dim"] = ""
         if any(self._dims(e) for e in lamps):
             seconds = float(params.get("dim_warning_seconds", 60))

@@ -42,12 +42,36 @@ PERSON_USER_ID = "demo-person"
 _Effect = Callable[[State, dict[str, Any]], tuple[str, dict[str, Any]]]
 
 
+# What Home Assistant reports for the colour names a stand may have (E-490), as hue and
+# saturation: a lamp told a name is in colour mode "hs" from then on.
+NAMED_HS: dict[str, tuple[float, float]] = {
+    "orange": (38.8, 100.0),
+    "red": (0.0, 100.0),
+    "hotpink": (330.0, 58.8),
+    "mediumpurple": (259.6, 48.9),
+    "royalblue": (225.0, 71.1),
+    "turquoise": (174.0, 71.4),
+    "limegreen": (120.0, 75.6),
+    "gold": (50.6, 100.0),
+}
+
+
 def _on(state: State, data: dict[str, Any]) -> tuple[str, dict[str, Any]]:
     attrs = dict(state.attributes)
     if "brightness_pct" in data:
         attrs["brightness"] = round(float(data["brightness_pct"]) * 255 / 100)
     if "color_temp_kelvin" in data:
         attrs["color_temp_kelvin"] = data["color_temp_kelvin"]
+        if "hs_color" in attrs:
+            attrs["color_mode"] = "color_temp"
+            attrs.pop("hs_color", None)
+    hs = data.get("hs_color")
+    if hs is None and data.get("color_name") in NAMED_HS:
+        hs = NAMED_HS[str(data["color_name"])]
+    if hs is not None:
+        attrs["color_mode"] = "hs"
+        attrs["hs_color"] = (float(hs[0]), float(hs[1]))
+        attrs.pop("color_temp_kelvin", None)
     if "percentage" in data:
         attrs["percentage"] = data["percentage"]
     return "on", attrs

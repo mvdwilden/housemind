@@ -20,6 +20,10 @@ if TYPE_CHECKING:
     from housemind.core.model import HouseModel, State
 
 SETTING = "lamp_stands"  # not "light_levels": that is when it is dark enough (E-268)
+# How long each lamp waits before it goes off once its room is empty (E-575): its own, not
+# with the standen, as lamps of the same type share standen but never a wait.
+WAIT_SETTING = "lamp_off_wait"
+WAIT_MAX = 30  # minutes, as the learned wait (E-444)
 STANDS = ("dim", "normal", "bright", "full")
 FELT = (15.0, 35.0, 60.0, 100.0)  # where the four standen sit on the felt scale
 START = (15, 35, 60, 100)
@@ -117,6 +121,11 @@ def stand_of(felt: float) -> int | None:
     return None
 
 
+def nearest(felt: float) -> int:
+    """The stand nearest a felt percentage (E-576); halfway goes to the softer one."""
+    return min(range(len(FELT)), key=lambda index: (abs(felt - FELT[index]), index))
+
+
 def between(felt: float) -> tuple[int | None, int | None]:
     """The standen a felt percentage lies between: (None, 0) below Gedimd, (i, i) on one."""
     exact = stand_of(felt)
@@ -157,9 +166,15 @@ def _line(points: tuple[float, ...], into: tuple[float, ...], value: float) -> f
 class LightLevels:
     """The standen of the lamps in this house, and the working out with them."""
 
-    def __init__(self, model: HouseModel, own: Mapping[str, Standen] | None = None) -> None:
+    def __init__(
+        self,
+        model: HouseModel,
+        own: Mapping[str, Standen] | None = None,
+        waits: Mapping[str, int] | None = None,
+    ) -> None:
         self.model = model
         self.own: dict[str, Standen] = dict(own or {})
+        self.waits: dict[str, int] = dict(waits or {})  # lamp → minutes (E-575)
 
     # -- the database ---------------------------------------------------------------------
 
@@ -174,6 +189,30 @@ class LightLevels:
 
     def dump(self) -> dict[str, Any]:
         return {e: s.to_json() for e, s in sorted(self.own.items())}
+
+    def load_waits(self, raw: Any) -> None:
+        self.waits = {}
+        if isinstance(raw, dict):
+            for entity_id, value in raw.items():
+                minutes = wait_from(value)
+                if minutes is not None:
+                    self.waits[str(entity_id)] = minutes
+
+    def dump_waits(self) -> dict[str, int]:
+        return dict(sorted(self.waits.items()))
+
+    # -- how long a lamp waits before it goes off (E-575) ---------------------------------
+
+    def off_wait(self, entity_id: str) -> int | None:
+        """The minutes this lamp waits once its room is empty, when someone set them: its own,
+        or those of the group that steers it. None: the room's learned wait counts."""
+        found = self.waits.get(entity_id)
+        if found is not None:
+            return found
+        group = self.model.steered_by.get(entity_id)
+        if group is not None and group != entity_id:
+            return self.waits.get(group)
+        return None
 
     # -- what a lamp is -------------------------------------------------------------------
 
@@ -226,6 +265,11 @@ class LightLevels:
 
     def standen(self, entity_id: str) -> Standen:
         return self.of(entity_id)[0]
+
+    def has_stands(self, entity_id: str) -> bool:
+        """Someone gave this lamp standen – its own, its group's or its type's (E-576): then
+        every rule takes one of the four, not a percentage of its own."""
+        return self.of(entity_id)[1] != "start"
 
     def follows_rhythm(self, entity_id: str) -> bool:
         return self.standen(entity_id).rhythm
@@ -288,6 +332,37 @@ class LightLevels:
             data["brightness_pct"] = self.real(entity_id, FELT[stand])
         data.update(self.colour_data(entity_id, stand, allowed, rhythm_kelvin, fallback_kelvin))
         return data
+
+
+def colour_now(attributes: Mapping[str, Any], allowed: Collection[str]) -> dict[str, Any]:
+    """The colour a lamp shows now, as far as it may be told it again (E-577): its kelvin in
+    colour temperature mode, else its hue and saturation. Empty when it cannot be given back."""
+    mode = attributes.get("color_mode")
+    hs = attributes.get("hs_color")
+    kelvin = attributes.get("color_temp_kelvin")
+    if (
+        mode != "color_temp"
+        and "hs_color" in allowed
+        and isinstance(hs, list | tuple)
+        and len(hs) == 2
+        and all(isinstance(v, int | float) and not isinstance(v, bool) for v in hs)
+    ):
+        return {"hs_color": [round(float(hs[0]), 1), round(float(hs[1]), 1)]}
+    if (
+        "color_temp_kelvin" in allowed
+        and isinstance(kelvin, int | float)
+        and not isinstance(kelvin, bool)
+    ):
+        return {"color_temp_kelvin": int(kelvin)}
+    return {}
+
+
+def wait_from(raw: Any) -> int | None:
+    """Whole minutes from 0 to WAIT_MAX, from the screen or the database; None otherwise."""
+    if isinstance(raw, bool) or not isinstance(raw, int | float):
+        return None
+    minutes = round(raw)
+    return minutes if 0 <= minutes <= WAIT_MAX and abs(raw - minutes) < 1e-9 else None
 
 
 def white(entity_id: str, levels: LightLevels | None, allowed: Collection[str]) -> dict[str, Any]:

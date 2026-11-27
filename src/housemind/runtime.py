@@ -66,7 +66,7 @@ from housemind.brain.knowing import Knowing, load_settings
 from housemind.brain.lampday import LampDay
 from housemind.brain.learning import Learning, StepChange, Thresholds
 from housemind.brain.levels import SETTING as LEVELS_SETTING
-from housemind.brain.levels import LightLevels
+from housemind.brain.levels import WAIT_SETTING, LightLevels
 from housemind.brain.library import STRONG, WEAK, Library, Piece, gist, good_name
 from housemind.brain.maintenance import PER_DAY as MAINTENANCE_PER_DAY
 from housemind.brain.maintenance import (
@@ -613,6 +613,7 @@ class HouseMind(
         # learning and the emergency reactions.
         self.light_levels.model = self.model
         self.light_levels.load(await self.db.get_setting(LEVELS_SETTING))
+        self.light_levels.load_waits(await self.db.get_setting(WAIT_SETTING))
         self.skills.stands = self.light_levels
         self.daylight.stands = self.light_levels
         self.learning.felt = self.light_levels.felt

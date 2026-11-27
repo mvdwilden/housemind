@@ -1,5 +1,12 @@
 # Quoi de neuf, par version (E-150) : une phrase pour Informé, une courte liste pour Impliqué et
 # Expert. Langage simple, sans noms de marques.
+"0.4.2":
+  one: "Choisis pour chaque lampe au bout de combien de minutes elle s'éteint, et les niveaux passent d'abord."
+  list:
+    - "Pour chaque lampe, un curseur choisit au bout de combien de minutes elle s'éteint quand il n'y a plus personne : de tout de suite à 30 minutes. Si tu ne choisis rien, HouseMind l'apprend comme toujours."
+    - "Une lampe avec des niveaux reçoit toujours l'un de ses quatre niveaux, avec la luminosité et la couleur que tu as enregistrées. Si Tamisé est violet, la veilleuse est violette."
+    - "Le rythme du jour ne choisit lui aussi qu'un niveau pour une telle lampe : elle change par paliers."
+    - "Juste avant de s'éteindre, une telle lampe baisse un instant dans la couleur de Tamisé. Si tu reviens, elle retrouve sa lumière et sa couleur."
 "0.4.1":
   one: "HouseMind 0.4.1 est testé avec Home Assistant 2026.11."
   list:

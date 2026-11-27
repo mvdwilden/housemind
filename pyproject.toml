@@ -1,6 +1,6 @@
 [project]
 name = "housemind"
-version = "0.4.1"
+version = "0.4.2"
 description = "HouseMind – a house that thinks for itself. A learning, explainable brain for Home Assistant."
 readme = "README.md"
 license = "Apache-2.0"

@@ -31,7 +31,7 @@ from housemind.brain.functions import FUNCTIONS, UNKNOWN
 from housemind.brain.house_knowledge import CONFIRMED, REJECTED, SUGGESTED, Finding
 from housemind.brain.lampday import KEEP as LAMP_DAY_KEEP
 from housemind.brain.lampday import what_changed
-from housemind.brain.levels import COLOURS
+from housemind.brain.levels import COLOURS, WAIT_MAX
 from housemind.brain.names import sentence_case
 from housemind.brain.notify import (
     ALL_CAMERAS,
@@ -50,6 +50,7 @@ from housemind.brain.readiness import (
     readiness_others,
 )
 from housemind.brain.rules import rule_text
+from housemind.brain.skills import light_off_hold
 from housemind.core.model import Entity
 from housemind.energy.battery import empty as battery_empty
 from housemind.energy.tips import tips
@@ -1762,6 +1763,53 @@ def _levels_view(hm: HouseMind, lang: str, entity_id: str) -> dict[str, Any]:
         "edit": not (steered and steered != entity_id),
         "rhythm": rhythm,
         "today": _lamp_today(hm, lang, entity_id),
+        "offWait": _off_wait_view(hm, lang, entity_id),
+    }
+
+
+def _off_wait_view(hm: HouseMind, lang: str, entity_id: str) -> dict[str, Any] | None:
+    """Uit na … zonder beweging (E-575): this lamp's own wait, or the one its room learned or
+    starts with; None where lamps never go off by themselves after people left (outside)."""
+    skills = hm.skills
+    area = hm.model.area_of(entity_id)
+    if skills is None or area is None:
+        return None
+    params = skills.params.get("light_off_leave", {})
+    role = hm.area_roles.get(area.id, "other")
+    if role in params.get("never_in", ()):
+        return None
+    t = hm.languages.text
+    occupancy = hm.world.occupancy if hm.world is not None else None
+    sensed = occupancy.sensed(area.id) if occupancy is not None else True
+    signals = occupancy.areas.get(area.id) if occupancy is not None else None
+    presence = bool(signals is not None and signals.has_presence_sensor) or bool(
+        occupancy is not None and occupancy.zones.in_area(area.id)
+    )
+    room, learned = light_off_hold(params, skills.prefs, area.id, role, False, presence)
+    room = round(room * 2) / 2  # to the half minute, as Brein says it
+    own = hm.light_levels.off_wait(entity_id)
+
+    def minutes(value: float) -> str:
+        return t(lang, "ui.stands.wait.minutes", n=hm.languages.number(lang, value))
+
+    if not sensed:
+        line = t(lang, "ui.stands.wait.line_none")
+    elif own == 0:
+        line = t(lang, "ui.stands.wait.line_now")
+    elif own is not None:
+        line = t(lang, "ui.stands.wait.line_own", minutes=minutes(own))
+    else:
+        key = "line_learned" if learned else "line_start"
+        line = t(lang, f"ui.stands.wait.{key}", minutes=minutes(room))
+    return {
+        "minutes": own,  # None: what the room learned counts
+        "room": room,
+        "roomText": minutes(room),
+        "learned": learned,
+        "line": line,
+        "sensed": sensed,
+        "motionOnly": sensed and not presence,
+        "max": WAIT_MAX,
     }
 
 

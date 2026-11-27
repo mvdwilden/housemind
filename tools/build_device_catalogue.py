@@ -19,7 +19,13 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from housemind import __version__  # noqa: E402
 from housemind.i18n.catalog import load_languages  # noqa: E402
-from housemind.knowledge.catalog import DeviceKind, ValueChoices, ValueRange, ValueText  # noqa: E402
+from housemind.knowledge.catalog import (  # noqa: E402
+    DeviceKind,
+    ValueChoices,
+    ValuePair,
+    ValueRange,
+    ValueText,
+)
 from housemind.knowledge.loader import load_catalog  # noqa: E402
 
 # Section per knowledge file, in reading order.
@@ -135,7 +141,9 @@ HARD_LIMITS = [
 ]
 
 
-def _value(rule: ValueRange | ValueChoices | ValueText, unit: str = "") -> str:
+def _value(rule: ValueRange | ValueChoices | ValueText | ValuePair, unit: str = "") -> str:
+    if isinstance(rule, ValuePair):
+        return " and ".join(_value(r) for r in (rule.first, rule.second))
     if isinstance(rule, ValueRange):
         low, high = (f"{v:g}" for v in (rule.minimum, rule.maximum))
         return f"{low}–{high}{unit}"

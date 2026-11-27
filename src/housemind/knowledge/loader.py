@@ -25,6 +25,7 @@ from housemind.knowledge.catalog import (
     SafetyClass,
     Step,
     ValueChoices,
+    ValuePair,
     ValueRange,
     ValueRule,
     ValueText,
@@ -46,7 +47,13 @@ _TEXT = {
     "additionalProperties": False,
     "properties": {"text": {"const": True}},
 }
-_VALUE_RULE = {"oneOf": [_RANGE, _CHOICES, _TEXT]}
+_PAIR = {
+    "type": "object",
+    "required": ["pair"],
+    "additionalProperties": False,
+    "properties": {"pair": {"type": "array", "items": _RANGE, "minItems": 2, "maxItems": 2}},
+}
+_VALUE_RULE = {"oneOf": [_RANGE, _CHOICES, _TEXT, _PAIR]}
 
 CATALOG_SCHEMA: dict[str, Any] = {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -155,6 +162,12 @@ def _kind_from_dict(raw: dict[str, Any]) -> DeviceKind:
             if isinstance(rule, dict) and rule.get("text") is True:
                 ranges[name] = ValueText()
                 continue
+            if isinstance(rule, dict) and "pair" in rule:
+                one, two = (ValueRange(float(r[0]), float(r[1])) for r in rule["pair"])
+                if one.minimum > one.maximum or two.minimum > two.maximum:
+                    raise KnowledgeError(f"{raw['key']}: pair {name} has min > max")
+                ranges[name] = ValuePair(one, two)
+                continue
             if isinstance(rule, dict):
                 ranges[name] = ValueChoices(frozenset(rule["one_of"]))
                 continue
@@ -223,6 +236,13 @@ def merge_kind(base: DeviceKind, override: DeviceKind) -> tuple[DeviceKind, list
                 )
             elif isinstance(rule, ValueChoices) and isinstance(base_rule, ValueChoices):
                 narrowed[name] = ValueChoices(rule.options & base_rule.options)
+            elif isinstance(rule, ValuePair) and isinstance(base_rule, ValuePair):
+                narrowed[name] = ValuePair(
+                    *(
+                        ValueRange(max(a.minimum, b.minimum), min(a.maximum, b.maximum))
+                        for a, b in ((rule.first, base_rule.first), (rule.second, base_rule.second))
+                    )
+                )
             elif isinstance(rule, ValueChoices) and isinstance(base_rule, ValueText):
                 narrowed[name] = rule  # a fixed list is stricter than any text
             else:

@@ -186,6 +186,8 @@
     </span>
     <span><span class="tag" class:own={lv.source === "own"} class:start={lv.source === "start"}>{t(`ui.stands.source.${lv.source}`, { name: lv.sourceName })}</span></span>
   {/if}
+  <!-- Uit na … zonder beweging (E-575): its own wait, or what the room learned. -->
+  {#if lv.offWait}<span class="muted off-wait" class:own={lv.offWait.minutes !== null}>{lv.offWait.line}</span>{/if}
 {/snippet}
 
 <!-- A group with what is inside it (E-312): smaller groups, then its own devices. -->
@@ -302,6 +304,8 @@
   .tag.start { color: var(--learning); border-color: var(--learning); }
   /* Standen voor lampen (B-413) */
   .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 2px; }
+  .off-wait { display: block; }
+  .off-wait.own { color: var(--accent); }
   .chip { display: inline-flex; align-items: center; gap: 6px; font-size: calc(13px * var(--text-scale)); padding: 2px 8px 2px 6px; border-radius: 14px; background: var(--raised); border: 1px solid var(--line); white-space: nowrap; }
   .chip b { font-family: var(--font-mono); font-weight: 500; font-size: calc(12px * var(--text-scale)); }
   .fill { width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid var(--learning); background: color-mix(in srgb, var(--learning) var(--fill), transparent); }

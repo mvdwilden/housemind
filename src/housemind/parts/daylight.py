@@ -23,6 +23,7 @@ from housemind.brain.daylight import (
     is_own,
     lamp_now,
     request_data,
+    with_transition,
 )
 from housemind.brain.notify import Kind
 from housemind.brain.skills import ARRIVAL, EVENING
@@ -378,8 +379,13 @@ class DaylightPart(Part):
                 else None
             ),
         )
+        allowed = self._daylight_may_tell(lamp)
+        stand = book.stand_data(lamp, allowed, pct, warm)  # one of its four standen (E-576)
         warm = fitted(lamp, book.states, warm)
-        if pct is not None and book.stands is not None:
+        if stand is not None:
+            # Compared as the stand is: while the rhythm stays nearest the same stand, nothing.
+            pct, warm = stand.get("brightness_pct"), stand.get("color_temp_kelvin")
+        elif pct is not None and book.stands is not None:
             pct = float(book.stands.real(lamp, pct))  # its own standen, before comparing (B-409)
         left = book.following.get(lamp)
         if (
@@ -389,7 +395,10 @@ class DaylightPart(Part):
         ):
             left.at = now  # nobody can see this: no radio for it
             return left
-        data = request_data(self._daylight_may_tell(lamp), pct, warm, transition)
+        if stand is not None:
+            data = with_transition(stand, allowed, transition)
+        else:
+            data = request_data(allowed, pct, warm, transition)
         if not data:
             return None
         decision = await self.gate.submit(

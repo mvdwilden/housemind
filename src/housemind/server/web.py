@@ -2094,6 +2094,12 @@ class Session:
             await self.send({"type": "saved", "text": hm.languages.text(self.lang, key)})
         elif do == "reset" and isinstance(lamp, str):
             await hm.levels_reset(lamp)
+        elif do == "wait" and isinstance(lamp, str):
+            # Uit na … zonder beweging (E-575): minutes 0 – 30, or None to learn it again.
+            ok = await hm.off_wait_save(lamp, data.get("minutes"))
+            key = "ui.stands.wait.saved" if ok else "ui.stands.wait.not_saved"
+            self._answered = True
+            await self.send({"type": "saved", "text": hm.languages.text(self.lang, key)})
         elif do in ("try", "try_room") and isinstance(stand, int) and not isinstance(stand, bool):
             area = data.get("area")
             if do == "try_room" and isinstance(area, str) and area in hm.model.areas:

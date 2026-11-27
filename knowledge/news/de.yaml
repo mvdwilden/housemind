@@ -1,5 +1,12 @@
 # Was ist neu, pro Version (E-150): ein Satz für Informiert, eine kurze Liste für Beteiligt und
 # Experte. Einfache Sprache, keine Markennamen.
+"0.4.2":
+  one: "Pro Lampe wählst du, nach wie vielen Minuten sie ausgeht, und Stufen gehen vor."
+  list:
+    - "Für jede Lampe wählst du mit einem Schieber, nach wie vielen Minuten sie ausgeht, wenn niemand mehr da ist: von sofort bis 30 Minuten. Wählst du nichts, lernt HouseMind es wie immer."
+    - "Hat eine Lampe Stufen, bekommt sie immer eine ihrer vier Stufen, mit der Helligkeit und Farbe, die du gespeichert hast. Ist Gedimmt lila, ist das Nachtlicht lila."
+    - "Auch der Tagesrhythmus wählt bei so einer Lampe nur eine Stufe, sie ändert sich also in Schritten."
+    - "Kurz vor dem Ausgehen dimmt so eine Lampe einen Moment in der Farbe von Gedimmt. Kommst du zurück, bekommt sie ihr Licht und ihre Farbe zurück."
 "0.4.1":
   one: "HouseMind 0.4.1 ist mit Home Assistant 2026.11 getestet."
   list:

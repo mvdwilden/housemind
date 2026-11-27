@@ -44,6 +44,9 @@ kinds:
           transition: [0, 300]
           # A stand's colour on a lamp that shows colours (E-490, B-407): only these names.
           color_name: {one_of: [orange, red, hotpink, mediumpurple, royalblue, turquoise, limegreen, gold]}
+          # The colour a lamp had before a dim warning in its Gedimd's colour, given back when
+          # someone comes back (E-577): hue and saturation, as Home Assistant reports them.
+          hs_color: {pair: [[0, 360], [0, 100]]}
           # A signal lamp at a break-in flashes by itself, when it can (E-543).
           flash: {one_of: [long]}
       - action: light.turn_off

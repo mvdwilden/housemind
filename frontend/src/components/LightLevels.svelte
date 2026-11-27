@@ -24,6 +24,10 @@
   let dim = $state<"keep" | "off">(first?.dim === "off" ? "off" : "keep");
   let rhythm = $state(first?.rhythm?.by === "own" ? first.rhythm.on !== false : true);
   let trying = $state<number | null>(null);
+  // Uit na … zonder beweging (E-575): its own wait, or null for what the room learned. The
+  // slider is saved as soon as it is let go; "Laat HouseMind het leren" gives it back.
+  let wait = $state<number | null>(untrack(() => lamp.levels?.offWait?.minutes ?? null));
+  let waitTimer: ReturnType<typeof setTimeout> | undefined;
   let showing = false; // Laat alle vier zien runs
   let timer: ReturnType<typeof setTimeout> | undefined;
   let follow: ReturnType<typeof setTimeout> | undefined;
@@ -115,6 +119,22 @@
     onsend({ do: "save", id: lamp.id, levels: draft() });
   }
 
+  function setWait(value: number): void {
+    wait = Math.max(0, Math.min(levels.offWait?.max ?? 30, Math.round(value)));
+    clearTimeout(waitTimer);
+    waitTimer = setTimeout(() => onsend({ do: "wait", id: lamp.id, minutes: wait }), 300);
+  }
+
+  function learnWait(): void {
+    clearTimeout(waitTimer);
+    wait = null;
+    onsend({ do: "wait", id: lamp.id, minutes: null });
+  }
+
+  function waitText(minutes: number): string {
+    return minutes === 0 ? t("ui.stands.wait.now") : t("ui.stands.wait.minutes", { n: minutes });
+  }
+
   // While this window is open HouseMind keeps off the lamp; it says so again every 20 seconds,
   // so a screen that went away lets go by itself (E-516).
   onMount(() => {
@@ -125,6 +145,7 @@
 
   onDestroy(() => {
     clearTimeout(follow);
+    clearTimeout(waitTimer);
     clearInterval(holding);
     stopShowing();
     onsend({ do: "release", id: lamp.id }); // closing the window: back as it was, HouseMind again
@@ -209,6 +230,34 @@
     {/if}
   {/if}
 
+  {#if levels.offWait && levels.edit}
+    {@const ow = levels.offWait}
+    <section class="wait" aria-label={t("ui.stands.wait.title")}>
+      <h3>{t("ui.stands.wait.title")}</h3>
+      {#if !ow.sensed}
+        <p class="note">{t("ui.stands.wait.no_sensor")}</p>
+      {:else}
+        <label class="line wait-line">
+          <span class="label">{t("ui.stands.wait.label")}</span>
+          <input type="range" min="0" max={ow.max} step="1" value={wait ?? Math.round(ow.room)}
+            oninput={(e) => setWait(Number(e.currentTarget.value))} aria-label={t("ui.stands.wait.label")}
+            aria-valuetext={wait !== null ? waitText(wait) : ow.roomText} />
+          <span class="value" class:own={wait !== null}>{wait !== null ? waitText(wait) : ow.roomText}</span>
+        </label>
+        <p class="note">{t("ui.stands.wait.hint")}</p>
+        {#if wait !== null}
+          <div class="row">
+            <span class="note grow">{t("ui.stands.wait.yours")}</span>
+            <button type="button" onclick={learnWait}>{t("ui.stands.wait.learn")}</button>
+          </div>
+        {:else}
+          <p class="note">{ow.learned ? t("ui.stands.wait.learned", { minutes: ow.roomText }) : t("ui.stands.wait.start", { minutes: ow.roomText })}</p>
+        {/if}
+        {#if ow.motionOnly}<p class="note warn">{t("ui.stands.wait.motion_only")}</p>{/if}
+      {/if}
+    </section>
+  {/if}
+
   {#if levels.today}
     <section class="today" aria-label={t("ui.stands.day.title")}>
       <h3>{t("ui.stands.day.title")}</h3>
@@ -282,6 +331,14 @@
   .choice input, .check input { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--accent); flex: none; }
   .choice small, .check small { display: block; color: var(--muted); font-size: calc(13px * var(--text-scale)); }
   .note { margin: 0; color: var(--muted); font-size: calc(13px * var(--text-scale)); }
+  /* Uit na … zonder beweging (E-575) */
+  .wait { border-top: 1px solid var(--line); padding-top: 10px; display: flex; flex-direction: column; gap: 8px; }
+  .wait h3 { margin: 0; font-size: calc(15px * var(--text-scale)); }
+  .wait .wait-line { padding-left: 0; grid-template-columns: 120px minmax(0, 1fr) 96px; }
+  .wait .value.own { color: var(--accent); font-weight: 600; }
+  .wait .row { align-items: center; }
+  .wait .grow { flex: 1; min-width: 0; }
+  .note.warn { color: var(--text); }
   /* Vandaag met deze lamp (E-500) */
   .today h3 { margin: 4px 0 8px; font-size: calc(15px * var(--text-scale)); }
   .today ol { list-style: none; margin: 0 0 6px; padding: 0; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }

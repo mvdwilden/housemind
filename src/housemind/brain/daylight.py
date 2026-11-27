@@ -18,6 +18,7 @@ from dataclasses import dataclass, field
 from datetime import UTC, date, datetime, time, timedelta, tzinfo
 from typing import TYPE_CHECKING, Any
 
+from housemind.brain.levels import nearest
 from housemind.core.model import HouseModel, State
 from housemind.ha.adapter import HALightRhythm
 
@@ -331,11 +332,26 @@ class DaylightBook:
         pct, warm = self.level(rhythm, now, shift)
         if pct is None and warm is None:
             return None
+        stand = self.stand_data(entity_id, allowed, pct, warm)
+        if stand is not None:
+            return with_transition(stand, allowed, rhythm.initial_transition_s)
         if pct is not None and self.stands is not None:
             pct = float(self.stands.real(entity_id, pct))  # its own standen (B-409)
         return request_data(
             allowed, pct, fitted(entity_id, self.states, warm), rhythm.initial_transition_s
         )
+
+    def stand_data(
+        self, entity_id: str, allowed: Collection[str], pct: float | None, warm: float | None
+    ) -> dict[str, Any] | None:
+        """A lamp with standen (E-576): the rhythm only picks one of the four – the one nearest
+        its brightness – with that stand's own brightness and colour; a stand that follows the
+        day's rhythm takes the rhythm's colour. None for a lamp on the start values."""
+        stands = self.stands
+        if stands is None or pct is None or not stands.has_stands(entity_id):
+            return None
+        kelvin = fitted(entity_id, self.states, round(warm) if warm is not None else None)
+        return stands.stand_data(entity_id, nearest(pct), allowed, kelvin, None)
 
     def still_there(self, lamp: str, state: State) -> bool:
         """Is this lamp still where HouseMind left it? If not, someone chose (B-383)."""
@@ -393,6 +409,13 @@ def request_data(
         data["brightness_pct"] = max(1, round(pct))
     if warm is not None and "color_temp_kelvin" in allowed:
         data["color_temp_kelvin"] = warm
+    return with_transition(data, allowed, transition)
+
+
+def with_transition(
+    data: dict[str, Any], allowed: Collection[str], transition: float
+) -> dict[str, Any]:
+    """Softly, as the group says, when there is something to send and the lamp may be told."""
     if data and "transition" in allowed:
-        data["transition"] = transition
+        return {**data, "transition": transition}
     return data

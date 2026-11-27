@@ -85,7 +85,23 @@ class ValueText:
         return 0 < len(value) <= self.max_length
 
 
-ValueRule = ValueRange | ValueChoices | ValueText
+@dataclass(frozen=True, slots=True)
+class ValuePair:
+    """Two numbers, each in its own range: a colour as hue and saturation (``hs_color``), to
+    give a lamp back the colour it had before a dim warning (E-577)."""
+
+    first: ValueRange
+    second: ValueRange
+
+    def contains(self, value: Any) -> bool:
+        if not isinstance(value, list | tuple) or len(value) != 2:
+            return False
+        if any(isinstance(v, bool) or not isinstance(v, int | float) for v in value):
+            return False
+        return self.first.contains(float(value[0])) and self.second.contains(float(value[1]))
+
+
+ValueRule = ValueRange | ValueChoices | ValueText | ValuePair
 
 
 @dataclass(frozen=True, slots=True)
@@ -109,6 +125,9 @@ class AllowedAction:
                 if not isinstance(value, int | float) or isinstance(value, bool):
                     return f"value_not_numeric:{key}"
                 if not rule.contains(float(value)):
+                    return f"value_out_of_range:{key}"
+            elif isinstance(rule, ValuePair):
+                if not rule.contains(value):
                     return f"value_out_of_range:{key}"
             elif not isinstance(value, str) or not rule.contains(value):
                 return f"value_not_an_option:{key}"

@@ -3,6 +3,15 @@
 <!-- support:start – made by tools/build_support.py from docs/support.yaml -->
 <!-- support:end -->
 
+## 0.4.2 – 27-11-2026
+
+Choose per lamp after how many minutes it goes off, and levels come first.
+
+- For each lamp, a slider chooses after how many minutes it goes off once nobody is there: from at once to 30 minutes. Choose nothing and HouseMind learns it as always.
+- A lamp with levels always gets one of its four levels, with the brightness and colour you saved. If Dimmed is purple, the night light is purple.
+- The day's rhythm only picks a level for such a lamp too, so it changes in steps.
+- Just before off, such a lamp dims for a moment in Dimmed's colour. Come back and it gets its light and colour back.
+
 ## 0.4.1 – 26-11-2026
 
 HouseMind 0.4.1 is tested with Home Assistant 2026.11.

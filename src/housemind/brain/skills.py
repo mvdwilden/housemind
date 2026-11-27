@@ -21,7 +21,7 @@ import yaml
 
 from housemind.brain.daylight import DaylightBook
 from housemind.brain.learning import HOLD_MAX, HOLD_MIN
-from housemind.brain.levels import FELT, STANDS, LightLevels, stand_of
+from housemind.brain.levels import FELT, STANDS, LightLevels, colour_now, nearest, stand_of
 from housemind.core.model import Entity, HouseModel, State, daypart
 from housemind.knowledge.catalog import Catalog, DeviceKind
 from housemind.knowledge.matcher import recognise
@@ -250,6 +250,11 @@ class SkillEngine:
     daylight: DaylightBook | None = None  # the day's rhythm of the light (E-466)
     stands: LightLevels | None = None  # the standen of the lamps (E-490, design 73)
     _dimmed: dict[str, tuple[datetime, dict[str, int]]] = field(default_factory=dict)
+    # A lamp with a wait of its own (E-575): its place, when its dim warning began, and its
+    # brightness before it (None: nothing to dim) – apart from the room's warning above.
+    _lamp_dimmed: dict[str, tuple[str, datetime, int | None]] = field(default_factory=dict)
+    # The colour a lamp had before a dim warning in its Gedimd's colour, to give back (E-577).
+    _dim_colour: dict[str, dict[str, Any]] = field(default_factory=dict)
     # When someone came into a dark place, or it got dark while they were there: light on is
     # about that moment, once – a lamp left off while someone sits in the dark is no new "not
     # like that" every five minutes.
@@ -700,8 +705,14 @@ class SkillEngine:
         stand: int | None = None
         if "brightness_pct" in found:
             felt, learned_it = found["brightness_pct"]
+            if levels.has_stands(entity.entity_id):
+                # Someone gave it standen: one of the four, also for what the house taught
+                # (E-576) – its brightness and its colour.
+                stand = nearest(felt)
+                felt = FELT[stand]
+            else:
+                stand = None if learned_it else stand_of(felt)
             data["brightness_pct"] = levels.real(entity.entity_id, felt)
-            stand = None if learned_it else stand_of(felt)
         kelvin = found["color_temp_kelvin"][0] if "color_temp_kelvin" in found else None
         if stand is not None:
             data.update(levels.colour_data(entity.entity_id, stand, allowed.values, None, kelvin))
@@ -756,7 +767,8 @@ class SkillEngine:
 
     def dimming(self, area_id: str) -> bool:
         """A dim warning runs in this room or a part of it: its lamps are not to be touched."""
-        return any(key == area_id or key.startswith(f"{area_id}#") for key in self._dimmed)
+        keys = [*self._dimmed, *(place for place, _, _ in self._lamp_dimmed.values())]
+        return any(key == area_id or key.startswith(f"{area_id}#") for key in keys)
 
     def next_recheck(self, now: datetime) -> datetime | None:
         """The first moment a place wants to be looked at again, if any (E-443)."""
@@ -811,13 +823,23 @@ class SkillEngine:
                 continue  # someone switched it on already
             brightness = state.attributes.get("brightness")
             current = brightness * 100 / 255 if isinstance(brightness, int | float) else None
-            target = self.standen().real(entity.entity_id, steps[index])  # its own (B-408)
+            levels = self.standen()
+            sunrise = kelvins[min(index, len(kelvins) - 1)] if kelvins else None
+            data: dict[str, Any]
+            if levels.has_stands(entity.entity_id):
+                # Its standen (E-576): up through them, each with its own colour; a stand on
+                # the day's rhythm takes the warm-to-white of the sunrise.
+                data = levels.stand_data(
+                    entity.entity_id, nearest(steps[index]), allowed.values, None, sunrise
+                )
+            else:
+                data = {"brightness_pct": levels.real(entity.entity_id, steps[index])}  # B-408
+                if "color_temp_kelvin" in allowed.values and sunrise is not None:
+                    data["color_temp_kelvin"] = sunrise
+            target = data.get("brightness_pct", 0)
             if state.state == "on" and current is not None and current >= target - 1:
                 continue
             self._wake_set[entity.entity_id] = today
-            data: dict[str, Any] = {"brightness_pct": target}
-            if "color_temp_kelvin" in allowed.values and kelvins:
-                data["color_temp_kelvin"] = kelvins[min(index, len(kelvins) - 1)]
             out.append(
                 self._req(
                     world,
@@ -875,9 +897,12 @@ class SkillEngine:
                 continue
             if levels.felt(entity.entity_id, brightness * 100 / 255) <= dim_to + 5:
                 continue
-            if stand is not None:
+            one = stand
+            if one is None and levels.has_stands(entity.entity_id):
+                one = nearest(dim_to)  # one of its four standen (E-576)
+            if one is not None:
                 rhythm = self._rhythm_kelvin(entity.entity_id, world.now)
-                data = levels.stand_data(entity.entity_id, stand, allowed.values, rhythm, fallback)
+                data = levels.stand_data(entity.entity_id, one, allowed.values, rhythm, fallback)
             else:
                 data = {"brightness_pct": levels.real(entity.entity_id, dim_to)}
                 if fallback is not None and "color_temp_kelvin" in allowed.values:
@@ -1588,8 +1613,18 @@ class SkillEngine:
         # Coming back during a dim warning: restore the light (E-113) – only a lamp that was
         # really dimmed: on Observe nothing is dimmed, and "turn it back on" for a lamp that is
         # on would count as "not like that".
-        if occupied and key in self._dimmed:
-            _, previous = self._dimmed.pop(key)
+        own_dimmed = (
+            [lamp for lamp, (place, _, _) in self._lamp_dimmed.items() if place == key]
+            if occupied
+            else []
+        )
+        if occupied and (key in self._dimmed or own_dimmed):
+            _, kept = self._dimmed.pop(key, (world.now, {}))
+            previous = dict(kept)
+            for lamp in own_dimmed:  # a lamp with a wait of its own (E-575)
+                brightness_before = self._lamp_dimmed.pop(lamp)[2]
+                if brightness_before is not None:
+                    previous[lamp] = brightness_before
             back = False
             for entity in lights:
                 state = states.get(entity.entity_id)
@@ -1601,7 +1636,8 @@ class SkillEngine:
                     and brightness * 100 / 255 < previous.get(entity.entity_id, 0) - 2
                 )
                 if dimmed:
-                    back = True
+                    # A wait of its own was set, not taught: it teaches the room nothing.
+                    back = back or entity.entity_id not in own_dimmed
                     out.append(
                         self._req(
                             world,
@@ -1610,10 +1646,15 @@ class SkillEngine:
                             area_id,
                             entity,
                             f"{entity.domain}.turn_on",
-                            {"brightness_pct": previous[entity.entity_id]},
+                            # … and its colour again, when the warning was in Gedimd's (E-577).
+                            {
+                                "brightness_pct": previous[entity.entity_id],
+                                **self._dim_colour.pop(entity.entity_id, {}),
+                            },
                             restored=True,
                         )
                     )
+                self._dim_colour.pop(entity.entity_id, None)
             if back and room:
                 # Someone was still there, or came back: this room's wait was too short (E-444).
                 minutes, _ = light_off_hold(off_params, self.prefs, area_id, role, False, blinks)
@@ -1690,13 +1731,25 @@ class SkillEngine:
             minutes, _ = light_off_hold(off_params, self.prefs, area_id, role, not room, blinks)
             hold = timedelta(minutes=minutes)
             empty_for = world.now - last_activity if last_activity else hold
-            on_lights = [
+            burning = [
                 e
                 for e in lights
                 if states.get(e.entity_id)
                 and states[e.entity_id].state == "on"
                 and not self._signalling(e.entity_id, world.now)
             ]
+            # A lamp with a wait of its own goes on its own time (E-575); the rest with the room.
+            waits = self.standen()
+            lit_now = {e.entity_id for e in burning}
+            for lamp in [
+                lamp
+                for lamp, (place, _, _) in self._lamp_dimmed.items()
+                if place == key and lamp not in lit_now
+            ]:
+                del self._lamp_dimmed[lamp]  # out by hand during its warning: nothing to give back
+            own = [e for e in burning if waits.off_wait(e.entity_id) is not None]
+            out += self._own_wait_off(world, states, area_id, key, own, last_activity, off_params)
+            on_lights = [e for e in burning if e not in own]
             if not on_lights or empty_for < hold:
                 return out
             # Never dimmed for longer than half the wait: a toilet's lamps that wait one minute
@@ -1704,21 +1757,15 @@ class SkillEngine:
             warning = timedelta(
                 seconds=min(float(off_params.get("dim_warning_seconds", 60)), minutes * 30)
             )
-            # Gedimd on each lamp, its colour as it is (E-494, E-495).
+            # Gedimd on each lamp (E-494): its colour as it is, or Gedimd's own on a lamp with
+            # standen (E-577).
             dim_felt = float(off_params.get("dim_to_pct", FELT[0]))
             if key not in self._dimmed:
                 before: dict[str, int] = {}
                 for entity in on_lights:
-                    brightness = states[entity.entity_id].attributes.get("brightness")
-                    kind = self._kind(entity)
-                    turn_on = kind.allowed(f"{entity.domain}.turn_on") if kind else None
-                    dim_to = self.standen().real(entity.entity_id, dim_felt)
-                    if (
-                        turn_on
-                        and "brightness_pct" in turn_on.values
-                        and brightness
-                        and brightness * 100 / 255 > dim_to
-                    ):
+                    data = self._dim_data(entity, states[entity.entity_id], dim_felt, world.now)
+                    if data is not None:
+                        brightness = states[entity.entity_id].attributes["brightness"]
                         before[entity.entity_id] = round(brightness * 100 / 255)
                         out.append(
                             self._req(
@@ -1728,7 +1775,7 @@ class SkillEngine:
                                 area_id,
                                 entity,
                                 f"{entity.domain}.turn_on",
-                                {"brightness_pct": dim_to},
+                                data,
                                 warning=True,
                             )
                         )
@@ -1740,6 +1787,7 @@ class SkillEngine:
             if world.now - started >= warning:
                 for entity in on_lights:
                     self._off_keys[entity.entity_id] = key
+                    self._dim_colour.pop(entity.entity_id, None)
                     out.append(
                         self._req(
                             world,
@@ -1754,6 +1802,105 @@ class SkillEngine:
                         )
                     )
                 self._dimmed.pop(key, None)
+        return out
+
+    def _dim_data(
+        self, entity: Entity, state: State, dim_felt: float, now: datetime
+    ) -> dict[str, Any] | None:
+        """What a lamp is told for its dim warning, or None when it does not dim: brighter than
+        its Gedimd, and it can dim. A lamp with standen takes Gedimd's colour too, when the
+        colour it has now can be given back (E-577)."""
+        brightness = state.attributes.get("brightness")
+        kind = self._kind(entity)
+        turn_on = kind.allowed(f"{entity.domain}.turn_on") if kind else None
+        levels = self.standen()
+        dim_to = levels.real(entity.entity_id, dim_felt)
+        if (
+            turn_on is None
+            or "brightness_pct" not in turn_on.values
+            or not isinstance(brightness, int | float)
+            or not brightness
+            or brightness * 100 / 255 <= dim_to
+        ):
+            return None
+        data: dict[str, Any] = {"brightness_pct": dim_to}
+        stand = stand_of(dim_felt)
+        if stand is not None and levels.has_stands(entity.entity_id):
+            back = colour_now(state.attributes, turn_on.values)
+            rhythm = self._rhythm_kelvin(entity.entity_id, now)
+            colour = levels.colour_data(entity.entity_id, stand, turn_on.values, rhythm, None)
+            if colour and back:
+                data.update(colour)
+                self._dim_colour[entity.entity_id] = back
+        return data
+
+    def _own_wait_off(
+        self,
+        world: WorldState,
+        states: dict[str, State],
+        area_id: str,
+        key: str,
+        lamps: list[Entity],
+        last_activity: datetime | None,
+        off_params: dict[str, Any],
+    ) -> list[ActionRequest]:
+        """Lamps with a wait of their own (E-575): each goes off exactly that many minutes after
+        its place is empty, its dim warning inside that time – half of it at most, never longer
+        than the room's warning; at 0 at once, without a warning."""
+        out: list[ActionRequest] = []
+        waits = self.standen()
+        empty_since = last_activity or world.now - timedelta(days=1)
+        dim_felt = float(off_params.get("dim_to_pct", FELT[0]))
+        for entity in lamps:
+            lamp = entity.entity_id
+            minutes = waits.off_wait(lamp) or 0
+            wait = timedelta(minutes=minutes)
+            warning = timedelta(
+                seconds=min(float(off_params.get("dim_warning_seconds", 60)), minutes * 30)
+            )
+            if world.now < empty_since + wait - warning:
+                self._recheck[f"off:{lamp}"] = empty_since + wait - warning
+                continue
+            if world.now < empty_since + wait:
+                if lamp not in self._lamp_dimmed:
+                    state = states[lamp]
+                    data = self._dim_data(entity, state, dim_felt, world.now)
+                    was = None
+                    if data is not None:
+                        was = round(state.attributes["brightness"] * 100 / 255)
+                        out.append(
+                            self._req(
+                                world,
+                                Layer.REFLEX,
+                                "light_off_leave",
+                                area_id,
+                                entity,
+                                f"{entity.domain}.turn_on",
+                                data,
+                                warning=True,
+                                own_wait=minutes,
+                            )
+                        )
+                    self._lamp_dimmed[lamp] = (key, world.now, was)
+                self._recheck[f"off:{lamp}"] = empty_since + wait
+                continue
+            self._lamp_dimmed.pop(lamp, None)
+            self._dim_colour.pop(lamp, None)
+            self._recheck.pop(f"off:{lamp}", None)
+            self._off_keys[lamp] = key
+            out.append(
+                self._req(
+                    world,
+                    Layer.REFLEX,
+                    "light_off_leave",
+                    area_id,
+                    entity,
+                    f"{entity.domain}.turn_off",
+                    {},
+                    empty_minutes=round((world.now - empty_since).total_seconds() / 60),
+                    own_wait=minutes,  # set, not taught: no hold_minutes to learn from (E-444)
+                )
+            )
         return out
 
     def _covers(
