@@ -27,7 +27,7 @@ def _facts(lang: str) -> dict[str, str]:
 
 
 async def test_the_block_shows_the_version_and_the_lowest_home_assistant(tmp_path: Path) -> None:
-    """The version is this App's, called beta as on its info page; 'works with Home Assistant
+    """The version is this App's, without 'beta' as on its info page; 'works with Home Assistant
     2026.4 or newer' is the lowest version the App asks Home Assistant for."""
     hm, _clock, _ha = await start(tmp_path)
     snap = await views.snapshot(hm, await viewer(hm, 2))
@@ -35,8 +35,8 @@ async def test_the_block_shows_the_version_and_the_lowest_home_assistant(tmp_pat
     assert snap["version"] == __version__ == config["version"]
     lowest = ".".join(str(config["homeassistant"]).split(".")[:2])
     assert snap["haOldest"] == lowest == load_compatibility([ROOT / "knowledge"]).oldest_text()
-    assert "**beta**" in (ROOT / "ha_app_stable" / "README.md").read_text()
-    assert "bèta" in _facts("nl")["version"] and "beta" in _facts("en")["version"]
+    assert "beta" not in (ROOT / "ha_app_stable" / "README.md").read_text().lower()
+    assert "bèta" not in _facts("nl")["version"] and "beta" not in _facts("en")["version"]
     await hm.stop()
 
 
@@ -85,5 +85,5 @@ def test_the_languages_and_the_licences_are_the_apps_own() -> None:
     assert holder is not None
     for lang in LANGS:
         facts = _facts(lang)
-        assert "2026" in facts["open"] and "Apache 2.0" in facts["open"]
+        assert "2026" in facts["open"] and "PolyForm Strict 1.0.0" in facts["open"]
         assert holder.group(1) not in json.dumps(facts, ensure_ascii=False)

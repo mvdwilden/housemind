@@ -44,9 +44,10 @@ languages:
       - A small integration shows HouseMind's state as entities, offers actions (pause, house mode, feedback,
         house rule, ask) and is a conversation agent for Assist. It talks to the App over the Supervisor
         network only.
-    - - Contributing
-      - 'Translations and device kinds are the easiest way to help. Code changes need green tests: pytest,
-        ruff, mypy and the frontend checks. See CONTRIBUTING.md.'
+    - - Helping
+      - 'The code is open to read, not to change: free to install and use, not to change or pass on
+        (PolyForm Strict 1.0.0). A problem, a device it does not know, a language or an idea helps a
+        lot: open an issue or a discussion. See CONTRIBUTING.md.'
     disclaimer: HouseMind helps with safety, but does not replace certified smoke detectors, CO detectors
       or alarm systems.
     support: HouseMind is free for everyone. Want to support it? See the Sponsor button on GitHub.
@@ -91,8 +92,9 @@ languages:
         feedback, huisregel, vragen) en is een gespreksagent voor Assist. Hij praat alleen via het netwerk
         van de Supervisor met de App.
     - - Meehelpen
-      - 'Vertalingen en apparaatsoorten zijn de makkelijkste manier om te helpen. Codewijzigingen vragen
-        groene tests: pytest, ruff, mypy en de frontendcontroles. Zie CONTRIBUTING.md.'
+      - 'De code is open om te lezen, niet om aan te passen: installeren en gebruiken mag gratis,
+        aanpassen en doorgeven niet (PolyForm Strict 1.0.0). Een probleem, een apparaat dat het niet
+        kent, een taal of een idee helpt veel: open een issue of een discussie. Zie CONTRIBUTING.md.'
     disclaimer: HouseMind helpt bij veiligheid, maar vervangt geen gecertificeerde rookmelders, CO-melders
       of alarmsystemen.
     support: HouseMind is gratis voor iedereen. Wil je het steunen? Zie de knop Sponsor op GitHub.
@@ -137,8 +139,9 @@ languages:
         Hausmodus, Rückmeldung, Hausregel, Fragen) und ist ein Gesprächsagent für Assist. Sie spricht
         nur über das Netzwerk des Supervisors mit der App.
     - - Mithelfen
-      - 'Übersetzungen und Gerätearten sind der einfachste Weg zu helfen. Codeänderungen brauchen grüne
-        Tests: pytest, ruff, mypy und die Frontend-Prüfungen. Siehe CONTRIBUTING.md.'
+      - 'Der Code ist offen zum Lesen, nicht zum Ändern: Installieren und Nutzen ist kostenlos, Ändern
+        und Weitergeben nicht (PolyForm Strict 1.0.0). Ein Problem, ein unbekanntes Gerät, eine Sprache
+        oder eine Idee hilft sehr: öffne ein Issue oder eine Diskussion. Siehe CONTRIBUTING.md.'
     disclaimer: HouseMind hilft bei der Sicherheit, ersetzt aber keine zertifizierten Rauchmelder, CO-Melder
       oder Alarmanlagen.
     support: HouseMind ist für alle kostenlos. Möchtest du es unterstützen? Siehe den Sponsor-Knopf auf
@@ -185,9 +188,10 @@ languages:
       - Une petite intégration montre l'état de HouseMind sous forme d'entités, propose des actions (pause,
         mode, avis, règle, question) et est un agent de conversation pour Assist. Elle parle à l'App uniquement
         via le réseau du Supervisor.
-    - - Contribuer
-      - 'Les traductions et les types d''appareils sont la façon la plus simple d''aider. Les modifications
-        de code demandent des tests au vert : pytest, ruff, mypy et les contrôles du frontend. Voir CONTRIBUTING.md.'
+    - - Aider
+      - 'Le code est ouvert à la lecture, pas à la modification : l''installer et l''utiliser est gratuit,
+        le modifier ou le transmettre non (PolyForm Strict 1.0.0). Un problème, un appareil inconnu, une
+        langue ou une idée aide beaucoup : ouvre une issue ou une discussion. Voir CONTRIBUTING.md.'
     disclaimer: HouseMind aide pour la sécurité, mais ne remplace pas les détecteurs de fumée, de CO ou
       les systèmes d'alarme certifiés.
     support: HouseMind est gratuit pour tous. Envie de le soutenir ? Voir le bouton Sponsor sur GitHub.

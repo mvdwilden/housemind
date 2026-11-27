@@ -1437,8 +1437,10 @@ class AIService:
             "calls it ('name', 'key'). Say for each what it most likely "
             f"switches, as one of these roles – {kinds} – or 'unknown' when you are not sure. "
             "A setting of the device itself (a child lock, a status light, a mode) is "
-            "'unknown'. Give a certainty from 0 to 1, and in 'why' one short sentence in the "
-            f"language with code '{language}'. "
+            "'unknown'. In a house, a smart switch or relay in a room most often powers the "
+            "lamp of that room; sometimes another device, such as a fan, a heater or a pump "
+            "('unknown' when none of the roles fits that). Give a certainty from 0 to 1, and "
+            f"in 'why' one short sentence in the language with code '{language}'. "
             'Reply as {"switches": {"<label>": {"role": "...", "certainty": 0.8, '
             '"why": "..."}}}.'
         )

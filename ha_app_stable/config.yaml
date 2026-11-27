@@ -1,10 +1,10 @@
 name: HouseMind
-version: "0.4.3"
+version: "0.4.4"
 slug: housemind
 description: A house that thinks for itself – a learning, explainable brain for your home.
 url: https://github.com/mvdwilden/housemind
-# The first public versions are a beta (B-43): Home Assistant shows it as experimental.
-stage: experimental
+# No beta any more (the administrator's choice, 27-11-2026): an ordinary, stable App.
+stage: stable
 arch:
   - amd64
   - aarch64

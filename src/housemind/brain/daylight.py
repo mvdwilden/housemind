@@ -200,6 +200,7 @@ class DaylightBook:
     switches: dict[str, dict[str, str]] = field(default_factory=dict)
     taken: set[str] = field(default_factory=set)  # groups HouseMind switched off (E-468)
     kept_on: set[str] = field(default_factory=set)  # someone put it back on: it stays
+    paused: set[str] = field(default_factory=set)  # resting while a lamp of it is set (E-579)
     following: dict[str, Following] = field(default_factory=dict)
     # Where a lamp last was, seen or sent: a plain "on" comes back there (E-467).
     last_seen: dict[str, Level] = field(default_factory=dict)

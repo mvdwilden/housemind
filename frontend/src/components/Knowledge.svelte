@@ -150,7 +150,7 @@
     {/if}
     {#if which && view && (choosing || item.unknown)}
       <!-- Iets anders… (E-525): another kind of room, another function, another sensor. -->
-      <label class="field">{t(which === "role" ? "ui.knowledge.choose_role" : which === "function" ? "ui.knowledge.choose_function" : "ui.knowledge.choose_sensor")}
+      <label class="field">{t(which === "role" ? "ui.knowledge.choose_role" : which === "function" ? "ui.knowledge.choose_function" : which === "switch" ? "ui.knowledge.choose_switch" : "ui.knowledge.choose_sensor")}
         <select value="" onchange={(e) => { const v = e.currentTarget.value; if (v) act(item, "other", v); }}>
           <option value="">…</option>
           {#if which === "role"}
@@ -158,6 +158,8 @@
             <option value="other">{t("ui.knowledge.none_of_these")}</option>
           {:else if which === "function"}
             {#each view.functions as choice (choice.id)}<option value={choice.id}>{choice.name}</option>{/each}
+          {:else if which === "switch"}
+            {#each view.switchRoles ?? [] as choice (choice.id)}{#if choice.id !== item.role}<option value={choice.id}>{choice.name}</option>{/if}{/each}
           {:else}
             {#each item.options ?? [] as choice (choice.id)}<option value={choice.id}>{choice.name}</option>{/each}
           {/if}

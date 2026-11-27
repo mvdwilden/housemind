@@ -72,6 +72,10 @@ describe("Alles weer aan te passen (E-525)", () => {
     expect(choiceOf(row({}))).toBe("function");
     expect(choiceOf(row({ kind: "area", field: "temperature", options: [{ id: "a", name: "A" }] }))).toBeNull();
     expect(choiceOf(row({ kind: "area", field: "temperature", options: [{ id: "a", name: "A" }, { id: "b", name: "B" }] }))).toBe("sensor");
+    // What a switch drives (E-580): a lamp from a label can become another device.
+    expect(choiceOf(row({ id: "entity:switch.plug:role", field: "role", role: "light", source: "person" }))).toBe("switch");
+    expect(acts(row({ id: "entity:switch.plug:role", field: "role", role: "light", source: "person" }))).toEqual(["other", "back"]);
+    expect(choiceOf(row({ id: "entity:light.plug:role", field: "role" }))).toBeNull();
     expect(choiceOf(row({ field: "status_led" }))).toBeNull();
   });
 });

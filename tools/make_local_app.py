@@ -4,8 +4,8 @@ Until the first Beta has prebuilt images, this lets HouseMind be installed as a 
 HA builds it on the device from this folder. The frontend must be built first
 (``npm run build`` in ``frontend/``).
 
-Usage: ``python tools/make_local_app.py [output_dir]`` (default ``dist/housemind``). For a beta
-tester's package, ``tools/make_beta_package.py`` builds it as "HouseMind (beta)" (E-528).
+Usage: ``python tools/make_local_app.py [output_dir]`` (default ``dist/housemind``). There is no
+beta tester's package any more (the administrator's choice, 27-11-2026).
 """
 
 from __future__ import annotations
@@ -46,7 +46,7 @@ CMD ["python3", "-m", "housemind"]
 PUBLIC = False
 
 
-def build(output: Path, beta: bool = False) -> Path:
+def build(output: Path) -> Path:
     dist = ROOT / "frontend" / "dist"
     if not (dist / "index.html").exists():
         raise SystemExit("Build the frontend first: cd frontend && npm run build")
@@ -55,7 +55,7 @@ def build(output: Path, beta: bool = False) -> Path:
     output.mkdir(parents=True)
     config = yaml.safe_load((ROOT / "ha_app_stable" / "config.yaml").read_text(encoding="utf-8"))
     config.pop("image", None)  # local build on the device
-    config["name"] = "HouseMind (beta)" if beta else "HouseMind (local)"
+    config["name"] = "HouseMind (local)"
     config["slug"] = "housemind_local"  # the same App, so a newer folder updates it
     if not PUBLIC:  # no project page yet: no link that goes nowhere
         config.pop("url", None)

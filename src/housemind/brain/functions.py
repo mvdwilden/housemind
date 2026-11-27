@@ -107,6 +107,10 @@ CONTROL_DOMAINS = {
 }
 # A switch's role (the catalogue's, a label's, behaviour's) as a function.
 SWITCH_ROLES = {"light": "lamp", "appliance_start": "appliance_start"}
+# What an administrator can say a switch drives in Wat ik weet (E-580): the catalogue's roles,
+# or another device – then it is no lamp and no other role, an ordinary switch.
+OTHER_DEVICE = "other"
+SWITCH_CHOICES = ("light", "appliance_start", "cooking_off", OTHER_DEVICE)
 STATUS_CLASSES = {
     "battery": "battery",
     "signal_strength": "signal",

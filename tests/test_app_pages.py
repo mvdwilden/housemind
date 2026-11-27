@@ -34,8 +34,9 @@ def test_both_tabs_are_made_from_their_sources(tmp_path: Path) -> None:
 
 def test_the_info_tab_shows_what_it_does_for_you_and_how_to_start() -> None:
     """Three screens first, then a day with HouseMind, what it takes off your hands, that it asks
-    first, Vesta, privacy and how to start – called beta, with the lowest Home Assistant the App
-    asks for, and no parts for developers."""
+    first, Vesta, privacy and how to start – no beta any more, free to use and not to change
+    (PolyForm Strict), with the lowest Home Assistant the App asks for, and nothing for
+    developers."""
     info = INFO.read_text(encoding="utf-8")
     first = info.index("![")
     assert info[first:].startswith("![HouseMind on a phone")
@@ -51,8 +52,8 @@ def test_the_info_tab_shows_what_it_does_for_you_and_how_to_start() -> None:
         assert heading in info, heading
     config = yaml.safe_load((ROOT / "ha_app_stable" / "config.yaml").read_text(encoding="utf-8"))
     lowest = ".".join(str(config["homeassistant"]).split(".")[:2])
-    assert "**beta**" in info and f"version {lowest} or newer" in info
-    assert "Demo mode" in info and "Apache-2.0" in info
+    assert "beta" not in info.lower() and f"version {lowest} or newer" in info
+    assert "Demo mode" in info and "PolyForm Strict 1.0.0" in info
     assert "Development" not in info and "uv run" not in info
 
 

@@ -145,6 +145,8 @@ class TestingPart(Part):
         speech: Speech
 
         def _beside(self, work: Coroutine[Any, Any, Any], name: str) -> asyncio.Task[Any]: ...
+        async def daylight_hold(self, lamp: str) -> None: ...
+        async def _daylight_resume(self, now: datetime, everything: bool = False) -> None: ...
         async def _record(self, decision: Decision, previous: State | None = None) -> int: ...
         async def _notify(self) -> None: ...
         async def _resolve(self, topic: str) -> None: ...
@@ -1078,6 +1080,8 @@ class TestingPart(Part):
         running = self._tries.get(self._stand_tries.get(lamp, 0))
         if running is not None and not running.over:
             running.until = max(running.until, until)
+        # What else gives the lamp its colour rests too (E-579): only the window steers it.
+        self._beside(self.daylight_hold(lamp), "stands-hold")
 
     async def levels_release(self, lamp: str) -> None:
         """The window closed: the lamp back as it was, and HouseMind takes it over again."""
@@ -1085,6 +1089,8 @@ class TestingPart(Part):
             for one in self._held_lamps(lamp):
                 self.gate.state.setting_until.pop(one, None)
         await self.levels_back([lamp])
+        if self.gate is not None:
+            await self._daylight_resume(self.clock.now())
 
     # -- the testkwartier (E-477, B-391) ---------------------------------------------------
 

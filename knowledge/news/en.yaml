@@ -1,5 +1,13 @@
 # What is new, per version (E-150): one sentence for Informed, a short list for Involved and
 # Expert. Plain language, no brand names.
+"0.4.4":
+  one: "HouseMind has your lamps to itself."
+  list:
+    - "When a light rule of a room is on Autonomous, HouseMind also does the day's rhythm of those lamps itself, with their levels. Adaptive Lighting no longer steers them."
+    - "While you set a lamp's levels, Adaptive Lighting rests for that lamp. Only you steer it then; after Done the group steers again."
+    - "In What I know you choose what a switch switches: a lamp, an appliance or another device. Switches that became a lamp through a label are there now too."
+    - "The Levels window says at the top in short where the values and the colour come from, and one Save keeps everything: the levels and the waiting time."
+    - "No beta any more: HouseMind is free to install and use. The code is open to read, but not to change or pass on. The changelog starts at 0.4.0."
 "0.4.3":
   one: "Updating keeps everything HouseMind knows."
   list:

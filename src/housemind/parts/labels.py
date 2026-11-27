@@ -25,6 +25,8 @@ from housemind.safety.gate import SafetyGate
 from housemind.world.world import WorldState
 
 if TYPE_CHECKING:
+    from housemind.brain.house_knowledge import Finding, HouseKnowledge
+    from housemind.core.clock import Clock
     from housemind.energy.manager import EnergyManager
     from housemind.i18n.catalog import Languages
 
@@ -44,6 +46,8 @@ class LabelsPart(Part):
         label_hints: LabelHints
         languages: Languages
         model: HouseModel
+        knowledge: HouseKnowledge
+        clock: Clock
         _raised: dict[str, Any]
 
         async def _raise(
@@ -71,12 +75,48 @@ class LabelsPart(Part):
         a yes to leave a label's devices alone for devices that got it later."""
         assert self.gate is not None
         roles = await self.db.get_setting("label_roles", {}) or {}
+        said = {f.subject for f in self.knowledge.of("entity", "role") if f.source == "person"}
         for entity_id, role in roles.items():
-            if entity_id in self.model.entities:
+            if entity_id in self.model.entities and entity_id not in said:
                 self.gate.state.roles[str(entity_id)] = str(role)
         answers = await self._label_answers()
         said_yes = [k for k, yes in answers.items() if yes and k.startswith(SYSTEM_TOPIC)]
         await self._leave_alone([k[len(SYSTEM_TOPIC) :] for k in said_yes])
+
+    async def _label_lamps_known(self) -> None:
+        """A lamp an administrator confirmed from a label is their own answer in Wat ik weet
+        (E-580), so that it shows there and can be changed – for example into another device."""
+        roles = await self.db.get_setting("label_roles", {}) or {}
+        now = self.clock.now()
+        for entity_id, role in roles.items():
+            if (
+                entity_id in self.model.entities
+                and self.knowledge.get("entity", entity_id, "role") is None
+            ):
+                own = {"role": str(role), "why": None}
+                await self.knowledge.answer("entity", str(entity_id), "role", True, now, own)
+
+    async def _label_role_back(self, entity_id: str, found: Finding | None) -> None:
+        """Terug naar te bevestigen for a switch (E-580): from the administrator's own choice
+        back to the label's lamp they said yes to; from that yes itself back to the label's
+        question, which may come again."""
+        assert self.gate is not None
+        roles = await self.db.get_setting("label_roles", {}) or {}
+        role = roles.get(entity_id)
+        if role is None:
+            return
+        if found is not None and found.value.get("role") == role:
+            await self.db.set_setting(
+                "label_roles", {k: v for k, v in roles.items() if k != entity_id}
+            )
+            answers = await self._label_answers()
+            answers.pop(f"{LAMP}{entity_id}", None)
+            await self.db.set_setting("label_answers", answers)
+            if self.gate.state.roles.get(entity_id) == role:
+                del self.gate.state.roles[entity_id]
+            return
+        await self._apply_label_roles()
+        await self._label_lamps_known()
 
     async def _leave_alone(self, label_ids: list[str]) -> None:
         """Put what these system labels cover on 'met rust laten', each device once: one an
@@ -243,6 +283,7 @@ class LabelsPart(Part):
                 roles = await self.db.get_setting("label_roles", {}) or {}
                 await self.db.set_setting("label_roles", {**roles, entity_id: "light"})
                 self.gate.state.roles[entity_id] = "light"
+                await self._label_lamps_known()
         elif topic.startswith(SYSTEM_TOPIC):
             label_id = topic[len(SYSTEM_TOPIC) :]
             if label_id not in self.model.labels:

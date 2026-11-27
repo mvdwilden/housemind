@@ -1,6 +1,8 @@
 HouseMind
 Copyright 2026 Michael van der Wilden
 
-Licensed under the Apache License, Version 2.0 (see LICENSE).
+Licensed under the PolyForm Strict License 1.0.0 (see LICENSE): free to install and use, not to
+change or to pass on. Versions up to and including 0.4.3 were published under the Apache
+License, Version 2.0, and stay under it.
 
 Third-party components and their licences are listed in THIRD_PARTY_LICENSES.md.

@@ -1,5 +1,13 @@
 # Quoi de neuf, par version (E-150) : une phrase pour Informé, une courte liste pour Impliqué et
 # Expert. Langage simple, sans noms de marques.
+"0.4.4":
+  one: "HouseMind a tes lampes pour lui seul."
+  list:
+    - "Quand une règle de lumière d'une pièce est en Autonome, HouseMind fait aussi lui-même le rythme du jour de ces lampes, avec leurs niveaux. Adaptive Lighting ne les pilote plus."
+    - "Tant que tu règles les niveaux d'une lampe, Adaptive Lighting se repose pour cette lampe. Toi seul la pilotes alors ; après Terminé, le groupe pilote de nouveau."
+    - "Dans Ce que je sais, tu choisis ce que commande un interrupteur : une lampe, un appareil ou un autre appareil. Les interrupteurs devenus lampe par une étiquette y sont maintenant aussi."
+    - "La fenêtre Niveaux dit en haut, en bref, d'où viennent les valeurs et la couleur, et un seul Enregistrer garde tout : les niveaux et le délai."
+    - "Plus de bêta : HouseMind est gratuit à installer et à utiliser. Le code est ouvert à la lecture, mais pas à la modification ni à la transmission. La liste des changements commence à 0.4.0."
 "0.4.3":
   one: "La mise à jour garde tout ce que HouseMind sait."
   list:

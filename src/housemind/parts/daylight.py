@@ -50,6 +50,16 @@ SETTING = "day_rhythm"
 # The lamps of one "on" report one by one: look a moment later, and send one message.
 PLAIN_WAIT_S = 1.0
 ON_THE_RHYTHM = frozenset({"light_on_entry", EVENING, ARRIVAL})  # skills whose "on" follows it
+# A room's lamps are HouseMind's as soon as one of its light rules there is on Autonomous
+# (E-579): from then on nothing else gives them their colour through the day.
+ROOM_LIGHT = (
+    "light_on_entry",
+    "light_off_leave",
+    "light_off_sleep",
+    "night_light",
+    "bedtime_dim",
+    "wake_light",
+)
 
 
 class DaylightPart(Part):
@@ -99,6 +109,7 @@ class DaylightPart(Part):
         saved = await self.db.get_setting(SETTING) or {}
         book.taken = {str(e) for e in saved.get("taken", ())}
         book.kept_on = {str(e) for e in saved.get("kept_on", ())}
+        book.paused = {str(e) for e in saved.get("paused", ())}
         await self._read_daylight(now)
         for entry_id in list(book.taken):
             rhythm = book.rhythms.get(entry_id)
@@ -106,10 +117,17 @@ class DaylightPart(Part):
                 # Put back on while HouseMind was away: that stays (E-468).
                 book.taken.discard(entry_id)
                 book.kept_on.add(entry_id)
+        for entry_id in list(book.paused):
+            rhythm = book.rhythms.get(entry_id)
+            if rhythm is None or book.is_on(rhythm):
+                book.paused.discard(entry_id)  # gone, or someone put it on: theirs
         self._daylight_switches()
         for entry_id in book.taken:
             if (rhythm := book.rhythms.get(entry_id)) is not None:
                 self._daylight_follow_what_burns(rhythm, now)
+        if book.paused:
+            # HouseMind stopped while a lamp was being set: no window holds it now.
+            await self._daylight_resume(now, everything=True)
 
     def _daylight_own(self, lamp: str) -> HALightRhythm | None:
         """A house without that integration (E-471, B-385): the same line over the day, between
@@ -173,7 +191,7 @@ class DaylightPart(Part):
         book = self.daylight
         self.gate.state.day_rhythm_taken = {
             switch
-            for entry_id in book.taken
+            for entry_id in book.taken | book.paused
             if (rhythm := book.rhythms.get(entry_id)) is not None
             and (switch := book.main_switch(rhythm)) is not None
         }
@@ -182,7 +200,12 @@ class DaylightPart(Part):
         book = self.daylight
         self._daylight_switches()
         await self.db.set_setting(
-            SETTING, {"taken": sorted(book.taken), "kept_on": sorted(book.kept_on)}
+            SETTING,
+            {
+                "taken": sorted(book.taken),
+                "kept_on": sorted(book.kept_on),
+                "paused": sorted(book.paused),
+            },
         )
 
     async def _daylight_round(self, snapshot: WorldState) -> None:
@@ -194,11 +217,22 @@ class DaylightPart(Part):
         if book.read_at is None or now - book.read_at >= READ_EVERY:
             await self._read_daylight(now)
         await self._daylight_hand_over(snapshot)
+        if book.paused:
+            await self._daylight_resume(now)
         await self._daylight_keep_up(snapshot)
 
+    def _rhythm_skill(self, area_id: str) -> str | None:
+        """The light rule of this room that HouseMind does on Autonomous, under which the day's
+        colour goes too (E-579): the room's lamps are its own then. None while none is."""
+        for skill in ROOM_LIGHT:
+            if skill in self.skill_params and self.autonomous_here(skill, area_id):
+                return skill
+        return None
+
     def _daylight_wanted(self, rhythm: HALightRhythm) -> bool:
-        """HouseMind itself steers all lamps of this group, on Autonomous (E-468): nothing else
-        steers them, or that would leave them without a colour."""
+        """HouseMind itself steers all lamps of this group once the light of each of their rooms
+        is its own on Autonomous (E-468, E-579): nothing else steers them then, and none is
+        left without a colour."""
         assert self.gate is not None
         book = self.daylight
         lamps = book.lamps_of(rhythm)
@@ -206,7 +240,7 @@ class DaylightPart(Part):
             return False
         for unit in self._daylight_units(rhythm):
             area = self.model.area_of(unit)
-            if area is None or not self.autonomous_here("light_on_entry", area.id):
+            if area is None or self._rhythm_skill(area.id) is None:
                 return False
             members = self.model.groups.get(unit, ())
             if watched(self.gate.state.other_system, unit, members):
@@ -295,7 +329,87 @@ class DaylightPart(Part):
             rhythm = book.rhythms.get(entry_id)
             if rhythm is not None and not await self._daylight_give_back(rhythm, why, now):
                 failed.append(book.main_switch(rhythm) or entry_id)
+        await self._daylight_resume(now, everything=True)
         return failed
+
+    # -- while the administrator sets a lamp's standen (E-579) -----------------------------
+
+    def _daylight_held(self, rhythm: HALightRhythm, now: datetime) -> bool:
+        """A lamp of this group is held by an open Standen window."""
+        assert self.gate is not None
+        lamps = set(self.daylight.lamps_of(rhythm)) | self._daylight_units(rhythm)
+        for lamp in list(lamps):
+            lamps.update(self.model.groups.get(lamp, ()))
+        return any(self.gate.state.setting(lamp, now) for lamp in lamps)
+
+    async def daylight_hold(self, lamp: str) -> None:
+        """The Standen window holds this lamp: the group of that integration that still gives
+        it its colour rests until the window closes, so only what the administrator tries is
+        on the lamp. Quiet, as the Proef itself: no line in the Logboek."""
+        if self.gate is None:
+            return
+        book = self.daylight
+        now = self.clock.now()
+        changed = False
+        for one in (lamp, *self.model.groups.get(lamp, ())):
+            rhythm = book.group_of(one)
+            if (
+                rhythm is None
+                or is_own(rhythm)
+                or book.ours(rhythm)
+                or rhythm.entry_id in book.paused
+                or not book.is_on(rhythm)
+                or (switch := book.main_switch(rhythm)) is None
+            ):
+                continue
+            decision = await self.gate.submit(
+                ActionRequest(
+                    Layer.PERSON_ANSWER,  # the administrator opened the window: their choice
+                    switch,
+                    "switch.turn_off",
+                    reason="setting_stands",
+                    created_at=now,
+                    facts={"day_rhythm_group": rhythm.title},
+                )
+            )
+            if decision.executed:
+                book.paused.add(rhythm.entry_id)
+                changed = True
+        if changed:
+            await self._daylight_save()
+
+    async def _daylight_resume(self, now: datetime, everything: bool = False) -> None:
+        """A group that rested while a lamp of it was being set goes on again once no window
+        holds a lamp of it – or becomes HouseMind's, if by now it may steer it (E-579)."""
+        assert self.gate is not None
+        book = self.daylight
+        back_off = bool(await self.db.get_setting("given_back", False))
+        changed = False
+        for entry_id in sorted(book.paused):
+            rhythm = book.rhythms.get(entry_id)
+            switch = book.main_switch(rhythm) if rhythm is not None else None
+            if rhythm is None or switch is None:
+                book.paused.discard(entry_id)
+                changed = True
+                continue
+            if not everything and self._daylight_held(rhythm, now):
+                continue
+            if not everything and not back_off and self._daylight_wanted(rhythm):
+                book.paused.discard(entry_id)
+                book.taken.add(entry_id)  # it stays off: HouseMind does the work now
+                self._daylight_follow_what_burns(rhythm, now)
+                changed = True
+                continue
+            decision = await self.gate.submit(
+                ActionRequest(
+                    Layer.RESTORE, switch, "switch.turn_on", reason="setting_done", created_at=now
+                )
+            )
+            if decision.executed:
+                book.paused.discard(entry_id)
+                changed = True
+        if changed:
+            await self._daylight_save()
 
     def _daylight_units(self, rhythm: HALightRhythm) -> set[str]:
         """What HouseMind addresses of this group: a group that steers its lamps, or the lamps
@@ -379,6 +493,7 @@ class DaylightPart(Part):
                 else None
             ),
         )
+        skill = (self._rhythm_skill(area.id) if area is not None else None) or "light_on_entry"
         allowed = self._daylight_may_tell(lamp)
         stand = book.stand_data(lamp, allowed, pct, warm)  # one of its four standen (E-576)
         warm = fitted(lamp, book.states, warm)
@@ -407,8 +522,8 @@ class DaylightPart(Part):
                 lamp,
                 "light.turn_on",
                 data,
-                reason="skill:light_on_entry",
-                skill="light_on_entry",
+                reason=f"skill:{skill}",
+                skill=skill,
                 area_id=area.id if area is not None else None,
                 created_at=now,
                 facts={"day_rhythm": True},
@@ -465,7 +580,9 @@ class DaylightPart(Part):
             rhythm = book.rhythms[entry_id]
             if book.main_switch(rhythm) != change.entity_id:
                 continue
-            if change.new.state == "on" and entry_id in book.taken:
+            if change.new.state == "on" and entry_id in book.paused:
+                book.paused.discard(entry_id)  # put on while it rested: theirs again
+            elif change.new.state == "on" and entry_id in book.taken:
                 book.taken.discard(entry_id)
                 book.kept_on.add(entry_id)
                 for lamp in self._daylight_units(rhythm):

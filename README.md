@@ -7,8 +7,8 @@ and it always tells you why it does what it does.
 
 ![HouseMind on a phone: what it thought just now and did today, how far it is per part, and Vesta](docs/app/images/hero.jpg)
 
-> Status: **beta**. Start with Demo mode if you like: an invented house to explore, while your
-> own house is never touched.
+> Start with Demo mode if you like: an invented house to explore, while your own house is never
+> touched.
 
 [![Add the HouseMind repository to your Home Assistant](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fmvdwilden%2Fhousemind)
 
@@ -78,9 +78,13 @@ uv run ruff check .
 uv run mypy
 ```
 
-Contributions are welcome – see [CONTRIBUTING.md](CONTRIBUTING.md). A new language or device
-type is a file in `knowledge/`, not code.
+HouseMind is made by one maker and stays in that maker's hands: pull requests from others are not
+taken in. Problems and ideas are very welcome – see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Licence
 
-Free for everyone, no paid features. Apache-2.0 – see `LICENSE` and `NOTICE`.
+Free for everyone to install and use, with no paid features. The code is open to read, so you
+can see what HouseMind does in your house – but not to change, copy into other software or pass
+on: PolyForm Strict 1.0.0, see `LICENSE` and `NOTICE`. GitHub lets anyone look at and fork a
+public repository; that gives no right to change HouseMind or use a changed copy. Versions up to
+and including 0.4.3 were published under Apache-2.0 and stay under it.

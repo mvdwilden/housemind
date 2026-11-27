@@ -552,7 +552,7 @@ export interface LevelsView {
   kelvin: [number, number];
   colours: { key: string; name: string }[];
   edit: boolean;
-  rhythm: { by: "ha"; name: string | null } | { by: "own"; on: boolean } | null;
+  rhythm: { by: "ha"; name: string | null; ours?: boolean } | { by: "own"; on: boolean } | null;
   today?: { events: LampEventView[]; since: string | null }; // vandaag met deze lamp (E-500)
   offWait?: OffWaitView | null; // uit na … zonder beweging (E-575); null: never by itself (outside)
 }
@@ -656,6 +656,7 @@ export interface HouseKnowledgeView {
   functions: { id: string; name: string }[];
   described: number;
   roles: { id: string; name: string }[];
+  switchRoles: { id: string; name: string }[]; // what a switch drives (E-580)
   scenes: SceneScriptView[];
 }
 

@@ -1,13 +1,13 @@
 name: A language
-description: A new language, or better words in an existing one.
+description: A language you would like HouseMind to speak, or better words in one it has.
 labels: [language]
 body:
   - type: markdown
     attributes:
       value: |
-        A language is one file: `knowledge/languages/<code>.yaml`. Copy `en.yaml`, translate the
-        texts and keep every `{placeholder}`. Plain, simple language (B1); no brand names. Until a
-        native speaker checked it, the app marks it "not yet reviewed".
+        Thank you! Say which language, or which words are wrong or hard to understand. The maker
+        adds and checks the words; until a native speaker checked a language, the app marks it
+        "not yet reviewed".
   - type: input
     id: language
     attributes:
@@ -18,4 +18,4 @@ body:
   - type: textarea
     id: notes
     attributes:
-      label: What did you change, or which words were hard?
+      label: Which words are wrong or hard, and what would be better?

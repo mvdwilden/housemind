@@ -26,10 +26,12 @@ export function shown(rows: KnowledgeRow[], tile: KnowledgeState | null, query: 
   );
 }
 
-/** What "Iets anders…" offers: another kind of room, another function, another sensor. */
-export type Choice = "role" | "function" | "sensor" | null;
+/** What "Iets anders…" offers: another kind of room, another function, another sensor, or
+ * what a switch drives (E-580). */
+export type Choice = "role" | "function" | "sensor" | "switch" | null;
 export function choiceOf(row: KnowledgeRow): Choice {
   if (row.kind === "area" && row.field === "role") return "role";
+  if (row.kind === "entity" && row.field === "role" && row.id.startsWith("entity:switch.")) return "switch";
   if (row.kind === "entity" && row.field === "function") return "function";
   if (row.field === "temperature" && (row.options?.length ?? 0) > 1) return "sensor";
   return null;

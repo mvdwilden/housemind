@@ -5,9 +5,9 @@ body:
   - type: markdown
     attributes:
       value: |
-        Device kinds live in `knowledge/catalog/*.yaml`, in Home Assistant's own terms (domain,
-        device_class, supported_features) – never brand names. A new kind may only be stricter
-        than the general one for its domain.
+        Thank you! Say what Home Assistant calls it – its domain, device class and features, as
+        in Home Assistant's own words, not a brand name. The maker adds device kinds; a new kind
+        may only ever be stricter than the general one for its domain.
   - type: input
     id: domain
     attributes:

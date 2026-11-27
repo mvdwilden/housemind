@@ -2088,8 +2088,19 @@ class Session:
             await hm.levels_release(lamp)
             return
         if do == "save" and isinstance(lamp, str):
-            ok = await hm.levels_save(lamp, data.get("levels"))
-            key = "ui.stands.saved" if ok else "ui.stands.not_saved"
+            # One Bewaren for the whole window (E-582): the standen – after Terug naar
+            # startwaarden back to where they come from – and the wait before off, if it
+            # changed. What could not be kept is said, never 'Bewaard.' for it.
+            if data.get("reset") is True and lamp in hm.model.entities:
+                await hm.levels_reset(lamp)
+                stands = True
+            else:
+                stands = await hm.levels_save(lamp, data.get("levels"))
+            wait = await hm.off_wait_save(lamp, data.get("wait")) if "wait" in data else None
+            if stands:
+                key = "ui.stands.saved_not_wait" if wait is False else "ui.stands.saved"
+            else:
+                key = "ui.stands.not_saved_wait_kept" if wait else "ui.stands.not_saved"
             self._answered = True
             await self.send({"type": "saved", "text": hm.languages.text(self.lang, key)})
         elif do == "reset" and isinstance(lamp, str):

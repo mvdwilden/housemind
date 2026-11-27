@@ -2,7 +2,7 @@
 
 The administrator's wish (01-11-2026): a changelog that is simple and readable. So per version
 it says what the app itself says after an update – the English What's new in
-``knowledge/news/en.yaml``: one sentence and a short list – from 0.2.0 on. A version may have a
+``knowledge/news/en.yaml``: one sentence and a short list – from 0.4.0 on. A version may have a
 picture, ``docs/app/images/changelog-<version>.jpg``; it goes into the page itself, as in the
 Documentation tab, because Home Assistant cannot load a separate file of a local App.
 
@@ -24,7 +24,9 @@ ROOT = Path(__file__).resolve().parents[1]
 NEWS = ROOT / "knowledge" / "news" / "en.yaml"
 TARGET = ROOT / "ha_app_stable" / "CHANGELOG.md"
 IMAGES = ROOT / "docs" / "app" / "images"
-FIRST = (0, 2, 0)  # everything before 0.2.0 went (the administrator's choice)
+# What came before went, the administrator's choice: before 0.2.0 on 01-11-2026, before 0.4.0
+# (the first version on GitHub) on 27-11-2026. Each new version comes on top.
+FIRST = (0, 4, 0)
 START = "<!-- support:start – made by tools/build_support.py from docs/support.yaml -->"
 END = "<!-- support:end -->"
 HEADING = re.compile(r"^## (\d+\.\d+\.\d+) – (.+)$", re.M)

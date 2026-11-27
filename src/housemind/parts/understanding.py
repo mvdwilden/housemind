@@ -45,8 +45,10 @@ from housemind.brain.filters import PARTS, parts_of
 from housemind.brain.functions import (
     FUNCTIONS,
     LESS,
+    OTHER_DEVICE,
     SETTING,
     STATUS,
+    SWITCH_CHOICES,
     SWITCH_ROLES,
     UNKNOWN,
     Context,
@@ -153,6 +155,9 @@ class UnderstandingPart(Part):
         def place(self) -> tuple[float, float] | None: ...
         async def _refresh_labels(self) -> None: ...
         async def _notify(self) -> None: ...
+        async def _apply_label_roles(self) -> None: ...
+        async def _label_lamps_known(self) -> None: ...
+        async def _label_role_back(self, entity_id: str, found: Finding | None) -> None: ...
         def _tracked(self, *prefixes: str) -> list[str]: ...
         async def _resolve(self, topic: str) -> None: ...
 
@@ -176,6 +181,7 @@ class UnderstandingPart(Part):
         """At the start: the findings into memory, what they say into the gate, the rooms'
         sensors and the openings again with what a person decided, and where the rules doubt."""
         await self.knowledge.load()
+        await self._label_lamps_known()  # a label's lamp can be changed in Wat ik weet (E-580)
         if any(f.field in DOUBTS for f in self.knowledge.findings.values()):
             self._sort_temperatures()
             self._sort_openings()
@@ -198,12 +204,22 @@ class UnderstandingPart(Part):
         said: dict[str, str] = {}  # for Waarom?: where what a decision rests on came from
         for finding in self.knowledge.of("entity", "role"):
             role, entity_id = finding.value.get("role"), finding.subject
-            if finding.status == REJECTED or not isinstance(role, str):
-                continue
-            if entity_id not in self.model.entities or entity_id in roles:
+            if not isinstance(role, str) or entity_id not in self.model.entities:
                 continue
             if entity_id in self.gate.state.openers:
                 continue  # it opens a door: no other role can make it something else (QA 3)
+            # What an administrator chose in Wat ik weet goes before a label's lamp and the
+            # catalogue's words (E-580): another device is no role at all, Klopt niet on
+            # what they chose themselves takes that away.
+            theirs = finding.source == "person"
+            if theirs and (role == OTHER_DEVICE or finding.status == REJECTED):
+                if role == OTHER_DEVICE or roles.get(entity_id) == role:
+                    roles.pop(entity_id, None)
+                continue
+            if finding.status == REJECTED or role == OTHER_DEVICE:
+                continue
+            if entity_id in roles and not (theirs and finding.status == CONFIRMED):
+                continue
             if finding.status != CONFIRMED and self._less_than_a_switch(entity_id):
                 continue  # what it is says a setting or a status: no switch (E-430)
             roles[entity_id] = role
@@ -1060,6 +1076,13 @@ class UnderstandingPart(Part):
             own_function = {"function": role, "why": None}
             if await self.knowledge.answer(kind, subject, field, True, now, own_function) is None:
                 return False
+        elif kind == "entity" and subject in self.model.entities and field == "role" and role:
+            # Iets anders… for a switch (E-580): what it drives, in the administrator's words.
+            if role not in SWITCH_CHOICES or not subject.startswith("switch."):
+                return False
+            own_role = {"role": role, "why": None}
+            if await self.knowledge.answer(kind, subject, field, True, now, own_role) is None:
+                return False
         elif kind == "entity" and subject in self.model.entities and role is None:
             if (
                 field == "summary"
@@ -1097,6 +1120,8 @@ class UnderstandingPart(Part):
             self._sort_temperatures()
         elif field == "opening":
             self._sort_openings()
+        elif kind == "entity" and field == "role":
+            await self._label_role_back(subject, found)  # a label's lamp, or its question
         self._apply_knowledge()
         await self._notify()
         return True

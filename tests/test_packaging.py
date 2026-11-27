@@ -60,43 +60,6 @@ def test_local_app_folder(tmp_path: Path) -> None:
     assert "Development" not in info and "uv run" not in info and "Repository layout" not in info
 
 
-@pytest.mark.skipif(
-    not (ROOT / "frontend" / "dist" / "index.html").exists(), reason="frontend not built"
-)
-def test_beta_package(tmp_path: Path) -> None:
-    """E-528: one zip for a beta tester – the local App folder as "HouseMind (beta)", with the
-    slug of the local App so a newer package updates it, and the install guide in four
-    languages with this version and date; nothing for developers and no stray files."""
-    import zipfile
-    from datetime import date
-
-    spec = importlib.util.spec_from_file_location(
-        "make_beta_package", ROOT / "tools" / "make_beta_package.py"
-    )
-    assert spec and spec.loader
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    out = module.build(tmp_path, date(2026, 11, 16))
-    version = yaml.safe_load((ROOT / "ha_app_stable" / "config.yaml").read_text())["version"]
-    assert out.name == f"HouseMind-{version}-beta.zip"
-    with zipfile.ZipFile(out) as archive:
-        names = archive.namelist()
-        config = yaml.safe_load(archive.read("housemind/config.yaml"))
-        guide = archive.read("Install HouseMind.html").decode("utf-8")
-        info = archive.read("housemind/README.md").decode("utf-8")
-    assert config["name"] == "HouseMind (beta)" and config["slug"] == "housemind_local"
-    assert config["version"] == version and "image" not in config
-    assert "url" not in config
-    assert info == (ROOT / "ha_app_stable" / "README.md").read_text(encoding="utf-8")
-    assert "housemind/Dockerfile" in names and "housemind/frontend/index.html" in names
-    assert all(n.startswith("housemind/") or n == "Install HouseMind.html" for n in names)
-    assert not [n for n in names if "/tests/" in n or "__pycache__" in n or ".DS_Store" in n]
-    for lang in ("en", "nl", "de", "fr"):
-        assert f'<section id="{lang}" lang="{lang}">' in guide
-    assert "{version}" not in guide and "{date}" not in guide
-    assert guide.count(f"HouseMind {version}") == 5 and "2026-11-16" in guide  # title + 4
-
-
 def test_supervisor_token_also_from_the_container_environment(tmp_path: Path) -> None:
     from housemind.__main__ import supervisor_token
 

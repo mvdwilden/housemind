@@ -1,5 +1,13 @@
 # Wat is nieuw, per versie (E-150): één zin voor Geïnformeerd, een korte lijst voor Betrokken
 # en Expert. In eenvoudige taal, zonder merknamen.
+"0.4.4":
+  one: "HouseMind heeft je lampen voor zichzelf."
+  list:
+    - "Staat in een ruimte een lichtregel op Autonoom, dan doet HouseMind ook het dagritme van die lampen zelf, met hun standen. Adaptive Lighting stuurt ze dan niet meer."
+    - "Zolang je de standen van een lamp instelt, rust Adaptive Lighting voor die lamp. Alleen jij stuurt hem dan; na Klaar stuurt de groep weer."
+    - "In Wat ik weet kies je wat een schakelaar schakelt: een lamp, een apparaat of een ander apparaat. Ook schakelaars die door een label een lamp werden, staan daar nu."
+    - "Het venster Standen zegt bovenaan kort waar de waarden en de kleur vandaan komen, en één keer Bewaren bewaart alles: de standen en de wachttijd."
+    - "Geen bèta meer: HouseMind is gratis te installeren en te gebruiken. De code is open om te lezen, maar niet om aan te passen of door te geven. De wijzigingslijst begint bij 0.4.0."
 "0.4.3":
   one: "Bijwerken houdt alles wat HouseMind weet."
   list:

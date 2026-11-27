@@ -1,5 +1,7 @@
 """The changelog in Home Assistant is simple and readable (the administrator's wish,
-01-11-2026: "hou de ChangeLog eenvoudiger en leesbaarder, en ruim alles op tot versie 0.2.0").
+01-11-2026: "hou de ChangeLog eenvoudiger en leesbaarder, en ruim alles op tot versie 0.2.0"; and
+27-11-2026: "Kan je de changelog bij de installatie beperken? Begin vanaf versie 0.4.0 en houd bij
+wat je bijgewerkt hebt").
 Per version it says what the app says after an update – the English What's new, one sentence and
 a short list – made by tools/changelog.py. Before, it held requirement numbers, file names and
 every detail since the first build: 113 KB."""
@@ -28,7 +30,7 @@ def test_the_changelog_is_what_is_new_in_plain_words() -> None:
     text = TARGET.read_text(encoding="utf-8")
     assert text == tool.make(text), "run: python tools/changelog.py"
     versions = [version for version, _ in tool.HEADING.findall(text)]
-    assert versions[-1] == "0.2.0" and len(versions) == len(set(versions))
+    assert versions[-1] == "0.4.0" and len(versions) == len(set(versions))
     # What people read: no pictures, no comments (the support block is made by a tool).
     plain = re.sub(r"\(data:image/[^)]+\)|<!--.*?-->", "", text)
     assert not re.search(r"\b[EBMH]-\d{1,3}\b|\.py\b|\.svelte\b|\.yaml\b|`", plain)

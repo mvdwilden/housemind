@@ -24,10 +24,11 @@
   let dim = $state<"keep" | "off">(first?.dim === "off" ? "off" : "keep");
   let rhythm = $state(first?.rhythm?.by === "own" ? first.rhythm.on !== false : true);
   let trying = $state<number | null>(null);
-  // Uit na … zonder beweging (E-575): its own wait, or null for what the room learned. The
-  // slider is saved as soon as it is let go; "Laat HouseMind het leren" gives it back.
+  // Uit na … zonder beweging (E-575): its own wait, or null for what the room learned. Like
+  // everything in this window it only changes here until Bewaren (E-582).
   let wait = $state<number | null>(untrack(() => lamp.levels?.offWait?.minutes ?? null));
-  let waitTimer: ReturnType<typeof setTimeout> | undefined;
+  let waitChanged = $state(false);
+  let fromStart = $state(false); // Terug naar startwaarden, until Bewaren
   let showing = false; // Laat alle vier zien runs
   let timer: ReturnType<typeof setTimeout> | undefined;
   let follow: ReturnType<typeof setTimeout> | undefined;
@@ -112,23 +113,37 @@
     colour = START_COLOURS.map((c) => ({ ...c }));
     dim = "keep";
     rhythm = true;
-    onsend({ do: "reset", id: lamp.id });
+    fromStart = true;
   }
 
+  // Still exactly the start values, as Terug naar startwaarden left them.
+  function atStart(): boolean {
+    return pct.every((p, i) => p === START[i]) && dim === "keep" && rhythm
+      && JSON.stringify(colour) === JSON.stringify(START_COLOURS);
+  }
+
+  // One Bewaren for the whole window (E-582): the standen – or back to where they come from –
+  // and the wait before off, if it changed.
   function save(): void {
-    onsend({ do: "save", id: lamp.id, levels: draft() });
+    onsend({
+      do: "save",
+      id: lamp.id,
+      levels: draft(),
+      ...(fromStart && atStart() ? { reset: true } : {}),
+      ...(waitChanged ? { wait } : {}),
+    });
+    fromStart = false;
+    waitChanged = false;
   }
 
   function setWait(value: number): void {
     wait = Math.max(0, Math.min(levels.offWait?.max ?? 30, Math.round(value)));
-    clearTimeout(waitTimer);
-    waitTimer = setTimeout(() => onsend({ do: "wait", id: lamp.id, minutes: wait }), 300);
+    waitChanged = true;
   }
 
   function learnWait(): void {
-    clearTimeout(waitTimer);
     wait = null;
-    onsend({ do: "wait", id: lamp.id, minutes: null });
+    waitChanged = true;
   }
 
   function waitText(minutes: number): string {
@@ -145,7 +160,6 @@
 
   onDestroy(() => {
     clearTimeout(follow);
-    clearTimeout(waitTimer);
     clearInterval(holding);
     stopShowing();
     onsend({ do: "release", id: lamp.id }); // closing the window: back as it was, HouseMind again
@@ -157,6 +171,19 @@
 
 <div class="levels">
   <p class="sub"><span class="now-lamp" aria-hidden="true"><DeviceIcon name="lamp" size={28} pct={lamp.pct ?? null} /></span>{lamp.area}{lamp.area ? " · " : ""}{canText}{#if can !== "onoff"} · <span class="tag" class:own={levels.source === "own"} class:start={levels.source === "start"}>{sourceText}</span>{/if}</p>
+
+  {#if can !== "onoff"}
+    <!-- Where the values and the colour come from, in one short block at the top (E-582). -->
+    <div class="from">
+      {#if levels.rhythm?.by === "ha"}
+        <p>{levels.rhythm.name && levels.rhythm.ours ? t("ui.stands.rhythm_ha_ours", { name: levels.rhythm.name })
+          : levels.rhythm.name ? t("ui.stands.rhythm_ha", { name: levels.rhythm.name }) : t("ui.stands.rhythm_ha_none")}</p>
+      {:else if levels.rhythm?.by === "own"}
+        <label class="check"><input type="checkbox" bind:checked={rhythm} /> <span>{t("ui.stands.rhythm_own")}<small>{t("ui.stands.rhythm_own_hint")}</small></span></label>
+      {/if}
+      <p>{t("ui.stands.start_note")}</p>
+    </div>
+  {/if}
 
   {#if can === "onoff"}
     <fieldset>
@@ -222,12 +249,6 @@
         {/if}
       </div>
     {/each}
-
-    {#if levels.rhythm?.by === "ha"}
-      <p class="note">{levels.rhythm.name ? t("ui.stands.rhythm_ha", { name: levels.rhythm.name }) : t("ui.stands.rhythm_ha_none")}</p>
-    {:else if levels.rhythm?.by === "own"}
-      <label class="check"><input type="checkbox" bind:checked={rhythm} /> <span>{t("ui.stands.rhythm_own")}<small>{t("ui.stands.rhythm_own_hint")}</small></span></label>
-    {/if}
   {/if}
 
   {#if levels.offWait && levels.edit}
@@ -285,7 +306,6 @@
     <button type="button" onclick={reset}>{t("ui.stands.reset")}</button>
     <button type="button" class="primary" onclick={save}>{t("ui.stands.save")}</button>
   </div>
-  {#if can !== "onoff"}<p class="note">{t("ui.stands.start_note")}</p>{/if}
 </div>
 
 <style>
@@ -293,6 +313,9 @@
   .now-lamp { display: inline-flex; vertical-align: -9px; margin-right: 6px; color: var(--learning); }
   .levels { display: flex; flex-direction: column; gap: 12px; }
   .sub { margin: 0; color: var(--muted); font-size: calc(14px * var(--text-scale)); }
+  .from { display: flex; flex-direction: column; gap: 4px; padding: 10px 12px; border-radius: 12px; background: var(--raised); color: var(--muted); font-size: calc(13px * var(--text-scale)); }
+  .from p { margin: 0; }
+  .from .check { padding: 0; border: 0; background: none; }
   .tag { font-size: calc(12px * var(--text-scale)); padding: 2px 8px; border-radius: 10px; border: 1px solid var(--line); white-space: nowrap; }
   .tag.own { color: var(--accent); border-color: var(--accent); }
   .tag.start { color: var(--learning); border-color: var(--learning); }

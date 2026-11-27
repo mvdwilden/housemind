@@ -1,6 +1,8 @@
-"""Uit na … zonder beweging, in a real browser (E-575): in Brein › Apparaten each lamp's row
-says how long it waits once nobody is there, and the lamp's window has a slider from 0 to 30
-minutes that is saved as soon as it is let go; "Laat HouseMind het leren" gives it back.
+"""Uit na … zonder beweging, in a real browser (E-575, E-582): in Brein › Apparaten each lamp's
+row says how long it waits once nobody is there, and the lamp's window has a slider from 0 to
+30 minutes; "Laat HouseMind het leren" gives it back. Like everything in the window it is kept
+only with the one Bewaren; closing without it keeps nothing. Where the values and the colour
+come from is one short block at the top.
 
 Runs only on request, like tests/test_ui.py: ``uv run pytest -m ui tests/test_ui_lamp_wait.py``
 (needs a built frontend and ``uv run playwright install chromium`` once)."""
@@ -51,6 +53,17 @@ SLIDE = """async (minutes) => {
 LEARN = """async () => {
   document.querySelector("div.levels .wait button").click();
   await new Promise((r) => setTimeout(r, 900));
+}"""
+SAVE = """async () => {
+  document.querySelector("div.levels .buttons button.primary").click();
+  await new Promise((r) => setTimeout(r, 900));
+}"""
+TOP = """() => {
+  const levels = document.querySelector("div.levels");
+  const from = levels.querySelector(".from");
+  const kids = [...levels.children];
+  const last = levels.lastElementChild.classList.contains("buttons");
+  return [from?.textContent ?? "", kids.indexOf(from), last];
 }"""
 
 
@@ -104,12 +117,22 @@ async def test_a_lamps_wait_is_set_with_a_slider_and_given_back(
         text = await page.evaluate(WAIT)
         assert "Uit als er niemand meer is" in text and "startwaarde voor deze ruimte" in text
 
-        # 0: off the moment nobody is there – saved at once.
+        # One block at the top says where the values and the colour come from; nothing below.
+        top, place, last = await page.evaluate(TOP)
+        assert "Startwaarden: Gedimd 15% en warm" in top and place == 1, (top, place)
+        assert last is True, last
+        if SHOTS:
+            await page.screenshot(path=f"{SHOTS}/standen-boven.png")
+
+        # 0: off the moment nobody is there – only in the window until Bewaren.
         await page.evaluate(SLIDE, 0)
-        assert hm.light_levels.off_wait(LAMP) == 0
+        assert hm.light_levels.off_wait(LAMP) is None
         text = await page.evaluate(WAIT)
         assert "Meteen" in text and "Laat HouseMind het leren" in text
+        await page.evaluate(SAVE)
+        assert hm.light_levels.off_wait(LAMP) == 0
         await page.evaluate(SLIDE, 4)
+        await page.evaluate(SAVE)
         assert hm.light_levels.off_wait(LAMP) == 4
         assert "4 min" in await page.evaluate(WAIT)
         if SHOTS:
@@ -119,10 +142,12 @@ async def test_a_lamps_wait_is_set_with_a_slider_and_given_back(
             await page.wait_for_timeout(300)
             await page.screenshot(path=f"{SHOTS}/uit-na-minuten.png")
 
-        # Back to what the house teaches.
+        # Back to what the house teaches, with Bewaren.
         await page.evaluate(LEARN)
-        assert hm.light_levels.off_wait(LAMP) is None
         assert "Laat HouseMind het leren" not in await page.evaluate(WAIT)
+        assert hm.light_levels.off_wait(LAMP) == 4
+        await page.evaluate(SAVE)
+        assert hm.light_levels.off_wait(LAMP) is None
 
         # On a phone the slider fits the window.
         await page.set_viewport_size({"width": 390, "height": 844})

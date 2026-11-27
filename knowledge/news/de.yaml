@@ -1,5 +1,13 @@
 # Was ist neu, pro Version (E-150): ein Satz für Informiert, eine kurze Liste für Beteiligt und
 # Experte. Einfache Sprache, keine Markennamen.
+"0.4.4":
+  one: "HouseMind hat deine Lampen für sich."
+  list:
+    - "Steht in einem Raum eine Lichtregel auf Selbstständig, macht HouseMind auch den Tagesrhythmus dieser Lampen selbst, mit ihren Stufen. Adaptive Lighting steuert sie dann nicht mehr."
+    - "Solange du die Stufen einer Lampe einstellst, ruht Adaptive Lighting für diese Lampe. Nur du steuerst sie dann; nach Fertig steuert die Gruppe wieder."
+    - "In Was ich weiß wählst du, was ein Schalter schaltet: eine Lampe, ein Gerät oder ein anderes Gerät. Auch Schalter, die durch ein Label eine Lampe wurden, stehen jetzt dort."
+    - "Das Fenster Stufen sagt oben kurz, woher die Werte und die Farbe kommen, und einmal Speichern speichert alles: die Stufen und die Wartezeit."
+    - "Keine Beta mehr: HouseMind ist kostenlos zu installieren und zu nutzen. Der Code ist offen zum Lesen, aber nicht zum Ändern oder Weitergeben. Die Änderungsliste beginnt bei 0.4.0."
 "0.4.3":
   one: "Aktualisieren behält alles, was HouseMind weiß."
   list:

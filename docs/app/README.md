@@ -9,8 +9,8 @@ automations, scenes or dashboards to build. And it always tells you why it does 
 
 ![HouseMind on a phone: what it thought just now and did today, how far it is per part, and Vesta](images/hero.jpg)
 
-> Status: **beta**. Start with Demo mode if you like: an invented house to explore, while your
-> own house is never touched.
+> Start with Demo mode if you like: an invented house to explore, while your own house is never
+> touched.
 
 <!-- support:start – made by tools/build_support.py from docs/support.yaml -->
 <!-- support:end -->
@@ -94,7 +94,8 @@ Any device Home Assistant knows, of any brand. HouseMind looks at every entity, 
 it is, and treats a group of lamps as one. It speaks English, Dutch, German and French, and an
 hourly **check-up** tells administrators what is broken in Home Assistant itself.
 
-Free for everyone, open source (Apache-2.0), no paid features.
+Free for everyone to install and use, no paid features. The code is open to read, not to change
+or pass on (PolyForm Strict 1.0.0).
 
 ## Get started in five minutes
 

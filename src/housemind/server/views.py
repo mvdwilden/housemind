@@ -27,7 +27,7 @@ from housemind.brain.briefing import PARTS
 from housemind.brain.care import CareSettings
 from housemind.brain.filters import PARTS as HOUSE_PARTS
 from housemind.brain.filters import causes_of, part_of, parts_of, rooms_of
-from housemind.brain.functions import FUNCTIONS, UNKNOWN
+from housemind.brain.functions import FUNCTIONS, OTHER_DEVICE, SWITCH_CHOICES, UNKNOWN
 from housemind.brain.house_knowledge import CONFIRMED, REJECTED, SUGGESTED, Finding
 from housemind.brain.lampday import KEEP as LAMP_DAY_KEEP
 from housemind.brain.lampday import what_changed
@@ -827,6 +827,9 @@ def house_knowledge(hm: HouseMind, lang: str) -> dict[str, Any]:
         ],
         "described": len(hm.knowledge.of("automation", "summary")),
         "roles": [{"id": r, "name": t(lang, f"ui.knowledge.room.{r}")} for r in ROLE_ORDER],
+        "switchRoles": [
+            {"id": r, "name": t(lang, f"ui.knowledge.switch.{r}")} for r in SWITCH_CHOICES
+        ],
         "scenes": scenes_scripts(hm, lang) if hm.gate and hm.world else [],
     }
 
@@ -860,7 +863,11 @@ def _knowledge_row(hm: HouseMind, lang: str, finding: Finding) -> dict[str, Any]
         what = t(lang, f"ui.knowledge.switch.{role}")
         if what == f"ui.knowledge.switch.{role}":  # a role the catalogue added later
             what = role.replace("_", " ")
-        note = t(lang, "ui.knowledge.switch_note", what=what)
+        note = (
+            t(lang, "ui.knowledge.switch_note_other")
+            if role == OTHER_DEVICE
+            else t(lang, "ui.knowledge.switch_note", what=what)
+        )
     elif field == "temperature":
         sensor = hm.model.entities.get(str(value.get("sensor")))
         if sensor is None:
@@ -1746,7 +1753,11 @@ def _levels_view(hm: HouseMind, lang: str, entity_id: str) -> dict[str, Any]:
     if can != "onoff":
         group = book.group_of(entity_id) if book.rhythms else None
         if book.rhythms:  # the integration in Home Assistant decides (E-465, E-496)
-            rhythm = {"by": "ha", "name": group.title if group is not None else None}
+            rhythm = {
+                "by": "ha",
+                "name": group.title if group is not None else None,
+                "ours": group is not None and book.ours(group),  # HouseMind does it (E-579)
+            }
         elif book.known:  # HouseMind's own rhythm (E-471): its own tick box
             rhythm = {"by": "own", "on": standen.rhythm}
     return {

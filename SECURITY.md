@@ -5,4 +5,4 @@ Please report security problems **privately** via GitHub's
 
 - We confirm your report within **7 days**.
 - Fixes for security problems are released directly to the Stable channel.
-- Supported: the latest Stable and Beta release.
+- Supported: the latest release.

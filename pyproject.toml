@@ -1,9 +1,9 @@
 [project]
 name = "housemind"
-version = "0.4.3"
+version = "0.4.4"
 description = "HouseMind – a house that thinks for itself. A learning, explainable brain for Home Assistant."
 readme = "README.md"
-license = "Apache-2.0"
+license = "LicenseRef-PolyForm-Strict-1.0.0"
 requires-python = ">=3.13"
 dependencies = [
     "aiohttp>=3.11",
