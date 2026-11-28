@@ -103,6 +103,7 @@ class DaylightPart(Part):
         assert self.skills is not None and self.world is not None
         book = self.daylight
         book.model = self.model
+        book.states = self.world.states  # what is on now, before the first round (B-502)
         self.skills.daylight = book
         book.zone = self.world.tz
         book.own_for = self._daylight_own
@@ -362,6 +363,10 @@ class DaylightPart(Part):
                 or (switch := book.main_switch(rhythm)) is None
             ):
                 continue
+            # Kept first, then switched off (B-502): a stop in between still finds it at the
+            # next start and puts the group back on.
+            book.paused.add(rhythm.entry_id)
+            await self._daylight_save()
             decision = await self.gate.submit(
                 ActionRequest(
                     Layer.PERSON_ANSWER,  # the administrator opened the window: their choice
@@ -372,8 +377,8 @@ class DaylightPart(Part):
                     facts={"day_rhythm_group": rhythm.title},
                 )
             )
-            if decision.executed:
-                book.paused.add(rhythm.entry_id)
+            if not decision.executed:
+                book.paused.discard(rhythm.entry_id)
                 changed = True
         if changed:
             await self._daylight_save()

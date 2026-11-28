@@ -1781,7 +1781,17 @@ def _temps_view(hm: HouseMind, lang: str, area_id: str, entity_id: str) -> dict[
         "after": own.after_h if own is not None and own.after_h is not None else START_AFTER,
         "afterSteps": list(AFTER_HOURS),
         "own": own is not None,
+        "now": "cool" if _cooling_now(hm, area_id) else "heat",
     }
+
+
+def _cooling_now(hm: HouseMind, area_id: str) -> bool:
+    """A thermostat of the room cools now: the Temperaturen window opens on Koelen (E-583)."""
+    states = hm.world.states if hm.world is not None else {}
+    return any(
+        (state := states.get(e.entity_id)) is not None and state.state == "cool"
+        for e in hm.room_thermostats(area_id)
+    )
 
 
 def _levels_view(hm: HouseMind, lang: str, entity_id: str) -> dict[str, Any]:

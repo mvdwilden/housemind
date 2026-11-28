@@ -1,12 +1,13 @@
 # Wat is nieuw, per versie (E-150): één zin voor Geïnformeerd, een korte lijst voor Betrokken
 # en Expert. In eenvoudige taal, zonder merknamen.
-"0.4.5":
+"0.4.6":
   one: "Temperaturen per ruimte, en een vraag maar één keer."
   list:
     - "Bij een thermostaat kies je nu zelf de temperatuur voor Thuis, Slapen en Weg, in halve graden: in Brein › Apparaten › Temperaturen. Met ‘Pas na’ kies je hoe lang iedereen weg moet zijn voordat het Weg wordt."
     - "Bedien je een lamp zelf, met een schakelaar of in de app, dan blijft dat hooguit een half uur staan. Daarna neemt HouseMind het weer over, ook de kleur en helderheid."
     - "Een vraag beantwoord je één keer: zodra iemand antwoordt, is hij overal weg, ook op de telefoons van anderen. Een oude knop doet daarna niets meer."
     - "Een nee op de vraag of het alarm voortaan zelf aan mag, en een nee op zorg, blijven bewaard: die vraag komt niet terug."
+    - "Het venster Temperaturen heeft echte knoppen, schrijft temperaturen zoals jij (18,5°) en opent op Koelen als de thermostaat koelt."
 "0.4.4":
   one: "HouseMind heeft je lampen voor zichzelf."
   list:

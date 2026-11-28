@@ -214,8 +214,22 @@ async def test_a_thermostat_that_also_cools_asks_both(tmp_path: Path) -> None:
     )
     temps = views._temps_view(hm, "nl", "living", LIVING)
     assert temps is not None and set(temps["values"]) == {"heat", "cool"}
+    assert temps["now"] == "heat"  # it heats now: the window opens on Verwarmen
     heat = {"home": 21.0, "sleep": 17.0, "away": 16.0}
     assert not await hm.room_temps_save("living", {"heat": heat, "after_h": 4})
     cool = {"home": 24.0, "sleep": 24.5, "away": 27.0}
     assert await hm.room_temps_save("living", {"heat": heat, "cool": cool, "after_h": 4})
+    await hm.stop()
+
+
+async def test_a_thermostat_that_cools_now_opens_on_cooling(tmp_path: Path) -> None:
+    """The airco cools now: the window opens on Koelen, where you want to change something."""
+    hm, ha = await _house(tmp_path)
+    await ha.simulate(
+        LIVING,
+        "cool",
+        {"temperature": 24.0, "current_temperature": 25.0, "hvac_modes": ["off", "heat", "cool"]},
+    )
+    temps = views._temps_view(hm, "nl", "living", LIVING)
+    assert temps is not None and temps["now"] == "cool"
     await hm.stop()

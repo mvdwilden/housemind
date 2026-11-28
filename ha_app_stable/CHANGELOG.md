@@ -3,7 +3,7 @@
 <!-- support:start – made by tools/build_support.py from docs/support.yaml -->
 <!-- support:end -->
 
-## 0.4.5 – 27-11-2026
+## 0.4.6 – 28-11-2026
 
 Temperatures per room, and a question only once.
 
@@ -11,6 +11,7 @@ Temperatures per room, and a question only once.
 - If you work a lamp yourself, with a switch or in the app, that stays for half an hour at most. After that HouseMind takes over again, also the colour and brightness.
 - A question is answered once: as soon as someone answers, it is gone everywhere, also from other people's phones. An old button does nothing after that.
 - A no to the question whether the alarm may go on by itself from now on, and a no to care, are kept: that question does not come back.
+- The Temperatures window has real buttons, writes temperatures the way you do, and opens on Cooling when the thermostat cools.
 
 ## 0.4.4 – 27-11-2026
 

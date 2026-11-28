@@ -10,6 +10,7 @@
   import { openBeside } from "../lib/openha";
   import LightLevels from "../components/LightLevels.svelte";
   import RoomTemperatures from "../components/RoomTemperatures.svelte";
+  import { degrees } from "../lib/temps";
   import Sheet from "../components/Sheet.svelte";
   import { STANDS, kelvinCss } from "../lib/stands";
   import Filters from "../components/Filters.svelte";
@@ -183,7 +184,7 @@
   {#if v}
     <span class="chips">
       {#each ["home", "sleep", "away"] as const as moment (moment)}
-        <span class="chip">{t(`ui.temps.${moment}`)} <b>{v[moment].value.toLocaleString(undefined, { maximumFractionDigits: 1 })}°</b></span>
+        <span class="chip">{t(`ui.temps.${moment}`)} <b>{degrees(v[moment].value, lang)}</b></span>
       {/each}
     </span>
     {#if tv.own}<span><span class="tag own">{t("ui.temps.from.own")}</span></span>{/if}
@@ -274,7 +275,7 @@
 
 {#if tempsDevice?.temps}
   <Sheet title={t("ui.temps.title", { room: tempsDevice.temps.room })} closeLabel={t("ui.close")} onclose={() => (tempsOf = null)}>
-    {#key tempsDevice.id}<RoomTemperatures temps={tempsDevice.temps} {t} onsend={ontemps} onclose={() => (tempsOf = null)} />{/key}
+    {#key tempsDevice.id}<RoomTemperatures temps={tempsDevice.temps} {lang} {t} onsend={ontemps} onclose={() => (tempsOf = null)} />{/key}
   </Sheet>
 {/if}
 

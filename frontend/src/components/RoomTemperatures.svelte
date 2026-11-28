@@ -4,21 +4,25 @@
   // long nobody is home before Weg. Nothing changes until Bewaren: one button for everything
   // in the window. "Terug naar wat ik leer" gives the room back to what HouseMind learns.
   import { untrack } from "svelte";
-  import { afterText, keepOrder, MOMENTS, type Mode, type Moment } from "../lib/temps";
+  import { afterText, degrees, keepOrder, MOMENTS, type Mode, type Moment } from "../lib/temps";
   import type { TempsView } from "../lib/types";
   import type { T } from "../lib/ui";
 
   interface Props {
     temps: TempsView;
+    lang: string; // numbers as the reader writes them: 18,5° (E-583)
     t: T;
     onsend: (message: Record<string, unknown>) => void;
     onclose: () => void;
   }
-  let { temps, t, onsend, onclose }: Props = $props();
+  let { temps, lang, t, onsend, onclose }: Props = $props();
 
   const modes = $derived(Object.keys(temps.values) as Mode[]);
   // A copy to change: the window's own until Bewaren (the window opens anew for another room).
-  let mode = $state<Mode>(untrack(() => (temps.values.heat ? "heat" : "cool")));
+  // It opens on what the thermostats do now: cooling when they cool (E-583).
+  let mode = $state<Mode>(
+    untrack(() => (temps.now === "cool" && temps.values.cool ? "cool" : temps.values.heat ? "heat" : "cool")),
+  );
   let values = $state(untrack(() => structuredClone($state.snapshot(temps.values))));
   let after = $state(untrack(() => temps.after));
   let changed = $state(false);
@@ -38,9 +42,6 @@
     return from === "start_away" ? t(`ui.temps.from.start_away_${mode}`) : t(`ui.temps.from.${from}`);
   }
 
-  function degrees(value: number): string {
-    return `${value.toLocaleString(undefined, { minimumFractionDigits: value % 1 ? 1 : 0, maximumFractionDigits: 1 })}°`;
-  }
 
   function save(): void {
     const out: Record<string, Record<Moment, number>> = {};
@@ -78,8 +79,8 @@
         <span class="label">{t(`ui.temps.${moment}`)}<small>{t(`ui.temps.${moment}_sub`)}</small></span>
         <input type="range" min={low} max={high} step="0.5" value={v.value}
           oninput={(e) => set(moment, Number(e.currentTarget.value))}
-          aria-label={t(`ui.temps.${moment}`)} aria-valuetext={degrees(v.value)} />
-        <span class="value" class:own={v.from === "own"}>{degrees(v.value)}</span>
+          aria-label={t(`ui.temps.${moment}`)} aria-valuetext={degrees(v.value, lang)} />
+        <span class="value" class:own={v.from === "own"}>{degrees(v.value, lang)}</span>
       </label>
       <p class="from">{fromText(moment)}</p>
     {/each}
@@ -127,4 +128,7 @@
   .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 10px; }
   .grow { flex: 1 1 200px; }
   .buttons { display: flex; gap: 8px; justify-content: flex-end; margin-top: 12px; }
+  /* Its own buttons, as in the Standen window: each window styles what is in it. */
+  button { min-height: 40px; padding: 0 14px; border-radius: 20px; border: 1px solid var(--edge); background: var(--raised); color: var(--text); cursor: pointer; }
+  button.primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); font-weight: 600; }
 </style>

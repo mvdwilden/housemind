@@ -1,12 +1,13 @@
 # Was ist neu, pro Version (E-150): ein Satz für Informiert, eine kurze Liste für Beteiligt und
 # Experte. Einfache Sprache, keine Markennamen.
-"0.4.5":
+"0.4.6":
   one: "Temperaturen pro Raum, und eine Frage nur einmal."
   list:
     - "An einem Thermostat wählst du jetzt selbst die Temperatur für Zuhause, Schlafen und Weg, in halben Grad: unter Gehirn › Geräte › Temperaturen. Mit ‚Erst nach‘ wählst du, wie lange alle weg sein müssen, bevor es Weg wird."
     - "Bedienst du eine Lampe selbst, mit einem Schalter oder in der App, bleibt das höchstens eine halbe Stunde so. Danach übernimmt HouseMind wieder, auch Farbe und Helligkeit."
     - "Eine Frage beantwortet man einmal: Sobald jemand antwortet, ist sie überall weg, auch auf den Handys der anderen. Eine alte Schaltfläche tut danach nichts mehr."
     - "Ein Nein auf die Frage, ob die Alarmanlage künftig von selbst angehen darf, und ein Nein zur Fürsorge bleiben gespeichert: Diese Frage kommt nicht wieder."
+    - "Das Fenster Temperaturen hat richtige Schaltflächen, schreibt Temperaturen so wie du (18,5°) und öffnet bei Kühlen, wenn das Thermostat kühlt."
 "0.4.4":
   one: "HouseMind hat deine Lampen für sich."
   list:

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { afterText, keepOrder, type Moment } from "./temps";
+import { afterText, degrees, keepOrder, type Moment } from "./temps";
 import type { TempValue } from "./types";
 
 const t = (key: string, p: Record<string, unknown> = {}): string => `${key}${p.n !== undefined ? `:${p.n}` : ""}`;
@@ -40,5 +40,11 @@ describe("afterText", () => {
       "ui.temps.after.hours:2",
       "ui.temps.after.day",
     ]);
+  });
+});
+
+describe("degrees", () => {
+  it("writes a temperature as the reader does", () => {
+    expect([degrees(18.5, "nl"), degrees(18.5, "en"), degrees(18, "nl")]).toEqual(["18,5°", "18.5°", "18°"]);
   });
 });

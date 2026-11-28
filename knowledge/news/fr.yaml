@@ -1,12 +1,13 @@
 # Quoi de neuf, par version (E-150) : une phrase pour Informé, une courte liste pour Impliqué et
 # Expert. Langage simple, sans noms de marques.
-"0.4.5":
+"0.4.6":
   one: "Températures par pièce, et une question une seule fois."
   list:
     - "Sur un thermostat, tu choisis maintenant toi-même la température pour À la maison, Sommeil et Absent, par demi-degrés : dans Cerveau › Appareils › Températures. Avec ‘Seulement après’, tu choisis combien de temps tout le monde doit être parti avant de passer à Absent."
     - "Si tu commandes une lampe toi-même, avec un interrupteur ou dans l'app, cela reste une demi-heure au plus. Ensuite HouseMind reprend la main, aussi pour la couleur et la luminosité."
     - "Une question reçoit une seule réponse : dès que quelqu'un répond, elle disparaît partout, aussi des téléphones des autres. Un ancien bouton ne fait plus rien ensuite."
     - "Un non à la question de savoir si l'alarme peut désormais s'activer seule, et un non à l'attention, sont gardés : cette question ne revient pas."
+    - "La fenêtre Températures a de vrais boutons, écrit les températures comme toi (18,5°) et s'ouvre sur Refroidir quand le thermostat refroidit."
 "0.4.4":
   one: "HouseMind a tes lampes pour lui seul."
   list:

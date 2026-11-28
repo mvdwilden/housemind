@@ -26,3 +26,8 @@ export function afterText(hours: number, t: T): string {
   if (hours >= 24) return t("ui.temps.after.day");
   return t("ui.temps.after.hours", { n: hours });
 }
+
+/** A temperature as the reader writes it: 18,5° in Dutch, 18.5° in English (E-583). */
+export function degrees(value: number, lang: string): string {
+  return `${value.toLocaleString(lang, { minimumFractionDigits: value % 1 ? 1 : 0, maximumFractionDigits: 1 })}°`;
+}

@@ -1013,4 +1013,5 @@ export interface TempsView {
   after: number; // hours before Weg
   afterSteps: number[];
   own: boolean;
+  now: "heat" | "cool"; // what the room's thermostats do now: the window opens there
 }
