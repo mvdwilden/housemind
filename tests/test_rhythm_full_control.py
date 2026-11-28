@@ -28,9 +28,11 @@ from tests.test_day_rhythm import (
 )
 
 
-async def _settle() -> None:
-    for _ in range(10):
-        await asyncio.sleep(0)
+async def _settle(hm: HouseMind) -> None:
+    """Until what the window started beside the queue is done – the group resting – not a
+    fixed number of turns of the loop: on a slow machine that was too few."""
+    await hm.settled()
+    await asyncio.sleep(0)
 
 
 # -- on Autonomous the room's light is HouseMind's, also its colour -----------------------------
@@ -106,10 +108,10 @@ async def test_while_its_standen_are_set_the_group_rests_and_comes_back_after_kl
     assert ha.states[SWITCH].state == "on"
     rows = await _rows(hm)
     hm.levels_hold(LAMP)
-    await _settle()
+    await _settle(hm)
     assert ha.states[SWITCH].state == "off"
     hm.levels_hold(LAMP)  # the window says it is still open
-    await _settle()
+    await _settle(hm)
     await hm.tick()
     assert ha.states[SWITCH].state == "off"
     await hm.levels_release(LAMP)
@@ -126,7 +128,7 @@ async def test_a_window_that_went_away_lets_the_group_go_on_again(tmp_path: Path
     await hm.set_admin_step("light_on_entry@living", "propose", "demo-user-1")
     await hm.tick()
     hm.levels_hold(LAMP)
-    await _settle()
+    await _settle(hm)
     assert ha.states[SWITCH].state == "off"
     await clock.advance(timedelta(seconds=90).total_seconds())
     await hm.tick()
@@ -141,10 +143,10 @@ async def test_someone_putting_it_on_while_it_rests_keeps_it_on(tmp_path: Path) 
     await hm.set_admin_step("light_on_entry@living", "propose", "demo-user-1")
     await hm.tick()
     hm.levels_hold(LAMP)
-    await _settle()
+    await _settle(hm)
     await ha.simulate(SWITCH, "on", by=Source.PERSON)
     hm.levels_hold(LAMP)
-    await _settle()
+    await _settle(hm)
     await hm.levels_release(LAMP)
     assert ha.states[SWITCH].state == "on"
     assert not hm.daylight.paused
@@ -158,7 +160,7 @@ async def test_on_autonomous_by_the_time_klaar_it_stays_housemind_s(tmp_path: Pa
     await hm.set_admin_step("light_on_entry@living", "propose", "demo-user-1")
     await hm.tick()
     hm.levels_hold(LAMP)
-    await _settle()
+    await _settle(hm)
     await hm.set_admin_step("light_on_entry@living", "autonomous", "demo-user-1")
     await hm.tick()
     await hm.levels_release(LAMP)
@@ -174,7 +176,7 @@ async def test_a_restart_while_it_rests_puts_it_on_again(tmp_path: Path) -> None
     await hm.set_admin_step("light_on_entry@living", "propose", "demo-user-1")
     await hm.tick()
     hm.levels_hold(LAMP)
-    await _settle()
+    await _settle(hm)
     assert ha.states[SWITCH].state == "off"
     await hm.stop()
     again = HouseMind(clock, ha, Paths([ROOT / "knowledge"], tmp_path), set())

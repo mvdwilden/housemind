@@ -3,7 +3,7 @@
 <!-- support:start – made by tools/build_support.py from docs/support.yaml -->
 <!-- support:end -->
 
-## 0.4.6 – 28-11-2026
+## 0.4.7 – 28-11-2026
 
 Temperatures per room, and a question only once.
 

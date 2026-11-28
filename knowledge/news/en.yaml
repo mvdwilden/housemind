@@ -1,6 +1,6 @@
 # What is new, per version (E-150): one sentence for Informed, a short list for Involved and
 # Expert. Plain language, no brand names.
-"0.4.6":
+"0.4.7":
   one: "Temperatures per room, and a question only once."
   list:
     - "At a thermostat you now choose the temperature for Home, Sleep and Away yourself, in half degrees: in Brain › Devices › Temperatures. With ‘Only after’ you choose how long everyone must be away before it becomes Away."

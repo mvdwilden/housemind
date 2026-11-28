@@ -1,6 +1,6 @@
 # Was ist neu, pro Version (E-150): ein Satz für Informiert, eine kurze Liste für Beteiligt und
 # Experte. Einfache Sprache, keine Markennamen.
-"0.4.6":
+"0.4.7":
   one: "Temperaturen pro Raum, und eine Frage nur einmal."
   list:
     - "An einem Thermostat wählst du jetzt selbst die Temperatur für Zuhause, Schlafen und Weg, in halben Grad: unter Gehirn › Geräte › Temperaturen. Mit ‚Erst nach‘ wählst du, wie lange alle weg sein müssen, bevor es Weg wird."
