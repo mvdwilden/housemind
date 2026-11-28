@@ -1,6 +1,16 @@
 # Changelog
 
 <!-- support:start – made by tools/build_support.py from docs/support.yaml -->
+### Support HouseMind
+
+Thank you to everyone who already supports HouseMind. HouseMind is free for everyone, without paid features. Support pays for the time to build it and to test it in real houses, and keeps it independent.
+
+[![Buy Me a Coffee](https://img.shields.io/badge/-Buy%20Me%20a%20Coffee-informational)](https://buymeacoffee.com/mvdwilden)
+
+![Sponsors](https://img.shields.io/github/sponsors/mvdwilden) ![Stars](https://img.shields.io/github/stars/mvdwilden/housemind)
+
+Do you like it? A star on GitHub helps others find it. https://github.com/mvdwilden/housemind
+
 <!-- support:end -->
 
 ## 0.4.8 – 28-11-2026

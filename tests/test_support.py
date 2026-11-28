@@ -29,6 +29,9 @@ def test_only_ways_with_a_link_show_with_the_counts_and_a_star(tmp_path: Path) -
     """Filled in when publishing: a button per way that has a link, the sponsor and star counts,
     the thank-you and the question for a star. Empty: nothing at all."""
     data = yaml.safe_load((ROOT / "docs" / "support.yaml").read_text(encoding="utf-8"))
+    data["owner"] = ""
+    for way in data["ways"]:
+        way["link"] = ""
     assert support.block(data) == f"{support.START}\n{support.END}"
     data["owner"] = "maker"
     data["ways"][0]["link"] = "https://github.com/sponsors/maker"

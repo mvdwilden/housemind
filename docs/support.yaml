@@ -1,12 +1,14 @@
 # Ways to support HouseMind (E-138, E-233): one list, chosen by the maker when publishing.
 # A way without a link is left out. Until the first release every link is empty, and the
-# block in the README and the changelog stays empty too. Run tools/build_support.py after a
-# change. Everything stays free for everyone (E-140); the app itself stays calm (E-139).
+# block in the README and the changelog stays empty too. GitHub Sponsors gets its link once
+# GitHub has approved the profile; until then the link only leads to the profile.
+# Run tools/build_support.py after a change. Everything stays free for everyone (E-140);
+# the app itself stays calm (E-139).
 schema: 1
-owner: ""  # the GitHub owner of the repository: for the star and sponsor counts
+owner: "mvdwilden"  # the GitHub owner of the repository: for the star and sponsor counts
 ways:
   - {name: GitHub Sponsors, link: ""}
-  - {name: Buy Me a Coffee, link: ""}
+  - {name: Buy Me a Coffee, link: "https://buymeacoffee.com/mvdwilden"}
   - {name: Patreon, link: ""}
   - {name: Ko-fi, link: ""}
   - {name: PayPal, link: ""}

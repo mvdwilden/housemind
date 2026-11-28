@@ -13,6 +13,16 @@ and it always tells you why it does what it does.
 [![Add the HouseMind repository to your Home Assistant](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fmvdwilden%2Fhousemind)
 
 <!-- support:start – made by tools/build_support.py from docs/support.yaml -->
+### Support HouseMind
+
+Thank you to everyone who already supports HouseMind. HouseMind is free for everyone, without paid features. Support pays for the time to build it and to test it in real houses, and keeps it independent.
+
+[![Buy Me a Coffee](https://img.shields.io/badge/-Buy%20Me%20a%20Coffee-informational)](https://buymeacoffee.com/mvdwilden)
+
+![Sponsors](https://img.shields.io/github/sponsors/mvdwilden) ![Stars](https://img.shields.io/github/stars/mvdwilden/housemind)
+
+Do you like it? A star on GitHub helps others find it. https://github.com/mvdwilden/housemind
+
 <!-- support:end -->
 
 ## Install in three steps

@@ -1,6 +1,6 @@
 # Donations are pure support: every HouseMind feature is free for everyone (E-140).
 # Filled in as soon as the maker has the pages; until then GitHub shows no Sponsor button.
-github: []        # GitHub Sponsors account
-buy_me_a_coffee:  # Buy Me a Coffee name
+github: []        # GitHub Sponsors account: mvdwilden, once GitHub has approved it
+buy_me_a_coffee: mvdwilden  # Buy Me a Coffee name
 patreon:          # Patreon name
 ko_fi:            # Ko-fi name
