@@ -30,7 +30,6 @@ YES_NO = {
     "automation": ("yes", "no"),
     "restore": ("yes", "no"),
     "vacation": ("yes", "no"),
-    "thumbs": ("good", "bad"),
     "offer": ("yes", "no"),
     "confirm": ("yes", "no"),
     "knowledge": ("yes", "no"),  # Klopt, Klopt niet (B-360)
@@ -117,7 +116,7 @@ class Conversation:
 
 
 def plain(text: str) -> str:
-    """Only letters, digits and spaces: "👍 Goed" is "goed", "Pauze…" is "pauze"."""
+    """Only letters, digits and spaces: "Doe het!" is "doe het", "Pauze…" is "pauze"."""
     return " ".join(re.sub(r"[^\w\s]", " ", normalise(text)).split())
 
 

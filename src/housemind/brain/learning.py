@@ -605,7 +605,7 @@ class Learning:
         setback: bool = True,
         plain: bool = True,
     ) -> None:
-        """``plain=False``: it teaches, but is no situation or answer of its own (a thumb)."""
+        """``plain=False``: it teaches, but is no situation or answer of its own (put back)."""
         if self.asleep(skill):
             return  # its part is off: nothing is counted (E-400)
         key = (skill, area_id, context, result.value)
@@ -1723,12 +1723,6 @@ class Learning:
             for p in self.pending
             if not (p.skill == skill and p.area_id == area_id and not p.executed)
         ]
-
-    def liked(self, skill: str, area_id: str, context: str, now: datetime) -> None:
-        """👍 on something HouseMind did (E-298): a light yes – no answer or situation of its
-        own (QA 2, B-179)."""
-        self._add(skill, area_id, context, Result.APPROVED, now, 0.5, plain=False)
-        self._add(skill, area_id, context, Result.HIT, now, 0.5, plain=False)
 
     def corrected(self, skill: str, area_id: str, context: str, now: datetime) -> None:
         """Undo (E-92): a person put back what HouseMind did – a correction, as when they

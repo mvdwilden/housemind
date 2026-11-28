@@ -355,15 +355,6 @@ ask_done:
     - "Great, then I won't remind you about it again."
     - "Fine, that one is off the list."
 
-# Na 👍 of 👎 op ‘Was dat goed?’ in haar venster (E-298).
-answer_thumbs:
-  je:
-    - "Thank you, that helps me do it better."
-    - "Good that you tell me, I will remember it."
-    - "Good to know, I learn from that."
-    - "Thanks a lot, I will take it into account."
-    - "Clear, that is how I learn what suits this house."
-
 # Antwoorden over het huis, de instellingen en de huisregels (E-243 – E-245, 18.3 – 18.5).
 # Feiten in haar eigen woorden: minstens drie varianten; een u-vorm alleen waar een je of u in staat.
 know_state_yes:

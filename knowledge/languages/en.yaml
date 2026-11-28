@@ -2111,7 +2111,7 @@ ui:
     keep:  # how long HouseMind keeps what (E-409)
       title: "How long HouseMind keeps what"
       week: "{days} days: notifications for information; then they leave the list."
-      month: "{days} days: what happened in the house and what HouseMind did and why, conversations as text, questions to the AI, handled notifications, what cameras reported (kind, room, time) and thumbs."
+      month: "{days} days: what happened in the house and what HouseMind did and why, conversations as text, questions to the AI, handled notifications and what cameras reported (kind, room, time)."
       proposals: "{days} days: proposals and corrections."
       years: "{years} years: weekly reports and energy totals per day."
       always: "Until you delete it: what HouseMind learned, house rules, moments, settings and preferences."
@@ -2138,22 +2138,6 @@ ui:
     forget_confirm: "Forget what HouseMind keeps about you: your preferences, consents, conversations and notifications for you. Your answers and house rules stay for the house, without your name. Then you start again with a short introduction. Go on?"
     forgotten: "Forgotten. Next time you get to know each other again."
   cooking_not_off: "Switching it off did not work. Switch it off with its own app or in Home Assistant."  # E-61, B-327
-  thumbs:
-    label: "Was that right?"
-    thanks: "Thanks, I will remember."
-    gone: "I can't find that any more, so it doesn't count. The question is gone."
-    up: "Good"
-    down: "Not good"
-    week: "👍 {up} · 👎 {down} this week, {pct}%"
-    log_good: "👍 Good – {who}, {at}."
-    log_bad: "👎 Not good – {who}, {at}."
-    who_you: "you"
-    who_someone: "someone"
-    learned_yes: "I count it as a yes for {skill} in the {area}."
-    learned_correction: "I count it as a correction for {skill} in the {area}: {n} of 2 this week. At 2 I take a step back here."
-    learned_back: "I count it as a correction for {skill} in the {area}. That makes {n} this week, so I take a step back here."
-    learned_observe: "I count it as a correction for {skill} in the {area}. Here I am still only watching."
-    learned_none: "Kept and counted; I learn nothing from it here."
   notice:
     emergency_stays: "An emergency message stays while the emergency lasts."
     later_title: "When should a message like this come again?"
@@ -2771,13 +2755,10 @@ notify:
     never: Never
     "yes": "Yes" # a plain yes or no; the automation question has turn_off and keep_on
     "no": "No"
-    good: "👍 Good"
-    bad: "👎 Not good"
     turn_off: "Yes, turn it off"
     keep_on: "No, keep it on"
   calendar_consent: "May I read the calendar in Home Assistant? It is for the waste reminder, the calendar in the morning briefing and days that are different. What is in it stays in the house. Until you say yes, I do not read it."
   care_consent: "May I watch for unusual quiet in the house while you are home? Then {contact} gets one message when nothing moves for a long time. I do nothing else. You can take it back in My data."
-  was_it_good: "I just did this: {what}. Was that right?"
   room_kind: "I don't know what kind of room {area} is. Will you choose it? Until then, it gets the rules that fit anywhere."  # E-486
   energy_rest:
     boiler: "Extra hot water brought less than it cost over the last three weeks. I stop doing it and will carefully try again in four weeks."
@@ -3435,8 +3416,6 @@ help:
     a24: "As an administrator: House settings › Start again. ‘Introduction again’ walks through the introduction once more. ‘Learn again’ makes HouseMind forget what it learned; your house rules stay. ‘Back to factory settings’ erases everything; then you set it up again with ‘Set up’. Emergency reactions keep working."
     q25: "How do I turn on the vacation or guest mode?"
     a25: "Tap {name} and choose ‘Vacation’ or ‘Guests’; then it says ‘Home again’. You can also say it: ‘we are going on vacation’. In both modes HouseMind does not learn. On vacation the house looks lived in in the evening."
-    q26: "What do the thumbs do?"
-    a26: "From Informed, 👍 and 👎 show under something {name} did herself, also at ‘Why?’; if she tried something herself while it was still on Propose, she sometimes asks whether it was good, with ‘👍 Good’ and ‘👎 Not good’. On Autonomous she asks nothing, not even afterwards, and no message appears. A thumb down counts as a correction. Your answer is in Logbook; from Involved, ‘Ready for autonomy?’ counts the thumbs."
     q27: "Can I say ‘Hey {name}’?"
     a27: "Yes, with a voice satellite or Assist on your phone. You have a wake word with her name made yourself; Home Assistant explains how. Once it exists, HouseMind puts it in her own Assist pipeline (House settings › {name})."
     q28: "What does HouseMind do with cameras?"
@@ -3823,7 +3802,6 @@ report:
     learned_propose: "Learned: {skill} in the {area} – I now propose it."
     learned_observe: "Stepped back: {skill} in the {area} – I watch again."
     asked: "Your answers: {yes} times yes, {no} times no."
-    thumbs: "Your thumbs: 👍 {up} · 👎 {down}, {pct}% good."
     measuring:
       one: "Energy: I measure for 1 more day; then you see here what it brings."
       other: "Energy: I measure for {count} more days; then you see here what it brings."

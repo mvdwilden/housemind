@@ -73,9 +73,9 @@ async def test_no_raw_events_and_no_empty_home_and_away(tmp_path: Path) -> None:
 async def test_old_thumbs_go_and_an_administrator_can_forget_someone_who_left(
     tmp_path: Path,
 ) -> None:
-    """Thumbs go after 30 days with the decisions they were on. Someone who is no longer a
-    user in Home Assistant can no longer choose "Vergeet mij": an administrator can, after a
-    yes; another resident cannot."""
+    """Old thumbs (from before they left the app) go after 30 days with the decisions. Someone
+    who is no longer a user in Home Assistant can no longer choose "Vergeet mij": an
+    administrator can, after a yes; another resident cannot."""
     hm, _ha = await _house(tmp_path)
     long_ago = (hm.clock.now() - timedelta(days=40)).isoformat()
     await hm.db.execute(

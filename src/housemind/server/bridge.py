@@ -72,13 +72,6 @@ def routes(app: web.Application, key: web.AppKey[HouseMind]) -> None:
             await hm.pause(None, _text(data.get("user_id"), 64))
         elif name == "house_mode" and data.get("mode") in MODES:
             result["ok"] = await hm.set_house_mode(str(data["mode"]))
-        elif name == "feedback" and isinstance(data.get("good"), bool):
-            decision = data.get("decision")
-            result = await hm.feedback(
-                bool(data["good"]),
-                decision if isinstance(decision, int) else None,
-                _text(data.get("user_id"), 64),
-            )
         elif name == "house_rule" and (text := _text(data.get("text"), 300)):
             lang = hm.languages.resolve(_text(data.get("language"), 16) or hm._language())
             # Only someone HouseMind knows, from level Involved (E-87, E-292): a speaker or

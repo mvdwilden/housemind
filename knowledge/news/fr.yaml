@@ -1,5 +1,13 @@
 # Quoi de neuf, par version (E-150) : une phrase pour Informé, une courte liste pour Impliqué et
 # Expert. Langage simple, sans noms de marques.
+"0.4.8":
+  one: "Les pouces ont quitté HouseMind."
+  list:
+    - "Après une chose que HouseMind a faite, et à ‘Pourquoi ?’, il n'y a plus de pouces. HouseMind ne demande plus non plus ‘C'était bien ?’."
+    - "HouseMind continue d'apprendre de ce que tu remets toi-même, avec un interrupteur ou dans l'app, et de ‘Annuler’."
+    - "Le Journal ne montre plus de pouces sous une ligne. Le Cerveau et le rapport de la maison de la semaine ne comptent plus que le nombre de fois où quelqu'un a remis ou annulé quelque chose."
+    - "Dans Home Assistant, l'action pour un pouce levé ou baissé a disparu."
+    - "Tout ce que HouseMind a déjà appris reste. Si une question ‘C'était bien ?’ était encore ouverte, elle disparaît d'elle-même, aussi de ton téléphone."
 "0.4.7":
   one: "Températures par pièce, et une question une seule fois."
   list:

@@ -804,22 +804,6 @@ class NotificationRouter:
             )
         return [str(r["topic"]) for r in rows]
 
-    async def expire_topics(self, prefix: str, keep: timedelta, now: datetime) -> list[str]:
-        """Close open notifications of one kind of topic older than ``keep``, such as the daily
-        'Was dat goed?', so they do not pile up (QA 2, H-10); returns the closed topics."""
-        before = (now - keep).isoformat()
-        rows = await self.db.fetchall(
-            "SELECT topic FROM notifications WHERE topic LIKE ? AND resolved_at IS NULL AND at < ?",
-            (f"{prefix}%", before),
-        )
-        if rows:
-            await self.db.execute(
-                "UPDATE notifications SET resolved_at = ? WHERE topic LIKE ? "
-                "AND resolved_at IS NULL AND at < ?",
-                (now.isoformat(), f"{prefix}%", before),
-            )
-        return [str(r["topic"]) for r in rows]
-
     # -- routing --------------------------------------------------------------------------
 
     def _budget(self, person: Person) -> int:

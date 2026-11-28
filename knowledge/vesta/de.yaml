@@ -604,21 +604,6 @@ ask_done:
     - "Super, dann muss ich Sie nicht mehr daran erinnern."
     - "Gut, das ist jetzt von der Liste."
 
-# Na 👍 of 👎 op ‘Was dat goed?’ in haar venster (E-298).
-answer_thumbs:
-  je:
-    - "Danke dir, das hilft mir, es besser zu machen."
-    - "Gut, dass du es sagst, ich merke es mir."
-    - "Gut zu wissen, daraus lerne ich."
-    - "Vielen Dank, ich nehme es mit."
-    - "Klar, so lerne ich, was zu euch passt."
-  u:
-    - "Danke Ihnen, das hilft mir, es besser zu machen."
-    - "Gut, dass Sie es sagen, ich merke es mir."
-    - "Gut zu wissen, daraus lerne ich."
-    - "Vielen Dank, ich nehme es mit."
-    - "Klar, so lerne ich, was zu Ihnen passt."
-
 # Antwoorden over het huis, de instellingen en de huisregels (E-243 – E-245, 18.3 – 18.5).
 # Feiten in haar eigen woorden: minstens drie varianten; een u-vorm alleen waar een je of u in staat.
 know_state_yes:

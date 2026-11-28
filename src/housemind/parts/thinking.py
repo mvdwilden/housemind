@@ -101,7 +101,6 @@ SKILL_SENSOR_CLASSES = {
     "pm25",
     "volatile_organic_compounds",
 }
-THUMBS_ASK_KEEP = timedelta(days=1)
 TICK_SECONDS = 30
 # Waking up (E-88): one "yes" the evening before holds for both skills that morning.
 WAKE_SKILLS = ("wake_light", "wake_warmth")
@@ -147,7 +146,6 @@ class ThinkingPart(Part):
         async def _ask(self, proposal_id: int, decision: Decision) -> None: ...
         async def _ask_calendar(self, snapshot: WorldState) -> None: ...
         async def _ask_labels(self, snapshot: WorldState) -> None: ...
-        async def _ask_was_it_good(self, snapshot: WorldState) -> None: ...
         def _asks_nobody(self, request: ActionRequest, planned: bool = False) -> bool: ...
 
         _automation_switched: Any
@@ -567,7 +565,6 @@ class ThinkingPart(Part):
             ("knowledge", lambda: self._knowledge_update(snapshot)),
             ("calendar", lambda: self._ask_calendar(snapshot)),
             ("labels", lambda: self._ask_labels(snapshot)),
-            ("was_it_good", lambda: self._ask_was_it_good(snapshot)),
             ("speech", lambda: self._check_speech(now)),
             ("version", lambda: self._check_version(snapshot)),
             ("escalate", lambda: router.escalate(self._people, now, snapshot.local, sleeping)),
@@ -597,9 +594,6 @@ class ThinkingPart(Part):
         if self.router is None:
             return
         for topic in await self.router.expire_info(now):
-            self._raised.pop(topic, None)
-        # 'Was dat goed?' is about something just done: after a day it no longer matters.
-        for topic in await self.router.expire_topics("thumbs:", THUMBS_ASK_KEEP, now):
             self._raised.pop(topic, None)
 
     async def _on_change(self, change: StateChange) -> None:
@@ -1206,7 +1200,7 @@ class ThinkingPart(Part):
     async def _store_correction(
         self, now: datetime, skill: str, area_id: str, entity_id: str, trial: bool = False
     ) -> None:
-        """One correction for S-01: switched back by hand, Undo or 👎 (QA 2, M-16)."""
+        """One correction for S-01: switched back by hand or Undo (QA 2, M-16, B-504)."""
         await self.db.execute(
             "INSERT INTO corrections(at, skill, area_id, entity_id, trial) VALUES(?,?,?,?,?)",
             (now.isoformat(), skill, area_id, entity_id, int(trial)),

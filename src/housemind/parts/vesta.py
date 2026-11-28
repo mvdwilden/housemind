@@ -707,8 +707,6 @@ class VestaPart(Part):
                     proof = str(row["text_key"]) == "notify.proof_automation"  # E-460
                     answers = ["yes", "later", "no"] if proof else ["yes", "no"]
                     decisions.append({**ask, "kind": kind, "actions": answers})
-            elif topic.startswith("thumbs:"):
-                decisions.append({**ask, "kind": "thumbs", "actions": ["good", "bad"]})
             elif topic.startswith("rule_suggest:"):
                 # A house rule the AI suggests (E-417): for an administrator, within budget.
                 person = self._person(user_id)

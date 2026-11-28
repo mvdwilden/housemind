@@ -76,10 +76,6 @@ def lines(
     yes, no = int(data.get("yes", 0)), int(data.get("no", 0))
     if yes or no:
         out.append(t(lang, "report.line.asked", yes=yes, no=no))
-    up, down = int(data.get("up", 0)), int(data.get("down", 0))
-    if up or down:  # 👍/👎 (E-298)
-        pct = round(up * 100 / (up + down))
-        out.append(t(lang, "report.line.thumbs", up=up, down=down, pct=pct))
     if data.get("measuring"):
         out.append(t(lang, "report.line.measuring", count=int(data.get("days_left", 0))))
     elif isinstance(saved, int | float):

@@ -2110,7 +2110,7 @@ ui:
     keep:  # how long HouseMind keeps what (E-409)
       title: "Hoe lang HouseMind wat bewaart"
       week: "{days} dagen: meldingen ter informatie; daarna gaan ze uit de lijst."
-      month: "{days} dagen: wat er in huis gebeurde en wat HouseMind deed en waarom, gesprekken als tekst, vragen aan de AI, afgehandelde meldingen, wat camera's meldden (soort, ruimte, tijd) en duimen."
+      month: "{days} dagen: wat er in huis gebeurde en wat HouseMind deed en waarom, gesprekken als tekst, vragen aan de AI, afgehandelde meldingen en wat camera's meldden (soort, ruimte, tijd)."
       proposals: "{days} dagen: voorstellen en correcties."
       years: "{years} jaar: weekverslagen en energietotalen per dag."
       always: "Tot je het wist: wat HouseMind leerde, huisregels, momenten, instellingen en voorkeuren."
@@ -2137,22 +2137,6 @@ ui:
     forget_confirm: "Vergeet wat HouseMind over jou bewaart: je voorkeuren, toestemmingen, gesprekken en meldingen voor jou. Je antwoorden en huisregels blijven voor het huis, zonder je naam. Daarna begin je opnieuw met een korte kennismaking. Doorgaan?"
     forgotten: "Vergeten. Bij de volgende keer maak je opnieuw kennis."
   cooking_not_off: "Uitzetten lukte niet. Zet hem uit met de eigen app of in Home Assistant."  # E-61, B-327
-  thumbs:
-    label: "Was dat goed?"
-    thanks: "Dank je, ik onthoud het."
-    gone: "Dat kan ik niet meer terugvinden, dus het telt niet mee. De vraag is weg."
-    up: "Goed"
-    down: "Niet goed"
-    week: "👍 {up} · 👎 {down} deze week, {pct}%"
-    log_good: "👍 Goed – {who}, {at}."
-    log_bad: "👎 Niet goed – {who}, {at}."
-    who_you: "jij"
-    who_someone: "iemand"
-    learned_yes: "Ik tel het als een ja voor {skill} in de {area}."
-    learned_correction: "Ik tel het als een correctie voor {skill} in de {area}: {n} van de 2 deze week. Bij 2 doe ik hier een stap terug."
-    learned_back: "Ik tel het als een correctie voor {skill} in de {area}. Dat zijn er {n} deze week, dus doe ik hier een stap terug."
-    learned_observe: "Ik tel het als een correctie voor {skill} in de {area}. Hier kijk ik nog alleen mee."
-    learned_none: "Bewaard en meegeteld; hier leer ik niets van."
   notice:
     emergency_stays: "Een noodmelding blijft staan zolang het noodgeval duurt."
     later_title: "Wanneer weer zo'n melding?"
@@ -2767,13 +2751,10 @@ notify:
     never: Nooit zo
     "yes": "Ja" # a plain yes or no; the automation question has turn_off and keep_on
     "no": "Nee"
-    good: "👍 Goed"
-    bad: "👎 Niet goed"
     turn_off: "Ja, zet uit"
     keep_on: "Nee, laat aan"
   calendar_consent: "Mag ik de agenda in Home Assistant lezen? Dat is voor de afvalherinnering, de agenda in de ochtendbriefing en dagen die anders zijn. Wat erin staat, blijft in huis. Tot je ja zegt, lees ik hem niet."
   care_consent: "Mag ik letten op ongewone stilte in huis als jij thuis bent? Dan krijgt {contact} één bericht als er lang niets beweegt. Verder doe ik niets. Intrekken kan bij Mijn gegevens."
-  was_it_good: "Ik heb net dit gedaan: {what}. Was dat goed?"
   room_kind: "Ik weet niet wat voor ruimte {area} is. Wil je het kiezen? Tot dan krijgt die ruimte de regels die overal passen."  # E-486
   energy_rest:
     boiler: "Extra warm water leverde de laatste drie weken minder op dan het kostte. Ik stop ermee en probeer het over vier weken voorzichtig opnieuw."
@@ -3431,8 +3412,6 @@ help:
     a24: "Als beheerder: Huisinstellingen › Opnieuw beginnen. ‘Kennismaking opnieuw’ loopt de kennismaking nog eens door. ‘Opnieuw leren’ vergeet wat HouseMind leerde; je huisregels blijven. ‘Terug naar fabrieksinstellingen’ wist alles; daarna richt je het opnieuw in met ‘Inrichten’. Noodreacties blijven werken."
     q25: "Hoe zet ik de vakantie- of gastenstand aan?"
     a25: "Tik op {name} en kies ‘Vakantie’ of ‘Gasten’; daarna staat er ‘Weer thuis’. Zeggen kan ook: ‘we gaan op vakantie’. In beide standen leert HouseMind niet. Op vakantie lijkt het huis ’s avonds bewoond."
-    q26: "Wat doen de duimpjes?"
-    a26: "Vanaf Geïnformeerd staan 👍 en 👎 onder iets wat {name} zelf deed, ook bij ‘Waarom?’; probeerde ze iets zelf terwijl het nog op Voorstellen stond, dan vraagt ze soms of het goed was, met ‘👍 Goed’ en ‘👎 Niet goed’. Op Autonoom vraagt ze niets, ook niet achteraf, en komt er geen bericht. Een duim omlaag telt als correctie. Je antwoord staat in Logboek; vanaf Betrokken telt ‘Klaar voor autonomie?’ de duimen."
     q27: "Kan ik ‘Hey {name}’ zeggen?"
     a27: "Ja, met een spraaksatelliet of Assist op je telefoon. Een wakkerwoord met haar naam laat je zelf maken; Home Assistant legt uit hoe. Bestaat het, dan zet HouseMind het in haar eigen Assist-pijplijn (Huisinstellingen › {name})."
     q28: "Wat doet HouseMind met camera's?"
@@ -3819,7 +3798,6 @@ report:
     learned_propose: "Geleerd: {skill} in de {area} stel ik nu voor."
     learned_observe: "Teruggestapt: bij {skill} in de {area} kijk ik weer mee."
     asked: "Jullie antwoorden: {yes} keer ja, {no} keer nee."
-    thumbs: "Jullie duimen: 👍 {up} · 👎 {down}, {pct}% goed."
     measuring:
       one: "Stroom: ik meet nog 1 dag; daarna zie je hier wat het oplevert."
       other: "Stroom: ik meet nog {count} dagen; daarna zie je hier wat het oplevert."

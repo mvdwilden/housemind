@@ -9,7 +9,6 @@ export interface VestaTurn {
   text: string;
   more?: VestaMore; // Lees meer: the part of the manual or the Help question (E-246)
   ai?: boolean; // the answer came via the AI (E-247)
-  thumbs?: number; // her "why": the decision, with 👍/👎 under it (E-298)
   partial?: boolean; // an AI's answer as it is written; her answer replaces it (E-159)
 }
 
@@ -56,7 +55,6 @@ export interface VestaAsk {
     | "automation"
     | "restore"
     | "vacation"
-    | "thumbs"
     | "task"
     | "knowledge"
     | "unusual" // something unusual: Ja, zet uit / Nee, laat aan (E-416)
@@ -88,11 +86,11 @@ export function typedTo(window: VestaWindow, text: string): VestaWindow {
  * means they are over. */
 export function saidTo(
   window: VestaWindow, text: string, heard?: string, confirm?: string, offer?: VestaOffer | null,
-  more?: VestaMore, ai?: boolean, thumbs?: number, ask?: VestaAsk | null, choices?: VestaChoice[] | null,
+  more?: VestaMore, ai?: boolean, ask?: VestaAsk | null, choices?: VestaChoice[] | null,
 ): VestaWindow {
   const turns = window.turns.filter((turn) => !turn.partial); // her answer replaces it (E-159)
   if (heard) turns.push({ who: "you", text: heard });
-  turns.push({ who: "vesta", text, ...(more ? { more } : {}), ...(ai ? { ai } : {}), ...(thumbs ? { thumbs } : {}) });
+  turns.push({ who: "vesta", text, ...(more ? { more } : {}), ...(ai ? { ai } : {}) });
   return {
     ...window, turns, phase: "idle", confirm: confirm ?? null, offer: offer ?? null, ask: ask ?? null,
     choices: choices && choices.length ? choices : null,
@@ -146,7 +144,3 @@ export function doing(shown: string, phase: VestaPhase, speaking: boolean): Doin
   return (DOING as readonly string[]).includes(shown) ? (shown as Doing) : "calm";
 }
 
-/** 👍 or 👎 given on her "why": the buttons go, the answer stays. */
-export function thumbed(window: VestaWindow, decision: number): VestaWindow {
-  return { ...window, turns: window.turns.map((turn) => (turn.thumbs === decision ? { ...turn, thumbs: undefined } : turn)) };
-}

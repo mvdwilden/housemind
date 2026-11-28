@@ -226,40 +226,6 @@ def _when(hm: HouseMind, at: datetime) -> dict[str, str]:
     return {"when": at.isoformat(), "day": local.date().isoformat(), "at": local.strftime("%H:%M")}
 
 
-def _answer(
-    hm: HouseMind, lang: str, user_id: str, row: dict[str, Any], decision: Decision
-) -> dict[str, Any]:
-    """A 👍/👎 under the line it was given on, and what Vesta did with it (E-298): who gave it
-    (only "you" or "someone", never a name), and whether it counted as a yes or a correction
-    – with how far that is from a step back."""
-    text = hm.languages.text
-    good = bool(row["good"])
-    at = _local(hm, datetime.fromisoformat(str(row["at"]))).strftime("%H:%M")
-    who = text(lang, "ui.thumbs.who_you" if row["user_id"] == user_id else "ui.thumbs.who_someone")
-    said = text(lang, "ui.thumbs.log_good" if good else "ui.thumbs.log_bad", who=who, at=at)
-    r = decision.request
-    learned = row.get("learned")
-    if not learned or not r.skill or not r.area_id or hm.learning is None:
-        key, n = "ui.thumbs.learned_none", 0
-    elif learned == "yes":
-        key, n = "ui.thumbs.learned_yes", 0
-    else:
-        n = len(hm.learning.recent_setbacks(r.skill, r.area_id, hm.clock.now()))
-        if hm._skill_step(r.skill, r.area_id) is Step.OBSERVE:
-            key = "ui.thumbs.learned_observe"
-        else:
-            key = "ui.thumbs.learned_back" if n >= 2 else "ui.thumbs.learned_correction"
-    area = hm.model.areas.get(r.area_id or "")
-    learned_text = text(
-        lang,
-        key,
-        skill=text(lang, f"skills.{r.skill}") if r.skill else "",
-        area=area.name if area else "",
-        n=max(n, 1),
-    )
-    return {"good": good, "text": f"{said} {learned_text}"}
-
-
 async def logbook(
     hm: HouseMind,
     viewer: Viewer,
@@ -335,10 +301,6 @@ async def logbook(
             if then is not None:
                 item["outcome"] = then.outcome.value
                 item["outcomeName"] = hm.languages.text(lang, f"ui.outcome.{then.outcome.value}")
-        if row_id is not None and level >= 2:
-            item["answers"] = [
-                _answer(hm, lang, user_id, row, decision) for row in await hm.thumbs_for(row_id)
-            ]
         items.append(item)
 
     # Notifications: the open ones with their answers, and what was handled this week – or,

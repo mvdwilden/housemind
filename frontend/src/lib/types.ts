@@ -237,7 +237,6 @@ export interface ReadyPart {
   capName: string | null;
   text: string;
   limit: boolean;
-  thumbs?: { up: number; down: number; text: string }; // this week, from level 3 (E-298)
   corrections?: { weeks: number[]; text: string }; // per week, oldest first, from level 3 (S-01)
   own?: OwnStep; // an administrator from level 3 (20.10)
   skills?: ReadySkill[];

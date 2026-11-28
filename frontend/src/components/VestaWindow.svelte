@@ -25,7 +25,6 @@
     ontype: (text: string) => void;
     ontyping: (at: boolean) => void; // in the typing field: she stops listening, the window stays
     onanswer: (yes: boolean, word: string) => void;
-    onthumbs?: (decision: number, good: boolean) => void;
     onask: (action: string, word: string) => void;
     onopen: () => void;
     ondecline: (word: string) => void;
@@ -41,7 +40,7 @@
     ontalk?: () => void; // a tap on her in the window: she listens (E-464)
     canlisten?: boolean; // this device can listen
   }
-  let { vesta, orb, level, name, speaking, t, onclose, onfinish, oncancel, onretry, ontype, ontyping, onanswer, onask, onopen, ondecline, onmore, aloud, onaloud, houseMode = "home", onmode, listenMs = 6000, onmoretime, onthumbs, onchoice, ai = false, ontalk, canlisten = false }: Props = $props();
+  let { vesta, orb, level, name, speaking, t, onclose, onfinish, oncancel, onretry, ontype, ontyping, onanswer, onask, onopen, ondecline, onmore, aloud, onaloud, houseMode = "home", onmode, listenMs = 6000, onmoretime, onchoice, ai = false, ontalk, canlisten = false }: Props = $props();
   const away = $derived(houseMode === "vacation" || houseMode === "guests");
 
   // The words on the buttons under her question: the same as in the notification list.
@@ -49,7 +48,7 @@
     if (action === "why") return t("ui.vesta.why_ask"); // Waarom? under a proposal (E-349)
     if (action.startsWith("later_")) return t(`ui.notice.later.${action.slice(6)}`); // how long (E-381)
     const kind = vesta.ask?.kind;
-    if (kind === "proposal" || kind === "thumbs") return t(`notify.answer.${action}`);
+    if (kind === "proposal") return t(`notify.answer.${action}`);
     if (action === "later") return t("notify.answer.later"); // "Nog niet" (E-460)
     if (kind === "automation" || kind === "restore" || kind === "vacation" || kind === "rule_suggest") {
       return t(`ui.${action}`);
@@ -140,14 +139,6 @@
       {#if last.ai}<p class="via">{t("ui.vesta.via_ai")}</p>{/if}
       {#if last.more}
         <button class="read" onclick={() => last.more && onmore(last.more)}>{t("ui.vesta.more")}</button>
-      {/if}
-      {#if last.thumbs && onthumbs}
-        {@const decision = last.thumbs}
-        <!-- Was it good what she did (E-298): one tap, from level 2. -->
-        <div class="buttons thumbs" role="group" aria-label={t("ui.thumbs.label")}>
-          <button onclick={() => onthumbs?.(decision, true)} aria-label={t("ui.thumbs.up")}>{t("notify.answer.good")}</button>
-          <button onclick={() => onthumbs?.(decision, false)} aria-label={t("ui.thumbs.down")}>{t("notify.answer.bad")}</button>
-        </div>
       {/if}
     {/if}
 
@@ -282,7 +273,6 @@
   .buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 4px; max-width: 100%; }
   .buttons button { min-width: min(110px, 100%); min-height: 48px; padding: 0 16px; border-radius: 24px; border: 1px solid var(--edge); background: var(--raised); color: inherit; font-size: calc(16px * var(--text-scale)); cursor: pointer; }
   .buttons.four { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; }
-  .buttons.thumbs button { min-width: 0; padding: 0 18px; }
   .buttons .primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); font-weight: 600; }
   .turns { list-style: none; margin: 8px 0 0; padding: 0; width: 100%; display: flex; flex-direction: column; gap: 6px; text-align: left; }
   .turns li { padding: 8px 12px; border-radius: 12px; background: var(--raised); font-size: calc(15px * var(--text-scale)); }

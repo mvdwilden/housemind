@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { askedTo, CLOSED, CLOSE_MS, closeDelay, doing, mayAsk, partialTo, saidTo, thumbed, TYPED_CLOSE_MS, typedTo, type VestaAsk, type VestaChoice } from "./vesta";
+import { askedTo, CLOSED, CLOSE_MS, closeDelay, doing, mayAsk, partialTo, saidTo, TYPED_CLOSE_MS, typedTo, type VestaAsk, type VestaChoice } from "./vesta";
 
 describe("the Vesta window, the same on every level (E-241)", () => {
   it("opens for a typed question, with your words first", () => {
@@ -25,14 +25,6 @@ describe("the Vesta window, the same on every level (E-241)", () => {
     const window = saidTo(typedTo(CLOSED, "Never turn on the hall light"), "Shall I remember that?", undefined, "t1");
     expect(window.confirm).toBe("t1");
     expect(closeDelay(window)).toBeNull();
-  });
-
-  it("keeps 👍/👎 under her why until one is given, then only her answer stays (E-298)", () => {
-    const why = saidTo({ ...CLOSED, open: true }, "I turned it on because you came in.", undefined, undefined, null, undefined, false, 42);
-    expect(why.turns.at(-1)?.thumbs).toBe(42);
-    const given = thumbed(why, 42);
-    expect(given.turns.at(-1)).toEqual({ who: "vesta", text: "I turned it on because you came in." });
-    expect(thumbed(why, 7).turns.at(-1)?.thumbs).toBe(42); // another decision: unchanged
   });
 });
 
@@ -119,17 +111,17 @@ describe("Vesta listens: her question and her choices stay while they are open (
   ];
 
   it("a question after a tap has its buttons; an answer that keeps it open keeps them", () => {
-    const tapped = saidTo({ ...CLOSED, open: true }, ask.text, undefined, undefined, null, undefined, false, undefined, ask);
+    const tapped = saidTo({ ...CLOSED, open: true }, ask.text, undefined, undefined, null, undefined, false, ask);
     expect(tapped.ask).toEqual(ask);
     expect(closeDelay(tapped)).toBeNull(); // to answer
-    const why = saidTo(tapped, "Because nobody is there. Shall I turn it off?", "Why?", undefined, null, undefined, false, undefined, ask);
+    const why = saidTo(tapped, "Because nobody is there. Shall I turn it off?", "Why?", undefined, null, undefined, false, ask);
     expect(why.ask).toEqual(ask);
     const done = saidTo(why, "Done.", "Yes");
     expect(done.ask).toBeNull(); // answered: the buttons go
   });
 
   it("her choices after a tap without an AI: time to choose, and no other question meanwhile", () => {
-    const window = saidTo({ ...CLOSED, open: true }, "Good evening, just choose.", undefined, undefined, null, undefined, false, undefined, null, choices);
+    const window = saidTo({ ...CLOSED, open: true }, "Good evening, just choose.", undefined, undefined, null, undefined, false, null, choices);
     expect(window.choices).toEqual(choices);
     expect(closeDelay(window)).toBe(TYPED_CLOSE_MS);
     expect(mayAsk({ visible: true, busy: false, typing: false, window })).toBe(false);

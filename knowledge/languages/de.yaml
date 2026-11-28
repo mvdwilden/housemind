@@ -2111,7 +2111,7 @@ ui:
     keep:  # how long HouseMind keeps what (E-409)
       title: "Wie lange HouseMind was aufbewahrt"
       week: "{days} Tage: Meldungen zur Information; danach verschwinden sie aus der Liste."
-      month: "{days} Tage: was im Haus geschah und was HouseMind tat und warum, Gespräche als Text, Fragen an die KI, erledigte Meldungen, was Kameras meldeten (Art, Raum, Zeit) und Daumen."
+      month: "{days} Tage: was im Haus geschah und was HouseMind tat und warum, Gespräche als Text, Fragen an die KI, erledigte Meldungen und was Kameras meldeten (Art, Raum, Zeit)."
       proposals: "{days} Tage: Vorschläge und Korrekturen."
       years: "{years} Jahre: Wochenberichte und Energiesummen pro Tag."
       always: "Bis du es löschst: was HouseMind gelernt hat, Hausregeln, Momente, Einstellungen und Vorlieben."
@@ -2138,22 +2138,6 @@ ui:
     forget_confirm: "Vergessen, was HouseMind über dich aufbewahrt: deine Einstellungen, Einwilligungen, Gespräche und Mitteilungen für dich. Deine Antworten und Hausregeln bleiben für das Haus, ohne deinen Namen. Danach beginnst du neu mit einem kurzen Kennenlernen. Weiter?"
     forgotten: "Vergessen. Beim nächsten Mal lernt ihr euch neu kennen."
   cooking_not_off: "Ausschalten hat nicht geklappt. Schalte es mit der eigenen App oder in Home Assistant aus."  # E-61, B-327
-  thumbs:
-    label: "War das richtig?"
-    thanks: "Danke, ich merke es mir."
-    gone: "Das finde ich nicht mehr, also zählt es nicht. Die Frage ist weg."
-    up: "Gut"
-    down: "Nicht gut"
-    week: "👍 {up} · 👎 {down} diese Woche, {pct} %"
-    log_good: "👍 Gut – {who}, {at}."
-    log_bad: "👎 Nicht gut – {who}, {at}."
-    who_you: "du"
-    who_someone: "jemand"
-    learned_yes: "Ich zähle es als Ja für {skill} im Raum {area}."
-    learned_correction: "Ich zähle es als Korrektur für {skill} im Raum {area}: {n} von 2 diese Woche. Bei 2 gehe ich hier einen Schritt zurück."
-    learned_back: "Ich zähle es als Korrektur für {skill} im Raum {area}. Das sind {n} diese Woche, also gehe ich hier einen Schritt zurück."
-    learned_observe: "Ich zähle es als Korrektur für {skill} im Raum {area}. Hier schaue ich noch nur zu."
-    learned_none: "Gespeichert und gezählt; daraus lerne ich hier nichts."
   notice:
     emergency_stays: "Eine Notfallmeldung bleibt, solange der Notfall dauert."
     later_title: "Wann soll so eine Nachricht wiederkommen?"
@@ -2772,13 +2756,10 @@ notify:
     never: Nie
     "yes": "Ja" # a plain yes or no; the automation question has turn_off and keep_on
     "no": "Nein"
-    good: "👍 Gut"
-    bad: "👎 Nicht gut"
     turn_off: "Ja, ausschalten"
     keep_on: "Nein, anlassen"
   calendar_consent: "Darf ich den Kalender in Home Assistant lesen? Das ist für die Müllerinnerung, den Kalender im Morgenbriefing und Tage, die anders sind. Was darin steht, bleibt im Haus. Bis du Ja sagst, lese ich ihn nicht."
   care_consent: "Darf ich auf ungewöhnliche Stille im Haus achten, wenn du zu Hause bist? Dann bekommt {contact} eine Nachricht, wenn sich lange nichts bewegt. Sonst tue ich nichts. Zurücknehmen kannst du es unter Meine Daten."
-  was_it_good: "Ich habe gerade das gemacht: {what}. War das richtig?"
   room_kind: "Ich weiß nicht, was für ein Raum {area} ist. Möchtest du es wählen? Bis dahin bekommt er die Regeln, die überall passen."  # E-486
   energy_rest:
     boiler: "Extra warmes Wasser hat in den letzten drei Wochen weniger gebracht, als es gekostet hat. Ich höre damit auf und versuche es in vier Wochen vorsichtig wieder."
@@ -3436,8 +3417,6 @@ help:
     a24: "Als Administrator: Hauseinstellungen › Neu beginnen. ‚Einführung noch einmal‘ geht die Einführung noch einmal durch. ‚Neu lernen‘ lässt HouseMind vergessen, was es gelernt hat; deine Hausregeln bleiben. ‚Zurück auf Werkseinstellungen‘ löscht alles; danach richtest du es mit ‚Einrichten‘ neu ein. Notfallreaktionen funktionieren weiter."
     q25: "Wie schalte ich den Urlaubs- oder Gästemodus ein?"
     a25: "Tippe auf {name} und wähle ‚Urlaub‘ oder ‚Gäste‘; danach steht dort ‚Wieder zu Hause‘. Du kannst es auch sagen: ‚wir fahren in den Urlaub‘. In beiden Modi lernt HouseMind nicht. Im Urlaub wirkt das Haus abends bewohnt."
-    q26: "Was machen die Daumen?"
-    a26: "Ab Informiert stehen 👍 und 👎 unter etwas, das {name} selbst getan hat, auch bei ‚Warum?‘; hat sie etwas selbst versucht, während es noch auf Vorschlagen stand, fragt sie manchmal, ob es gut war, mit ‚👍 Gut‘ und ‚👎 Nicht gut‘. Bei Selbstständig fragt sie nichts, auch nicht hinterher, und es kommt keine Meldung. Ein Daumen nach unten zählt als Korrektur. Deine Antwort steht im Logbuch; ab Beteiligt zählt ‚Bereit für Selbstständigkeit?‘ die Daumen."
     q27: "Kann ich ‚Hey {name}‘ sagen?"
     a27: "Ja, mit einem Sprachsatelliten oder mit Assist auf deinem Telefon. Ein Aktivierungswort mit ihrem Namen lässt du selbst erstellen; Home Assistant erklärt, wie. Gibt es eines, setzt HouseMind es in ihre eigene Assist-Pipeline (Hauseinstellungen › {name})."
     q28: "Was macht HouseMind mit Kameras?"
@@ -3824,7 +3803,6 @@ report:
     learned_propose: "Gelernt: {skill} ({area}) – das schlage ich jetzt vor."
     learned_observe: "Zurückgestuft: {skill} ({area}) – ich schaue wieder nur zu."
     asked: "Eure Antworten: {yes}-mal ja, {no}-mal nein."
-    thumbs: "Eure Daumen: 👍 {up} · 👎 {down}, {pct} % gut."
     measuring:
       one: "Strom: Ich messe noch 1 Tag; danach siehst du hier, was es bringt."
       other: "Strom: Ich messe noch {count} Tage; danach siehst du hier, was es bringt."

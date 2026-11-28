@@ -727,13 +727,12 @@
     onclose={(id) => conn.dismiss(id)}
     onconfirm={(n, yes) => { conn.send({ type: "confirm_rule", token: n.confirm, yes }); conn.dismiss(n.id); }}
     onwhy={(n) => conn.send({ type: "why", id: n.action })}
-    onundo={(n) => { conn.send({ type: "undo", id: n.action }); conn.dismiss(n.id); }}
-    onthumbs={(n, good) => { if (n.action) conn.thumbs(n.action, good); conn.dismiss(n.id); }} />
+    onundo={(n) => { conn.send({ type: "undo", id: n.action }); conn.dismiss(n.id); }} />
 {/snippet}
 {#if conn.vesta.open && snap}
   <VestaWindow vesta={conn.vesta} {orb} level={snap.level} name={snap.vesta?.name ?? "Vesta"} speaking={conn.speaking} {t}
     onclose={() => conn.closeVesta()} onfinish={() => conn.finishListening()} oncancel={() => conn.cancelListening()}
-    onretry={() => conn.retryMic()} ontype={talk} ontyping={(at) => conn.typingToVesta(at)} onanswer={(yes, word) => conn.answerVesta(yes, word)} onthumbs={(decision, good) => conn.thumbs(decision, good, true)} onask={(action, word) => conn.answerAsk(action, word)}
+    onretry={() => conn.retryMic()} ontype={talk} ontyping={(at) => conn.typingToVesta(at)} onanswer={(yes, word) => conn.answerVesta(yes, word)} onask={(action, word) => conn.answerAsk(action, word)}
     onopen={() => conn.openSetting()} ondecline={(word) => conn.declineOffer(word)}
     onmore={(more) => conn.readMore(more)} aloud={voiceOn} onaloud={(on) => { setAloud(on); voiceOn = on; }}
     houseMode={snap.houseMode} onmode={(mode) => conn.send({ type: "house_mode", mode })}

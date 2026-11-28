@@ -1,5 +1,13 @@
 # Was ist neu, pro Version (E-150): ein Satz für Informiert, eine kurze Liste für Beteiligt und
 # Experte. Einfache Sprache, keine Markennamen.
+"0.4.8":
+  one: "Die Daumen sind aus HouseMind verschwunden."
+  list:
+    - "Nach etwas, das HouseMind getan hat, und bei ‚Warum?‘ gibt es keine Daumen mehr. HouseMind fragt auch nicht mehr ‚War das richtig?‘."
+    - "HouseMind lernt weiter aus dem, was du selbst zurückstellst, mit einem Schalter oder in der App, und aus ‚Rückgängig‘."
+    - "Im Logbuch stehen keine Daumen mehr unter einer Zeile. Das Gehirn und der Hausbericht der Woche zählen nur noch, wie oft jemand etwas zurückgestellt oder rückgängig gemacht hat."
+    - "In Home Assistant ist die Aktion für einen Daumen hoch oder runter weg."
+    - "Alles, was HouseMind schon gelernt hat, bleibt. Stand noch eine Frage ‚War das richtig?‘ offen, verschwindet sie von selbst, auch von deinem Handy."
 "0.4.7":
   one: "Temperaturen pro Raum, und eine Frage nur einmal."
   list:

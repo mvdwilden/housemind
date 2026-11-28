@@ -112,17 +112,6 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
             {"action": "house_mode", "mode": call.data["mode"], "user_id": call.context.user_id}
         )
 
-    async def feedback(call: ServiceCall) -> None:
-        # One decision if given, else the last action; the person from the call (E-298).
-        await send(
-            {
-                "action": "feedback",
-                "good": call.data["good"],
-                "decision": call.data.get("decision"),
-                "user_id": call.context.user_id,
-            }
-        )
-
     async def house_rule(call: ServiceCall) -> ServiceResponse:
         result = await send(
             {
@@ -155,14 +144,6 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     hass.services.async_register(DOMAIN, "resume", resume)
     hass.services.async_register(
         DOMAIN, "house_mode", house_mode, schema=vol.Schema({vol.Required("mode"): vol.In(MODES)})
-    )
-    hass.services.async_register(
-        DOMAIN,
-        "feedback",
-        feedback,
-        schema=vol.Schema(
-            {vol.Required("good"): cv.boolean, vol.Optional("decision"): vol.Coerce(int)}
-        ),
     )
     hass.services.async_register(
         DOMAIN,

@@ -106,6 +106,27 @@ def test_the_image_installs_exactly_uv_lock_with_hashes() -> None:
     assert (ROOT / ".github" / "dependabot.yml").exists()
 
 
+def test_the_screens_are_built_on_the_build_machine() -> None:
+    """The aarch64 release once hung for six hours on npm ci under emulation. The screens are
+    plain files, the same on every architecture, so their stage runs on the machine that
+    builds; only the App itself is built for the target, and it takes just those files."""
+    stages: dict[str, list[str]] = {}
+    name = ""
+    for line in (ROOT / "Dockerfile").read_text(encoding="utf-8").splitlines():
+        if line.startswith("FROM "):
+            name = line.split(" AS ")[1] if " AS " in line else "app"
+            stages[name] = [line]
+        elif name and line.strip() and not line.startswith("#"):
+            stages[name].append(line)
+    assert set(stages) == {"frontend", "app"}, list(stages)
+    first = stages["frontend"][0]
+    assert first.startswith("FROM --platform=$BUILDPLATFORM node:") and "@sha256:" in first
+    assert stages["app"][0] == "FROM ${BUILD_FROM}"  # the App itself: the target platform
+    taken = [line for line in stages["app"] if "--from=" in line]
+    assert taken == ["COPY --from=frontend /build/dist/ /app/frontend/"]
+    assert stages["frontend"][-1] == "RUN npm run build"
+
+
 def test_home_assistant_watches_the_app_and_limits_it() -> None:
     """QA 2, M-34: no watchdog and no AppArmor profile. Now HA asks /api/health and starts
     the App again when it does not answer, and the App has its own profile."""

@@ -113,9 +113,8 @@ async def test_assist_house_questions_rules_by_voice_and_an_honest_no(tmp_path: 
     await hm.stop()
 
 
-async def test_feedback_teaches_and_a_scene_by_voice(tmp_path: Path) -> None:
+async def test_a_scene_by_voice(tmp_path: Path) -> None:
     hm, _, ha = await start(tmp_path)
-    assert (await hm.feedback(True))["ok"] is False  # nothing done yet
     reply = await hm.assist("film", "nl", None, "demo-user-1")
     assert reply["text"].startswith("Goed: Film")
     assert ha.states["cover.living_curtain"].state == "closed"

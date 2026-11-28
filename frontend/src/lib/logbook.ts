@@ -20,7 +20,6 @@ export interface LogDone extends Omit<MindItem, "at">, When {
   type: "done";
   id: number | null; // known while the brain remembers the decision: then Why? and Undo work
   undo: boolean;
-  answers?: { good: boolean; text: string }[]; // 👍/👎 given on it, and what Vesta learned (E-298)
   part?: string; // lighting, covers …, for Filter (E-323)
 }
 export interface LogNotice extends Omit<Notice, "at">, When {

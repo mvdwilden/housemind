@@ -3,6 +3,16 @@
 <!-- support:start – made by tools/build_support.py from docs/support.yaml -->
 <!-- support:end -->
 
+## 0.4.8 – 28-11-2026
+
+The thumbs are gone from HouseMind.
+
+- After something HouseMind did, and at ‘Why?’, there are no thumbs any more. HouseMind no longer asks ‘Was that right?’ either.
+- HouseMind keeps learning from what you put back yourself, with a switch or in the app, and from ‘Undo’.
+- The Logbook no longer shows thumbs under a line. The Brain and this week's house report only count how often someone put something back or undid it.
+- In Home Assistant the action for a thumb up or down is gone.
+- Everything HouseMind already learned stays. If a question ‘Was that right?’ was still open, it goes away by itself, also from your phone.
+
 ## 0.4.7 – 28-11-2026
 
 Temperatures per room, and a question only once.

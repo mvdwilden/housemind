@@ -15,18 +15,6 @@ house_mode:
         select:
           options: ["home", "away", "sleep", "vacation", "guests"]
           translation_key: mode
-feedback:
-  fields:
-    good:
-      required: true
-      selector:
-        boolean:
-    decision:
-      selector:
-        number:
-          min: 1
-          max: 1000000000
-          mode: box
 house_rule:
   fields:
     text:

@@ -469,7 +469,6 @@ class HouseMind(
         self._quarters: dict[int, Quarter] = {}  # the testkwartier (E-477)
         self._carefree_only = False
         self._phoneless = False  # residents without a phone of their own (E-293)
-        self._corrected: set[int] = set()  # decisions a correction was counted for (B-179)
         self._watched: dict[tuple[str, str, str], datetime] = {}  # only watched, when (B-181)
         self.rhythm = Rhythm()
         self._alarm_sensors: list[str] = []
@@ -500,7 +499,6 @@ class HouseMind(
         self._heat_cool_dirty = False
         self._hc_sent: dict[str, tuple[str, Any, datetime]] = {}
         self._calendar_ok = False  # the calendar is read only after an administrator's yes
-        self._thumbs_asked: dict[str, str] = {}  # "Was dit goed?": once a day per person
         # The safe mode (E-301): the data could not be converted, or is from a newer version.
         self.safe_mode: str | None = None
         # Which speech engines work in the house and which in the cloud (20.19), and where
@@ -743,6 +741,11 @@ class HouseMind(
         ]
         await self._caught_up()
         await self._refresh_people()
+        # 'Was dat goed?' left the app with the thumbs (B-505): one still open from before the
+        # update closes, also on the phones it reached (so after the people are known);
+        # nothing else of the house changes.
+        for topic in [t for t in self._raised if t.startswith("thumbs:")]:
+            await self._resolve(topic)
         self.compatibility = load_compatibility(self.paths.knowledge)
         await self._self_check()
         await self._emergencies_now()
@@ -1103,53 +1106,6 @@ class HouseMind(
                 for service in person.notify_services:
                     await self.ha.notify(service, title, message, None)
 
-    async def _ask_was_it_good(self, snapshot: WorldState) -> None:
-        """'Was dit goed?' (E-298, 20.20): now and then, at most once a day per person – also
-        across a restart (B-417) – about something HouseMind did itself in the last half hour,
-        in the part with the fewest thumbs this week; within the question budget (the router
-        keeps that). Only about a try on Voorstellen (E-57, E-287): a rule on Autonoom asks
-        nothing, not even afterwards (E-498, B-416)."""
-        if not self.activated or not self._learns_now():
-            return
-        now = snapshot.now
-        recent = [
-            r
-            for r in self.recent.values()
-            if r.decision.executed
-            and not r.undone
-            and r.decision.request.skill
-            and r.decision.request.layer is Layer.TRIAL
-            and now - r.decision.at <= timedelta(minutes=30)
-        ]
-        if not recent:
-            return
-        counted = await self.thumbs_week(now)
-        chosen = min(
-            recent,
-            key=lambda r: (
-                sum(counted.get(self._part_of(r.decision.request) or "", (0, 0))),
-                -r.id,
-            ),
-        )
-        today = snapshot.local.date().isoformat()
-        for person in self._people:
-            if person.level < 2 or self._thumbs_asked.get(person.user_id) == today:
-                continue
-            self._thumbs_asked[person.user_id] = today
-            await self.db.set_setting("thumbs_asked", self._thumbs_asked)
-            explainer = self.vesta_explainer or self.explainer
-            assert explainer is not None
-            what = explainer.action_phrase(person.language, chosen.decision)
-            await self._raise(
-                Kind.LEARNING,
-                f"thumbs:{chosen.id}",
-                "notify.was_it_good",
-                {"what": what},
-                snapshot,
-                concerns=f"user:{person.user_id}",
-                actions=(("good", "notify.answer.good"), ("bad", "notify.answer.bad")),
-            )
-
     def _calendars(self) -> list[str]:
         """The calendars HouseMind may read: none without an administrator's yes (20.19)."""
         if not self._calendar_ok or self.world is None:
@@ -1213,78 +1169,6 @@ class HouseMind(
         first = next((p for p in self._people if p.is_admin and p.level >= 2), None)
         return first.user_id if first else None
 
-    async def feedback(
-        self, good: bool, decision_id: int | None = None, user_id: str | None = None
-    ) -> dict[str, Any]:
-        """👍/👎 (E-97, E-298) on one thing HouseMind did: 👍 a light yes, 👎 a correction
-        (20.9). Kept per decision and person, with what it taught, so the logbook shows it and
-        it can be counted. Without a decision (HA's action): HouseMind's last action. A thumb on
-        something it did not do teaches nothing and is not moved to another action (found in
-        the real house: a thumb under "not done" landed on the last thing it did)."""
-        assert self.learning is not None
-        if decision_id is not None:
-            # Also an action the brain no longer has in memory (only the last 50, none after a
-            # restart; B-180). The question goes either way.
-            decision = await self.stored_decision(decision_id)
-            if decision is None or not decision.executed:
-                await self._resolve(f"thumbs:{decision_id}")
-                await self._notify()
-                return {"ok": False, "reason": "not_done"}
-            found_id = decision_id
-        else:
-            done = [r for r in self.recent.values() if r.decision.executed]
-            if not done:
-                return {"ok": False}
-            found_id, decision = done[-1].id, done[-1].decision
-        request = decision.request
-        now = self.clock.now()
-        learned = None
-        earlier = await self.db.fetchone(
-            "SELECT id, learned FROM thumbs WHERE decision_id = ? AND user_id IS ?",
-            (found_id, user_id),
-        )
-        if earlier is not None:
-            # One thumb per person per action (QA 2, B-179): a new one replaces the shown
-            # thumb, and teaches nothing again.
-            await self.db.execute(
-                "UPDATE thumbs SET at = ?, good = ? WHERE id = ?",
-                (now.isoformat(), int(good), earlier["id"]),
-            )
-            await self._resolve(f"thumbs:{found_id}")
-            await self._notify()
-            return {
-                "ok": True,
-                "skill": request.skill,
-                "area": request.area_id,
-                "learned": earlier["learned"],
-            }
-        if request.skill and request.area_id and self.learning_allowed:
-            context = str(request.facts.get("context", ""))
-            if good:
-                self.learning.liked(request.skill, request.area_id, context, now)
-                learned = "yes"
-            elif found_id not in self._corrected:
-                # 👎 and Undo on the same action are one correction together (B-179).
-                self._corrected.add(found_id)
-                self.learning.corrected(request.skill, request.area_id, context, now)
-                await self._store_correction(now, request.skill, request.area_id, request.entity_id)
-                learned = "correction"
-        await self.db.execute(
-            "INSERT INTO thumbs(at, decision_id, user_id, part, good, learned) VALUES(?,?,?,?,?,?)",
-            (now.isoformat(), found_id, user_id, self._part_of(request), int(good), learned),
-        )
-        await self._resolve(f"thumbs:{found_id}")
-        await self._notify()  # the logbook shows the answer at once
-        return {"ok": True, "skill": request.skill, "area": request.area_id, "learned": learned}
-
-    async def thumbs_for(self, decision_id: int) -> list[dict[str, Any]]:
-        """The thumbs on one decision, oldest first (the logbook, E-298)."""
-        rows = await self.db.fetchall(
-            "SELECT at, user_id, good, learned FROM thumbs WHERE decision_id = ? ORDER BY id",
-            (decision_id,),
-        )
-        return [dict(r) for r in rows]
-
     def _part_of(self, request: ActionRequest) -> str | None:
         """The part a decision belongs to: its skill's, else by the device (lighting …)."""
         part = self.skill_params.get(request.skill or "", {}).get("domain")
@@ -1292,22 +1176,6 @@ class HouseMind(
             return str(part)
         domain = request.entity_id.split(".", 1)[0]
         return next((p for p, ha in DOMAINS.items() if domain in ha), None)
-
-    async def thumbs_week(self, now: datetime) -> dict[str, tuple[int, int]]:
-        """👍 and 👎 per part over the last seven days (S-02 b)."""
-        rows = await self.db.fetchall(
-            "SELECT part, good, count(*) AS n FROM thumbs WHERE at >= ? GROUP BY part, good",
-            ((now - timedelta(days=7)).isoformat(),),
-        )
-        out: dict[str, tuple[int, int]] = {}
-        for row in rows:
-            up, down = out.get(str(row["part"]), (0, 0))
-            if row["good"]:
-                up += int(row["n"])
-            else:
-                down += int(row["n"])
-            out[str(row["part"])] = (up, down)
-        return out
 
     # -- the weekly house report (E-91) -------------------------------------------------
 
@@ -1357,11 +1225,8 @@ class HouseMind(
             "SELECT count(*) AS n FROM day_notes WHERE day >= ?",
             ((now.astimezone(tz).date() - timedelta(days=7)).isoformat(),),
         )
-        thumbs = await self.thumbs_week(now)
         data: dict[str, Any] = {
             "did": did,
-            "up": sum(up for up, _ in thumbs.values()),
-            "down": sum(down for _, down in thumbs.values()),
             "undone": int(undone["n"]) if undone else 0,
             "learned": learned,
             "yes": by_answer.get("do", 0) + by_answer.get("always", 0),
@@ -2958,12 +2823,12 @@ class HouseMind(
             "DELETE FROM presence_history WHERE user_id = ?",
             "UPDATE proposals SET answered_by = NULL WHERE answered_by = ?",
             "UPDATE house_rules SET created_by = NULL WHERE created_by = ?",
-            "UPDATE thumbs SET user_id = NULL WHERE user_id = ?",  # counted, no longer theirs
+            # The thumbs from before they left the app (B-505): kept until they age out, no
+            # longer theirs.
+            "UPDATE thumbs SET user_id = NULL WHERE user_id = ?",
         ):
             await self.db.execute(sql, (user_id,))
         await self.db.execute("DELETE FROM notifications WHERE concerns = ?", (f"user:{user_id}",))
-        if self._thumbs_asked.pop(user_id, None) is not None:  # the day of 'Was dit goed?'
-            await self.db.set_setting("thumbs_asked", self._thumbs_asked)
         if self.router is not None:
             tz = ZoneInfo(self.config.time_zone if self.config else "UTC")
             await self.router.forget(user_id, self.clock.now().astimezone(tz))
@@ -3149,8 +3014,6 @@ class HouseMind(
         elif topic.startswith("knowledge:") and code in ("yes", "no"):
             # Klopt or Klopt niet (B-360): only administrators on Geïnformeerd got it.
             await self.answer_knowledge(topic.split(":", 1)[1], code == "yes")
-        elif topic.startswith("thumbs:") and code in ("good", "bad"):
-            await self.feedback(code == "good", int(topic.split(":", 1)[1]), None)
         elif topic.startswith("room_kind:") and code == "no":
             await self.answer_room_kind(topic)  # Nu niet (E-486); Kiezen needs the app
         elif topic.startswith("automation:") and code in ("yes", "no", "later"):
@@ -3294,13 +3157,7 @@ class HouseMind(
             kind = recognise(self.catalog, entity, self.gate.state.roles.get(entity.entity_id)).kind
             hours = kind.people_win_max_hours if kind is not None else 2
             self.gate.state.people_win_until[entity.entity_id] = now + timedelta(hours=hours)
-        if (
-            original.skill
-            and original.area_id
-            and self.learning_allowed
-            and decision_id not in self._corrected  # 👎 already counted it (B-179)
-        ):
-            self._corrected.add(decision_id)
+        if original.skill and original.area_id and self.learning_allowed:
             context = str(original.facts.get("context", ""))
             self.learning.corrected(original.skill, original.area_id, context, now)  # 20.9
             await self._store_correction(now, original.skill, original.area_id, original.entity_id)
@@ -3374,10 +3231,6 @@ class HouseMind(
         self._phoneless = bool(await self.setting("phoneless_residents"))
         self._lived_in_on = await self.setting("lived_in") is not False  # E-285
         self._calendar_ok = await self.setting("calendar") is True  # one yes (20.19)
-        asked = await self.db.get_setting("thumbs_asked", {})  # once a day, also after a restart
-        self._thumbs_asked = (
-            {str(k): str(v) for k, v in asked.items()} if isinstance(asked, dict) else {}
-        )
         if self.world is not None:
             self.world.modes.phoneless = self._phoneless  # E-293
         stored = await self.setting("pet_areas")

@@ -411,7 +411,7 @@ class Session:
                 key = "ui.vesta.why_ask"
             elif action.startswith("later_"):
                 key = f"ui.notice.later.{action[6:]}"  # how long, as on the card (E-372)
-            elif asked.kind in ("proposal", "thumbs"):
+            elif asked.kind == "proposal":
                 key = f"notify.answer.{action}"
             elif asked.kind == "task":
                 key = f"ui.notifications.{action}"
@@ -1239,34 +1239,9 @@ class Session:
         if isinstance(data.get("id"), int):
             viewer = self.viewer or await self.refresh()
             lines = await self.hm.why_stored(int(data["id"]), viewer.level, self.lang, plain=True)
-            # Vesta explains it in her window (E-252), in plain names (E-248); from level 2
-            # with 👍/👎 under it (E-298).
+            # Vesta explains it in her window (E-252), in plain names (E-248).
             text = " ".join(lines) if lines else self.hm.why_not("", self.lang, plain=True)
-            # Only under something it did itself: a thumb on what it left teaches nothing. Also
-            # under an older action the brain no longer has in memory.
-            stored = await self.hm.stored_decision(int(data["id"]))
-            done = stored is not None and stored.executed
-            extra = {"thumbs": int(data["id"])} if lines and done and viewer.level >= 2 else {}
-            await self.say(text, window=True, **extra)
-
-    async def on_thumbs(self, data: dict[str, Any]) -> None:
-        """👍/👎 on one decision (E-298), from level 2."""
-        viewer = self.viewer or await self.refresh()
-        good = data.get("good")
-        if viewer.level < 2 or not isinstance(good, bool):
-            return
-        decision = data.get("id")
-        done = await self.hm.feedback(
-            good, decision if isinstance(decision, int) else None, self.user_id
-        )
-        if not done["ok"]:
-            return  # nothing it did itself: no thanks for a thumb that taught nothing
-        if data.get("via") == "vesta":  # in her window: she thanks in her own words
-            text = self.hm.vesta_says(self.lang, "answer_thumbs", self.user_id)
-            await self.say(text, window=True, voice=self.hm.vesta_name(self.lang))
-            await self._voice(text)
-        else:
-            await self._tell("ui.thumbs.thanks")
+            await self.say(text, window=True)
 
     async def on_why_not(self, data: dict[str, Any]) -> None:
         entity_id = data.get("entity")
@@ -1368,14 +1343,6 @@ class Session:
             # 'Bekijken' (B-245): Home Assistant netjes, also on Carefree and Informed.
             if await self._admin():
                 await self.send({"type": "open", "sheet": "settings", "section": "tidy"})
-            return
-        if topic.startswith("thumbs:") and action in ("good", "bad"):
-            # "Was dit goed?" (E-298): the answer is a thumb on that decision – thanks, or
-            # honestly that it can no longer be found (never a plain "Gedaan.").
-            done = await self.hm.feedback(
-                action == "good", int(topic.split(":", 1)[1]), self.user_id
-            )
-            await self._tell("ui.thumbs.thanks" if done["ok"] else "ui.thumbs.gone")
             return
         if topic.startswith(("label_lamp:", "label_system:")) and action in ("yes", "no"):
             if await self._admin():
@@ -2255,8 +2222,6 @@ ANSWER_SAYS = {
     "dismiss": "ask_done",
     "seen": "ask_seen",
     "mute": "ask_muted",
-    "good": "answer_thumbs",
-    "bad": "answer_thumbs",
 }
 
 # Short confirmations: plain text in the header, gone after 2 seconds (E-174). Everything else
@@ -2267,7 +2232,6 @@ BRIEF = frozenset(
         "ui.ready.forget.done",
         "ui.settings.thresholds.saved",
         "ui.settings.snapshots.done",
-        "ui.thumbs.thanks",
         "ui.setup.pipeline_made",
     }
 )

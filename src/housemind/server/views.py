@@ -1054,8 +1054,6 @@ def notice_item(
         if not admin:
             return None  # only an administrator chooses which alarm it is (B-67, E-311)
         actions, labels = security.choice_buttons(hm)
-    elif topic.startswith("thumbs:"):
-        actions = ["good", "bad"]  # "Was dit goed?" (E-298)
     elif topic in ("calendar_consent", "battery_remote", "battery_calibrate"):
         if not admin:
             return None

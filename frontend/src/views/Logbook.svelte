@@ -178,12 +178,6 @@
           </ol>
         </details>
       {/if}
-      {#if item.answers?.length}
-        <!-- The thumbs given on it, and what Vesta did with them (E-298). -->
-        <ul class="answers">
-          {#each item.answers as answer, j (j)}<li class:bad={!answer.good}>{answer.text}</li>{/each}
-        </ul>
-      {/if}
       {#if item.id !== null && (level < 3 || item.undo)}
         <div class="row">
           <!-- Waarom? on Geïnformeerd only: from Betrokken the line itself says saw → thought → did (QA 3). -->
@@ -328,9 +322,6 @@
   .with-icon { display: flex; gap: 10px; align-items: flex-start; }
   .dev-icon { display: inline-flex; flex: none; color: var(--muted); margin-top: 2px; }
   .dev-icon.lamp { color: var(--learning); }
-  .answers { list-style: none; margin: 6px 0 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
-  .answers li { font-size: calc(14px * var(--text-scale)); padding: 6px 10px; border-radius: 10px; background: var(--raised); }
-  .answers li.bad { border-left: 3px solid var(--warn, #c77a2b); }
   .card { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 14px 16px; }
   .alarm .dev-icon { color: var(--accent); }
   .alarm.triggered { border-color: var(--emergency); }

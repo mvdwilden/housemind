@@ -98,20 +98,6 @@
         }
       }
     },
-    "feedback": {
-      "name": "Avis",
-      "description": "Pouce levé ou baissé sur la dernière action de HouseMind – il en apprend.",
-      "fields": {
-        "good": {
-          "name": "Bien",
-          "description": "Activé : pouce levé. Désactivé : pouce baissé."
-        },
-        "decision": {
-          "name": "Décision",
-          "description": "Le numéro d'une décision de HouseMind. Sans numéro : la dernière action."
-        }
-      }
-    },
     "house_rule": {
       "name": "Règle de la maison",
       "description": "Une règle en mots simples. D'abord relue ; active Confirmer pour l'enregistrer.",

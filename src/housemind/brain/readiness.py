@@ -201,7 +201,6 @@ class Readiness:
         self.admin = admin
         self.now: datetime = hm.clock.now()
         self.t = hm.languages.text
-        self.thumbs: dict[str, tuple[int, int]] = {}  # 👍/👎 per part this week (E-298)
         self._by_room: dict[str, list[tuple[str, DeviceKind]]] | None = None
         # Once per card (S4): what automations teach, and the step choices per limit – the
         # card has a row for every rule a room has the devices for (E-485).
@@ -805,13 +804,6 @@ class Readiness:
         if self.admin and self.level >= 3:
             out["own"] = self._own(domain, domain, skills, None)  # 20.10
         if self.level >= 3:
-            up, down = self.thumbs.get(domain, (0, 0))
-            if up or down:
-                out["thumbs"] = {
-                    "up": up,
-                    "down": down,
-                    "text": t(lang, "ui.thumbs.week", up=up, down=down, pct=_pct(up, down)),
-                }
             weeks = self.corrections.get(domain)
             if weeks and any(weeks):
                 # S-01: how often someone stepped in, per week, oldest first (QA 2, M-16).
@@ -885,16 +877,10 @@ class Readiness:
     async def parts(self) -> list[dict[str, Any]]:
         given_back = bool(await self.hm.db.get_setting("given_back", False))
         if self.level >= 3:
-            self.thumbs = await self.hm.thumbs_week(self.now)
             self.corrections = await self.hm.corrections_weeks()
         domains = {p.get("domain") for p in self.hm.skill_params.values()} - {None}
         ordered = [d for d in ORDER if d in domains] + sorted(str(d) for d in domains - set(ORDER))
         return [p for d in ordered if (p := self.part(d, given_back)) is not None]
-
-
-def _pct(up: int, down: int) -> int:
-    """The share of 👍, rounded (E-298)."""
-    return round(up * 100 / (up + down)) if up + down else 0
 
 
 async def readiness(hm: HouseMind, lang: str, level: int, admin: bool) -> list[dict[str, Any]]:

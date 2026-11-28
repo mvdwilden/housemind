@@ -1,5 +1,13 @@
 # Wat is nieuw, per versie (E-150): één zin voor Geïnformeerd, een korte lijst voor Betrokken
 # en Expert. In eenvoudige taal, zonder merknamen.
+"0.4.8":
+  one: "De duimpjes zijn uit HouseMind."
+  list:
+    - "Na iets wat HouseMind deed, en bij ‘Waarom?’, staan geen duimpjes meer. HouseMind vraagt ook niet meer ‘Was dat goed?’."
+    - "HouseMind leert gewoon verder van wat je zelf terugzet, met een schakelaar of in de app, en van ‘Ongedaan maken’."
+    - "In het Logboek staan geen duimpjes meer onder een regel. Brein en het huisverslag van de week tellen alleen nog hoe vaak iemand iets terugzette of ongedaan maakte."
+    - "In Home Assistant is de actie voor een duim omhoog of omlaag weg."
+    - "Alles wat HouseMind al leerde, blijft. Stond er nog een vraag ‘Was dat goed?’ open, dan verdwijnt die vanzelf, ook van je telefoon."
 "0.4.7":
   one: "Temperaturen per ruimte, en een vraag maar één keer."
   list:

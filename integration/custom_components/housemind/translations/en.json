@@ -98,20 +98,6 @@
         }
       }
     },
-    "feedback": {
-      "name": "Feedback",
-      "description": "Thumbs up or down on HouseMind's last action – it learns from it.",
-      "fields": {
-        "good": {
-          "name": "Good",
-          "description": "On: thumbs up. Off: thumbs down."
-        },
-        "decision": {
-          "name": "Decision",
-          "description": "The number of one decision of HouseMind. Without it, the last action."
-        }
-      }
-    },
     "house_rule": {
       "name": "House rule",
       "description": "A house rule in plain words. First read back; set Confirm to save it.",

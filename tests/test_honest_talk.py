@@ -20,7 +20,7 @@ from housemind.server.web import say
 from tests.test_automations import start as start_automations
 from tests.test_readiness import _seen
 from tests.test_round1_safety import ROOT, _start, _texts
-from tests.test_thumbs import _did_something
+from tests.test_vesta_as_herself import _did_something
 
 
 async def test_an_emergency_message_counts_the_lamps_that_really_went_on(tmp_path: Path) -> None:
@@ -94,15 +94,13 @@ async def test_an_answer_from_the_help_fits_the_level_of_who_asks(tmp_path: Path
     await hm.stop()
 
 
-async def test_undo_and_a_thumb_down_count_as_stepping_in_per_part_with_a_trend(
-    tmp_path: Path,
-) -> None:
+async def test_undo_counts_as_stepping_in_per_part_with_a_trend(tmp_path: Path) -> None:
     """S-01 asks for the count of corrections per part, with its trend, on levels 3 and 4:
-    nowhere shown, and Undo and 👎 were not in the count (M-16). Now each part shows four
-    weeks, oldest first; Undo and 👎 on the same action count once."""
+    nowhere shown, and Undo was not in the count (M-16). Now each part shows four weeks,
+    oldest first; Undo counts an action once."""
     hm, ha, decision = await _did_something(tmp_path)
     assert (await hm.undo(decision, "demo-user-1"))["ok"]
-    await hm.feedback(False, decision, "demo-user-1")  # the same action: still one
+    assert not (await hm.undo(decision, "demo-user-1"))["ok"]  # the same action: still one
     parts = {p["domain"]: p for p in await readiness(hm, "nl", 3, True)}
     assert parts["lighting"]["corrections"]["weeks"] == [0, 0, 0, 1]
     assert (
@@ -115,7 +113,7 @@ async def test_undo_and_a_thumb_down_count_as_stepping_in_per_part_with_a_trend(
     await ha.simulate("binary_sensor.kitchen_motion", "on")
     again = max(i for i, r in hm.recent.items() if r.decision.executed and r.decision.request.skill)
     assert again != decision
-    await hm.feedback(False, again, "demo-user-2")
+    assert (await hm.undo(again, "demo-user-2"))["ok"]
     parts = {p["domain"]: p for p in await readiness(hm, "nl", 3, True)}
     assert parts["lighting"]["corrections"] == {
         "weeks": [0, 0, 1, 1],

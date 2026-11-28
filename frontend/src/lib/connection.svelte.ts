@@ -7,7 +7,7 @@ import { detectBrowser, micPermission, micProblem, type MicProblem } from "./mic
 import { playVoice, unlockVoice } from "./voice";
 import { tabletArea } from "./tablet";
 import type { Snapshot, Toast } from "./types";
-import { askedTo, CLOSED, closeDelay, mayAsk, partialTo, saidTo, thumbed, typedTo, type VestaAsk, type VestaChoice, type VestaMore, type VestaOffer, type VestaWindow } from "./vesta";
+import { askedTo, CLOSED, closeDelay, mayAsk, partialTo, saidTo, typedTo, type VestaAsk, type VestaChoice, type VestaMore, type VestaOffer, type VestaWindow } from "./vesta";
 
 export type { VestaWindow };
 
@@ -205,8 +205,7 @@ export class Connection {
           // In the window: your words, then hers – not again as a message below (B-85).
           this.vesta = saidTo(
             this.vesta, message.text as string, heard, confirm, (message.offer as VestaOffer | undefined) ?? null,
-            message.more as VestaMore | undefined, message.ai === true,
-            typeof message.thumbs === "number" ? message.thumbs : undefined, ask, choices,
+            message.more as VestaMore | undefined, message.ai === true, ask, choices,
           );
           this.closeLater();
           this.askAfter(voice ? 6000 : READ_MS); // a waiting question after her answer (E-252)
@@ -550,14 +549,6 @@ export class Connection {
     this.vesta = { ...this.vesta, ask: null, phase: "thinking", turns: [...this.vesta.turns, { who: "you", text: word }] };
     if (ask.kind === "proposal") this.send({ type: "answer", proposal: ask.proposal, answer: action, via: "vesta" });
     else this.send({ type: "notification", id: ask.notification, action, via: "vesta" });
-  }
-
-  /** 👍 or 👎 on one thing HouseMind did (E-298): under her "why", or on the message after it. */
-  thumbs(decision: number, good: boolean, inWindow = false): void {
-    if (inWindow) {
-      this.vesta = { ...thumbed(this.vesta, decision), phase: "thinking" };
-      this.send({ type: "thumbs", id: decision, good, via: "vesta" });
-    } else this.send({ type: "thumbs", id: decision, good });
   }
 
   /** In the typing field of her window (E-264): she stops listening – typing instead of

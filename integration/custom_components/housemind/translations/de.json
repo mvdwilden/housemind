@@ -98,20 +98,6 @@
         }
       }
     },
-    "feedback": {
-      "name": "Rückmeldung",
-      "description": "Daumen hoch oder runter zur letzten Aktion von HouseMind – es lernt daraus.",
-      "fields": {
-        "good": {
-          "name": "Gut",
-          "description": "An: Daumen hoch. Aus: Daumen runter."
-        },
-        "decision": {
-          "name": "Entscheidung",
-          "description": "Die Nummer einer Entscheidung von HouseMind. Ohne Nummer: die letzte Aktion."
-        }
-      }
-    },
     "house_rule": {
       "name": "Hausregel",
       "description": "Eine Hausregel in einfachen Worten. Erst vorlesen; Bestätigen einschalten zum Speichern.",

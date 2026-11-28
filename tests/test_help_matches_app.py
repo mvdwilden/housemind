@@ -1,9 +1,8 @@
 """Help says what the app does (found while bringing the manual up to date, 20-10): Help sent you
 to Onderhoud en privacy for ‘Alles teruggeven’, while the button is under Opnieuw beginnen; it
-sent you to Huisinstellingen → Beveiliging, while that is under Huis; it said the thumbs were
-counted from Expert (levels count from 1: 👍/👎 show from Geïnformeerd, the counts from
-Betrokken); and some texts said "Vesta" where the house may have given her
-another name. Each test fails without its fix; what it checks is its docstring."""
+sent you to Huisinstellingen → Beveiliging, while that is under Huis; and some texts said
+"Vesta" where the house may have given her another name. Each test fails without its fix;
+what it checks is its docstring."""
 
 from __future__ import annotations
 
@@ -43,14 +42,3 @@ def test_help_finds_the_alarm_choice_where_it_is() -> None:
         path = f"› {texts['ui.settings.group.house']} › {texts['ui.settings.security.title']}"
         assert path in texts["help.l2.a29"], code
         assert path in texts["notify.alarm.choose"], code
-
-
-def test_help_says_from_which_level_the_thumbs_show() -> None:
-    """👍 and 👎 from Geïnformeerd on (level 2), the counts per part from Betrokken on (level 3)
-    – as the app does; Expert is not where they start."""
-    for code in CODES:
-        texts = LANGUAGES[code]
-        answer = texts["help.l2.a26"]
-        assert texts["levels.informed"] in answer, code
-        assert texts["levels.involved"] in answer, code
-        assert texts["levels.expert"] not in answer, code

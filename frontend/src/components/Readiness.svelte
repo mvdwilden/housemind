@@ -404,8 +404,7 @@
     {#if part.off && onlimit && send}
       <button class="link" onclick={() => send?.({ type: "house_setting", key: "parts", value: { [part.domain]: "on" } })}>{t("ui.parts.turn_on")}</button>
     {/if}
-    {#if part.thumbs}<p class="thumbs">{part.thumbs.text}</p>{/if}
-    {#if part.corrections}<p class="thumbs">{part.corrections.text}</p>{/if}
+    {#if part.corrections}<p class="corrections">{part.corrections.text}</p>{/if}
     {#if part.limit && onlimit && !part.off}
       <button class="link" onclick={onlimit}>{t("ui.settings.max_step")}</button>
     {/if}
@@ -549,7 +548,7 @@
   .part { padding: 10px 14px; display: flex; flex-direction: column; gap: 4px; border-bottom: 1px solid var(--line); }
   .part:last-child { border-bottom: none; }
   header { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
-  .thumbs { margin: 0; font-size: calc(13px * var(--text-scale)); color: var(--muted); }
+  .corrections { margin: 0; font-size: calc(13px * var(--text-scale)); color: var(--muted); }
   .counts { display: flex; flex-wrap: wrap; gap: 6px; font-size: calc(13px * var(--text-scale)); }
   .cap { color: var(--muted); font-style: italic; font-size: calc(13px * var(--text-scale)); }
   .text { margin: 0; line-height: 1.45; }

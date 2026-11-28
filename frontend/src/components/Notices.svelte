@@ -13,9 +13,8 @@
     onconfirm: (notice: Notice, yes: boolean) => void;
     onwhy: (notice: Notice) => void;
     onundo: (notice: Notice) => void;
-    onthumbs?: (notice: Notice, good: boolean) => void;
   }
-  let { notices, t, onclose, onconfirm, onwhy, onundo, onthumbs }: Props = $props();
+  let { notices, t, onclose, onconfirm, onwhy, onundo }: Props = $props();
 
   // Per notice: how much time is left, in which round, and whether it is paused.
   const left = new Map<number, number>();
@@ -77,11 +76,6 @@
           {#if n.kind === "action"}
             <button class="link" onclick={() => onwhy(n)}>{t("ui.why")}</button>
             {#if n.undo}<button class="link" onclick={() => onundo(n)}>{t("ui.undo")}</button>{/if}
-            {#if onthumbs}
-              <!-- Was it good (E-298): one tap, then the message goes. -->
-              <button class="link thumb" aria-label={t("ui.thumbs.up")} title={t("ui.thumbs.up")} onclick={() => onthumbs(n, true)}>👍</button>
-              <button class="link thumb" aria-label={t("ui.thumbs.down")} title={t("ui.thumbs.down")} onclick={() => onthumbs(n, false)}>👎</button>
-            {/if}
           {/if}
           <button onclick={() => onclose(n.id)}>{t("ui.ok")}</button>
         {/if}
@@ -101,7 +95,6 @@
   .row { display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
   button { min-height: 44px; padding: 0 16px; border-radius: 22px; border: 1px solid var(--line); background: var(--surface); cursor: pointer; font-weight: 500; }
   .link { border: none; background: none; color: var(--accent); font-weight: 600; padding: 0 8px; }
-  .thumb { font-size: calc(20px * var(--text-scale)); min-width: 44px; }
   .yes { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
   .bar { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--line); }
   .bar span { display: block; height: 100%; background: var(--accent); }

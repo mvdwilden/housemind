@@ -300,7 +300,7 @@ class Database:
             "detections",
             "part_changes",  # parts turned off and on (E-400)
             "alarm_log",  # the alarm on, off and gone off (E-533)
-            "thumbs",  # with the decisions they were given on (QA 2, M-9)
+            "thumbs",  # from before they left the app (B-505): gone after the same days
         ):
             removed[table] = await self.execute(f"DELETE FROM {table} WHERE at < ?", (cutoff,))  # noqa: S608
         removed["energy_quarters"] = await self.execute(

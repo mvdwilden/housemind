@@ -98,20 +98,6 @@
         }
       }
     },
-    "feedback": {
-      "name": "Feedback",
-      "description": "Duim omhoog of omlaag op de laatste actie van HouseMind – het leert ervan.",
-      "fields": {
-        "good": {
-          "name": "Goed",
-          "description": "Aan: duim omhoog. Uit: duim omlaag."
-        },
-        "decision": {
-          "name": "Besluit",
-          "description": "Het nummer van één besluit van HouseMind. Zonder nummer: de laatste actie."
-        }
-      }
-    },
     "house_rule": {
       "name": "Huisregel",
       "description": "Een huisregel in gewone taal. Eerst teruglezen; zet Bevestigen aan om te bewaren.",
