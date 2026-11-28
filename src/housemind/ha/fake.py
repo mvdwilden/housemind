@@ -233,6 +233,8 @@ class FakeHomeAssistant:
         self._action_listeners: list[EventListener] = []
         self.users_list: list[HAUser] = []
         self.notifications: list[tuple[str, str, str, dict[str, Any]]] = []
+        # Questions taken off a phone (E-585): not a message anyone sees.
+        self.cleared: list[tuple[str, str]] = []
         self.notify_services: set[str] = set()
         self.forecasts: dict[str, list[dict[str, Any]]] = {}  # weather entity → days (demo)
         self.hourly: dict[str, list[dict[str, Any]]] = {}  # weather entity → hours (E-536)
@@ -453,6 +455,9 @@ class FakeHomeAssistant:
     ) -> ActionResult:
         if service.split(".", 1)[1] not in self.notify_services:
             return ActionResult(ok=False, error=f"unknown service {service}")
+        if message == "clear_notification":
+            self.cleared.append((service, str((data or {}).get("tag", ""))))
+            return ActionResult(ok=True)
         self.notifications.append((service, title, message, dict(data or {})))
         return ActionResult(ok=True)
 

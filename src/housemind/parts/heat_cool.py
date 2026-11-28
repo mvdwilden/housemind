@@ -7,11 +7,16 @@ import logging
 from datetime import datetime, timedelta
 from typing import TYPE_CHECKING, Any
 
+from housemind.brain import room_temps
+from housemind.brain.room_temps import RoomTemps, after_from, limits, temps_from
 from housemind.brain.skills import SkillEngine, one_setpoint
-from housemind.core.model import Source, State, StateChange
+from housemind.core.model import Entity, HouseModel, Source, State, StateChange
 from housemind.memory.database import Database
 from housemind.parts import Part
-from housemind.safety.gate import Decision
+from housemind.safety.gate import Decision, SafetyGate
+
+if TYPE_CHECKING:
+    from housemind.world.world import World
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -27,6 +32,99 @@ class HeatCoolPart(Part):
         _heat_cool_dirty: Any
         db: Database
         skills: SkillEngine | None
+        model: HouseModel
+        world: World | None
+        gate: SafetyGate | None
+
+    # -- Temperaturen per ruimte (E-583) ----------------------------------------------------
+
+    async def _load_room_temps(self) -> None:
+        assert self.skills is not None
+        self.skills.room_temps = room_temps.parse(await self.db.get_setting(room_temps.SETTING))
+
+    def room_thermostats(self, area_id: str) -> list[Entity]:
+        """The thermostats that heat or cool this room, not left alone (E-583)."""
+        if self.skills is None:
+            return []
+        rooms = self.skills.room_climates
+        excluded = self.gate.state.excluded if self.gate is not None else set()
+        out: list[Entity] = []
+        for entity in self.model.entities.values():
+            area = self.model.area_of(entity.entity_id)
+            if (
+                entity.domain != "climate"
+                or area is None
+                or area.id != area_id
+                or entity.disabled
+                or entity.entity_id in excluded
+                or entity.entity_id in self.model.held
+                or (rooms is not None and entity.entity_id not in rooms)
+            ):
+                continue
+            out.append(entity)
+        return sorted(out, key=lambda e: e.entity_id)
+
+    def room_temps_can(self, area_id: str) -> dict[str, Any]:
+        """What the room's thermostats can: heat, cool, one setpoint for both, and how far the
+        sliders go for each (E-583)."""
+        states = self.world.states if self.world is not None else {}
+        modes: set[str] = set()
+        lows: list[float] = []
+        highs: list[float] = []
+        one = True
+        found = False
+        for entity in self.room_thermostats(area_id):
+            state = states.get(entity.entity_id)
+            if state is None:
+                continue
+            found = True
+            modes.add(state.state)  # what it does now, also where the list is missing
+            modes.update(str(m) for m in state.attributes.get("hvac_modes") or [])
+            low, high = state.attributes.get("min_temp"), state.attributes.get("max_temp")
+            if isinstance(low, int | float):
+                lows.append(float(low))
+            if isinstance(high, int | float):
+                highs.append(float(high))
+            one = one and state.state == "heat_cool" and one_setpoint(state)
+        heat = bool(modes & {"heat", "heat_cool", "auto"})
+        cool = bool(modes & {"cool", "heat_cool"}) and not one
+        return {
+            "found": found,
+            "heat": heat or one,
+            "cool": cool,
+            "one": found and one,
+            "limits": {mode: limits(lows, highs, mode) for mode in room_temps.MODES},
+        }
+
+    async def room_temps_save(self, area_id: str, raw: Any) -> bool:
+        """Bewaren in the Temperaturen window (E-583): the room's Thuis, Slapen and Weg for
+        what its thermostats can, and "Pas na". None: back to what HouseMind learns."""
+        assert self.skills is not None
+        if area_id not in self.model.areas:
+            return False
+        rooms = dict(self.skills.room_temps)
+        if raw is None:
+            if rooms.pop(area_id, None) is None:
+                return True
+        else:
+            can = self.room_temps_can(area_id)
+            if not isinstance(raw, dict) or not can["found"]:
+                return False
+            got: dict[str, Any] = {}
+            for mode in room_temps.MODES:
+                if not can[mode]:
+                    continue
+                temps = temps_from(raw.get(mode), mode, *can["limits"][mode])
+                if temps is None:
+                    return False
+                got[mode] = temps
+            after = after_from(raw.get("after_h"))
+            if after is None or not got:
+                return False
+            rooms[area_id] = RoomTemps(got.get("heat"), got.get("cool"), after)
+        self.skills.room_temps = rooms
+        await self.db.set_setting(room_temps.SETTING, room_temps.dump(rooms))
+        return True
 
     async def _load_heat_cool(self) -> None:
         raw = await self.db.get_setting("heat_cool")

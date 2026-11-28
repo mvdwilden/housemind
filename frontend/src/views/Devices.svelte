@@ -9,6 +9,7 @@
   import { tone } from "../lib/deviceicons";
   import { openBeside } from "../lib/openha";
   import LightLevels from "../components/LightLevels.svelte";
+  import RoomTemperatures from "../components/RoomTemperatures.svelte";
   import Sheet from "../components/Sheet.svelte";
   import { STANDS, kelvinCss } from "../lib/stands";
   import Filters from "../components/Filters.svelte";
@@ -34,10 +35,13 @@
     onwhynot: (id: string) => void;
     why: Record<string, string>;
     onlevels?: (message: Record<string, unknown>) => void; // Standen voor lampen (E-490)
+    ontemps?: (message: Record<string, unknown>) => void; // Temperaturen per ruimte (E-583)
   }
-  let { devices, isAdmin, lang, name = "Vesta", t, onexclude, onwhynot, why, onlevels = () => {} }: Props = $props();
+  let { devices, isAdmin, lang, name = "Vesta", t, onexclude, onwhynot, why, onlevels = () => {}, ontemps = () => {} }: Props = $props();
   // The lamp whose standen are open, and the room where a stand is being tried (E-491).
   let levelsOf = $state<string | null>(null);
+  let tempsOf = $state<string | null>(null);
+  const tempsDevice = $derived(tempsOf ? (devices ?? []).find((d) => d.id === tempsOf) : undefined);
   const levelsLamp = $derived(levelsOf ? (devices ?? []).find((d) => d.id === levelsOf) : undefined);
   let roomTry = $state<{ area: string; stand: number | null } | null>(null);
   function tryRoom(area: string, stand: number): void {
@@ -155,10 +159,12 @@
       {#if isAdmin}<button class="link other-icon" onclick={() => openBeside(`/config/entities?search=${encodeURIComponent(device.id)}`)}>{t("ui.devices.open_in_ha")}</button>{/if}
       {#if device.detects}<span class="muted detects">{device.detects}</span>{/if}
       {#if device.levels}{@render stands(device)}{/if}
+      {#if device.temps}{@render temperatures(device)}{/if}
       {#if view !== "room" && device.partOf}<span class="muted">{t("ui.devices.group.part_of", { name: device.partOf.name })}</span>{/if}
       {#if view !== "room" && device.group}<span class="tag" class:radio={device.group.radio}>{device.group.sourceName}</span>{/if}
     </div>
     <div class="side">
+      {#if isAdmin && device.temps}<button class="levels" onclick={() => (tempsOf = device.id)}>{t("ui.temps.button")}</button>{/if}
       {#if isAdmin && device.levels?.edit}<button class="levels" onclick={() => (levelsOf = device.id)}>{device.levels.can === "onoff" ? t("ui.stands.adjust") : t("ui.stands.button")}</button>{/if}
       {#if device.controls}<button aria-expanded={asked === device.id} onclick={() => { asked = asked === device.id ? null : device.id; if (asked) onwhynot(device.id); }}>{t("ui.why_not")}</button>{/if}
       {#if isAdmin && device.controls}
@@ -167,6 +173,21 @@
     </div>
     {#if asked === device.id}<p class="why" role="status">{why[device.id] ?? "…"}</p>{/if}
   </li>
+{/snippet}
+
+<!-- A room's Temperaturen (E-583): Thuis, Slapen and Weg of how it heats now. -->
+{#snippet temperatures(device: DeviceRow)}
+  {@const tv = device.temps!}
+  {@const mode = tv.values.heat ? "heat" : "cool"}
+  {@const v = tv.values[mode]}
+  {#if v}
+    <span class="chips">
+      {#each ["home", "sleep", "away"] as const as moment (moment)}
+        <span class="chip">{t(`ui.temps.${moment}`)} <b>{v[moment].value.toLocaleString(undefined, { maximumFractionDigits: 1 })}°</b></span>
+      {/each}
+    </span>
+    {#if tv.own}<span><span class="tag own">{t("ui.temps.from.own")}</span></span>{/if}
+  {/if}
 {/snippet}
 
 <!-- A lamp's four standen: how full, its percentage and its colour (E-490). -->
@@ -250,6 +271,12 @@
     {/each}
   {/if}
 </section>
+
+{#if tempsDevice?.temps}
+  <Sheet title={t("ui.temps.title", { room: tempsDevice.temps.room })} closeLabel={t("ui.close")} onclose={() => (tempsOf = null)}>
+    {#key tempsDevice.id}<RoomTemperatures temps={tempsDevice.temps} {t} onsend={ontemps} onclose={() => (tempsOf = null)} />{/key}
+  </Sheet>
+{/if}
 
 {#if levelsLamp?.levels}
   <Sheet title={t("ui.stands.title", { name: levelsLamp.name })} closeLabel={t("ui.close")} onclose={() => { roomDone(); levelsOf = null; }}>

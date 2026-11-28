@@ -914,6 +914,43 @@ ui:
         automation: "An automation"
         other: "Something else"
         housemind: "HouseMind"
+  temps:  # Temperaturen per ruimte (E-583)
+    button: "Temperatures"
+    title: "Temperatures · {room}"
+    room_note: "Applies to the whole room."
+    room_note_more: "Applies to the whole room: all {count} thermostats get these temperatures."
+    one_note: "This thermostat heats and cools with one temperature. Sleep and Away only count while it heats."
+    heat: "Heating"
+    cool: "Cooling"
+    home: "Home"
+    home_sub: "someone is home and awake"
+    sleep: "Sleep"
+    sleep_sub: "the house is asleep"
+    away: "Away"
+    away_sub: "nobody home"
+    after_title: "To Away"
+    after_label: "Only after"
+    after_note: "On vacation the house goes to Away at once."
+    after_slow: "With floor heating or a heat pump, turning it down soon after you leave often saves nothing."
+    own_note: "Your own temperatures go before what I learn."
+    learned_note: "I use what I learned and the start values."
+    learn: "Back to what I learn"
+    cancel: "Cancel"
+    save: "Save"
+    saved: "Temperatures saved."
+    learn_done: "I learn this room's temperatures myself again."
+    not_saved: "I could not save that."
+    from:
+      own: "your own"
+      learned: "learned"
+      start: "start value"
+      start_away_heat: "start value: 3° below Home"
+      start_away_cool: "start value: 3° above Home"
+    after:
+      now: "at once"
+      minutes: "{n} min"
+      hours: "{n} h"
+      day: "1 day"
   devices:
     open_in_ha: "Open in Home Assistant"
     unavailable_n:
@@ -2434,7 +2471,9 @@ reason:
   cool_on_presence_reach: "the {area} is not cool enough yet; the air conditioner measures cooler than the room itself"
   cool_on_presence_ease: "the {area} got cooler than needed"
   setback_away: "nobody has been home for a while"
+  setback_away_own: "nobody has been home for a while; this is your temperature for Away"
   setback_sleep: "everyone is asleep"
+  setback_sleep_own: "everyone is asleep; this is your temperature for Sleep"
   window_open_setback: "a window is open in {area}"
   emergency: "of an emergency: {what}"
   alarm: "the alarm went off"  # E-533
@@ -2487,6 +2526,7 @@ rules:
   skill_never: "Never do: {skill} in the {area}."
   not_understood: "I did not understand this rule. Try for example: never open the curtains in the living room before 7:00."
 notify:
+  already_answered: "This question was already answered."  # once is enough (E-585)
   paused_by_someone: "I am paused until {until}, by someone who is not an administrator. The Logbook says who. Emergency reactions keep working."
   label_lamp: "‘{device}’ has the label {label} in Home Assistant. Is it a lamp? Then I will get to know it as a lamp." # a label as a hint (E-345)
   knowledge:  # Vesta's one question a day on Informed, with That's right and Not right (E-207, B-360)

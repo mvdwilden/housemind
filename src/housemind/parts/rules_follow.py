@@ -48,6 +48,7 @@ class RulesFollowPart(Part):
 
         def _tracked(self, prefix: str) -> list[str]: ...
         async def _resolve(self, topic: str) -> None: ...
+        async def _notify(self) -> None: ...
         async def _raise(
             self,
             kind: Kind,
@@ -182,3 +183,4 @@ class RulesFollowPart(Part):
         """'Nu niet': the question closes; this room is not asked about again."""
         if topic.startswith(ROOM_KIND):
             await self._resolve(topic)
+            await self._notify()  # gone from every screen at once (E-585)

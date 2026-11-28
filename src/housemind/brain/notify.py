@@ -20,6 +20,7 @@ is home are one message, a line per place and kind (E-373).
 
 from __future__ import annotations
 
+import contextlib
 import hashlib
 import hmac
 import json
@@ -276,6 +277,8 @@ class NotificationRouter:
         self.where: Callable[[str], set[str] | None] | None = None
         # Her name in a language, for the title of a push message: "Vesta – nood" (20.21).
         self.name_of: Callable[[str], str] = lambda lang: "Vesta"
+        # A person's phones (E-585): to take an answered question off every phone it reached.
+        self.phones_of: Callable[[str], list[str]] = lambda user_id: []
         # Per person what they put off (E-372): "later" key → until when.
         self._quiet: dict[str, dict[str, dict[str, Any]]] = {}
         # What an administrator switched off for the whole house (E-412): key → how it is
@@ -579,8 +582,11 @@ class NotificationRouter:
         return notification_id
 
     async def resolve(self, topic: str, now: datetime) -> bool:
+        """Answered or solved: closed for everyone, and taken off every phone it reached, so
+        that nobody sees it or answers it a second time (E-585)."""
         rows = await self.db.fetchall(
-            "SELECT id FROM notifications WHERE topic = ? AND resolved_at IS NULL", (topic,)
+            "SELECT id, delivered FROM notifications WHERE topic = ? AND resolved_at IS NULL",
+            (topic,),
         )
         changed = await self.db.execute(
             "UPDATE notifications SET resolved_at = ? WHERE topic = ? AND resolved_at IS NULL",
@@ -594,6 +600,16 @@ class NotificationRouter:
             self._actions.pop(notification_id, None)
             self._push.pop(notification_id, None)
         self.snoozed.pop(topic, None)
+        reached = {
+            user_id
+            for r in rows
+            for user_id, how in json.loads(r["delivered"] or "{}").items()
+            if how == "push"
+        }
+        for user_id in sorted(reached):
+            for service in self.phones_of(user_id):
+                with contextlib.suppress(Exception):  # a phone that is away: it does not matter
+                    await self.ha.notify(service, "", "clear_notification", {"tag": topic})
         return changed > 0
 
     async def refresh(

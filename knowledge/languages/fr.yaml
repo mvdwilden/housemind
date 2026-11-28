@@ -914,6 +914,43 @@ ui:
         automation: "Une automatisation"
         other: "Autre chose"
         housemind: "HouseMind"
+  temps:  # Temperaturen per ruimte (E-583)
+    button: "Températures"
+    title: "Températures · {room}"
+    room_note: "Vaut pour toute la pièce."
+    room_note_more: "Vaut pour toute la pièce : les {count} thermostats reçoivent ces températures."
+    one_note: "Ce thermostat chauffe et refroidit avec une seule température. Sommeil et Absent ne comptent que lorsqu'il chauffe."
+    heat: "Chauffer"
+    cool: "Refroidir"
+    home: "À la maison"
+    home_sub: "quelqu'un est éveillé à la maison"
+    sleep: "Sommeil"
+    sleep_sub: "la maison dort"
+    away: "Absent"
+    away_sub: "personne à la maison"
+    after_title: "Vers Absent"
+    after_label: "Seulement après"
+    after_note: "En vacances, la maison passe tout de suite à Absent."
+    after_slow: "Avec un plancher chauffant ou une pompe à chaleur, baisser peu après ton départ n'économise souvent rien."
+    own_note: "Tes propres températures passent avant ce que j'apprends."
+    learned_note: "J'utilise ce que j'ai appris et les valeurs de départ."
+    learn: "Revenir à ce que j'apprends"
+    cancel: "Annuler"
+    save: "Enregistrer"
+    saved: "Températures enregistrées."
+    learn_done: "J'apprends de nouveau moi-même les températures de cette pièce."
+    not_saved: "Je n'ai pas pu enregistrer cela."
+    from:
+      own: "la tienne"
+      learned: "appris"
+      start: "valeur de départ"
+      start_away_heat: "valeur de départ : 3° sous À la maison"
+      start_away_cool: "valeur de départ : 3° au-dessus d'À la maison"
+    after:
+      now: "tout de suite"
+      minutes: "{n} min"
+      hours: "{n} h"
+      day: "1 jour"
   devices:
     open_in_ha: "Ouvrir dans Home Assistant"
     unavailable_n:
@@ -2434,7 +2471,9 @@ reason:
   cool_on_presence_reach: "la pièce {area} n'est pas encore assez fraîche ; le climatiseur mesure plus frais que la pièce elle-même"
   cool_on_presence_ease: "la pièce {area} est devenue plus fraîche que nécessaire"
   setback_away: "personne n'est à la maison depuis un moment"
+  setback_away_own: "personne n'est à la maison depuis un moment ; c'est ta température pour Absent"
   setback_sleep: "tout le monde dort"
+  setback_sleep_own: "tout le monde dort ; c'est ta température pour Sommeil"
   window_open_setback: "une fenêtre est ouverte dans la pièce {area}"
   emergency: "il y a une urgence : {what}"
   alarm: "l'alarme s'est déclenchée"  # E-533
@@ -2487,6 +2526,7 @@ rules:
   skill_never: "Ne jamais faire : {skill} dans la pièce {area}."
   not_understood: "Je n'ai pas compris cette règle. Essaie par exemple : ne jamais ouvrir les rideaux du salon avant 7:00."
 notify:
+  already_answered: "Quelqu'un a déjà répondu à cette question."  # once is enough (E-585)
   paused_by_someone: "Je suis en pause jusqu’à {until}, par quelqu’un qui n’est pas administrateur. Le journal dit qui. Les réactions d’urgence continuent."
   label_lamp: "« {device} » a l'étiquette {label} dans Home Assistant. Est-ce une lampe ? Alors je l'apprendrai comme une lampe." # a label as a hint (E-345)
   knowledge:  # Vesta's one question a day on Informé, with C'est juste and Pas juste (E-207, B-360)

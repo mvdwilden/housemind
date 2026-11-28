@@ -4,6 +4,7 @@ The administrator's yes (06-11-2026) to: as long as someone is in the room, your
 Has the room been empty and someone comes in, that is a new moment. Otherwise, once HouseMind does
 the light itself, one press on a switch means no light for four hours on whoever walks in later.
 
+Since E-584 (27-11-2026) a choice stands half an hour at most, also while someone is there.
 And what the first night on Autonomous showed: without a sensor that can see someone, a room is
 never "empty" – the lamp went out on someone sitting there.
 """
@@ -49,12 +50,13 @@ async def _someone_puts_it_out(ha: FakeHomeAssistant, by: Source = Source.PHYSIC
 
 
 async def test_the_choice_stands_while_someone_is_there(tmp_path: Path) -> None:
+    """As long as someone is there, their choice stands – for half an hour at most (E-584)."""
     hm, clock, ha = await _house(tmp_path)
     assert hm.gate is not None
     await ha.simulate(LIVING, "on")
     await hm.tick()
     await _someone_puts_it_out(ha)
-    await until(clock, hm, local(19, 21, 0))
+    await until(clock, hm, local(19, 20, 29))
     assert ha.states[LAMP].state == "off"
     assert LAMP not in hm.gate.state.come_in
     assert hm.gate.evaluate(_request(clock, ON[0])).reason == "people_win"
@@ -112,12 +114,12 @@ async def test_a_button_that_puts_all_out_leaves_no_dark_rooms_behind(tmp_path: 
 
 
 async def test_a_lamp_put_on_from_afar_stays_on(tmp_path: Path) -> None:
-    """Someone put it on for a reason, also with nobody there: that is not undone, until someone
-    has been there and left."""
+    """Someone put it on for a reason, also with nobody there: that is not undone for half an
+    hour (E-584), unless someone has been there and left."""
     hm, clock, ha = await _house(tmp_path)
     assert hm.gate is not None
     await ha.simulate(LAMP, "on", {"brightness": 200}, by=Source.PERSON)
-    await until(clock, hm, local(19, 21, 0))
+    await until(clock, hm, local(19, 20, 29))
     assert ha.states[LAMP].state == "on"
     assert hm.gate.evaluate(_request(clock, OFF[0], "light.turn_off")).reason == "people_win"
     await hm.stop()

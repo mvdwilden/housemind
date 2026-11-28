@@ -646,6 +646,7 @@ class HouseMind(
         # The words that make an outside place the entrance, in every language (E-447).
         self.skills.entrance_words = tuple(daily_words(self.languages, "entrance"))
         await self._load_heat_cool()
+        await self._load_room_temps()  # Temperaturen per ruimte (E-583)
         self._day_words = day_words(self.languages)
         await self._load_days()
         self.speech.devices = speakers(self.model)
@@ -702,6 +703,9 @@ class HouseMind(
         await self.router.load()  # what was sent and ignored survives a restart (H20)
         self.router.where = self._people_in  # a question about a room: who is there (E-287)
         self.router.name_of = self.vesta_name  # she sends the messages: her name (20.21)
+        self.router.phones_of = lambda user_id: next(
+            (list(p.notify_services) for p in self._people if p.user_id == user_id), []
+        )
         self._raised = {
             str(r["topic"]): (
                 Kind(str(r["kind"])),
@@ -2056,6 +2060,10 @@ class HouseMind(
             return
         if await self.care_agreed(settings) or "care_consent" in self._raised:
             return
+        said = await self.db.fetchone("SELECT consents FROM people WHERE user_id = ?", (user,))
+        declined = json.loads(said["consents"] or "{}").get("care_no") if said else None
+        if declined == {"contact": settings.contact, "person": settings.person}:
+            return  # they said no to this care: not asked again until it changes (E-585)
         assert self.world is not None
         contact = await self.db.fetchone(
             "SELECT display_name FROM people WHERE user_id = ?", (settings.contact,)
@@ -2081,8 +2089,11 @@ class HouseMind(
         consents = json.loads(row["consents"] or "{}")
         if yes:
             consents["care"] = {"contact": settings.contact, "at": self.clock.now().isoformat()}
+            consents.pop("care_no", None)
         else:
             consents.pop("care", None)
+            # Their no is kept (E-585): asked again only when the care itself changes.
+            consents["care_no"] = {"contact": settings.contact, "person": settings.person}
         await self.db.execute(
             "UPDATE people SET consents = ? WHERE user_id = ?", (json.dumps(consents), user_id)
         )
@@ -3105,10 +3116,11 @@ class HouseMind(
             return
         notification_id, _, code = payload.partition("|")
         row = await self.db.fetchone(
-            "SELECT topic FROM notifications WHERE id = ?", (int(notification_id),)
+            "SELECT topic FROM notifications WHERE id = ? AND resolved_at IS NULL",
+            (int(notification_id),),
         )
         if row is None:
-            return
+            return  # answered already, here or elsewhere: once is enough (E-585)
         topic = str(row["topic"])
         await self.router.acknowledged_topic(topic, None)  # answered: not ignored
         if topic.startswith("proposal:") and code in {a.value for a in Answer}:

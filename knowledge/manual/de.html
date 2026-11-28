@@ -1723,7 +1723,7 @@
         </div>
       </div>
 
-      <p><strong>Auf eine Benachrichtigung antworten.</strong> Eine gewöhnliche Benachrichtigung hat überall dieselben Schaltflächen: auf der Karte, im Logbuch und bei Vesta. Eine Benachrichtigung, die etwas fragt, hat eigene Schaltflächen, etwa Ja und Nein.</p>
+      <p><strong>Auf eine Benachrichtigung antworten.</strong> Eine gewöhnliche Benachrichtigung hat überall dieselben Schaltflächen: auf der Karte, im Logbuch und bei Vesta. Eine Benachrichtigung, die etwas fragt, hat eigene Schaltflächen, etwa Ja und Nein. Eine Frage beantwortet man einmal: Sobald jemand antwortet, ist sie überall weg, auch auf den Handys der anderen. Tippst du später noch auf eine alte Schaltfläche, sagt HouseMind, dass die Frage schon beantwortet ist.</p>
       <div class="voorbeeld">
         <p class="label">So sieht es aus · eine Benachrichtigung für einen Administrator, nach einem Tippen auf Später</p>
         <div class="berichtstapel" aria-hidden="true">
@@ -2949,7 +2949,7 @@
         <ul>
           <li><strong>Hereinkommen und gehen.</strong> Im Dunkeln geht das Licht sofort an. Ist der Raum eine Weile leer, dimmt es kurz und geht aus; kommst du zurück, bleibt es an. Wie lange HouseMind wartet, lernt es pro Raum: erst kurz in einer Toilette oder einem Bad, länger in einem Flur, und mindestens 3 Minuten mit nur einem Bewegungsmelder. Ohne Bewegungs- oder Präsenzsensor geht das Licht nicht von selbst aus; siehe <a href="#leren-wie-er-is">Wer da ist</a>. Für jede Lampe wählst du auch selbst, nach wie vielen Minuten sie ausgeht, von sofort bis 30 Minuten; siehe <a href="#standen">Stufen für deine Lampen</a>.</li>
           <li><strong>Das Licht folgt dem Tag:</strong> tagsüber heller und weißer, abends weicher und wärmer. Mit Adaptive Lighting stellst du das dort ein; steht in einem Raum eine Lichtregel auf Selbstständig, übernimmt HouseMind es für die Lampen dieses Raums, bis zu einem Schritt zurück. Dann steuert nichts anderes diese Lampen. Ohne diese Integration macht HouseMind es selbst.</li>
-          <li><strong>Selbst bedient?</strong> Solange jemand im Raum ist, bleibt deine Wahl bestehen, höchstens ein paar Stunden. Wählst du oft eine andere Farbe oder Helligkeit, merkt HouseMind sich das.</li>
+          <li><strong>Selbst bedient?</strong> Solange jemand im Raum ist, bleibt deine Wahl bestehen, höchstens eine halbe Stunde. Danach übernimmt HouseMind wieder, auch eine Farbe oder Helligkeit, die du selbst gewählt hast. Wählst du oft eine andere Farbe oder Helligkeit, merkt HouseMind sich das.</li>
           <li><strong>Draußen am Abend</strong> gehen die Lampen an, wenn es dunkel wird, auch wenn niemand zu Hause ist, damit das Haus bewohnt aussieht. Sie gehen aus, wenn das Haus schlafen geht, spätestens zu eurer üblichen Zeit (anfangs 23:30). Ist niemand zu Hause, gegen die Schlafenszeit, jeden Abend etwas anders.</li>
           <li><strong>Heimkommen im Dunkeln:</strong> Die Lampen am Eingang, etwa an der Einfahrt, gehen an und nach 5 Minuten wieder aus, oder nach höchstens einer halben Stunde, wenn noch jemand draußen ist. Ein Garten oder eine Terrasse hinter dem Haus bleibt dunkel. Schaltest du die Lampe danach wieder ein, brennt sie ab dann länger.</li>
           <li><strong>Außerdem</strong> Nachtlicht, Licht beim <a href="#wekken">Wecken</a>, ruhiges Dimmen vor dem Schlafen und <a href="#momenten">Momente</a>.</li>
@@ -2982,6 +2982,20 @@
           </ol>
           <figcaption>Wer bei einer Lampe Vorrang hat, von oben nach unten.</figcaption>
         </figure>
+      </div>
+      <div class="sub" id="temperaturen">
+        <h3>Temperaturen für deine Räume</h3>
+        <p>Wie bei den Stufen einer Lampe wählst du an einem Thermostat selbst, wie warm ein Raum sein soll: wenn jemand zu Hause ist, wenn das Haus schläft und wenn niemand da ist. HouseMind nimmt dann deine Werte statt dessen, was es gelernt hat.</p>
+        <ul>
+          <li><strong>Wo.</strong> Bei Experte, unter Gehirn › <span class="ui">Geräte</span>: Ein Administrator tippt bei einem Thermostat auf <span class="ui">Temperaturen</span>. Was keinen Raum heizt, etwa die Wassertemperatur einer Wärmepumpe, hat keine Temperaturen.</li>
+          <li><strong>Drei Schieberegler:</strong> <span class="ui">Zuhause</span>, <span class="ui">Schlafen</span> und <span class="ui">Weg</span>, in halben Grad und so weit, wie das Thermostat kann. Schlafen und Weg sind nie wärmer als Zuhause. Bei jedem Regler steht, woher der Wert kommt: gelernt, ein Startwert oder dein eigener.</li>
+          <li><strong>Für den ganzen Raum.</strong> Die Temperaturen gehören zum Raum: Hat ein Raum mehrere Thermostate, bekommen alle dieselben.</li>
+          <li><strong>Erst nach.</strong> Mit dem zweiten Regler wählst du, wie lange niemand zu Hause sein muss, bevor der Raum auf Weg geht: von sofort bis zu einem Tag. Er beginnt bei einem Tag. Fußbodenheizung und Wärmepumpe heizen langsam auf; früh nach dem Weggehen abzusenken spart dann oft nichts. Im Urlaub geht das Haus sofort auf Weg.</li>
+          <li><strong>Kühlen.</strong> Kühlt das Thermostat auch, wechselst du oben zwischen <span class="ui">Heizen</span> und <span class="ui">Kühlen</span>, mit eigenen Werten. Beim Kühlen ist Weg gerade wärmer.</li>
+          <li><strong>Eine Temperatur für Heizen und Kühlen.</strong> So ein Thermostat bekommt Zuhause; Schlafen und Weg gelten nur, solange es heizt, damit sie im Sommer nie mehr Kühlen bedeuten.</li>
+          <li><strong>Wer geht vor.</strong> Drehst du selbst am Thermostat, bleibt das bis zum nächsten Moment: Schlafen, Weg oder wieder zu Hause. Ein offenes Fenster, das Aufstehen und der Energieplan laufen wie immer.</li>
+          <li><strong>Einmal Speichern.</strong> <span class="ui">Speichern</span> speichert alles im Fenster. <span class="ui">Zurück zu dem, was ich lerne</span> gibt den Raum an HouseMind zurück.</li>
+        </ul>
       </div>
       <div class="sub" id="groepen">
         <h3>Lampengruppen</h3>

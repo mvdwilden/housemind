@@ -539,6 +539,7 @@ export interface DeviceRow extends IconLook {
   partOf?: { id: string; name: string }; // the group that switches this device
   areaId?: string;
   levels?: LevelsView; // a lamp's standen (E-490 – E-496)
+  temps?: TempsView; // its room's Temperaturen (E-583)
 }
 
 /** A lamp's standen in Brein › Apparaten (B-413). */
@@ -993,4 +994,23 @@ export interface Rhythm {
   other: RhythmOther[];
   note: string | null;
   habits?: RhythmHabit[];
+}
+
+/** One temperature in the Temperaturen window (E-583) and where it comes from. */
+export interface TempValue {
+  value: number;
+  from: "own" | "learned" | "start" | "start_away";
+}
+
+/** Temperaturen of a room (E-583): Thuis, Slapen and Weg per way of working, and "Pas na". */
+export interface TempsView {
+  area: string;
+  room: string;
+  count: number; // thermostats in the room: they all get these
+  one: boolean; // one setpoint for heating and cooling
+  limits: Partial<Record<"heat" | "cool", [number, number]>>;
+  values: Partial<Record<"heat" | "cool", Record<"home" | "sleep" | "away", TempValue>>>;
+  after: number; // hours before Weg
+  afterSteps: number[];
+  own: boolean;
 }

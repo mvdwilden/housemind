@@ -3,6 +3,15 @@
 <!-- support:start – made by tools/build_support.py from docs/support.yaml -->
 <!-- support:end -->
 
+## 0.4.5 – 27-11-2026
+
+Temperatures per room, and a question only once.
+
+- At a thermostat you now choose the temperature for Home, Sleep and Away yourself, in half degrees: in Brain › Devices › Temperatures. With ‘Only after’ you choose how long everyone must be away before it becomes Away.
+- If you work a lamp yourself, with a switch or in the app, that stays for half an hour at most. After that HouseMind takes over again, also the colour and brightness.
+- A question is answered once: as soon as someone answers, it is gone everywhere, also from other people's phones. An old button does nothing after that.
+- A no to the question whether the alarm may go on by itself from now on, and a no to care, are kept: that question does not come back.
+
 ## 0.4.4 – 27-11-2026
 
 HouseMind has your lamps to itself.

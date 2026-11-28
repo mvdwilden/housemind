@@ -110,11 +110,12 @@
       </RhythmCard>
     {:else if current === "knowledge" && get}
       <!-- Wat ik weet (E-524): what HouseMind knows of the house, everything to take back (E-525). -->
-      <Knowledge view={knowledge} lang={snap.language} {t} {send} {get} {focus} roomIcons={roomIcons(snap.rooms)} />
+      <Knowledge view={knowledge} lang={snap.language} {t} {send} {get} {focus} roomIcons={roomIcons(snap.rooms)} waiting={snap.knowledgeWaiting ?? 0} />
     {:else if current === "devices"}
       <section class="col" aria-label={t("tabs.devices")}>
         <Devices {devices} isAdmin={snap.user.isAdmin} lang={snap.language} name={snap.vesta?.name} excluded={[]} {t} {onexclude} {onwhynot} {why}
-          onlevels={(message) => send({ type: "levels", ...message })} />
+          onlevels={(message) => send({ type: "levels", ...message })}
+          ontemps={(message) => send({ type: "temperatures", ...message })} />
       </section>
     {/if}
   </div>

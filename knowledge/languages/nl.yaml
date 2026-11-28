@@ -913,6 +913,43 @@ ui:
         automation: "Een automatisering"
         other: "Iets anders"
         housemind: "HouseMind"
+  temps:  # Temperaturen per ruimte (E-583)
+    button: "Temperaturen"
+    title: "Temperaturen · {room}"
+    room_note: "Geldt voor de hele ruimte."
+    room_note_more: "Geldt voor de hele ruimte: alle {count} thermostaten krijgen deze temperaturen."
+    one_note: "Deze thermostaat verwarmt en koelt met één temperatuur. Slapen en Weg gelden alleen als hij verwarmt."
+    heat: "Verwarmen"
+    cool: "Koelen"
+    home: "Thuis"
+    home_sub: "iemand is wakker thuis"
+    sleep: "Slapen"
+    sleep_sub: "het huis slaapt"
+    away: "Weg"
+    away_sub: "niemand thuis"
+    after_title: "Naar Weg"
+    after_label: "Pas na"
+    after_note: "Op vakantie gaat het huis meteen naar Weg."
+    after_slow: "Bij vloerverwarming of een warmtepomp is kort na weggaan lager zetten vaak niet zuinig."
+    own_note: "Je eigen temperaturen gaan voor wat ik leer."
+    learned_note: "Ik gebruik wat ik leerde en de startwaarden."
+    learn: "Terug naar wat ik leer"
+    cancel: "Annuleren"
+    save: "Bewaren"
+    saved: "Temperaturen bewaard."
+    learn_done: "Ik leer de temperaturen van deze ruimte weer zelf."
+    not_saved: "Dat kon ik niet bewaren."
+    from:
+      own: "jouw eigen"
+      learned: "geleerd"
+      start: "startwaarde"
+      start_away_heat: "startwaarde: 3° onder Thuis"
+      start_away_cool: "startwaarde: 3° boven Thuis"
+    after:
+      now: "meteen"
+      minutes: "{n} min"
+      hours: "{n} uur"
+      day: "1 dag"
   devices:
     open_in_ha: "Openen in Home Assistant"
     unavailable_n:
@@ -2430,7 +2467,9 @@ reason:
   cool_on_presence_reach: "het in de {area} nog niet koel genoeg is; de airco meet koeler dan de ruimte zelf"
   cool_on_presence_ease: "het in de {area} koeler werd dan nodig"
   setback_away: "er al langer niemand thuis is"
+  setback_away_own: "er al een tijd niemand thuis is; dit is jouw temperatuur voor Weg"
   setback_sleep: "iedereen slaapt"
+  setback_sleep_own: "iedereen slaapt; dit is jouw temperatuur voor Slapen"
   window_open_setback: "er een raam openstaat in de {area}"
   emergency: "er een noodgeval is: {what}"
   alarm: "het alarm afging"  # E-533
@@ -2483,6 +2522,7 @@ rules:
   skill_never: "Nooit doen: {skill} in de {area}."
   not_understood: "Deze regel begreep ik niet. Probeer bijvoorbeeld: nooit de gordijnen in de woonkamer open voor 7:00."
 notify:
+  already_answered: "Deze vraag is al beantwoord."  # once is enough (E-585)
   paused_by_someone: "Ik sta op pauze tot {until}, gezet door iemand die geen beheerder is. Wie het was, staat in het Logboek. Noodreacties werken door."
   label_lamp: "‘{device}’ heeft in Home Assistant het label {label}. Is het een lamp? Dan leer ik het als lamp kennen." # a label as a hint (E-345)
   knowledge:  # Vesta's one question a day on Geïnformeerd, with Klopt and Klopt niet (E-207, B-360)

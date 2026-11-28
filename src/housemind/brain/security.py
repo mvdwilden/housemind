@@ -80,7 +80,8 @@ SETTINGS = house_settings.SECURITY_KEYS  # from the one table (code QA 3, punt 1
 # The alarm on by itself (E-540).
 MOMENTS = ("away", "night")
 SELF_AFTER = 5  # the last this many answers yes: the one question
-SELF_ASK_AGAIN = timedelta(days=30)  # after a no to that question
+SELF_ASK_AGAIN = timedelta(days=30)  # a question that went unanswered
+NEVER = "never"  # a no to that question: asked once (E-585)
 QUIET_FOR = timedelta(minutes=10)  # away: no sensor saw anyone this long
 SELF_WAIT = timedelta(minutes=15)  # not quiet by then: the question after all
 QUICK_OFF = timedelta(minutes=10)  # switched off this soon after HouseMind switched it on …
@@ -196,6 +197,8 @@ async def start(hm: HouseMind) -> None:
         if k in MOMENTS
     }
     hm.security.offered = {str(k): str(v) for k, v in (learned.get("offered") or {}).items()}
+    # Which occasion was asked already (E-585): also after a restart that evening, not again.
+    hm.security.asked = {str(k): str(v) for k, v in (learned.get("asked") or {}).items()}
     hm.security.quick_off = {
         str(k): [str(x) for x in v] for k, v in (learned.get("quick_off") or {}).items()
     }
@@ -357,7 +360,8 @@ def _self_can(hm: HouseMind) -> dict[str, bool]:
 async def _save_learn(hm: HouseMind) -> None:
     w = hm.security
     await hm.db.set_setting(
-        "alarm_learn", {"answers": w.answers, "offered": w.offered, "quick_off": w.quick_off}
+        "alarm_learn",
+        {"answers": w.answers, "offered": w.offered, "quick_off": w.quick_off, "asked": w.asked},
     )
 
 
@@ -450,6 +454,8 @@ async def _learn_answer(hm: HouseMind, moment: str, yes: bool) -> None:
         return  # a code, or no such mode: it stays a question
     now = hm.clock.now()
     asked = w.offered.get(moment)
+    if asked == NEVER:
+        return  # they said no to it (E-585): it is not asked again
     if asked is not None and now - datetime.fromisoformat(asked) < SELF_ASK_AGAIN:
         return
     w.offered[moment] = now.isoformat()
@@ -1303,6 +1309,7 @@ async def _suggest_arming(hm: HouseMind, snapshot: WorldState) -> None:
     alarm = the_alarm(hm)
     if alarm is None and len(alarms(hm)) > 1:
         w.asked[moment] = occasion
+        await _save_learn(hm)
         if "alarm_choice" not in hm._raised:
             await _ask_which(hm, snapshot)
         return
@@ -1313,6 +1320,7 @@ async def _suggest_arming(hm: HouseMind, snapshot: WorldState) -> None:
     if how is None:
         return
     w.asked[moment] = occasion
+    await _save_learn(hm)  # asked for this occasion: also after a restart (E-585)
     if moment in w.self_arm and not _needs_code(hm, alarm):  # the standing yes (E-540)
         if not _unsafe(hm, snapshot, moment):
             if await _arm_myself(hm, alarm, how, moment, snapshot):
@@ -1379,6 +1387,9 @@ async def answer(hm: HouseMind, topic: str, code: str, user_id: str | None) -> b
         await hm._resolve(topic)
         if code == "yes" and moment in MOMENTS:
             await _self_arm(hm, moment, True, user_id or "answer")  # from now on (E-540)
+        elif moment in MOMENTS:
+            hm.security.offered[moment] = NEVER  # one answer is enough (E-585)
+            await _save_learn(hm)
         await hm._notify()
         return True
     if not topic.startswith("alarm_arm:") or code not in ("yes", "no"):

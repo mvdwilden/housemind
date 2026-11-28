@@ -544,6 +544,17 @@ class DaylightPart(Part):
         assert self.skills is not None
         book = self.daylight
         now = snapshot.now
+        for unit, at in list(book.chosen.items()):
+            if now - at < self._daylight_hand_holds(unit):
+                continue
+            # Half an hour after someone chose (E-584): the day's light again, from this round.
+            del book.chosen[unit]
+            state = book.states.get(unit)
+            rhythm = book.group_of(unit)
+            if state is None or state.state != "on" or rhythm is None or not book.ours(rhythm):
+                continue
+            pct, warm = lamp_now(state)
+            book.following[unit] = Following(pct, warm, now - timedelta(seconds=rhythm.interval_s))
         for lamp in list(book.following):
             state = book.states.get(lamp)
             rhythm = book.group_of(lamp)
@@ -560,6 +571,14 @@ class DaylightPart(Part):
                 book.following.pop(lamp, None)
                 continue
             await self._daylight_send(lamp, rhythm, rhythm.transition_s, snapshot)
+
+    def _daylight_hand_holds(self, unit: str) -> timedelta:
+        """How long someone's own choice for a lamp holds before the rhythm takes it again: as
+        long as the catalogue lets a person's hand go first for that kind of lamp (E-584)."""
+        entity = self.model.entities.get(unit)
+        roles = self.gate.state.roles if self.gate is not None else {}
+        kind = recognise(self.catalog, entity, roles.get(unit)).kind if entity else None
+        return timedelta(hours=kind.people_win_max_hours if kind is not None else 0.5)
 
     def _daylight_saw(self, change: StateChange, now: datetime) -> None:
         """What happens to its lamps and its switches (E-467, E-468)."""
@@ -609,6 +628,7 @@ class DaylightPart(Part):
         if new.state != "on":
             if new.state == "off":
                 book.following.pop(lamp, None)
+                book.chosen.pop(lamp, None)
                 self._daylight_plain.discard(lamp)
             return
         level = lamp_now(new)
@@ -636,8 +656,10 @@ class DaylightPart(Part):
             left = book.following.get(unit)
             if left is None or not chosen(level, (left.pct, left.kelvin)):
                 return
-        # Someone chose: it stays until the lamp goes out, and it teaches (E-467).
+        # Someone chose: it stays – half an hour at most, or until the lamp goes out (E-467,
+        # E-584) – and it teaches.
         book.following.pop(unit, None)
+        book.chosen[unit] = now
         self._daylight_plain.discard(lamp)
         if change.source in (Source.PERSON, Source.PHYSICAL):
             self._daylight_learn(rhythm, lamp, level, now)

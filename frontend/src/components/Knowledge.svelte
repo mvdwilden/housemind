@@ -20,11 +20,17 @@
     get: (what: string) => void;
     focus?: string | null; // "knowledge:area:music:role": open at that line (E-486)
     roomIcons?: Record<string, string>;
+    waiting?: number; // what waits, for every screen: answered elsewhere, it changes (E-585)
   }
-  let { view, lang, t, send, get, focus = null, roomIcons = {} }: Props = $props();
+  let { view, lang, t, send, get, focus = null, roomIcons = {}, waiting = 0 }: Props = $props();
 
-  // Asked when the tab opens; while AI reads the house, what it finds comes in by itself.
-  $effect(() => get("house_knowledge"));
+  // Asked when the tab opens, and again when what waits changed – someone else answered on
+  // another screen, so no line stays here to be answered twice (E-585). While AI reads the
+  // house, what it finds comes in by itself.
+  $effect(() => {
+    void waiting;
+    get("house_knowledge");
+  });
   $effect(() => {
     if (!view?.busy) return;
     const timer = setInterval(() => get("house_knowledge"), 3000);

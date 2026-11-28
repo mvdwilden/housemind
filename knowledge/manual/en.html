@@ -1723,7 +1723,7 @@
         </div>
       </div>
 
-      <p><strong>Answering a notification.</strong> An ordinary notification has the same buttons everywhere: on the card, in Logbook and with Vesta. A notification that asks something has its own buttons, such as Yes and No.</p>
+      <p><strong>Answering a notification.</strong> An ordinary notification has the same buttons everywhere: on the card, in Logbook and with Vesta. A notification that asks something has its own buttons, such as Yes and No. A question is answered once: as soon as someone answers, it is gone everywhere, also from other people's phones. If you tap an old button later, HouseMind says the question was already answered.</p>
       <div class="voorbeeld">
         <p class="label">This is what it looks like · a notification for an administrator, after a tap on Later</p>
         <div class="berichtstapel" aria-hidden="true">
@@ -2949,7 +2949,7 @@
         <ul>
           <li><strong>Coming in and leaving.</strong> In the dark the light goes on at once. If the room has been empty for a while, it dims for a moment and goes off; if you come back, it stays on. How long HouseMind waits, it learns per room: short at first in a toilet or bathroom, longer in a hall, and at least 3 minutes with only a motion sensor. Without a motion or presence sensor the light does not go off by itself; see <a href="#leren-wie-er-is">Who is there</a>. For each lamp you can also choose yourself after how many minutes it goes off, from at once to 30 minutes; see <a href="#standen">Levels for your lamps</a>.</li>
           <li><strong>Light follows the day:</strong> brighter and whiter by day, softer and warmer in the evening. With Adaptive Lighting you set that up there; as soon as a light rule of a room is on Autonomous, HouseMind takes it over for the lamps of that room, until a step back. Then nothing else steers those lamps. Without that integration HouseMind does it itself.</li>
-          <li><strong>Worked it yourself?</strong> As long as someone is in the room, your choice stands, for a few hours at most. If you often choose another colour or brightness, HouseMind remembers it.</li>
+          <li><strong>Worked it yourself?</strong> As long as someone is in the room, your choice stands, for half an hour at most. After that HouseMind takes over again, also a colour or brightness you chose yourself. If you often choose another colour or brightness, HouseMind remembers it.</li>
           <li><strong>Outside in the evening</strong> the lamps go on when it gets dark, also when nobody is home, so the house looks lived in. They go off when the house goes to sleep, at the latest at your usual time (23:30 at first). When nobody is home, around bedtime, a bit differently each evening.</li>
           <li><strong>Coming home in the dark:</strong> the lamps at the entrance, such as on the driveway, go on and off again after 5 minutes, or after half an hour at most if someone is still outside. A garden or terrace at the back stays dark. If you switch the lamp on again afterwards, it stays on longer from then on.</li>
           <li><strong>Also</strong> night light, light when <a href="#wekken">waking up</a>, calm dimming before sleeping and <a href="#momenten">moments</a>.</li>
@@ -2982,6 +2982,20 @@
           </ol>
           <figcaption>Who goes first for a lamp, from top to bottom.</figcaption>
         </figure>
+      </div>
+      <div class="sub" id="temperaturen">
+        <h3>Temperatures for your rooms</h3>
+        <p>Just like the levels of a lamp, you choose at a thermostat how warm a room should be: when someone is home, when the house is asleep and when nobody is there. HouseMind then uses your numbers instead of what it learned.</p>
+        <ul>
+          <li><strong>Where.</strong> On Expert, in Brain › <span class="ui">Devices</span>: an administrator taps <span class="ui">Temperatures</span> at a thermostat. What heats no room, such as the water temperature of a heat pump, has no temperatures.</li>
+          <li><strong>Three sliders:</strong> <span class="ui">Home</span>, <span class="ui">Sleep</span> and <span class="ui">Away</span>, in half degrees and as far as the thermostat can go. Sleep and Away are never warmer than Home. Each slider says where its number comes from: learned, a start value or your own.</li>
+          <li><strong>For the whole room.</strong> The temperatures belong to the room: if a room has more thermostats, they all get the same.</li>
+          <li><strong>Only after.</strong> With the second slider you choose how long nobody must be home before the room goes to Away: from at once to a day. It starts at a day. Floor heating and a heat pump warm up slowly; turning them down soon after you leave often saves nothing. On vacation the house goes to Away at once.</li>
+          <li><strong>Cooling.</strong> If the thermostat also cools, you switch at the top between <span class="ui">Heating</span> and <span class="ui">Cooling</span>, with their own numbers. For cooling, Away is warmer.</li>
+          <li><strong>One temperature for heating and cooling.</strong> Such a thermostat gets Home; Sleep and Away only count while it heats, so in summer they never mean extra cooling.</li>
+          <li><strong>Who goes first.</strong> If you turn the thermostat yourself, that stays until the next moment: sleep, away or home again. An open window, getting up and the energy plan work as always.</li>
+          <li><strong>One Save.</strong> <span class="ui">Save</span> keeps everything in the window. <span class="ui">Back to what I learn</span> gives the room back to HouseMind.</li>
+        </ul>
       </div>
       <div class="sub" id="groepen">
         <h3>Groups of lamps</h3>

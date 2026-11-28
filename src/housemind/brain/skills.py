@@ -22,6 +22,7 @@ import yaml
 from housemind.brain.daylight import DaylightBook
 from housemind.brain.learning import HOLD_MAX, HOLD_MIN
 from housemind.brain.levels import FELT, STANDS, LightLevels, colour_now, nearest, stand_of
+from housemind.brain.room_temps import RoomTemps, Temps, half
 from housemind.core.model import Entity, HouseModel, State, daypart
 from housemind.knowledge.catalog import Catalog, DeviceKind
 from housemind.knowledge.matcher import recognise
@@ -336,6 +337,8 @@ class SkillEngine:
     # "away" (None: HouseMind did not).
     hc_wish: Callable[[str, State], float | None] = field(default=lambda entity_id, state: None)
     hc_before: Callable[[str], str | None] = field(default=lambda entity_id: None)
+    # Temperaturen per ruimte (E-583): what an administrator set for a room goes first.
+    room_temps: dict[str, RoomTemps] = field(default_factory=dict)
     _air_on: set[str] = field(default_factory=set)
     # Sleeping and waking up (E-88): today's wake-up time (with "alarm" or "usual") and
     # tonight's usual bedtime, from the rhythm. Without a clear rhythm they give None.
@@ -2080,9 +2083,18 @@ class SkillEngine:
         if not thermostats:
             return out
         context = world.context_key()
-        heat = self._wish(area_id, role, context, "heat_on_presence", "comfort_c", 19.0)
-        cool = self._wish(area_id, role, context, "cool_on_presence", "cool_c", 24.0)
-        long_away = self._long_away(world)
+        own = self.room_temps.get(area_id, RoomTemps())
+        heat = (
+            own.heat.home
+            if own.heat is not None
+            else self._wish(area_id, role, context, "heat_on_presence", "comfort_c", 19.0)
+        )
+        cool = (
+            own.cool.home
+            if own.cool is not None
+            else self._wish(area_id, role, context, "cool_on_presence", "cool_c", 24.0)
+        )
+        long_away = self._long_away(world, own.after_h)
         away = self.params.get("setback_away", {})
         window = self._window_open(world, states, area_id)
         for entity in thermostats:
@@ -2090,7 +2102,9 @@ class SkillEngine:
             if self.room_climates is not None and entity.entity_id not in self.room_climates:
                 continue  # a pool, a wine cooler, a tank: not a room's thermostat
             if state is not None and state.state == "heat_cool" and one_setpoint(state):
-                out += self._heat_cool(world, states, area_id, entity, state, long_away, window)
+                out += self._heat_cool(
+                    world, states, area_id, entity, state, long_away, window, own.heat
+                )
                 continue
             if state is None or state.state not in ("heat", "cool"):
                 # Auto, heat-and-cool with two limits, and off stay as people set them:
@@ -2105,11 +2119,20 @@ class SkillEngine:
                 target = cool
                 if long_away:
                     skill = "setback_away"
-                    target = min(
-                        float(away.get("maximum_c", 28)), cool + float(away.get("setback_c", 3))
+                    target = (
+                        own.cool.away
+                        if own.cool is not None
+                        else min(
+                            float(away.get("maximum_c", 28)),
+                            cool + float(away.get("setback_c", 3)),
+                        )
                     )
+                    if own.cool is not None:
+                        extra = {"variant": "own"}
+                elif own.cool is not None and world.mode is HouseMode.SLEEP:
+                    skill, target, extra = "setback_sleep", own.cool.sleep, {"variant": "own"}
             else:
-                found = self._heating(world, area_id, role, wake, heat, long_away, window)
+                found = self._heating(world, area_id, role, wake, heat, long_away, window, own.heat)
                 if found is None:
                     continue
                 skill, target, extra = found
@@ -2150,16 +2173,20 @@ class SkillEngine:
         state: State,
         long_away: bool,
         window: bool,
+        own: Temps | None = None,
     ) -> list[ActionRequest]:
         """A heat pump that heats and cools with one setpoint (E-318, B-185): it keeps the
         wish a person set; a day away uses its own "away"; the room reaches the wish in both
         directions. Lowering it while away could mean more cooling in summer, so without an
-        "away" of its own it stays as it is."""
+        "away" of its own it stays as it is. With the room's own temperatures (E-583) Thuis is
+        the wish, and Slapen and Weg count only while it heats: the room colder than Thuis."""
         if window:
             return []  # an open window changes nothing here, as for cooling
         presets = [str(p) for p in state.attributes.get("preset_modes") or []]
         preset = state.attributes.get("preset_mode")
         before = self.hc_before(entity.entity_id)
+        if own is not None and preset != "away":
+            return self._heat_cool_own(world, states, area_id, entity, state, long_away, own)
         if long_away:
             if "away" not in presets or preset == "away":
                 return []
@@ -2197,6 +2224,46 @@ class SkillEngine:
             self._req(
                 world, Layer.PLANNER, "keep_temperature", area_id, entity,
                 "climate.set_temperature", {"temperature": round(wanted * 2) / 2}, **facts,
+            )
+        ]  # fmt: skip
+
+    def _heat_cool_own(
+        self,
+        world: WorldState,
+        states: dict[str, State],
+        area_id: str,
+        entity: Entity,
+        state: State,
+        long_away: bool,
+        own: Temps,
+    ) -> list[ActionRequest]:
+        """One setpoint, and the room's own temperatures (E-583): Thuis as the wish, reached in
+        the room itself; Slapen and Weg only while it heats, so that in summer they never mean
+        more cooling."""
+        room = self.room_air(area_id, states)
+        if room is None:
+            measured = state.attributes.get("current_temperature")
+            room = float(measured) if isinstance(measured, int | float) else None
+        heating = room is not None and room < own.home
+        skill, facts = "keep_temperature", {}
+        if long_away and heating:
+            skill, wanted, facts = "setback_away", own.away, {"variant": "own"}
+        elif world.mode is HouseMode.AWAY and not long_away:
+            return []  # the first hours away: as it is (E-315)
+        elif world.mode is HouseMode.SLEEP and heating:
+            skill, wanted, facts = "setback_sleep", own.sleep, {"variant": "own"}
+        else:
+            wanted, how = self._reach_both(world, states, area_id, entity, state, own.home)
+            if how:
+                facts = {"variant": how}
+        current = state.attributes.get("temperature")
+        if isinstance(current, int | float) and abs(float(current) - wanted) < 0.5:
+            return []
+        return [
+            self._req(
+                world, Layer.PLANNER, skill, area_id, entity,
+                "climate.set_temperature", {"temperature": round(wanted * 2) / 2},
+                target=wanted, **facts,
             )
         ]  # fmt: skip
 
@@ -2259,11 +2326,51 @@ class SkillEngine:
             return learned
         return float(_by_role(self.params.get(skill, {}).get(table, {}), role, default))
 
-    def _long_away(self, world: WorldState) -> bool:
-        """Away long enough to save (E-315): on vacation, or nobody home for over 24 hours."""
+    def climate_basis(
+        self, area_id: str, role: str, context: str
+    ) -> dict[str, dict[str, tuple[float, str]]]:
+        """What a room gets without temperatures of its own (E-583), each with where it comes
+        from: "learned" (what the residents set), "start" (a usual value for this kind of room)
+        or "start_away" (the start's few degrees from Thuis). On half degrees, as the window
+        shows them."""
+
+        def wish(skill: str, table: str, default: float) -> tuple[float, str]:
+            learned = self.prefs.value(skill, area_id, context, "temperature")
+            if learned is not None:
+                return half(learned), "learned"
+            found = _by_role(self.params.get(skill, {}).get(table, {}), role, default)
+            return half(float(found)), "start"
+
+        heat = wish("heat_on_presence", "comfort_c", 19.0)
+        cool = wish("cool_on_presence", "cool_c", 24.0)
+        away = self.params.get("setback_away", {})
+        step = float(away.get("setback_c", 3))
+        sleep = _by_role(self.params.get("setback_sleep", {}).get("sleep_c", {}), role, 17.0)
+        heat_away = max(float(away.get("minimum_c", 15)), heat[0] - step)
+        cool_away = min(float(away.get("maximum_c", 28)), cool[0] + step)
+        return {
+            "heat": {
+                "home": heat,
+                "sleep": (min(half(float(sleep)), heat[0]), "start"),
+                "away": (min(half(heat_away), heat[0]), "start_away"),
+            },
+            "cool": {
+                "home": cool,
+                "sleep": (cool[0], "start"),  # cooling kept the same at night (E-315)
+                "away": (max(half(cool_away), cool[0]), "start_away"),
+            },
+        }
+
+    def _long_away(self, world: WorldState, after_h: float | None = None) -> bool:
+        """Away long enough to save (E-315): on vacation, or nobody home for over 24 hours – or
+        as long as a room's own "Pas na" says (E-583)."""
         if world.mode is HouseMode.VACATION:
             return True
-        hours = float(self.params.get("setback_away", {}).get("after_hours", 24))
+        hours = (
+            after_h
+            if after_h is not None
+            else float(self.params.get("setback_away", {}).get("after_hours", 24))
+        )
         return (
             world.mode is HouseMode.AWAY
             and world.mode_since is not None
@@ -2280,12 +2387,16 @@ class SkillEngine:
         comfort: float,
         long_away: bool,
         window: bool,
+        own: Temps | None = None,
     ) -> tuple[str, float, dict[str, Any]] | None:
-        """Which heating skill applies, and its temperature; None: leave it as it is."""
+        """Which heating skill applies, and its temperature; None: leave it as it is. A room's
+        own Slapen and Weg go before the start values (E-583)."""
         if window:
             setback = float(self.params.get("window_open_setback", {}).get("setback_to_c", 12.0))
             return "window_open_setback", setback, {}
         if long_away:
+            if own is not None:
+                return "setback_away", own.away, {"variant": "own"}
             p = self.params.get("setback_away", {})
             low = max(float(p.get("minimum_c", 15)), comfort - float(p.get("setback_c", 3)))
             return "setback_away", low, {}
@@ -2313,6 +2424,8 @@ class SkillEngine:
                     },
                 )
         if world.mode is HouseMode.SLEEP:
+            if own is not None:
+                return "setback_sleep", own.sleep, {"variant": "own"}
             sleep = _by_role(self.params.get("setback_sleep", {}).get("sleep_c", {}), role, 17.0)
             return "setback_sleep", float(sleep), {}
         return "heat_on_presence", comfort, {}

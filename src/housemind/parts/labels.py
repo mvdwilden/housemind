@@ -63,6 +63,7 @@ class LabelsPart(Part):
             push: dict[str, str] | None = None,
         ) -> int | None: ...
         async def _resolve(self, topic: str) -> None: ...
+        async def _notify(self) -> None: ...
         def _tracked(self, *prefixes: str) -> list[str]: ...
         async def set_house_setting(self, key: str, value: Any) -> bool: ...
 
@@ -275,6 +276,8 @@ class LabelsPart(Part):
         """An administrator's yes or no to a label question; kept, never asked again."""
         assert self.gate is not None
         answers = await self._label_answers()
+        if topic in answers:
+            return False  # answered already, by someone (E-585): a late answer changes nothing
         if topic.startswith(LAMP):
             entity_id = topic[len(LAMP) :]
             if entity_id not in self.model.entities:
@@ -294,6 +297,7 @@ class LabelsPart(Part):
         if yes and topic.startswith(SYSTEM_TOPIC):
             await self._leave_alone([topic[len(SYSTEM_TOPIC) :]])
         await self._resolve(topic)
+        await self._notify()  # gone from every screen at once (E-585)
         return True
 
     def label_note(self, entity_id: str, lang: str) -> str:

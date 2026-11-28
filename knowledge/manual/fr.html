@@ -1723,7 +1723,7 @@
         </div>
       </div>
 
-      <p><strong>Répondre à une notification.</strong> Une notification ordinaire a partout les mêmes boutons : sur la carte, dans le Journal et chez Vesta. Une notification qui demande quelque chose a ses propres boutons, comme Oui et Non.</p>
+      <p><strong>Répondre à une notification.</strong> Une notification ordinaire a partout les mêmes boutons : sur la carte, dans le Journal et chez Vesta. Une notification qui demande quelque chose a ses propres boutons, comme Oui et Non. Une question reçoit une seule réponse : dès que quelqu'un répond, elle disparaît partout, aussi des téléphones des autres. Si tu touches plus tard un ancien bouton, HouseMind dit qu'on a déjà répondu à la question.</p>
       <div class="voorbeeld">
         <p class="label">Voici à quoi ça ressemble · une notification pour un administrateur, après une touche sur Plus tard</p>
         <div class="berichtstapel" aria-hidden="true">
@@ -2949,7 +2949,7 @@
         <ul>
           <li><strong>Entrer et sortir.</strong> Dans le noir, la lumière s'allume tout de suite. Si la pièce est vide un moment, elle baisse un instant puis s'éteint ; si tu reviens, elle reste allumée. Combien de temps HouseMind attend, il l'apprend pour chaque pièce : d'abord court dans des toilettes ou une salle de bain, plus long dans un couloir, et au moins 3 minutes avec seulement un détecteur de mouvement. Sans capteur de mouvement ou de présence, la lumière ne s'éteint pas d'elle-même ; voir <a href="#leren-wie-er-is">Qui est là</a>. Pour chaque lampe, tu peux aussi choisir toi-même au bout de combien de minutes elle s'éteint, de tout de suite à 30 minutes ; voir <a href="#standen">Niveaux de tes lampes</a>.</li>
           <li><strong>La lumière suit la journée :</strong> plus vive et plus blanche le jour, plus douce et plus chaude le soir. Avec Adaptive Lighting, tu le règles là-bas ; dès qu'une règle de lumière d'une pièce est en Autonome, HouseMind le reprend pour les lampes de cette pièce, jusqu'à un pas en arrière. Plus rien d'autre ne pilote alors ces lampes. Sans cette intégration, HouseMind le fait lui-même.</li>
-          <li><strong>Commandé toi-même ?</strong> Tant que quelqu'un est dans la pièce, ton choix tient, quelques heures au plus. Si tu choisis souvent une autre couleur ou luminosité, HouseMind s'en souvient.</li>
+          <li><strong>Commandé toi-même ?</strong> Tant que quelqu'un est dans la pièce, ton choix tient, une demi-heure au plus. Ensuite HouseMind reprend la main, aussi pour une couleur ou une luminosité que tu as choisie toi-même. Si tu choisis souvent une autre couleur ou luminosité, HouseMind s'en souvient.</li>
           <li><strong>Dehors le soir,</strong> les lampes s'allument à la tombée de la nuit, même quand personne n'est à la maison, pour que la maison paraisse habitée. Elles s'éteignent quand la maison va dormir, au plus tard à votre heure habituelle (au début 23:30). Si personne n'est à la maison, vers l'heure du coucher, chaque soir un peu différemment.</li>
           <li><strong>Rentrer dans le noir :</strong> les lampes de l'entrée, comme dans l'allée, s'allument et s'éteignent après 5 minutes, ou après une demi-heure au plus s'il y a encore quelqu'un dehors. Un jardin ou une terrasse à l'arrière reste dans le noir. Si tu rallumes la lampe ensuite, elle reste désormais allumée plus longtemps.</li>
           <li><strong>Aussi</strong> la veilleuse, la lumière au <a href="#wekken">réveil</a>, la baisse en douceur avant de dormir et les <a href="#momenten">moments</a>.</li>
@@ -2982,6 +2982,20 @@
           </ol>
           <figcaption>Qui passe d'abord pour une lampe, de haut en bas.</figcaption>
         </figure>
+      </div>
+      <div class="sub" id="temperaturen">
+        <h3>Températures pour tes pièces</h3>
+        <p>Comme pour les niveaux d'une lampe, tu choisis toi-même sur un thermostat la chaleur d'une pièce : quand quelqu'un est à la maison, quand la maison dort et quand il n'y a personne. HouseMind utilise alors tes valeurs au lieu de ce qu'il a appris.</p>
+        <ul>
+          <li><strong>Où.</strong> En Expert, dans Cerveau › <span class="ui">Appareils</span> : un administrateur touche <span class="ui">Températures</span> à côté d'un thermostat. Ce qui ne chauffe aucune pièce, comme la température de l'eau d'une pompe à chaleur, n'a pas de températures.</li>
+          <li><strong>Trois curseurs :</strong> <span class="ui">À la maison</span>, <span class="ui">Sommeil</span> et <span class="ui">Absent</span>, par demi-degrés et aussi loin que le thermostat le permet. Sommeil et Absent ne sont jamais plus chauds qu'À la maison. Chaque curseur dit d'où vient sa valeur : appris, une valeur de départ ou la tienne.</li>
+          <li><strong>Pour toute la pièce.</strong> Les températures appartiennent à la pièce : si une pièce a plusieurs thermostats, ils reçoivent tous les mêmes.</li>
+          <li><strong>Seulement après.</strong> Avec le deuxième curseur, tu choisis combien de temps personne ne doit être à la maison avant que la pièce passe à Absent : de tout de suite à un jour. Il commence à un jour. Un plancher chauffant ou une pompe à chaleur chauffent lentement ; baisser peu après ton départ n'économise alors souvent rien. En vacances, la maison passe tout de suite à Absent.</li>
+          <li><strong>Refroidir.</strong> Si le thermostat refroidit aussi, tu passes en haut de <span class="ui">Chauffer</span> à <span class="ui">Refroidir</span>, avec leurs propres valeurs. Pour refroidir, Absent est justement plus chaud.</li>
+          <li><strong>Une température pour chauffer et refroidir.</strong> Un tel thermostat reçoit À la maison ; Sommeil et Absent ne comptent que lorsqu'il chauffe, pour qu'en été ils ne signifient jamais refroidir davantage.</li>
+          <li><strong>Qui passe en premier.</strong> Si tu tournes toi-même le thermostat, cela reste jusqu'au moment suivant : sommeil, absence ou retour à la maison. Une fenêtre ouverte, le lever et le plan d'énergie fonctionnent comme toujours.</li>
+          <li><strong>Un seul Enregistrer.</strong> <span class="ui">Enregistrer</span> garde tout dans la fenêtre. <span class="ui">Revenir à ce que j'apprends</span> rend la pièce à HouseMind.</li>
+        </ul>
       </div>
       <div class="sub" id="groepen">
         <h3>Les groupes de lampes</h3>

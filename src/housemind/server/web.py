@@ -336,6 +336,7 @@ class Session:
             await self.send(
                 {"type": "vesta_ask_gone", "key": self.ask["key"]}
             )  # answered elsewhere
+            self.talking.answered(str(self.ask["key"]))  # a "ja" now answers nothing (E-585)
             self.ask = None
         asks = await self.hm.vesta_asks(
             self.user_id, viewer.level, viewer.is_admin, self.tablet is not None
@@ -1282,9 +1283,24 @@ class Session:
         if not isinstance(notification_id, int):
             return
         row = await self.hm.db.fetchone(
-            "SELECT topic, kind, concerns FROM notifications WHERE id = ?", (notification_id,)
+            "SELECT topic, kind, concerns, resolved_at FROM notifications WHERE id = ?",
+            (notification_id,),
         )
         if row is None:
+            return
+        if row["resolved_at"] is not None:
+            # Answered already, here or by someone else (E-585): once is enough. Whatever still
+            # shows it here goes, and nothing is done a second time.
+            if self.ask and self.ask.get("notification") == notification_id:
+                await self._ask_over()
+            self.talking.answered()
+            await self.send(
+                {
+                    "type": "saved",
+                    "text": self.hm.languages.text(self.lang, "notify.already_answered"),
+                }
+            )
+            await self.hm._notify()
             return
         # Only who it is for may answer, put off or close it (QA 2, L3): a message for the
         # administrators is theirs, one for a person is that person's (20.5).
@@ -2133,6 +2149,28 @@ class Session:
             return
         else:
             return
+        await self.on_get({"what": "devices"})
+
+    async def on_temperatures(self, data: dict[str, Any]) -> None:
+        """Temperaturen per ruimte (E-583): an administrator on Expert saves a room's Thuis,
+        Slapen and Weg and "Pas na" with one Bewaren, or gives the room back to what HouseMind
+        learns. Never on a wall tablet, as Standen."""
+        if not await self._tester():
+            return
+        hm = self.hm
+        area = data.get("area")
+        if not isinstance(area, str) or area not in hm.model.areas:
+            return
+        if data.get("do") == "save":
+            ok = await hm.room_temps_save(area, data.get("temps"))
+            key = "ui.temps.saved" if ok else "ui.temps.not_saved"
+        elif data.get("do") == "learn":
+            ok = await hm.room_temps_save(area, None)
+            key = "ui.temps.learn_done" if ok else "ui.temps.not_saved"
+        else:
+            return
+        self._answered = True
+        await self.send({"type": "saved", "text": hm.languages.text(self.lang, key)})
         await self.on_get({"what": "devices"})
 
     async def _send_test(self) -> None:

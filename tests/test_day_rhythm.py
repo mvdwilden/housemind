@@ -356,14 +356,17 @@ async def _rounds(hm: HouseMind, clock: SimulatedClock, minutes: int = 12) -> No
         await hm.tick()
 
 
-async def test_a_choice_by_hand_stays_until_the_lamp_goes_out(tmp_path: Path) -> None:
-    """Set brighter in the app: the rounds leave it, also later in the evening. After it went
-    out, the next time on is the day's again."""
+async def test_a_choice_by_hand_stays_half_an_hour(tmp_path: Path) -> None:
+    """Set brighter in the app: the rounds leave it for half an hour (E-584); after that the
+    lamp is on the day's rhythm again."""
     hm, clock, ha = await _lit(tmp_path, start=datetime(2026, 11, 7, 16, 0, tzinfo=ZONE))
     await ha.simulate(LAMP, "on", {"brightness": 200, "color_temp_kelvin": 4000}, by=Source.PERSON)
-    await _rounds(hm, clock, 30)
+    await _rounds(hm, clock, 29)
     assert _lamp(ha)[1:] == (78, 4000)
     assert GROUP not in hm.daylight.following
+    await _rounds(hm, clock, 3)
+    assert GROUP in hm.daylight.following
+    assert _lamp(ha, GROUP)[1:] != (78, 4000)
     await hm.stop()
 
 

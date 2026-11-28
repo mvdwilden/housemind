@@ -194,7 +194,8 @@
     </div>
   {:else if item.type === "notice"}
     <Cells columns={own} {item} />
-    <NoticeCard notice={item} {t} handled={!item.open} onaction={(action, extra) => onnotice(item, action, extra)} />
+    <!-- Answered elsewhere, by anyone (E-585): it is no longer waiting, so no buttons here. -->
+    <NoticeCard notice={item} {t} handled={!item.open || !waits.has(item.id)} onaction={(action, extra) => onnotice(item, action, extra)} />
   {:else if item.type === "talk"}
     <div class="talk">
       {#if own.length}<div class="when"><Cells columns={own} {item} /></div>{/if}

@@ -49,6 +49,7 @@ from housemind.brain.readiness import (
     readiness,
     readiness_others,
 )
+from housemind.brain.room_temps import AFTER_HOURS, MODES, MOMENTS, START_AFTER
 from housemind.brain.rules import rule_text
 from housemind.brain.skills import light_off_hold
 from housemind.core.model import Entity
@@ -1705,6 +1706,10 @@ def devices(hm: HouseMind, lang: str) -> list[dict[str, Any]]:
             row["partOf"] = {"id": steered, "name": steering.name if steering else steered}
         if entity.domain == "light" and controls:
             row["levels"] = _levels_view(hm, lang, entity.entity_id)  # E-490 – E-496
+        if entity.domain == "climate" and controls and area is not None:
+            temps = _temps_view(hm, lang, area.id, entity.entity_id)  # E-583
+            if temps is not None:
+                row["temps"] = temps
         out.append(
             {
                 **row,
@@ -1732,6 +1737,51 @@ def devices(hm: HouseMind, lang: str) -> list[dict[str, Any]]:
             }
         )
     return out
+
+
+def _temps_view(hm: HouseMind, lang: str, area_id: str, entity_id: str) -> dict[str, Any] | None:
+    """Temperaturen of a room for Brein › Apparaten (E-583): what its thermostats can, how far
+    each slider goes, and per way of working Thuis, Slapen and Weg with where each comes from
+    – the room's own, learned, or a start value – and "Pas na". None for a thermostat that heats
+    or cools no room."""
+    if hm.skills is None or hm.world is None:
+        return None
+    if entity_id not in {e.entity_id for e in hm.room_thermostats(area_id)}:
+        return None
+    can = hm.room_temps_can(area_id)
+    if not can["found"]:
+        return None
+    area = hm.model.areas[area_id]
+    now = hm.world.snapshot(hm.clock.now())
+    basis = hm.skills.climate_basis(area_id, hm.area_roles.get(area_id, "other"), now.context_key())
+    if can["one"]:  # one setpoint: what a person set on it is its Thuis (E-318)
+        wish = hm._heat_cool["wish"].get(entity_id)
+        if wish is not None:
+            basis["heat"]["home"] = (round(float(wish) * 2) / 2, "learned")
+    own = hm.skills.room_temps.get(area_id)
+    values: dict[str, dict[str, dict[str, Any]]] = {}
+    for mode in MODES:
+        if not can[mode]:
+            continue
+        mine = getattr(own, mode) if own is not None else None
+        low, high = can["limits"][mode]
+        values[mode] = {}
+        for moment in MOMENTS:
+            value, source = basis[mode][moment]
+            if mine is not None:
+                value, source = getattr(mine, moment), "own"
+            values[mode][moment] = {"value": min(max(value, low), high), "from": source}
+    return {
+        "area": area_id,
+        "room": area.name,
+        "count": len(hm.room_thermostats(area_id)),
+        "one": can["one"],
+        "limits": {mode: list(can["limits"][mode]) for mode in values},
+        "values": values,
+        "after": own.after_h if own is not None and own.after_h is not None else START_AFTER,
+        "afterSteps": list(AFTER_HOURS),
+        "own": own is not None,
+    }
 
 
 def _levels_view(hm: HouseMind, lang: str, entity_id: str) -> dict[str, Any]:
